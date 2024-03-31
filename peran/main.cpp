@@ -10,5 +10,5 @@ int main() {
     Petani a("haikal");
     cout << a.gulden << endl;
     a.addpenyimpanan("BOM");
-    a.printpenyimpanan();
+    a.tanam();
 }

@@ -31,7 +31,7 @@ class Peran {
 
 class Petani: public Peran {
     private: 
-        vector<vector<string>> lahanpertanian;
+        vector<vector<string>> lahanpertanian; // Vector plant tipe data asli
         string peran_pemain;
 
     public:

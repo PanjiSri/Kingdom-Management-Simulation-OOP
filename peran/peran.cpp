@@ -96,7 +96,7 @@ void Peran::addpenyimpanan(string benda) {
     vector<int> lokasi = parse(idx);
     cout << lokasi[1] << endl;
     cout << lokasi[0] << endl;
-    penyimpanan[lokasi[1]][5] = benda;
+    penyimpanan[lokasi[1]][lokasi[0]] = benda;
 }
 
 // Child Petani
@@ -106,7 +106,7 @@ Petani::Petani(string username): Peran(username) {
     for(int i = 0; i < 8; i++) {
         vector<string> rowlahan;
         for(int j = 0; j < 8; j++) {
-            rowlahan.push_back("KLP");
+            rowlahan.push_back("   ");
         }
         lahanpertanian.push_back(rowlahan);
     }
@@ -119,7 +119,7 @@ Petani::Petani(): Peran() {
     for(int i = 0; i < 10; i++) {
         vector<string> rowpenyimpanan;
         for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("KLP");
+            rowpenyimpanan.push_back("   ");
         }
         penyimpanan.push_back(rowpenyimpanan);
     }
@@ -129,7 +129,7 @@ Petani::Petani(int gulden, int berat, string username): Peran(gulden, berat, use
     for(int i = 0; i < 8; i++) {
         vector<string> rowlahan;
         for(int j = 0; j < 8; j++) {
-            rowlahan.push_back("KLP");
+            rowlahan.push_back("   ");
         }
         lahanpertanian.push_back(rowlahan);
     }
@@ -137,6 +137,7 @@ Petani::Petani(int gulden, int berat, string username): Peran(gulden, berat, use
 
 void Petani::cetaklahan() {
     int asciinum = 65;
+    cout << "_____________________LADANG___________________" << endl;
     cout << "   ";
     for(int i = 0; i < 8; i++) {
         cout << "  " << (char)(i+asciinum) << "  ";
@@ -169,14 +170,24 @@ int Petani::getlahankosong() {
 }
 
 void Petani::tanam() {
-    this->cetaklahan();
     printpenyimpanan();
+    string indeksinvent, tumbuhan;
+    cout << "Slot: ";
+    cin >> indeksinvent;
+    vector<int> lokasiinvent = parse(indeksinvent); 
+    tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
+    cout << "Tumbuhan " << tumbuhan << " diambil" << endl;
+    cetaklahan();
+    cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {
         cout << "Lahan penuh" << endl;
     }
     else {
-
+        string idx;
+        cout << "Masukkan lokasi yang diinginkan: ";
+        cin >> idx;
+        vector<int> lokasi = parse(idx);
+        lahanpertanian[lokasi[1]][lokasi[0]] = tumbuhan;
     }
-    cout <<"Lahan kosong: " << this->getlahankosong() << endl;
-
+    cetaklahan();
 }
