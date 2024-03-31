@@ -12,7 +12,7 @@ Peran::Peran() {
     for(int i = 0; i < 10; i++) {
         vector<string> rowpenyimpanan;
         for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("");
+            rowpenyimpanan.push_back("   ");
         }
         penyimpanan.push_back(rowpenyimpanan);
     }
@@ -25,7 +25,7 @@ Peran::Peran(string username) {
     for(int i = 0; i < 10; i++) {
         vector<string> rowpenyimpanan;
         for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("");
+            rowpenyimpanan.push_back("   ");
         }
         penyimpanan.push_back(rowpenyimpanan);
     }
@@ -38,7 +38,7 @@ Peran::Peran(int gulden, int berat, string username) {
     for(int i = 0; i < 10; i++) {
         vector<string> rowpenyimpanan;
         for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("APO");
+            rowpenyimpanan.push_back("   ");
         }
         penyimpanan.push_back(rowpenyimpanan);
     }
@@ -52,11 +52,18 @@ int Peran::getberat() {
     return this->berat;
 }
 
+vector<int> Peran::parse(string idx) {
+    vector<int> indeks;
+    indeks.push_back(((int)idx[0])-65);
+    indeks.push_back((int)(idx[2]-'0')-1);
+    return indeks;
+}
+
 void Peran::printpenyimpanan() {
-    int asciinum = 97;
+    int asciinum = 65;
     cout << "   ";
     for(int i = 0; i < 10; i++) {
-        cout << " " << (char)(i+asciinum) << " ";
+        cout << "  " << (char)(i+asciinum) << "  ";
     }
     cout << endl;
     for(int i = 0; i < 10; i++) {
@@ -67,7 +74,7 @@ void Peran::printpenyimpanan() {
             cout << i+1 << " ";
         }
         for(int j = 0; j < 10; j++) {
-            cout << penyimpanan[i][j];
+            cout << " " << penyimpanan[i][j] << " ";
         }
         cout << endl;
     }
@@ -81,9 +88,21 @@ Peran& Peran::operator=(const Peran& other) {
     return *this;
 }
 
+void Peran::addpenyimpanan(string benda) {
+    printpenyimpanan();
+    string idx;
+    cout << "Masukkan lokasi yang diinginkan: ";
+    cin >> idx;
+    vector<int> lokasi = parse(idx);
+    cout << lokasi[1] << endl;
+    cout << lokasi[0] << endl;
+    penyimpanan[lokasi[1]][5] = benda;
+}
+
 // Child Petani
 
 Petani::Petani(string username): Peran(username) {
+    peran_pemain = "petani";
     for(int i = 0; i < 8; i++) {
         vector<string> rowlahan;
         for(int j = 0; j < 8; j++) {
@@ -138,7 +157,7 @@ void Petani::cetaklahan() {
 }
 
 int Petani::getlahankosong() {
-    int lahankosong;
+    int lahankosong = 0;
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
             if (lahanpertanian[i][j] == "   ") {
@@ -151,5 +170,13 @@ int Petani::getlahankosong() {
 
 void Petani::tanam() {
     this->cetaklahan();
+    printpenyimpanan();
+    if (getlahankosong() == 0) {
+        cout << "Lahan penuh" << endl;
+    }
+    else {
+
+    }
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
+
 }

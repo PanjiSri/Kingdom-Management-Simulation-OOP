@@ -17,6 +17,8 @@ class Peran {
         int getgulden();
         int getberat();
         void printpenyimpanan();
+        void addpenyimpanan(string);
+        vector<int> parse(string);
         Peran& operator=(const Peran&);
 };
 
@@ -30,6 +32,7 @@ class Peran {
 class Petani: public Peran {
     private: 
         vector<vector<string>> lahanpertanian;
+        string peran_pemain;
 
     public:
         Petani();
