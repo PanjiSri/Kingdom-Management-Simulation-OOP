@@ -5,34 +5,90 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "../exception/header/exception.hpp"
+#include <sstream>
+#include "../../exception/header/exception.hpp"
 using namespace std;
 
-
-class plant_file
+class line_handler
 {
 private:
-    int id;
-    string kode;
-    string nama;
-    string tipe;
-    int value1;
-    int value2;
+    string id;
+    string kode_huruf;
+    string name;
+    string type;
+    int duration;
+    int price;
 
 public:
-    int get_id();
-    string get_kode();
-    string get_nama();
-    string get_tipe();
-    int get_value1();
-    int get_value2();
-    void set_id(int id);
-    void set_kode(string kode);
-    void set_nama(string nama);
-    void set_tipe(string tipe);
-    void set_value1(int value1);
-    void set_value2(int value2);
-    void read_file(string path);
+    line_handler(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price)
+        : id(id), kode_huruf(kode_huruf), name(name), type(type), duration(duration), price(price) {}
+
+    string getId() const
+    {
+        return id;
+    }
+
+    string getKodeHuruf() const
+    {
+        return kode_huruf;
+    }
+
+    string getName() const
+    {
+        return name;
+    }
+
+    string getType() const
+    {
+        return type;
+    }
+
+    int getDurationToHarvest() const
+    {
+        return duration;
+    }
+
+    int getPrice() const
+    {
+        return price;
+    }
+};
+
+
+class list_hasil_baca
+{
+private:
+    vector<line_handler> list_objek;
+
+public:
+    void readPlanFromFile(const string& filename) {
+        ifstream file(filename);
+        if (!file.is_open()) {
+            throw FilePathTidakValid();
+        }
+
+        string id, kode_huruf, name, type;
+        int duration_to_harvest, price;
+        string line; 
+        
+        while (getline(file, line)) {
+            stringstream ss(line);
+            ss >> id >> kode_huruf >> name >> type >> duration_to_harvest >> price;
+            list_objek.push_back(line_handler(id, kode_huruf, name, type, duration_to_harvest, price));
+        }
+
+        file.close();
+    }
+
+    line_handler getObjek(int index) const
+    {
+        return list_objek[index];
+    }
+
+    int getUkuran() const
+    {
+        return list_objek.size();
+    }
 };
 
 #endif
