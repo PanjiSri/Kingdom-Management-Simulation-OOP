@@ -99,6 +99,15 @@ void Peran::addpenyimpanan(string benda) {
     penyimpanan[lokasi[1]][lokasi[0]] = benda;
 }
 
+// Child Walikota
+Walikota::Walikota (string username): Peran(username) {
+    peran_pemain = "walikota";
+    gulden = 50;
+    berat = 40;
+}
+
+
+
 // Child Petani
 
 Petani::Petani(string username): Peran(username) {
@@ -178,6 +187,7 @@ void Petani::tanam() {
     tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
     cout << "Tumbuhan " << tumbuhan << " diambil" << endl;
     cetaklahan();
+    cout << lahanpertanian[0].size() << " " << lahanpertanian[0][0].size() << endl;
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {
         cout << "Lahan penuh" << endl;
@@ -190,4 +200,41 @@ void Petani::tanam() {
         lahanpertanian[lokasi[1]][lokasi[0]] = tumbuhan;
     }
     cetaklahan();
+}
+
+void Petani::panen() {
+    vector<string> listtanamanmatang;
+    vector<int> jumlahtanamanmatang;
+    cout << lahanpertanian[0].size() << " " << lahanpertanian[0][0].size() << endl;
+    // Menghitung tanaman yang siap panen
+    for (int i = 0; i < lahanpertanian.size(); i++) {
+        for(int j = 0; j < lahanpertanian[0].size(); j++) {  // Validasi umur tumbuhan
+            if(lahanpertanian[i][j] != "   ") {
+                if(listtanamanmatang.size() == 0) {
+                    listtanamanmatang.push_back(lahanpertanian[i][j]);
+                    jumlahtanamanmatang.push_back(1);
+                }
+                else {
+                    bool found = false;
+                    int x = 0;
+                    while (found == false and x < listtanamanmatang.size()) {
+                        if (lahanpertanian[i][j] == listtanamanmatang[x]) {
+                            jumlahtanamanmatang[x] += 1;
+                            found = true;
+                        }
+                        else {
+                            x += 1;
+                        }
+                    }
+                    if (found == false) {
+                        listtanamanmatang.push_back(lahanpertanian[i][j]);
+                        jumlahtanamanmatang.push_back(1);
+                    }
+                }
+            }
+        }
+    }
+    for(int i = 0; i < listtanamanmatang.size(); i++) {
+        cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
+    }
 }

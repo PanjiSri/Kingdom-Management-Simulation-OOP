@@ -9,7 +9,7 @@ class Peran {
         int berat;
         string username;
         vector<vector<string>> penyimpanan;
-
+        string peran_pemain;
     public:
         Peran();
         Peran(string);
@@ -22,17 +22,16 @@ class Peran {
         Peran& operator=(const Peran&);
 };
 
-// class Walikota: public Peran {
-//     public:
-//         Walikota();
-//         Walikota(int gulden, int berat);
-//         void ambilpajak();
-// };
+class Walikota: public Peran {
+    public:
+        Walikota(string);
+        Walikota(int gulden, int berat, string);
+        void ambilpajak();
+};
 
 class Petani: public Peran {
     private: 
         vector<vector<string>> lahanpertanian; // Vector plant tipe data asli
-        string peran_pemain;
 
     public:
         Petani();
@@ -40,9 +39,17 @@ class Petani: public Peran {
         Petani(int gulden, int berat, string);
         void tanam();
         void cetaklahan();
-        void pernyataanperan();
         void panen();
         int getlahankosong();
+};
+
+class Peternak: public Peran {
+    private: 
+        vector<vector<string>> peternakan; // Vector pakai tipe data animal
+
+    public:
+        Peternak(string);
+        Peternak(int, int, string);
 };
 
 #endif

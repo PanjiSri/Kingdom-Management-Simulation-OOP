@@ -11,4 +11,5 @@ int main() {
     cout << a.gulden << endl;
     a.addpenyimpanan("BOM");
     a.tanam();
+    a.panen();
 }
