@@ -3,7 +3,7 @@
 /*
     User-defined constructor produk
 */
-Produk::Produk(int id, string &kode, string &nama, string &tipe, string &asal, int tambahan_berat, int harga)
+Produk::Produk(int id, const string &kode, const string &nama, const string &tipe, const string &asal, int tambahan_berat, int harga)
     : id(id), kode(kode), nama(nama), tipe(tipe), asal(asal), tambahan_berat(tambahan_berat), harga(harga) {}
 
 /*
