@@ -1,15 +1,11 @@
 #include "peran.hpp"
-#include "../helper/helper.hpp"
 #include <iostream>
 #include <ostream>
 #include "vector"
+#include "vector.hpp"
 using namespace std;
 
 int main() {
-    // <haikal,petani>, <ronaldo,walikota>
-    Petani a("haikal");
-    cout << a.gulden << endl;
-    a.addpenyimpanan("BOM");
-    a.tanam();
-    a.panen();
-}
+    Peran* a = new Petani("haikal");
+    cout << a->penyimpanan[0] << endl;
+};

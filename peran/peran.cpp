@@ -9,39 +9,18 @@ Peran::Peran() {
     this->username = " ";
     gulden = 50;
     berat = 40;
-    for(int i = 0; i < 10; i++) {
-        vector<string> rowpenyimpanan;
-        for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("   ");
-        }
-        penyimpanan.push_back(rowpenyimpanan);
-    }
 } 
 
 Peran::Peran(string username) {
     this->username = username;
     gulden = 50;
     berat = 40;
-    for(int i = 0; i < 10; i++) {
-        vector<string> rowpenyimpanan;
-        for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("   ");
-        }
-        penyimpanan.push_back(rowpenyimpanan);
-    }
 }
 
 Peran::Peran(int gulden, int berat, string username) {
     this->username = username;
     this->gulden = gulden;
     this->berat = berat;
-    for(int i = 0; i < 10; i++) {
-        vector<string> rowpenyimpanan;
-        for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("   ");
-        }
-        penyimpanan.push_back(rowpenyimpanan);
-    }
 }
 
 int Peran::getgulden() {
@@ -59,25 +38,30 @@ vector<int> Peran::parse(string idx) {
     return indeks;
 }
 
+string Peran::get_type() {
+    return this->peran_pemain;
+}
+
 void Peran::printpenyimpanan() {
-    int asciinum = 65;
-    cout << "   ";
-    for(int i = 0; i < 10; i++) {
-        cout << "  " << (char)(i+asciinum) << "  ";
-    }
-    cout << endl;
-    for(int i = 0; i < 10; i++) {
-        if(i < 9) {
-            cout << "0" << i+1 << " ";
-        }
-        else {
-            cout << i+1 << " ";
-        }
-        for(int j = 0; j < 10; j++) {
-            cout << " " << penyimpanan[i][j] << " ";
-        }
-        cout << endl;
-    }
+    // int asciinum = 65;
+    // cout << "   ";
+    // for(int i = 0; i < 10; i++) {
+    //     cout << "  " << (char)(i+asciinum) << "  ";
+    // }
+    // cout << endl;
+    // for(int i = 0; i < 10; i++) {
+    //     if(i < 9) {
+    //         cout << "0" << i+1 << " ";
+    //     }
+    //     else {
+    //         cout << i+1 << " ";
+    //     }
+    //     for(int j = 0; j < 10; j++) {
+    //         cout << " " << penyimpanan[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << penyimpanan << endl;
 }
 
 Peran& Peran::operator=(const Peran& other) {
@@ -96,7 +80,7 @@ void Peran::addpenyimpanan(string benda) {
     vector<int> lokasi = parse(idx);
     cout << lokasi[1] << endl;
     cout << lokasi[0] << endl;
-    penyimpanan[lokasi[1]][lokasi[0]] = benda;
+    // penyimpanan[lokasi[1]][lokasi[0]] = benda;
 }
 
 // Child Walikota
@@ -106,77 +90,56 @@ Walikota::Walikota (string username): Peran(username) {
     berat = 40;
 }
 
+void Walikota::addgulden(int guldentambahan) {
+    this->gulden += guldentambahan;
+}
+
+void Walikota::ambilpajak(vector<Peran*> listpemain) {
+    int guldenpajak = 0;
+    for(int i = 0; i < listpemain.size(); i++) {
+        guldenpajak += (int)(listpemain[i]->getgulden())*0.1;
+    }
+    addgulden(guldenpajak);
+}
+
+void Walikota::tanam() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+}
+
+void Walikota::panen() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+}
+
+void Walikota::cetaklahan() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+}
+
+int Walikota::getlahankosong() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+    return -1;
+}
 
 
 // Child Petani
 
 Petani::Petani(string username): Peran(username) {
     peran_pemain = "petani";
-    for(int i = 0; i < 8; i++) {
-        vector<string> rowlahan;
-        for(int j = 0; j < 8; j++) {
-            rowlahan.push_back("   ");
-        }
-        lahanpertanian.push_back(rowlahan);
-    }
 }
 
 Petani::Petani(): Peran() {
     this->username = " ";
     gulden = 50;
     berat = 40;
-    for(int i = 0; i < 10; i++) {
-        vector<string> rowpenyimpanan;
-        for(int j = 0; j < 10; j++) {
-            rowpenyimpanan.push_back("   ");
-        }
-        penyimpanan.push_back(rowpenyimpanan);
-    }
 } 
 
 Petani::Petani(int gulden, int berat, string username): Peran(gulden, berat, username) {
-    for(int i = 0; i < 8; i++) {
-        vector<string> rowlahan;
-        for(int j = 0; j < 8; j++) {
-            rowlahan.push_back("   ");
-        }
-        lahanpertanian.push_back(rowlahan);
-    }
 }
 
 void Petani::cetaklahan() {
     int asciinum = 65;
-    cout << "_____________________LADANG___________________" << endl;
-    cout << "   ";
-    for(int i = 0; i < 8; i++) {
-        cout << "  " << (char)(i+asciinum) << "  ";
-    }
-    cout << endl;
-    for(int i = 0; i < 8; i++) {
-        if(i < 9) {
-            cout << "0" << i+1 << " ";
-        }
-        else {
-            cout << i+1 << " ";
-        }
-        for(int j = 0; j < 8; j++) {
-            cout << " "<< lahanpertanian[i][j] << " ";
-        }
-        cout << endl;
-    }
 }
 
-int Petani::getlahankosong() {
-    int lahankosong = 0;
-    for(int i = 0; i < 8; i++) {
-        for(int j = 0; j < 8; j++) {
-            if (lahanpertanian[i][j] == "   ") {
-                lahankosong += 1;
-            }
-        }
-    }
-    return lahankosong;
-}
+int Petani::getlahankosong() {}
 
 void Petani::tanam() {
     printpenyimpanan();
@@ -187,7 +150,6 @@ void Petani::tanam() {
     tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
     cout << "Tumbuhan " << tumbuhan << " diambil" << endl;
     cetaklahan();
-    cout << lahanpertanian[0].size() << " " << lahanpertanian[0][0].size() << endl;
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {
         cout << "Lahan penuh" << endl;
@@ -205,35 +167,7 @@ void Petani::tanam() {
 void Petani::panen() {
     vector<string> listtanamanmatang;
     vector<int> jumlahtanamanmatang;
-    cout << lahanpertanian[0].size() << " " << lahanpertanian[0][0].size() << endl;
     // Menghitung tanaman yang siap panen
-    for (int i = 0; i < lahanpertanian.size(); i++) {
-        for(int j = 0; j < lahanpertanian[0].size(); j++) {  // Validasi umur tumbuhan
-            if(lahanpertanian[i][j] != "   ") {
-                if(listtanamanmatang.size() == 0) {
-                    listtanamanmatang.push_back(lahanpertanian[i][j]);
-                    jumlahtanamanmatang.push_back(1);
-                }
-                else {
-                    bool found = false;
-                    int x = 0;
-                    while (found == false and x < listtanamanmatang.size()) {
-                        if (lahanpertanian[i][j] == listtanamanmatang[x]) {
-                            jumlahtanamanmatang[x] += 1;
-                            found = true;
-                        }
-                        else {
-                            x += 1;
-                        }
-                    }
-                    if (found == false) {
-                        listtanamanmatang.push_back(lahanpertanian[i][j]);
-                        jumlahtanamanmatang.push_back(1);
-                    }
-                }
-            }
-        }
-    }
     for(int i = 0; i < listtanamanmatang.size(); i++) {
         cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
     }

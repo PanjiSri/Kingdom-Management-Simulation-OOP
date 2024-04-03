@@ -1,6 +1,7 @@
 #ifndef _PERAN_HPP_
 #define _PERAN_HPP_
 #include "vector"
+#include "vector.hpp"
 #include <iostream>
 using namespace std;
 class Peran {
@@ -8,7 +9,7 @@ class Peran {
         int gulden;
         int berat;
         string username;
-        vector<vector<string>> penyimpanan;
+        vector2<string, 8, 8> penyimpanan; // Vector item
         string peran_pemain;
     public:
         Peran();
@@ -16,8 +17,13 @@ class Peran {
         Peran(int gulden, int berat, string username);
         int getgulden();
         int getberat();
+        string get_type();
         void printpenyimpanan();
         void addpenyimpanan(string);
+        virtual void tanam() = 0;
+        virtual void cetaklahan() = 0;
+        virtual void panen() = 0;
+        virtual int getlahankosong() = 0;
         vector<int> parse(string);
         Peran& operator=(const Peran&);
 };
@@ -25,13 +31,18 @@ class Peran {
 class Walikota: public Peran {
     public:
         Walikota(string);
-        Walikota(int gulden, int berat, string);
-        void ambilpajak();
+        // Walikota(int gulden, int berat, string);
+        void addgulden(int);
+        void ambilpajak(vector<Peran*>);
+        void tanam();
+        void cetaklahan();
+        void panen();
+        int getlahankosong();
 };
 
 class Petani: public Peran {
-    private: 
-        vector<vector<string>> lahanpertanian; // Vector plant tipe data asli
+    public: 
+        vector2<string, 8, 8> lahanpertanian; // Vector plant tipe data asli
 
     public:
         Petani();
@@ -43,13 +54,13 @@ class Petani: public Peran {
         int getlahankosong();
 };
 
-class Peternak: public Peran {
-    private: 
-        vector<vector<string>> peternakan; // Vector pakai tipe data animal
+// class Peternak: public Peran {
+//     private: 
+//         vector<vector<string>> peternakan; // Vector pakai tipe data animal
 
-    public:
-        Peternak(string);
-        Peternak(int, int, string);
-};
+//     public:
+//         Peternak(string);
+//         Peternak(int, int, string);
+// };
 
 #endif
