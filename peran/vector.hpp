@@ -8,7 +8,7 @@ using namespace std;
 template <class T, int row, int col>
 class Matriks {
     private:
-        T*** matriks;
+        T** matriks;
         int baris;
         int kolom;
     public:
@@ -16,19 +16,19 @@ class Matriks {
             baris = row;
             kolom = col;
             
-            matriks = new T**[row];
+            matriks = new T*[row];
             for (int i = 0; i < row; i++) {
-                matriks[i] = new T*[col];
+                matriks[i] = new T[col];
             }
 
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
-                    matriks[i][j] = new T();
+                    T matriks[i][j];
                 }
             }
         }
 
-        T** operator[](int idx) {
+        T* operator[](int idx) {
             return matriks[idx];
         }
 
@@ -39,7 +39,7 @@ class Matriks {
         void print() {
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {
-                    cout << matriks[i][j]->getKode() << " ";
+                    cout << matriks[i][j].getKode() << " ";
                 }
                 cout << endl;
             }
