@@ -6,10 +6,19 @@
 class Herbivore : public Hewan
 {
     private:
+        string kode;
+        string nama;
     public:
         Herbivore(string kode, string nama, int berat, int harga);
         ~Herbivore();
-        void makan(string product_type);
+        string getType();
+        string getKode();
+        string getNama();
+        int getBeratPanen();
+        int getHarga();
+        int getberat_saat_ini();
+        void makan(Produk produk);
+        bool isSiapPanen();
 };
 
 

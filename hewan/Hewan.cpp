@@ -1,7 +1,6 @@
 #include "Hewan.hpp"
 
 Hewan::Hewan(string kode, string nama, int berat_panen, int harga){
-    this->id = nhewan;
     this->kode = kode;
     this->nama = nama;
     this->standar_berat_panen = berat_panen;
@@ -11,6 +10,13 @@ Hewan::Hewan(string kode, string nama, int berat_panen, int harga){
 }
 
 Hewan::~Hewan(){
+}
+
+string Hewan::getKode(){
+    return kode;
+}
+string Hewan::getNama(){
+    return nama;
 }
 
 int Hewan::getBeratPanen(){
@@ -25,6 +31,14 @@ int Hewan::getberat_saat_ini(){
     return berat_saat_ini;
 }
 
-void Hewan::setberat_saat_ini(int added_weight){
-    berat_saat_ini = berat_saat_ini + added_weight;
+void Hewan::setberat_saat_ini(int tambahan_berat){
+    berat_saat_ini = berat_saat_ini + tambahan_berat;
+}
+
+int Hewan::getJumlahHewan(){
+    return nhewan;
+}
+
+bool Hewan::isSiapPanen(){
+    return berat_saat_ini == standar_berat_panen;
 }

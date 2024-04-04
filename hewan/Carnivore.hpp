@@ -6,31 +6,19 @@
 class Carnivore : public Hewan
 {
     private:
-
+        string kode; 
+        string nama;
     public:
         Carnivore(string kode, string nama, int berat, int harga);
         ~Carnivore();
-    virtual void makan(string product_type);
-    void panen();
+        string getType();
+        string getKode();
+        string getNama();
+        int getBeratPanen();
+        int getHarga();
+        int getberat_saat_ini();
+        void makan(Produk produk);
+        bool isSiapPanen();
 };
-
-Carnivore::Carnivore(string kode, string nama, int berat, int harga) : Hewan(kode, nama, berat, harga)
-{
-}
-
-Carnivore::~Carnivore()
-{
-}
-
-//masih dummy
-void Carnivore::makan(string product_type) {
-    if (product_type != "Hewan")
-    {
-        throw exception();
-    } else {
-         
-    }
-    
-}
 
 #endif
