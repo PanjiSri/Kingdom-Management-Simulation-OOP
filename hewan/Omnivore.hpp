@@ -10,7 +10,13 @@ class Omnivore : public Hewan
         Omnivore(string kode, string nama, int berat, int harga);
         ~Omnivore();
         string getType();
-        void makan(string product_type);
+        string getKode();
+        string getNama();
+        int getBeratPanen();
+        int getHarga();
+        int getberat_saat_ini();
+        void makan(Produk produk);
+        bool isSiapPanen();
 };
 
 #endif

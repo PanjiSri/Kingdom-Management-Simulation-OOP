@@ -1,31 +1,56 @@
 #ifndef _VECTOR_HPP_
 #define _VECTOR_HPP_
-#include "vector"
+#include <vector>
 #include <iostream>
+#include <string>
 using namespace std;
 
-template<class T, int baris, int kolom>
-class vector2{
+template <class T, int row, int col>
+class Matriks {
+    private:
+        T*** matriks;
+        int baris;
+        int kolom;
     public:
-        T** matriks;
-        int row;
-        int column;
-    public: 
-        vector2() {
-            matriks = new T*[baris];
-            for(int i = 0; i < baris; i++) {
-                matriks[baris] = new T[kolom];
+        Matriks() {
+            baris = row;
+            kolom = col;
+            
+            matriks = new T**[row];
+            for (int i = 0; i < row; i++) {
+                matriks[i] = new T*[col];
             }
-            for(int i = 0; i < baris; i++) {
-                for(int j = 0; j < kolom; j++) {
-                    matriks[i][j] = kolom;
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    matriks[i][j] = new T();
                 }
             }
-            row = baris;
-            column = kolom;
         }
-        T* operator[](int idx) {
-            return this->matriks[idx];
+
+        T** operator[](int idx) {
+            return matriks[idx];
+        }
+
+        ~Matriks() {
+            delete[] matriks;
+        }
+
+        void print() {
+            for (int i = 0; i < baris; i++) {
+                for (int j = 0; j < kolom; j++) {
+                    cout << matriks[i][j]->getKode() << " ";
+                }
+                cout << endl;
+            }
+        }
+
+        int getbaris() {
+            return this->baris;
+        }
+
+        int getkolom() {
+            return this->kolom;
         }
 };
 

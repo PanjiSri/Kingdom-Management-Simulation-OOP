@@ -137,18 +137,20 @@ Petani::Petani(int gulden, int berat, string username): Peran(gulden, berat, use
 
 void Petani::cetaklahan() {
     int asciinum = 65;
+    lahanpertanian.print();
 }
 
 int Petani::getlahankosong() {}
 
 void Petani::tanam() {
     printpenyimpanan();
-    string indeksinvent, tumbuhan;
+    string indeksinvent;
+    Hewan* tumbuhan;
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
     tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
-    cout << "Tumbuhan " << tumbuhan << " diambil" << endl;
+    cout << "Tumbuhan " << tumbuhan->getKode() << " diambil" << endl;
     cetaklahan();
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {

@@ -2,6 +2,7 @@
 #define _PERAN_HPP_
 #include "vector"
 #include "vector.hpp"
+#include "../hewan/Carnivore.hpp"
 #include <iostream>
 using namespace std;
 class Peran {
@@ -9,7 +10,7 @@ class Peran {
         int gulden;
         int berat;
         string username;
-        vector2<string, 8, 8> penyimpanan; // Vector item
+        Matriks<Hewan, 8, 8> penyimpanan; // Vector item
         string peran_pemain;
     public:
         Peran();
@@ -42,7 +43,7 @@ class Walikota: public Peran {
 
 class Petani: public Peran {
     public: 
-        vector2<string, 8, 8> lahanpertanian; // Vector plant tipe data asli
+        Matriks<Hewan, 8, 8> lahanpertanian; // Vector plant tipe data asli
 
     public:
         Petani();
