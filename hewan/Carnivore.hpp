@@ -9,6 +9,7 @@ class Carnivore : public Hewan
         string kode; 
         string nama;
     public:
+        Carnivore();
         Carnivore(string kode, string nama, int berat, int harga);
         ~Carnivore();
         string getType();

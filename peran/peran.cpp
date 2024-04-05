@@ -2,6 +2,8 @@
 #include "vector"
 #include <iostream>
 using namespace std;
+#include "../hewan/Carnivore.hpp"
+#include "../hewan/Hewan.hpp"
 
 // Parent Peran
 
@@ -145,12 +147,12 @@ int Petani::getlahankosong() {}
 void Petani::tanam() {
     printpenyimpanan();
     string indeksinvent;
-    Hewan tumbuhan;
+    Hewan* tumbuhan;
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
     tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
-    cout << "Tumbuhan " << tumbuhan.getKode() << " diambil" << endl;
+    cout << "Tumbuhan " << tumbuhan->getKode() << " diambil" << endl;
     cetaklahan();
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {

@@ -1,3 +1,4 @@
+
 #ifndef _PERAN_HPP_
 #define _PERAN_HPP_
 #include "vector"
@@ -10,7 +11,7 @@ class Peran {
         int gulden;
         int berat;
         string username;
-        Matriks<Hewan, 8, 8> penyimpanan; // Vector item
+        Matriks<Hewan*, 8, 8> penyimpanan; // Vector item
         string peran_pemain;
     public:
         Peran();
@@ -43,7 +44,7 @@ class Walikota: public Peran {
 
 class Petani: public Peran {
     public: 
-        Matriks<Hewan, 8, 8> lahanpertanian; // Vector plant tipe data asli
+        Matriks<Hewan*, 8, 8> lahanpertanian; // Vector plant tipe data asli
 
     public:
         Petani();

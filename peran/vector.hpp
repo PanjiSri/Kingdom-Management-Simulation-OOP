@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "../hewan/Carnivore.hpp"
 using namespace std;
 
 template <class T, int row, int col>
@@ -23,7 +24,7 @@ class Matriks {
 
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
-                    T matriks[i][j];
+                    matriks[i][j] = new Carnivore();
                 }
             }
         }
@@ -39,7 +40,7 @@ class Matriks {
         void print() {
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {
-                    cout << matriks[i][j].getKode() << " ";
+                    cout << matriks[i][j]->getKode() << " ";
                 }
                 cout << endl;
             }

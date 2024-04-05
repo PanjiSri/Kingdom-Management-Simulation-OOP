@@ -22,13 +22,13 @@ class Hewan
         string getKode();
         string getNama();
         Hewan& operator=(Hewan& other);
-        virtual string getType();
+        virtual string getType() = 0;
         int getBeratPanen();
         int getHarga();
         int getberat_saat_ini();
         static int getJumlahHewan();
         void setberat_saat_ini(int tambahan_berat);
-        virtual void makan(Produk produk);
+        virtual void makan(Produk produk) = 0;
         bool isSiapPanen();
 };
 
