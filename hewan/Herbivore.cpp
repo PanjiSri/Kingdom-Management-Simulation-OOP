@@ -6,14 +6,14 @@ Herbivore::Herbivore(string kode, string nama, int berat, int harga) : Hewan(kod
 Herbivore::~Herbivore(){
 }
 
-void Herbivore::makan(Produk produk) {
-    if (produk.get_tipe() == "PRODUCT_ANIMAL") {
+void Herbivore::makan(Produk* produk) {
+    if (produk->get_tipe() == "PRODUCT_ANIMAL") {
         throw CarnivoraTidakMakanSayurException();
-    } else if(produk.get_tipe() == "PRODUCT_MATERIAL_PLANT") {
+    } else if(produk->get_tipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setberat_saat_ini(produk.get_tambahan_berat());
+        setberat_saat_ini(produk->get_tambahan_berat());
     }
 }
 

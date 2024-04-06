@@ -9,14 +9,14 @@ Carnivore::Carnivore(string kode, string nama, int berat, int harga) : Hewan(kod
 Carnivore::~Carnivore(){
 }
 
-void Carnivore::makan(Produk produk) {
-    if (produk.get_tipe() == "PRODUCT_FRUIT_PLANT") {
+void Carnivore::makan(Produk* produk) {
+    if (produk->get_tipe() == "PRODUCT_FRUIT_PLANT") {
         throw CarnivoraTidakMakanSayurException();
-    } else if(produk.get_tipe() == "PRODUCT_MATERIAL_PLANT") {
+    } else if(produk->get_tipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setberat_saat_ini(produk.get_tambahan_berat());
+        setberat_saat_ini(produk->get_tambahan_berat());
     }
 }
 

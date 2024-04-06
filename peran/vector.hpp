@@ -4,14 +4,16 @@
 #include <iostream>
 #include <string>
 #include "../hewan/Carnivore.hpp"
+#include "../hewan/Omnivore.hpp"
 using namespace std;
 
-template <class T, int row, int col>
+template <class T, int row, int col, int type>
 class Matriks {
     private:
         T** matriks;
         int baris;
         int kolom;
+        int tipe;
     public:
         Matriks() {
             baris = row;
@@ -21,10 +23,18 @@ class Matriks {
             for (int i = 0; i < row; i++) {
                 matriks[i] = new T[col];
             }
-
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    matriks[i][j] = new Carnivore();
+            if(tipe == 0) {
+                for(int i = 0; i < row; i++) {
+                    for(int j = 0; j < col; j++) {
+                        matriks[i][j] = new Carnivore(); 
+                    }
+                }
+            }
+            else {
+                for(int i = 0; i < row; i++) {
+                    for(int j = 0; j < col; j++) {
+                        matriks[i][j] = new Omnivore(); 
+                    }
                 }
             }
         }
@@ -38,9 +48,18 @@ class Matriks {
         }
 
         void print() {
+            int asciinum = 65;
+            cout << "     ";
+            for(int i = 0; i < baris; i++) {
+                cout << "  " << (char)(asciinum+i) << "  ";
+            }
+            cout << endl;
             for (int i = 0; i < baris; i++) {
+                if(i < 9) {
+                    cout << "  0" << i+1 << " "; 
+                }
                 for (int j = 0; j < kolom; j++) {
-                    cout << matriks[i][j]->getKode() << " ";
+                    cout << " "<< matriks[i][j]->getType() << " ";
                 }
                 cout << endl;
             }

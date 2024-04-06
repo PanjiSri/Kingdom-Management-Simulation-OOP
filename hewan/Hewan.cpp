@@ -3,7 +3,7 @@
 int Hewan::nhewan = 0;
 
 Hewan::Hewan() {
-    kode = "BOM";
+    kode = "   ";
     nama = "   ";
     standar_berat_panen = 0;
     berat_saat_ini = 0;

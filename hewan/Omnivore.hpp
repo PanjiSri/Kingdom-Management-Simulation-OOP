@@ -7,6 +7,7 @@ class Omnivore : public Hewan
 {
     private:
     public:
+        Omnivore();
         Omnivore(string kode, string nama, int berat, int harga);
         ~Omnivore();
         string getType();
@@ -15,7 +16,7 @@ class Omnivore : public Hewan
         int getBeratPanen();
         int getHarga();
         int getberat_saat_ini();
-        void makan(Produk produk);
+        void makan(Produk* produk);
         bool isSiapPanen();
 };
 

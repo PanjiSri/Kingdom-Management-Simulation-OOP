@@ -18,7 +18,7 @@ class Carnivore : public Hewan
         int getBeratPanen();
         int getHarga();
         int getberat_saat_ini();
-        void makan(Produk produk);
+        void makan(Produk* produk);
         bool isSiapPanen();
 };
 

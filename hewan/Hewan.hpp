@@ -28,7 +28,7 @@ class Hewan
         int getberat_saat_ini();
         static int getJumlahHewan();
         void setberat_saat_ini(int tambahan_berat);
-        virtual void makan(Produk produk) = 0;
+        virtual void makan(Produk* produk) = 0;
         bool isSiapPanen();
 };
 

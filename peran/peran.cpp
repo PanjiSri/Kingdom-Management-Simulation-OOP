@@ -3,7 +3,11 @@
 #include <iostream>
 using namespace std;
 #include "../hewan/Carnivore.hpp"
+#include "../hewan/Herbivore.hpp"
+#include "../hewan/Omnivore.hpp"
 #include "../hewan/Hewan.hpp"
+#include "../produk/Produk.hpp"
+#include "vector.hpp"
 
 // Parent Peran
 
@@ -45,25 +49,7 @@ string Peran::get_type() {
 }
 
 void Peran::printpenyimpanan() {
-    // int asciinum = 65;
-    // cout << "   ";
-    // for(int i = 0; i < 10; i++) {
-    //     cout << "  " << (char)(i+asciinum) << "  ";
-    // }
-    // cout << endl;
-    // for(int i = 0; i < 10; i++) {
-    //     if(i < 9) {
-    //         cout << "0" << i+1 << " ";
-    //     }
-    //     else {
-    //         cout << i+1 << " ";
-    //     }
-    //     for(int j = 0; j < 10; j++) {
-    //         cout << " " << penyimpanan[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-    // cout << penyimpanan << endl;
+    penyimpanan.print();
 }
 
 Peran& Peran::operator=(const Peran& other) {
@@ -74,7 +60,8 @@ Peran& Peran::operator=(const Peran& other) {
     return *this;
 }
 
-void Peran::addpenyimpanan(string benda) {
+void Peran::addpenyimpanan(string benda, vector<Produk*> listhewan) {
+    Hewan* x;
     printpenyimpanan();
     string idx;
     cout << "Masukkan lokasi yang diinginkan: ";
@@ -82,7 +69,7 @@ void Peran::addpenyimpanan(string benda) {
     vector<int> lokasi = parse(idx);
     cout << lokasi[1] << endl;
     cout << lokasi[0] << endl;
-    // penyimpanan[lokasi[1]][lokasi[0]] = benda;
+    penyimpanan[lokasi[1]][lokasi[0]] = x;
 }
 
 // Child Walikota
@@ -116,6 +103,9 @@ void Walikota::cetaklahan() {
     cout << "Hanya bisa dilakukan petani" << endl;
 }
 
+void Walikota::berimakan() {
+}
+
 int Walikota::getlahankosong() {
     cout << "Hanya bisa dilakukan petani" << endl;
     return -1;
@@ -142,7 +132,17 @@ void Petani::cetaklahan() {
     lahanpertanian.print();
 }
 
-int Petani::getlahankosong() {}
+int Petani::getlahankosong() {
+    int empty = 0;
+    for(int i = 0; i < lahanpertanian.getbaris(); i++) {
+        for(int j = 0; j < lahanpertanian.getkolom(); j++) {
+            if(lahanpertanian[i][j]->getKode() == "   " ) {
+                empty += 1;
+            }
+        }
+    }
+    return empty;
+}
 
 void Petani::tanam() {
     printpenyimpanan();
@@ -151,8 +151,8 @@ void Petani::tanam() {
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
-    tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
-    cout << "Tumbuhan " << tumbuhan->getKode() << " diambil" << endl;
+    // tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
+    cout << "Tumbuhan " << tumbuhan->getNama() << " diambil" << endl;
     cetaklahan();
     cout <<"Lahan kosong: " << this->getlahankosong() << endl;
     if (getlahankosong() == 0) {
@@ -176,3 +176,44 @@ void Petani::panen() {
         cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
     }
 }
+
+void Petani::berimakan() {}
+
+// Child Peternak
+Peternak::Peternak(string username): Peran(username) {
+    peran_pemain = "peternak";
+}
+
+void Peternak::cetaklahan() {
+    peternakan.print();
+}
+
+void Peternak::tanam() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+}
+
+void Peternak::panen() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+}
+
+void Peternak::berimakan() {
+    peternakan[0][7] = new Carnivore("SNK", "SNAKE", 13, 4);
+    cetaklahan();
+    string slot;
+    Hewan* hewan;
+    cout << "Hewan yang akan diberi makan: ";
+    cin >> slot;
+    vector<int> index = parse(slot);
+    hewan = peternakan[index[1]][index[0]];
+    printpenyimpanan();
+    Produk* produk;
+    cout << "Ambil makanan: ";
+    cin >> slot;
+    hewan->makan(produk);
+}
+
+int Peternak::getlahankosong() {
+    cout << "Hanya bisa dilakukan petani" << endl;
+    return -1;
+}
+
