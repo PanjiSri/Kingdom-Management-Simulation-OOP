@@ -4,36 +4,40 @@
 #include <iostream>
 #include "../exception/header/exception.hpp"
 #include "../produk/Produk.hpp"
+#include "../item/Item.hpp"
+#include <string>
+
 using namespace std;
 
-class Hewan
+class Hewan : public Item
 {
     private:
-        string kode;
-        string nama; 
         static int nhewan;
-        int standar_berat_panen;
-        int harga;
+        const int standar_berat_panen;
+        const int harga;
         int berat_saat_ini;
+
     public:
+        // Constructor & Destructor
         Hewan();
-        Hewan(string kode, string nama, int standar_berat_panen, int harga);
+        Hewan(int _ID);
+        Hewan(const Hewan& other);
         ~Hewan();
-        string getKode();
-        string getNama();
         Hewan& operator=(Hewan& other);
-        virtual string getType() = 0;
+        
+        // Getter
         int getBeratPanen();
         int getHarga();
-        int getberat_saat_ini();
+        int getBeratSaatIni();
         static int getJumlahHewan();
-        void setberat_saat_ini(int tambahan_berat);
+        virtual string getType() = 0;
+        
+        // Setter
+        void setBeratSaatIni(int tambahan_berat);
+        
+        // Other Method
         virtual void makan(Produk* produk) = 0;
         bool isSiapPanen();
 };
-
-
-
-
 
 #endif
