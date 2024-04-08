@@ -22,7 +22,9 @@ class Item {
         int getID();
         string getKode();
         string getNama();
+        virtual string getTipe() = 0;
         virtual int getHarga() = 0;
+        virtual int getTambahan() = 0;
 };
 
 #endif

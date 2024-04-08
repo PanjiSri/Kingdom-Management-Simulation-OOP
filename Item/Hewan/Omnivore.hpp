@@ -15,7 +15,7 @@ class Omnivore : public Hewan
         Omnivore(const Omnivore& other);
         ~Omnivore();
 
-        string getType();
+        string getTipe();
         void makan(Produk* produk);
         int getHarga();
 };

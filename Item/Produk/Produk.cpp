@@ -4,9 +4,9 @@ Produk::Produk() :
     Item(),
     tipe("XXX"), asal("XXX"), tambahan_berat(0), harga(0) {}
 
-// Produk::Produk(int _ID) : 
-//    Item(_ID),
-//    tipe(dummy[_ID][3]), asal(dummy[_ID][4]), tambahan_berat(dummy[_ID][5]), harga(dummy[_ID][6]) {}
+Produk::Produk(int _ID, string code, string name, string type, string origin, int tambahan, int harga) : 
+   Item(_ID, code, name),
+   tipe(type), asal(origin), tambahan_berat(tambahan), harga(harga) {}
 
 Produk::Produk(const Produk &other) :
         Item(other),
@@ -22,7 +22,7 @@ string Produk::getAsal() {
     return asal;
 }
 
-int Produk::getTambahanBerat() {
+int Produk::getTambahan() {
     return tambahan_berat;
 }
 

@@ -48,3 +48,7 @@ void Hewan::setBeratSaatIni(int tambahan_berat) {
 bool Hewan::isSiapPanen() {
     return berat_saat_ini >= standar_berat_panen;
 }
+
+int Hewan::getTambahan() {
+    return 0;
+}

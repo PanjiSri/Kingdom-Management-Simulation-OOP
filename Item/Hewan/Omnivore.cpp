@@ -8,7 +8,7 @@ Omnivore::Omnivore(const Omnivore& other) : Hewan(other) {}
 
 Omnivore::~Omnivore() {}
 
-string Omnivore::getType() {
+string Omnivore::getTipe() {
     return tipe;
 }
 
@@ -17,7 +17,7 @@ void Omnivore::makan(Produk* produk) {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setBeratSaatIni(produk->getTambahanBerat());
+        setBeratSaatIni(produk->getTambahan());
     }
 }
 

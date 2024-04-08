@@ -9,7 +9,7 @@ Carnivore::Carnivore(const Carnivore& other) : Hewan(other) {}
 
 Carnivore::~Carnivore() {}
 
-string Carnivore::getType() {
+string Carnivore::getTipe() {
     return tipe;
 }
 
@@ -20,7 +20,7 @@ void Carnivore::makan(Produk* produk) {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setBeratSaatIni(produk->getTambahanBerat());
+        setBeratSaatIni(produk->getTambahan());
     }
 }
 

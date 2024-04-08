@@ -16,7 +16,7 @@ private:
 public:
     // Constructor & Destructor
     Produk();
-    Produk(int _id);
+    Produk(int _id, string, string, string, string, int, int);
     Produk(const Produk &other);
     ~Produk();
 
@@ -33,7 +33,7 @@ public:
     /*
         Mengembalikan tambahan berat jika produk dikonsumsi
     */
-    int getTambahanBerat();
+    int getTambahan();
 
     /*
         Mengembalikan harga produk

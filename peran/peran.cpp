@@ -63,8 +63,13 @@ Peran& Peran::operator=(const Peran& other) {
     return *this;
 }
 
-void Peran::addpenyimpanan(string benda, vector<Produk*> listhewan) {
-    Hewan* x;
+void Peran::addpenyimpanan(string benda, vector<Item*> listitem) {
+    Item* x;
+    for(int i = 0; i < listitem.size(); i++) {
+        if(listitem[i]->getKode() == benda) {
+            x = listitem[i];
+        }
+    }
     printpenyimpanan();
     string idx;
     cout << "Masukkan lokasi yang diinginkan: ";
@@ -73,6 +78,26 @@ void Peran::addpenyimpanan(string benda, vector<Produk*> listhewan) {
     cout << lokasi[1] << endl;
     cout << lokasi[0] << endl;
     penyimpanan[lokasi[1]][lokasi[0]] = x;
+}
+
+void Peran::player_makan() {
+    printpenyimpanan();
+    Item* x;
+    string kode;
+    cout << "Ambil makanan dalam inventory mu: ";
+    cin >> kode;
+    vector<int> index = parse(kode);
+    x = penyimpanan[index[1]][index[0]];
+    if((x->getTipe() == "PRODUCT_ANIMAL") or (x->getTipe() == "PRODUCT_FRUIT_PLANT")) {
+        setberat(x->getTambahan());
+    }
+    else {
+        cout << "Jangan makan barang mentah atau kosong" << endl;
+    }
+}
+
+void Peran::setberat(int berat_tambahan) {
+    berat += berat_tambahan;
 }
 
 // Child Walikota
@@ -139,7 +164,7 @@ int Petani::getlahankosong() {
     int empty = 0;
     for(int i = 0; i < lahanpertanian.getbaris(); i++) {
         for(int j = 0; j < lahanpertanian.getkolom(); j++) {
-            if(lahanpertanian[i][j]->getKode() == "   " ) {
+            if(lahanpertanian[i][j]->getKode() == "XXX" ) {
                 empty += 1;
             }
         }
@@ -150,23 +175,26 @@ int Petani::getlahankosong() {
 void Petani::tanam() {
     printpenyimpanan();
     string indeksinvent;
-    Hewan* tumbuhan;
+    Item* hewan;
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
-    // tumbuhan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
-    cout << "Tumbuhan " << tumbuhan->getNama() << " diambil" << endl;
-    cetaklahan();
-    cout <<"Lahan kosong: " << this->getlahankosong() << endl;
-    if (getlahankosong() == 0) {
-        cout << "Lahan penuh" << endl;
-    }
-    else {
-        string idx;
-        cout << "Masukkan lokasi yang diinginkan: ";
-        cin >> idx;
-        vector<int> lokasi = parse(idx);
-        lahanpertanian[lokasi[1]][lokasi[0]] = tumbuhan;
+    if (penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe() == "HERBIVORE") {
+        hewan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
+        cout << "Tumbuhan " << hewan->getNama() << " diambil" << endl;
+        cetaklahan();
+        cout <<"Lahan kosong: " << this->getlahankosong() << endl;
+        if (getlahankosong() == 0) {
+            cout << "Lahan penuh" << endl;
+        }
+        else {
+            string idx;
+            cout << "Masukkan lokasi yang diinginkan: ";
+            cin >> idx;
+            vector<int> lokasi = parse(idx);
+            lahanpertanian[lokasi[1]][lokasi[0]] = hewan;
+            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Carnivore();
+        }
     }
     cetaklahan();
 }
@@ -192,7 +220,30 @@ void Peternak::cetaklahan() {
 }
 
 void Peternak::tanam() {
-    cout << "Hanya bisa dilakukan petani" << endl;
+    printpenyimpanan();
+    string indeksinvent;
+    Item* hewan;
+    cout << "Slot: ";
+    cin >> indeksinvent;
+    vector<int> lokasiinvent = parse(indeksinvent); 
+    if (penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe() == "HERBIVORE") {
+        hewan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
+        cout << "Hewan " << hewan->getNama() << " diambil" << endl;
+        cetaklahan();
+        cout <<"Lahan kosong: " << this->getlahankosong() << endl;
+        if (getlahankosong() == 0) {
+            cout << "Lahan penuh" << endl;
+        }
+        else {
+            string idx;
+            cout << "Masukkan lokasi yang diinginkan: ";
+            cin >> idx;
+            vector<int> lokasi = parse(idx);
+            peternakan[lokasi[1]][lokasi[0]] = hewan;
+            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Carnivore();
+        }
+    }
+    cetaklahan();
 }
 
 void Peternak::panen() {
@@ -215,7 +266,14 @@ void Peternak::berimakan() {
 }
 
 int Peternak::getlahankosong() {
-    cout << "Hanya bisa dilakukan petani" << endl;
-    return -1;
+    int empty = 0;
+    for(int i = 0; i < peternakan.getbaris(); i++) {
+        for(int j = 0; j < peternakan.getkolom(); j++) {
+            if(peternakan[i][j]->getKode() == "XXX" ) {
+                empty += 1;
+            }
+        }
+    }
+    return empty;
 }
 

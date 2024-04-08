@@ -25,6 +25,7 @@ class Tanaman : public Item {
         int getWaktuPanen();
         int getUmur();
         int getHarga();
+        int getTambahan();
 
         // Setter
         void tambahUmur();

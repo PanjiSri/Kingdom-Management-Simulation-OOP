@@ -15,7 +15,7 @@ class Herbivore : public Hewan
         Herbivore(const Herbivore& other);
         ~Herbivore();
 
-        string getType();
+        string getTipe();
         void makan(Produk* produk);
         int getHarga();
 };

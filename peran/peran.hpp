@@ -28,7 +28,9 @@ class Peran {
         int getberat();
         string get_type();
         void printpenyimpanan();
-        void addpenyimpanan(string, vector<Produk*>);
+        void addpenyimpanan(string, vector<Item*>);
+        void setberat(int berat);
+        void player_makan();
         virtual void tanam() = 0;
         virtual void cetaklahan() = 0;
         virtual void panen() = 0;

@@ -16,7 +16,7 @@ class Carnivore : public Hewan
         ~Carnivore();
 
         // Getter
-        string getType();
+        string getTipe();
         void makan(Produk* produk);
         int getHarga();
 };

@@ -30,7 +30,8 @@ class Hewan : public Item
         int getHarga();
         int getBeratSaatIni();
         static int getJumlahHewan();
-        virtual string getType() = 0;
+        virtual string getTipe() = 0;
+        int getTambahan();
         
         // Setter
         void setBeratSaatIni(int tambahan_berat);

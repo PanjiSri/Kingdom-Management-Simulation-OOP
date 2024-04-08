@@ -8,7 +8,7 @@ Herbivore::Herbivore(const Herbivore& other) : Hewan(other) {}
 
 Herbivore::~Herbivore() {}
 
-string Herbivore::getType() {
+string Herbivore::getTipe() {
     return tipe;
 }
 
@@ -19,7 +19,7 @@ void Herbivore::makan(Produk* produk) {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setBeratSaatIni(produk->getTambahanBerat());
+        setBeratSaatIni(produk->getTambahan());
     }
 }
 
