@@ -6,11 +6,11 @@ Tanaman::Tanaman() :
     this->umur = 0;
 }
 
-// Tanaman::Tanaman(int _ID) : 
-//    Item(_ID), 
-//    tipe(dummy[_ID][3]), waktu_panen(dummy[_ID][4]), harga(dummy[_ID][5]) {
-//     this->umur = 0;
-// }
+Tanaman::Tanaman(int _ID, string code, string tipe, string name, int panen, int harga) : 
+   Item(_ID, code, name), 
+   tipe(tipe), waktu_panen(panen), harga(harga) {
+    this->umur = 0;
+}
 
 Tanaman::Tanaman(const Tanaman& other) :
     Item(other), 

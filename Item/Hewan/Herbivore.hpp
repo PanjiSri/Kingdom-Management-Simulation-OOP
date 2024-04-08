@@ -11,12 +11,13 @@ class Herbivore : public Hewan
     public:
         // Constructor & Destructor
         Herbivore();
-        Herbivore(int _ID);
+        Herbivore(int _ID, string, string, int, int);
         Herbivore(const Herbivore& other);
         ~Herbivore();
 
-        string getTipe();
+        string getType();
         void makan(Produk* produk);
+        int getHarga();
 };
 
 

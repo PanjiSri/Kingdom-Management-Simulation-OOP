@@ -2,11 +2,14 @@
 #include "vector"
 #include <iostream>
 using namespace std;
-#include "../hewan/Carnivore.hpp"
-#include "../hewan/Herbivore.hpp"
-#include "../hewan/Omnivore.hpp"
-#include "../hewan/Hewan.hpp"
-#include "../produk/Produk.hpp"
+#include "../Item/Hewan/Carnivore.hpp"
+#include "../Item/Hewan/Omnivore.hpp"
+#include "../Item/Hewan/Herbivore.hpp"
+#include "../Item/Hewan/Hewan.hpp"
+#include "../Item/Item.hpp"
+#include "../Item/Produk/Produk.hpp"
+#include "../Item/Tanaman/Tanaman.hpp"
+#include "../Item/Bangunan/Bangunan.hpp"
 #include "vector.hpp"
 
 // Parent Peran
@@ -197,10 +200,9 @@ void Peternak::panen() {
 }
 
 void Peternak::berimakan() {
-    peternakan[0][7] = new Carnivore("SNK", "SNAKE", 13, 4);
     cetaklahan();
     string slot;
-    Hewan* hewan;
+    Item* hewan;
     cout << "Hewan yang akan diberi makan: ";
     cin >> slot;
     vector<int> index = parse(slot);
@@ -209,7 +211,7 @@ void Peternak::berimakan() {
     Produk* produk;
     cout << "Ambil makanan: ";
     cin >> slot;
-    hewan->makan(produk);
+    // hewan->makan(produk);
 }
 
 int Peternak::getlahankosong() {

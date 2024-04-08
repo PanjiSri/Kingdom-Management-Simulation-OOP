@@ -3,8 +3,14 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "../hewan/Carnivore.hpp"
-#include "../hewan/Omnivore.hpp"
+#include "../Item/Hewan/Carnivore.hpp"
+#include "../Item/Hewan/Omnivore.hpp"
+#include "../Item/Hewan/Herbivore.hpp"
+#include "../Item/Hewan/Hewan.hpp"
+#include "../Item/Item.hpp"
+#include "../Item/Produk/Produk.hpp"
+#include "../Item/Tanaman/Tanaman.hpp"
+#include "../Item/Bangunan/Bangunan.hpp"
 using namespace std;
 
 template <class T, int row, int col, int type>
@@ -23,17 +29,17 @@ class Matriks {
             for (int i = 0; i < row; i++) {
                 matriks[i] = new T[col];
             }
-            if(tipe == 0) {
+            if(tipe == 1) {
                 for(int i = 0; i < row; i++) {
                     for(int j = 0; j < col; j++) {
-                        matriks[i][j] = new Carnivore(); 
+                        matriks[i][j] = new Tanaman(); 
                     }
                 }
             }
             else {
                 for(int i = 0; i < row; i++) {
                     for(int j = 0; j < col; j++) {
-                        matriks[i][j] = new Omnivore(); 
+                        matriks[i][j] = new Carnivore(); 
                     }
                 }
             }
@@ -59,7 +65,7 @@ class Matriks {
                     cout << "  0" << i+1 << " "; 
                 }
                 for (int j = 0; j < kolom; j++) {
-                    cout << " "<< matriks[i][j]->getType() << " ";
+                    cout << " "<< matriks[i][j]->getKode() << " ";
                 }
                 cout << endl;
             }

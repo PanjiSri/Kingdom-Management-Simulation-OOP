@@ -16,7 +16,7 @@ class Tanaman : public Item {
     public:
         // Constructor & Destructor
         Tanaman();
-        Tanaman(int _ID);
+        Tanaman(int _ID, string, string, string, int, int);
         Tanaman(const Tanaman& other);
         ~Tanaman();
 

@@ -14,7 +14,7 @@ class Item {
     public:
         // Constructor & Destructor
         Item();
-        Item(int _ID);
+        Item(int _ID, string, string);
         Item(const Item& other);
         ~Item();
 

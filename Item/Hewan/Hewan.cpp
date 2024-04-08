@@ -1,17 +1,20 @@
 #include "Hewan.hpp"
 
+int Hewan::nhewan = 0;
+
 Hewan::Hewan() :
     Item(), 
     standar_berat_panen(0), harga(0) {
     this->berat_saat_ini = 0;
 }
 
-// Hewan::Hewan(int _ID) :
-//     Item(_ID), 
-//     standar_berat_panen(dummy[_ID][4]), harga(dummy[_ID][5]) {
-//     this->berat_saat_ini = 0;
-//     nhewan++;
-// }
+Hewan::Hewan(int _ID, string code, string name, int berat, int price) :
+    Item(_ID,code,name),
+    standar_berat_panen(berat),
+    harga(price){
+    this->berat_saat_ini = 0;
+    nhewan++;
+}
 
 Hewan::Hewan(const Hewan& other) :
     Item(other), 

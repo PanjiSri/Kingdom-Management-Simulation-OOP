@@ -2,13 +2,13 @@
 
 Omnivore::Omnivore() : Hewan() {}
 
-Omnivore::Omnivore(int _ID) : Hewan(_ID) {}
+Omnivore::Omnivore(int _ID, string code, string name, int berat, int harga) : Hewan(_ID, code, name, berat, harga) {}
 
 Omnivore::Omnivore(const Omnivore& other) : Hewan(other) {}
 
 Omnivore::~Omnivore() {}
 
-string Omnivore::getTipe() {
+string Omnivore::getType() {
     return tipe;
 }
 
@@ -19,4 +19,8 @@ void Omnivore::makan(Produk* produk) {
     else {
         setBeratSaatIni(produk->getTambahanBerat());
     }
+}
+
+int Omnivore::getHarga() {
+    return this->harga;
 }

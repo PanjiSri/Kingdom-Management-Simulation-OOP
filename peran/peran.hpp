@@ -3,9 +3,14 @@
 #define _PERAN_HPP_
 #include "vector"
 #include "vector.hpp"
-#include "../hewan/Carnivore.hpp"
-#include "../produk/Tanaman/Fruit_Plant.hpp"
-#include "../produk/Tanaman/Plant.hpp"
+#include "../Item/Hewan/Carnivore.hpp"
+#include "../Item/Hewan/Omnivore.hpp"
+#include "../Item/Hewan/Herbivore.hpp"
+#include "../Item/Hewan/Hewan.hpp"
+#include "../Item/Item.hpp"
+#include "../Item/Produk/Produk.hpp"
+#include "../Item/Tanaman/Tanaman.hpp"
+#include "../Item/Bangunan/Bangunan.hpp"
 #include <iostream>
 using namespace std;
 class Peran {
@@ -13,7 +18,7 @@ class Peran {
         int gulden;
         int berat;
         string username;
-        Matriks<Hewan*, 8, 8, 0> penyimpanan; // Vector item
+        Matriks<Item*, 8, 8, 0> penyimpanan; // Vector item
         string peran_pemain;
     public:
         Peran();
@@ -48,7 +53,7 @@ class Walikota: public Peran {
 
 class Petani: public Peran {
     public: 
-        Matriks<Hewan*, 8, 8, 1> lahanpertanian; // Vector plant tipe data asli
+        Matriks<Item*, 8, 8, 1> lahanpertanian; // Vector plant tipe data asli
 
     public:
         Petani();
@@ -63,7 +68,7 @@ class Petani: public Peran {
 
 class Peternak: public Peran {
     public: 
-        Matriks<Hewan*,8,8,2> peternakan; // Vector pakai tipe data animal
+        Matriks<Item*,8,8,2> peternakan; // Vector pakai tipe data animal
 
     public:
         Peternak(string);

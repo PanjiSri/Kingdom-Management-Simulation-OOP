@@ -3,8 +3,8 @@
 Item::Item() :
     ID(0), kode("XXX"), nama("XXX") {}
 
-// Item::Item(int _ID) 
-//    : ID(_ID) , kode(dummy[_ID][1]), nama(dummy[_ID][2]) {}
+Item::Item(int _ID, string code, string name) 
+   : ID(_ID) , kode(code), nama(name) {}
 
 Item::Item(const Item& other) 
     : ID(other.ID) , kode(other.kode), nama(other.nama) {}

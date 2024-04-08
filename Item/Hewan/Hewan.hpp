@@ -2,16 +2,16 @@
 #define HEWAN_HPP
 
 #include <iostream>
-#include "../exception/header/exception.hpp"
+#include "../../exception/header/exception.hpp"
 #include "../produk/Produk.hpp"
-#include "../item/Item.hpp"
+#include "../Item.hpp"
 #include <string>
 
 using namespace std;
 
 class Hewan : public Item
 {
-    private:
+    protected:
         static int nhewan;
         const int standar_berat_panen;
         const int harga;
@@ -20,7 +20,7 @@ class Hewan : public Item
     public:
         // Constructor & Destructor
         Hewan();
-        Hewan(int _ID);
+        Hewan(int _ID, string, string, int, int);
         Hewan(const Hewan& other);
         ~Hewan();
         Hewan& operator=(Hewan& other);
