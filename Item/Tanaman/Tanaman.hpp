@@ -32,6 +32,7 @@ class Tanaman : public Item {
 
         // Other Method
         bool isSiapPanen();
+        // void makan(Produk* produk) {}
 };
 
 #endif

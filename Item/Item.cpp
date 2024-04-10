@@ -1,4 +1,5 @@
 #include "Item.hpp"
+#include "Tanaman/Tanaman.hpp"
 
 Item::Item() :
     ID(0), kode("XXX"), nama("XXX") {}

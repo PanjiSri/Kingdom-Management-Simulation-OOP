@@ -25,6 +25,7 @@ class Item {
         virtual string getTipe() = 0;
         virtual int getHarga() = 0;
         virtual int getTambahan() = 0;
+        // virtual void makan(Produk*) = 0;
 };
 
 #endif

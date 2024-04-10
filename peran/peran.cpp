@@ -52,6 +52,7 @@ string Peran::get_type() {
 }
 
 void Peran::printpenyimpanan() {
+    cout << "===================PENYIMPANAN====================" << endl;
     penyimpanan.print();
 }
 
@@ -114,7 +115,7 @@ void Walikota::addgulden(int guldentambahan) {
 void Walikota::ambilpajak(vector<Peran*> listpemain) {
     int guldenpajak = 0;
     for(int i = 0; i < listpemain.size(); i++) {
-        guldenpajak += (int)(listpemain[i]->getgulden())*0.1;
+        guldenpajak += listpemain[i]->calculateTax()*0.35;
     }
     addgulden(guldenpajak);
 }
@@ -137,6 +138,10 @@ void Walikota::berimakan() {
 int Walikota::getlahankosong() {
     cout << "Hanya bisa dilakukan petani" << endl;
     return -1;
+}
+
+int Walikota::calculateTax() {
+    return 0;
 }
 
 
@@ -175,13 +180,13 @@ int Petani::getlahankosong() {
 void Petani::tanam() {
     printpenyimpanan();
     string indeksinvent;
-    Item* hewan;
+    Tanaman* tanaman;
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
     if (penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe() == "HERBIVORE") {
-        hewan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
-        cout << "Tumbuhan " << hewan->getNama() << " diambil" << endl;
+        tanaman = dynamic_cast<Tanaman*>(penyimpanan[lokasiinvent[1]][lokasiinvent[0]]);
+        cout << "Tumbuhan " << tanaman->getNama() << " diambil" << endl;
         cetaklahan();
         cout <<"Lahan kosong: " << this->getlahankosong() << endl;
         if (getlahankosong() == 0) {
@@ -192,7 +197,7 @@ void Petani::tanam() {
             cout << "Masukkan lokasi yang diinginkan: ";
             cin >> idx;
             vector<int> lokasi = parse(idx);
-            lahanpertanian[lokasi[1]][lokasi[0]] = hewan;
+            lahanpertanian[lokasi[1]][lokasi[0]] = tanaman;
             penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Carnivore();
         }
     }
@@ -210,6 +215,13 @@ void Petani::panen() {
 
 void Petani::berimakan() {}
 
+int Petani::calculateTax() {
+    int uang = this->gulden;
+    uang += penyimpanan.getValue();
+    uang += lahanpertanian.getValue();
+    return uang;
+}
+
 // Child Peternak
 Peternak::Peternak(string username): Peran(username) {
     peran_pemain = "peternak";
@@ -222,12 +234,12 @@ void Peternak::cetaklahan() {
 void Peternak::tanam() {
     printpenyimpanan();
     string indeksinvent;
-    Item* hewan;
+    Hewan* hewan;
     cout << "Slot: ";
     cin >> indeksinvent;
     vector<int> lokasiinvent = parse(indeksinvent); 
     if (penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe() == "HERBIVORE") {
-        hewan = penyimpanan[lokasiinvent[1]][lokasiinvent[0]];
+        hewan = dynamic_cast<Hewan*>(penyimpanan[lokasiinvent[1]][lokasiinvent[0]]);
         cout << "Hewan " << hewan->getNama() << " diambil" << endl;
         cetaklahan();
         cout <<"Lahan kosong: " << this->getlahankosong() << endl;
@@ -253,7 +265,7 @@ void Peternak::panen() {
 void Peternak::berimakan() {
     cetaklahan();
     string slot;
-    Item* hewan;
+    Hewan* hewan;
     cout << "Hewan yang akan diberi makan: ";
     cin >> slot;
     vector<int> index = parse(slot);
@@ -262,7 +274,9 @@ void Peternak::berimakan() {
     Produk* produk;
     cout << "Ambil makanan: ";
     cin >> slot;
-    // hewan->makan(produk);
+    index = parse(slot);
+    produk = dynamic_cast<Produk*>(penyimpanan[index[1]][index[0]]);
+    hewan->makan(produk);
 }
 
 int Peternak::getlahankosong() {
@@ -277,3 +291,9 @@ int Peternak::getlahankosong() {
     return empty;
 }
 
+int Petani::calculateTax() {
+    int uang = this->gulden;
+    uang += penyimpanan.getValue();
+    uang += lahanpertanian.getValue();
+    return uang;
+}

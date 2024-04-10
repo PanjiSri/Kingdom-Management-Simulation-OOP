@@ -116,15 +116,15 @@ int main() {
         listitem.push_back(x);
     }
 
-    for(int i = 0; i < listhewan.size(); i++) {
-        cout << listhewan[i]->getKode() << endl;
-    }
     vector<Peran*> listpemain;
     Peran* a = new Peternak("haikal");
     cout <<  a->getberat() << endl;
+    cout << "Test1" << endl;
+    a->cetaklahan();
     a->addpenyimpanan("COW", listitem);
-    a->tanam();
     a->addpenyimpanan("COM", listitem);
-    a->player_makan();
-    cout << a->getberat() << endl;
+    a->tanam();
+    a->berimakan();
+    a->printpenyimpanan();
+    cout << "TEST2" << endl;
 };

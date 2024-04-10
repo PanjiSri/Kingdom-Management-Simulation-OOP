@@ -39,6 +39,7 @@ public:
         Mengembalikan harga produk
     */
     int getHarga();
+    void makan(Produk* produk){}
 };
 
 #endif

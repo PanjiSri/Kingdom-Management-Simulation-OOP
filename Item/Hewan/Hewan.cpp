@@ -41,6 +41,10 @@ int Hewan::getJumlahHewan() {
     return nhewan;
 }
 
+string Hewan::getKode() {
+    return kode;
+}
+
 void Hewan::setBeratSaatIni(int tambahan_berat) {
     berat_saat_ini += tambahan_berat;
 }

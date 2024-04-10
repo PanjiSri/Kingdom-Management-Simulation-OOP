@@ -29,6 +29,7 @@ class Hewan : public Item
         int getBeratPanen();
         int getHarga();
         int getBeratSaatIni();
+        string getKode();
         static int getJumlahHewan();
         virtual string getTipe() = 0;
         int getTambahan();
