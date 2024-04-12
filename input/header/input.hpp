@@ -9,9 +9,9 @@
 #include "../../exception/header/exception.hpp"
 using namespace std;
 
-class line_handler
+class Line_Handler
 {
-private:
+protected:
     string id;
     string kode_huruf;
     string name;
@@ -20,75 +20,30 @@ private:
     int price;
 
 public:
-    line_handler(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price)
-        : id(id), kode_huruf(kode_huruf), name(name), type(type), duration(duration), price(price) {}
+    Line_Handler(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price);
 
-    string getId() const
-    {
-        return id;
-    }
+    string getId() const;
 
-    string getKodeHuruf() const
-    {
-        return kode_huruf;
-    }
+    string getKodeHuruf() const;
 
-    string getName() const
-    {
-        return name;
-    }
+    string getName() const;
 
-    string getType() const
-    {
-        return type;
-    }
+    string getType() const;
 
-    int getDurationToHarvest() const
-    {
-        return duration;
-    }
+    int getDurationToHarvest() const;
 
-    int getPrice() const
-    {
-        return price;
-    }
+    int getPrice() const;
 };
 
-
-class list_hasil_baca
+class Line_Handler_Produk : public Line_Handler
 {
 private:
-    vector<line_handler> list_objek;
+    string origin;
 
 public:
-    void readPlanFromFile(const string& filename) {
-        ifstream file(filename);
-        if (!file.is_open()) {
-            throw FilePathTidakValid();
-        }
+    Line_Handler_Produk(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price, const string &origin);
 
-        string id, kode_huruf, name, type;
-        int duration_to_harvest, price;
-        string line; 
-        
-        while (getline(file, line)) {
-            stringstream ss(line);
-            ss >> id >> kode_huruf >> name >> type >> duration_to_harvest >> price;
-            list_objek.push_back(line_handler(id, kode_huruf, name, type, duration_to_harvest, price));
-        }
-
-        file.close();
-    }
-
-    line_handler getObjek(int index) const
-    {
-        return list_objek[index];
-    }
-
-    int getUkuran() const
-    {
-        return list_objek.size();
-    }
+    string getOrigin() const;
 };
 
 #endif
