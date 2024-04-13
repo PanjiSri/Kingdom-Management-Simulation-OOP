@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ostream>
 #include "vector"
-#include "vector.hpp"
+#include "MatriksPenyimpanan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
@@ -13,6 +13,9 @@
 #include "../Item/Bangunan/Bangunan.hpp"
 #include <string>
 using namespace std;
+
+// compile
+// g++ -o main main.cpp peran.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
 
 int main() {
     static int nhewan = 0;

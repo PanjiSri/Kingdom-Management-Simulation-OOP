@@ -2,8 +2,7 @@
 #ifndef _PERAN_HPP_
 #define _PERAN_HPP_
 #include "vector"
-#include "vector.hpp"
-#include "vector2.hpp"
+#include "MatriksPenyimpanan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
@@ -17,76 +16,112 @@ using namespace std;
 
 
 class Peran {
-    public: 
+    public:
         int gulden;
         int berat;
         string username;
-        MatriksHewan<Item*> penyimpanan; // Vector item
-        string peran_pemain;
+        MatriksPenyimpanan<Item*> penyimpanan;
+        
     public:
+        // Constructor & Destructor
         Peran();
-        Peran(string);
-        Peran(int gulden, int berat, string username);
-        int getgulden();
-        int getberat();
-        virtual int calculateTax() = 0;
-        string get_type();
-        void printpenyimpanan();
-        void addpenyimpanan(string, vector<Item*>);
-        void setberat(int berat);
-        void player_makan();
-        virtual void tanam() = 0;
-        virtual void cetaklahan() = 0;
-        virtual void panen() = 0;
-        virtual void berimakan() = 0;
-        virtual int getlahankosong() = 0;
+        Peran(string username, int row, int col);
+        Peran(int gulden, int berat, string username, int row, int col);
+        ~Peran();
+        Peran& operator= (const Peran& other);
+
+        // Getter
+        int getGulden();
+        int getBerat();
+
+        // Setter
+        void tambahBerat(int berat);
+
+        // Other Method
+        void printPenyimpanan();
+        void playerMakan();
+        void addPenyimpanan(string, vector<Item*>);
         vector<int> parse(string);
-        Peran& operator=(const Peran&);
+        
+        virtual string getType() = 0;
+        virtual void tanam() = 0;
+        virtual void panen() = 0;
+        virtual void cetakLahan() = 0;
+        virtual void beriMakan() = 0;
+        virtual int getLahanKosong() = 0;
+        virtual int calculateTax() = 0;
 };
 
 class Walikota: public Peran {
+    private:
+        string peran_pemain;
+
     public:
-        Walikota(string);
+        // Constructor & Destructor
+        Walikota(string username, int row, int col);
+        ~Walikota();
         // Walikota(int gulden, int berat, string);
-        void addgulden(int);
-        void ambilpajak(vector<Peran*>);
+
+        // Getter
+        string getType();
+
+        // Setter
+        void addGulden(int);
+        void ambilPajak(vector<Peran*>);
         void tanam();
-        void cetaklahan();
         void panen();
-        void berimakan();
+        void beriMakan();
+        void cetakLahan();
         int getlahankosong();
         int calculateTax();
 };
 
 class Petani: public Peran {
-    public: 
-        MatriksTumbuhan<Tanaman*, 8, 8> lahanpertanian; // Vector plant tipe data asli
+    public:
+        string peran_pemain; 
+        MatriksPenyimpanan<Tanaman*> lahanPertanian; // Vector plant tipe data asli
 
     public:
+        // Constructor & Destructor
         Petani();
-        Petani(string);
-        Petani(int gulden, int berat, string);
+        Petani(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        Petani(int gulden, int berat, string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        ~Petani();
+
+        // Getter
+        string getType();
+
+        // Other Method
         void tanam();
-        void berimakan();
-        void cetaklahan();
+        void beriMakan();
+        void cetakLahan();
         void panen();
         int calculateTax();
-        int getlahankosong();
+        int getLahanKosong();
 };
 
 class Peternak: public Peran {
     public: 
-        MatriksHewan<Hewan*> peternakan; // Vector pakai tipe data animal
+        string peran_pemain;
+        MatriksPenyimpanan<Hewan*> peternakan; // Vector pakai tipe data animal
 
     public:
-        Peternak(string);
-        // Peternak(int, int, string);
+        // Constructor & Destructor
+        Peternak();
+        Peternak(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        Peternak(int gulden, int berat, string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        ~Peternak();
+
+        // Getter
+        string getType();
+
+        // Other Method
         void tanam();
+        void beriMakan();
+        void cetakLahan();
         void panen();
         int calculateTax();
-        int getlahankosong();
-        void cetaklahan();
-        void berimakan();
+        int getLahanKosong();
 };
 
 #endif

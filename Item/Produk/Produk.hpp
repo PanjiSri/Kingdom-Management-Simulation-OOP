@@ -11,13 +11,12 @@ private:
     const string tipe;
     const string asal;
     const int tambahan_berat;
-    const int harga;
 
 public:
     // Constructor & Destructor
     Produk();
-    Produk(int _id, string, string, string, string, int, int);
-    Produk(const Produk &other);
+    Produk(int, string, string, string, string, int, int);
+    Produk(const Produk&);
     ~Produk();
 
     /*
@@ -34,12 +33,6 @@ public:
         Mengembalikan tambahan berat jika produk dikonsumsi
     */
     int getTambahan();
-
-    /*
-        Mengembalikan harga produk
-    */
-    int getHarga();
-    void makan(Produk* produk){}
 };
 
 #endif

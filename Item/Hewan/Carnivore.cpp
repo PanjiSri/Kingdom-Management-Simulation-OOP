@@ -2,10 +2,14 @@
 
 Carnivore::Carnivore() : Hewan() {}
 
-Carnivore::Carnivore(int _ID, string code, string name, int berat, int harga) : Hewan(_ID, code, name, berat, harga) {}
+Carnivore::Carnivore(int _ID, string _kode, string _nama, int _berat, int _harga) : 
+    Hewan(_ID, _kode, _nama, _berat, _harga) 
+    {}
 
 
-Carnivore::Carnivore(const Carnivore& other) : Hewan(other) {}
+Carnivore::Carnivore(const Carnivore& other) : 
+    Hewan(other) 
+    {}
 
 Carnivore::~Carnivore() {}
 
@@ -22,8 +26,4 @@ void Carnivore::makan(Produk* produk) {
     else {
         setBeratSaatIni(produk->getTambahan());
     }
-}
-
-int Carnivore::getHarga() {
-    return harga;
 }

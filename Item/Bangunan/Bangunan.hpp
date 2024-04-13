@@ -8,20 +8,12 @@
 using namespace std;
 
 class Bangunan : public Item {
-    private:
-        // map<string, int> resep;
-        const int harga;
-    
     public:
         // Constructor & Destructor
         Bangunan();
-        Bangunan(int _ID);
-        Bangunan(const Bangunan& other);
+        Bangunan(int, string, string, int);
+        Bangunan(const Bangunan&);
         ~Bangunan();
-        Bangunan& operator=(const Bangunan& other);
-
-        // Getter
-        int getHarga();
 };
 
 #endif
