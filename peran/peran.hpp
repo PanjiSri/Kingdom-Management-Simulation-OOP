@@ -56,6 +56,9 @@ class Peran {
         virtual int getLahanKosong() = 0;
         virtual int calculateTax() = 0;
 
+        void menjual(Toko* toko);
+        void membeli(Toko* toko);
+
 };
 
 class Walikota: public Peran {
