@@ -2,19 +2,25 @@
 
 Tanaman::Tanaman() : 
     Item(), 
-    tipe("Tanaman"), waktu_panen(0), harga(0) {
+    tipe("Tanaman"), 
+    waktu_panen(0)
+{
     this->umur = 0;
 }
 
-Tanaman::Tanaman(int _ID, string code, string tipe, string name, int panen, int harga) : 
-   Item(_ID, code, name), 
-   tipe(tipe), waktu_panen(panen), harga(harga) {
+Tanaman::Tanaman(int _ID, string _kode, string _tipe, string _nama, int _waktu_panen, int _harga) : 
+    Item(_ID, _kode, _nama, _harga), 
+    tipe(_tipe), 
+    waktu_panen(_waktu_panen) 
+{
     this->umur = 0;
 }
 
 Tanaman::Tanaman(const Tanaman& other) :
     Item(other), 
-    tipe(other.tipe), waktu_panen(other.waktu_panen), harga(other.harga) {
+    tipe(other.tipe), 
+    waktu_panen(other.waktu_panen)
+{
     this->umur = other.umur;
 }
 
@@ -32,8 +38,8 @@ int Tanaman::getUmur() {
     return umur;
 }
 
-int Tanaman::getHarga() {
-    return harga;
+int Tanaman::getTambahan() {
+    return 0;
 }
 
 void Tanaman::tambahUmur() {
@@ -42,8 +48,4 @@ void Tanaman::tambahUmur() {
 
 bool Tanaman::isSiapPanen() {
     return umur >= waktu_panen;
-}
-
-int Tanaman::getTambahan() {
-    return 0;
 }

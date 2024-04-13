@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ostream>
 #include "vector"
-#include "vector.hpp"
+#include "MatriksPenyimpanan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
@@ -12,7 +12,11 @@
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
 #include <string>
+#include "../Pcolor/pcolor.h"
 using namespace std;
+
+// compile
+// g++ -o main main.cpp peran.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
 
 int main() {
     static int nhewan = 0;
@@ -117,14 +121,11 @@ int main() {
     }
 
     vector<Peran*> listpemain;
-    Peran* a = new Peternak("haikal");
-    cout <<  a->getberat() << endl;
-    cout << "Test1" << endl;
-    a->cetaklahan();
-    a->addpenyimpanan("COW", listitem);
-    a->addpenyimpanan("COM", listitem);
+    Peran* a = new Peternak("haikal", 8, 8, 8, 8);  
+    a->printPenyimpanan();
+    a->addPenyimpanan("COM", listitem);
+    a->addPenyimpanan("COW", listitem);
     a->tanam();
-    a->berimakan();
-    a->printpenyimpanan();
-    cout << "TEST2" << endl;
+    a->panen();
+    a->printPenyimpanan();
 };

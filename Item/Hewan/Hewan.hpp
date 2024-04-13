@@ -14,28 +14,26 @@ class Hewan : public Item
     protected:
         static int nhewan;
         const int standar_berat_panen;
-        const int harga;
         int berat_saat_ini;
 
     public:
         // Constructor & Destructor
         Hewan();
-        Hewan(int _ID, string, string, int, int);
-        Hewan(const Hewan& other);
+        Hewan(int, string, string, int, int);
+        Hewan(const Hewan&);
         ~Hewan();
-        Hewan& operator=(Hewan& other);
         
         // Getter
         int getBeratPanen();
-        int getHarga();
         int getBeratSaatIni();
         string getKode();
+        int getTambahan();
         static int getJumlahHewan();
         virtual string getTipe() = 0;
-        int getTambahan();
+
         
         // Setter
-        void setBeratSaatIni(int tambahan_berat);
+        void setBeratSaatIni(int);
         
         // Other Method
         virtual void makan(Produk* produk) = 0;

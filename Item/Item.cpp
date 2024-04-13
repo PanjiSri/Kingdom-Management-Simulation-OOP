@@ -2,13 +2,25 @@
 #include "Tanaman/Tanaman.hpp"
 
 Item::Item() :
-    ID(0), kode("XXX"), nama("XXX") {}
+    ID(0), 
+    kode("   "), 
+    nama("   "), 
+    harga(0)
+    {}
 
-Item::Item(int _ID, string code, string name) 
-   : ID(_ID) , kode(code), nama(name) {}
+Item::Item(int _ID, string _kode, string _nama, int _harga) : 
+    ID(_ID), 
+    kode(_kode), 
+    nama(_nama),
+    harga(_harga)
+    {}
 
-Item::Item(const Item& other) 
-    : ID(other.ID) , kode(other.kode), nama(other.nama) {}
+Item::Item(const Item& other) : 
+    ID(other.ID), 
+    kode(other.kode), 
+    nama(other.nama),
+    harga(other.harga)
+    {}
 
 Item::~Item() {}
 
@@ -22,4 +34,8 @@ string Item::getKode() {
 
 string Item::getNama() {
     return nama;
+}
+
+int Item::getHarga() {
+    return harga;
 }
