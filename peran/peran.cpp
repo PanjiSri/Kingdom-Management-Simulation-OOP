@@ -18,12 +18,14 @@ Peran::Peran() {
     this->username = " ";
     gulden = 50;
     berat = 40;
-} 
+    changepernyimpanan();
+}
 
 Peran::Peran(string username) {
     this->username = username;
     gulden = 50;
     berat = 40;
+    changepernyimpanan();
 }
 
 Peran::Peran(int gulden, int berat, string username) {
@@ -39,7 +41,6 @@ int Peran::getgulden() {
 int Peran::getberat() {
     return this->berat;
 }
-
 vector<int> Peran::parse(string idx) {
     vector<int> indeks;
     indeks.push_back(((int)idx[0])-65);
@@ -56,13 +57,13 @@ void Peran::printpenyimpanan() {
     penyimpanan.print();
 }
 
-Peran& Peran::operator=(const Peran& other) {
-    gulden = other.gulden;
-    berat = other.berat;
-    penyimpanan = other.penyimpanan;
-    username = other.username;
-    return *this;
-}
+// Peran& Peran::operator=(const Peran& other) {
+//     gulden = other.gulden;
+//     berat = other.berat;
+//     penyimpanan 
+//     username = other.username;
+//     return *this;
+// }
 
 void Peran::addpenyimpanan(string benda, vector<Item*> listitem) {
     Item* x;
@@ -101,6 +102,16 @@ void Peran::setberat(int berat_tambahan) {
     berat += berat_tambahan;
 }
 
+void Peran::changepernyimpanan() {
+    cout << "OK" <<endl;
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
+            penyimpanan[i][j] = new Carnivore();
+            cout << penyimpanan[i][j]->getKode() << endl;
+        }
+    }
+}
+
 // Child Walikota
 Walikota::Walikota (string username): Peran(username) {
     peran_pemain = "walikota";
@@ -129,7 +140,7 @@ void Walikota::panen() {
 }
 
 void Walikota::cetaklahan() {
-    cout << "Hanya bisa dilakukan petani" << endl;
+    cout << "Hanya bisa dilakukan petani dan peternak" << endl;
 }
 
 void Walikota::berimakan() {
@@ -142,6 +153,9 @@ int Walikota::getlahankosong() {
 
 int Walikota::calculateTax() {
     return 0;
+}
+
+void Walikota::changelahan() {
 }
 
 
@@ -162,7 +176,16 @@ Petani::Petani(int gulden, int berat, string username): Peran(gulden, berat, use
 
 void Petani::cetaklahan() {
     int asciinum = 65;
+    cout << "======================LAHAN PERTANIAN===========================" << endl;
     lahanpertanian.print();
+}
+
+void Petani::changelahan() {
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
+            lahanpertanian[i][j] = new Tanaman();
+        }
+    }
 }
 
 int Petani::getlahankosong() {
@@ -252,7 +275,7 @@ void Peternak::tanam() {
             cin >> idx;
             vector<int> lokasi = parse(idx);
             peternakan[lokasi[1]][lokasi[0]] = hewan;
-            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Carnivore();
+            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Tanaman();
         }
     }
     cetaklahan();
@@ -276,7 +299,7 @@ void Peternak::berimakan() {
     cin >> slot;
     index = parse(slot);
     produk = dynamic_cast<Produk*>(penyimpanan[index[1]][index[0]]);
-    hewan->makan(produk);
+    // hewan->makan(produk);
 }
 
 int Peternak::getlahankosong() {
@@ -291,9 +314,17 @@ int Peternak::getlahankosong() {
     return empty;
 }
 
-int Petani::calculateTax() {
+int Peternak::calculateTax() {
     int uang = this->gulden;
     uang += penyimpanan.getValue();
-    uang += lahanpertanian.getValue();
+    // uang += lahanpertanian.getValue();
     return uang;
+}
+
+void Peternak::changelahan() {
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
+            peternakan[i][j] = new Carnivore();
+        }
+    }
 }

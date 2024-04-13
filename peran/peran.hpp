@@ -16,12 +16,14 @@
 using namespace std;
 
 
+
+
 class Peran {
-    public: 
+    protected: 
         int gulden;
         int berat;
         string username;
-        MatriksHewan<Item*> penyimpanan; // Vector item
+        Matriks<Item*, 8, 8> penyimpanan; // Vector item
         string peran_pemain;
     public:
         Peran();
@@ -34,14 +36,16 @@ class Peran {
         void printpenyimpanan();
         void addpenyimpanan(string, vector<Item*>);
         void setberat(int berat);
+        void changepernyimpanan();
         void player_makan();
         virtual void tanam() = 0;
         virtual void cetaklahan() = 0;
         virtual void panen() = 0;
         virtual void berimakan() = 0;
         virtual int getlahankosong() = 0;
+        virtual void changelahan() = 0;
         vector<int> parse(string);
-        Peran& operator=(const Peran&);
+        // Peran& operator=(const Peran&);
 };
 
 class Walikota: public Peran {
@@ -55,12 +59,13 @@ class Walikota: public Peran {
         void panen();
         void berimakan();
         int getlahankosong();
+        void changelahan();
         int calculateTax();
 };
 
 class Petani: public Peran {
-    public: 
-        MatriksTumbuhan<Tanaman*, 8, 8> lahanpertanian; // Vector plant tipe data asli
+    protected: 
+        Matriks<Tanaman*, 8, 8> lahanpertanian; // Vector plant tipe data asli
 
     public:
         Petani();
@@ -70,13 +75,14 @@ class Petani: public Peran {
         void berimakan();
         void cetaklahan();
         void panen();
+        void changelahan();
         int calculateTax();
         int getlahankosong();
 };
 
 class Peternak: public Peran {
-    public: 
-        MatriksHewan<Hewan*> peternakan; // Vector pakai tipe data animal
+    protected: 
+        Matriks<Hewan*, 8, 8> peternakan; // Vector pakai tipe data animal
 
     public:
         Peternak(string);
@@ -87,6 +93,7 @@ class Peternak: public Peran {
         int getlahankosong();
         void cetaklahan();
         void berimakan();
+        void changelahan();
 };
 
 #endif
