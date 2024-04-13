@@ -39,6 +39,9 @@ public:
     // method load misc.txt
     void loadConfigMisc();
 
+    //memulai game
+    void mulaiTanpaBerkas();
+
     //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
 

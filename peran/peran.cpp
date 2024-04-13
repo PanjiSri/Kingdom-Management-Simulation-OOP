@@ -74,7 +74,7 @@ void Peran::playerMakan() {
         
         if (x == NULL) {
             cout << "Tidak ada apa-apa di di sana" << endl;
-        } else if ((x->getTipe() == "PRODUCT_ANIMAL") or (x->getTipe() == "PRODUCT_FRUIT_PLANT")) {
+        } else if ((x->getTipe() == "PRODUCT_ANIMAL") || (x->getTipe() == "PRODUCT_FRUIT_PLANT")) {
             tambahBerat(x->getTambahan());
             penyimpanan[index[1]][index[0]] = NULL;
             cout << "Berat badanmu naik jadi " << berat << endl;

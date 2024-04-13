@@ -32,7 +32,7 @@ int main() {
         string data;
         getline(cin,datahewan);
         for(int j = 0; j < datahewan.size(); j++) {
-            if(datahewan[j] == ' ' or datahewan == "\n") {
+            if(datahewan[j] == ' ' || datahewan == "\n") {
                 if(step == 0) {
                     id = data;
                     data = "";
@@ -84,7 +84,7 @@ int main() {
         string data;
         getline(cin,datahewan);
         for(int j = 0; j < datahewan.size(); j++) {
-            if(datahewan[j] == ' ' or datahewan == "\n") {
+            if(datahewan[j] == ' ' || datahewan == "\n") {
                 if(step == 0) {
                     id = data;
                     data = "";

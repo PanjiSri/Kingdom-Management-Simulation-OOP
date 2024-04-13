@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include "../../exception/header/exception.hpp"
+#include "../peran/peran.hpp"
 using namespace std;
 
 class Line_Handler
