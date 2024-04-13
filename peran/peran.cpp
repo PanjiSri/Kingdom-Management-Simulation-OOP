@@ -101,6 +101,38 @@ void Peran::setberat(int berat_tambahan) {
     berat += berat_tambahan;
 }
 
+// belum handle error
+void Peran::menjual(Toko* toko){
+    cout << "Berikut merupakan penyimpanan Anda\n";
+    printpenyimpanan();
+    cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
+    string indeksinvent;
+    cin >> indeksinvent;
+    Item* barang;
+    // ketika peran menjual berarti toko membeli kan,
+    // make sense ga penamaannya atau malah bikin bingung
+    toko->beli(barang);
+    gulden = gulden + barang->getHarga();
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah 12 gulden!\n";
+}
+
+// belum selesai
+void Peran::membeli(Toko* toko){
+    toko->cetakListBarang();
+    int noBarang;
+    int kuantitas;
+    cout << "\nUang Anda : " << gulden << endl;
+    cout << "Slot Penyimpanan tersedia : " << "gatau\n";
+    cout << "Barang ingin dibeli : "; 
+    cin >> noBarang;
+    cout << "\nKuantitas : ";
+    cin >> kuantitas;
+    // belum divalidasi
+    toko->jual(noBarang);
+    // addpenyimpanan();
+    // bingung
+}
+
 // Child Walikota
 Walikota::Walikota (string username): Peran(username) {
     peran_pemain = "walikota";

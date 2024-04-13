@@ -12,6 +12,7 @@
 #include "../Item/Produk/Produk.hpp"
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
+#include "../toko/Toko.hpp"
 #include <iostream>
 using namespace std;
 
@@ -40,6 +41,8 @@ class Peran {
         virtual void panen() = 0;
         virtual void berimakan() = 0;
         virtual int getlahankosong() = 0;
+        virtual void menjual(Toko* toko) = 0;
+        virtual void membeli(Toko* toko) = 0;
         vector<int> parse(string);
         Peran& operator=(const Peran&);
 };
