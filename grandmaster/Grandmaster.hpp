@@ -7,6 +7,7 @@
 #include <sstream>
 #include "../input/header/input.hpp"
 #include "../peran/peran.hpp"
+#include "../exception/header/exception.hpp"
 using namespace std;
 
 class Grandmaster
@@ -30,27 +31,29 @@ private:
     string config_produk;
     string config_misc;
 
-    //list pemain
-    vector<Peran*> list_pemain;
+    // list pemain
+    vector<Peran *> list_pemain;
     int banyak_pemain;
-    
 
 public:
     Grandmaster();
     // method load animal.txt, plant.txt, product.txt
     void loadConfigHewanTanaman();
     void loadConfigProduk();
+
     // method load misc.txt
     void loadConfigMisc();
 
-    //load semua config
+    // load semua config
     void loadallconfig();
 
-
-    //memulai game //ragu apakah perlu loadallconfig() disini?
+    // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
 
-    //................... ini buat testing aja......................//
+    // manipulasi list
+    void muatPemain(Peran * pemain_baru);
+
+        //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
 
     Line_Handler getJenisHewan(int index) const;

@@ -127,10 +127,40 @@ void Grandmaster::mulaiTanpaBerkas()
     list_pemain.push_back(new Peternak("Peternak1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
     list_pemain.push_back(new Walikota("Walikota", besar_penyimpanan[0], besar_penyimpanan[1]));
 
-    //inisiasi banyak_pemain
+    // inisiasi banyak_pemain
     banyak_pemain = 3;
 }
 
+void Grandmaster::muatPemain(Peran *pemain_baru)
+{
+    // leksikografis
+    string username_baru = pemain_baru->username;
+    bool cek = false;
+
+    for (int i = 0; i < banyak_pemain; ++i)
+    {
+        if(username_baru == list_pemain[i]->username){
+
+            throw NamaPemainTidakValidException();      
+                
+        }
+        if (username_baru < list_pemain[i]->username)
+        {
+            list_pemain.insert(list_pemain.begin() + i, pemain_baru);
+            cek = true;
+            break;
+        }
+    }
+
+    if (!cek)
+    {
+        list_pemain.push_back(pemain_baru);
+    }
+
+    banyak_pemain++;
+}
+
+// getter
 int Grandmaster::getUangMenang() const
 {
     return uang_menang;
