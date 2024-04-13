@@ -81,7 +81,7 @@ class Walikota: public Peran {
         void panen();
         void beriMakan();
         void cetakLahan();
-        int getlahankosong();
+        int getLahanKosong();
         // void changelahan();
         int calculateTax();
 };

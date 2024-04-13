@@ -6,7 +6,6 @@ Grandmaster::Grandmaster()
     config_produk = "folder/product.txt";
     config_tanaman = "folder/plant.txt";
     config_misc = "folder/misc.txt";
-
 }
 
 void Grandmaster::loadConfigHewanTanaman()
@@ -83,22 +82,28 @@ void Grandmaster::loadConfigMisc()
     }
     string line;
 
-    for(int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++)
+    {
         getline(file, line);
         stringstream ss(line);
-        if(i == 0){
+        if (i == 0)
+        {
             ss >> uang_menang;
         }
-        else if(i == 1){
+        else if (i == 1)
+        {
             ss >> berat_menang;
         }
-        else if(i == 2){
+        else if (i == 2)
+        {
             ss >> besar_penyimpanan[0] >> besar_penyimpanan[1];
         }
-        else if(i == 3){
+        else if (i == 3)
+        {
             ss >> besar_lahan[0] >> besar_lahan[1];
         }
-        else if(i == 4){
+        else if (i == 4)
+        {
             ss >> besar_peternakan[0] >> besar_peternakan[1];
         }
     }
@@ -109,30 +114,49 @@ void Grandmaster::loadallconfig()
     loadConfigHewanTanaman();
     loadConfigProduk();
     loadConfigMisc();
-    cout << "aman" << endl;
+    // cout << "aman" << endl;
 }
 
-int Grandmaster::getUangMenang() const{
+void Grandmaster::mulaiTanpaBerkas()
+{
+    loadallconfig();
+
+    // masih prototype
+    // Membuat list pemain sesuai dengan informasi yang diberikan
+    list_pemain.push_back(new Petani("Petani1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
+    list_pemain.push_back(new Peternak("Peternak1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
+    list_pemain.push_back(new Walikota("Walikota", besar_penyimpanan[0], besar_penyimpanan[1]));
+
+    //inisiasi banyak_pemain
+    banyak_pemain = 3;
+}
+
+int Grandmaster::getUangMenang() const
+{
     return uang_menang;
 }
 
-int Grandmaster::getBeratMenang() const{
+int Grandmaster::getBeratMenang() const
+{
     return berat_menang;
 }
 
-int Grandmaster::getBesarPenyimpanan(int index) const{
+int Grandmaster::getBesarPenyimpanan(int index) const
+{
     return besar_penyimpanan[index];
 }
 
-int Grandmaster::getBesarLahan(int index) const{
+int Grandmaster::getBesarLahan(int index) const
+{
     return besar_lahan[index];
 }
 
-int Grandmaster::getBesarPeternakan(int index) const{
+int Grandmaster::getBesarPeternakan(int index) const
+{
     return besar_peternakan[index];
 }
 
-//testing
+// testing
 Line_Handler Grandmaster::getJenisHewan(int index) const
 {
     return list_jenis_hewan[index];

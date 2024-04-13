@@ -189,7 +189,7 @@ void Walikota::cetakLahan() {
     cout << "Anda tidak punya lahan." << endl;
 }
 
-int Walikota::getlahankosong() {
+int Walikota::getLahanKosong() {
     cout << "Hanya bisa dilakukan oleh petani" << endl;
     return -1;
 }

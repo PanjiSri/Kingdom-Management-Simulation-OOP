@@ -15,7 +15,7 @@ private:
     int banyak_pemain;
 
 public:
-    ListPemain();
+    ListPemain(string opsi);
     ListPemain(const ListPemain& other); 
     ~ListPemain();
     void tambah_pemain();//aku tidak tahu parameter yang cocok untuk method ini
