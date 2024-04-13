@@ -2,9 +2,13 @@
 
 Herbivore::Herbivore() : Hewan() {}
 
-Herbivore::Herbivore(int _ID, string code, string name, int berat, int harga) : Hewan(_ID, code, name, berat, harga) {}
+Herbivore::Herbivore(int _ID, string _kode, string _nama, int _berat, int _harga) : 
+    Hewan(_ID, _kode, _nama, _berat, _harga) 
+    {}
 
-Herbivore::Herbivore(const Herbivore& other) : Hewan(other) {}
+Herbivore::Herbivore(const Herbivore& other) : 
+    Hewan(other) 
+    {}
 
 Herbivore::~Herbivore() {}
 
@@ -21,8 +25,4 @@ void Herbivore::makan(Produk* produk) {
     else {
         setBeratSaatIni(produk->getTambahan());
     }
-}
-
-int Herbivore::getHarga() {
-    return harga;
 }

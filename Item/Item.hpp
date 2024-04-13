@@ -10,22 +10,22 @@ class Item {
         const int ID;
         const string kode;
         const string nama;
+        const int harga;
     
     public:
         // Constructor & Destructor
         Item();
-        Item(int _ID, string, string);
-        Item(const Item& other);
+        Item(int, string, string, int);
+        Item(const Item&);
         ~Item();
-
+        
         // Getter
         int getID();
         string getKode();
         string getNama();
+        int getHarga();
         virtual string getTipe() = 0;
-        virtual int getHarga() = 0;
         virtual int getTambahan() = 0;
-        // virtual void makan(Produk*) = 0;
 };
 
 #endif

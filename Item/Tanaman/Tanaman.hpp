@@ -10,21 +10,19 @@ class Tanaman : public Item {
     private:
         const string tipe;
         const int waktu_panen;
-        const int harga;
         int umur;
 
     public:
         // Constructor & Destructor
         Tanaman();
-        Tanaman(int _ID, string, string, string, int, int);
-        Tanaman(const Tanaman& other);
+        Tanaman(int, string, string, string, int, int);
+        Tanaman(const Tanaman&);
         ~Tanaman();
 
         // Getter
         string getTipe();
         int getWaktuPanen();
         int getUmur();
-        int getHarga();
         int getTambahan();
 
         // Setter
@@ -32,7 +30,6 @@ class Tanaman : public Item {
 
         // Other Method
         bool isSiapPanen();
-        // void makan(Produk* produk) {}
 };
 
 #endif

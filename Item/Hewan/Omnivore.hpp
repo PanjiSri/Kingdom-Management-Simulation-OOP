@@ -11,13 +11,15 @@ class Omnivore : public Hewan
     public:
         // Constructor & Destructor
         Omnivore();
-        Omnivore(int _ID, string, string, int, int);
-        Omnivore(const Omnivore& other);
+        Omnivore(int, string, string, int, int);
+        Omnivore(const Omnivore&);
         ~Omnivore();
 
+        // Getter
         string getTipe();
+        
+        // Other Method
         void makan(Produk* produk);
-        int getHarga();
 };
 
 #endif
