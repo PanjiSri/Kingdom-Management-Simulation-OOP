@@ -17,13 +17,14 @@ string Carnivore::getTipe() {
     return tipe;
 }
 
-void Carnivore::makan(Produk* produk) {
+bool Carnivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_FRUIT_PLANT") {
         throw CarnivoraTidakMakanSayurException();
     } else if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setBeratSaatIni(produk->getTambahan());
+        cout << "Berat hewan bertambah sebanyak " << produk->getTambahan() << endl;
+        return true;
     }
 }

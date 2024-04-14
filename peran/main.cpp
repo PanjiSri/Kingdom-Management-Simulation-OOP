@@ -124,8 +124,13 @@ int main() {
     Peran* a = new Peternak("haikal", 8, 8, 8, 8);  
     a->printPenyimpanan();
     a->addPenyimpanan("COM", listitem);
-    a->addPenyimpanan("COW", listitem);
+    a->addPenyimpanan("COM", listitem);
+    a->addPenyimpanan("COM", listitem);
+    a->addPenyimpanan("SNK", listitem);
     a->tanam();
+    a->beriMakan();
+    a->beriMakan();
+    a->beriMakan();
     a->panen();
     a->printPenyimpanan();
 };

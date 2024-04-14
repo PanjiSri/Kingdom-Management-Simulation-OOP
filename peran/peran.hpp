@@ -19,8 +19,7 @@ using namespace std;
 
 
 class Peran {
-    protected: 
-    public:
+    protected:
         int gulden;
         int berat;
         string username;
@@ -52,6 +51,9 @@ class Peran {
         virtual void panen() = 0;
         virtual void cetakLahan() = 0;
         virtual void beriMakan() = 0;
+        virtual void addumur() = 0;
+        virtual void ambilPajak(vector<Peran*>) = 0;
+        virtual void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
         virtual int getLahanKosong() = 0;
         virtual int calculateTax() = 0;
 
@@ -73,10 +75,13 @@ class Walikota: public Peran {
         // Setter
         void addGulden(int);
         void ambilPajak(vector<Peran*>);
+        void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         void tanam();
         void panen();
         void beriMakan();
         void cetakLahan();
+        void addumur();
+        void buatuser();
         int getlahankosong();
         // void changelahan();
         int calculateTax();
@@ -101,7 +106,10 @@ class Petani: public Peran {
         void tanam();
         void beriMakan();
         void cetakLahan();
+        void addumur();
         void panen();
+        void ambilPajak(vector<Peran*>);
+        void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         // void changelahan();
         int calculateTax();
         int getLahanKosong();
@@ -126,7 +134,10 @@ class Peternak: public Peran {
         void tanam();
         void beriMakan();
         void cetakLahan();
+        void addumur();
         void panen();
+        void ambilPajak(vector<Peran*>);
+        void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         int calculateTax();
         int getLahanKosong();
 };

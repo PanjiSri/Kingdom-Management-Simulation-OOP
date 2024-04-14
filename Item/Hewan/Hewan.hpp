@@ -36,7 +36,7 @@ class Hewan : public Item
         void setBeratSaatIni(int);
         
         // Other Method
-        virtual void makan(Produk* produk) = 0;
+        virtual bool makan(Produk* produk) = 0;
         bool isSiapPanen();
 };
 

@@ -1,6 +1,7 @@
 #include "peran.hpp"
-#include "vector"
+#include <vector>
 #include <iostream>
+#include <map>
 using namespace std;
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
@@ -168,7 +169,35 @@ int Walikota::calculateTax() {
     return 0;
 }
 
+void Walikota::addumur() {
 
+}
+
+void Walikota::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
+    if(gulden >= 50) {
+        string role, uname;
+        cout << "Pilih role yang ingin dibuat: ";
+        cin >> role;
+        if (role == "Petani" || role == "Peternak") {
+            cout << "Masukkan username: ";
+            gulden -= 50;
+            if(role == "Petani") {
+                Peran* a = new Petani(uname, row_inv, col_inv, row_farm, col_farm);
+                listplayer.push_back(a);
+            }
+            else {
+                Peran* a = new Peternak(uname, row_inv, col_inv, row_pet, col_pet);
+                listplayer.push_back(a);
+            }
+        }
+        else {
+            cout << "Role ini tidak bisa dibuat" << endl;
+        }
+    }
+    else {
+        cout << "Tidak ada uang" << endl;
+    }
+}
 
 /*
  *  Class Petani
@@ -265,6 +294,24 @@ int Petani::calculateTax() {
     return uang;
 }
 
+void Petani::addumur() {
+    for(int i = 0 ; i < lahanPertanian.getBaris(); i++) {
+        for(int j = 0; j < lahanPertanian.getKolom(); j++) {
+            if(lahanPertanian[i][j] != NULL) {
+                lahanPertanian[i][j]->tambahUmur();
+            }
+        }
+    }
+}
+
+void Petani::ambilPajak(vector<Peran*> list) {
+    cout << "Hanya bisa dilakukan oleh walikota" << endl;
+}
+
+void Petani::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
+    cout << "Hanya bisa dilakukan oleh walikota" << endl;
+}
+
 // Child Peternak
 Peternak::Peternak(): Peran() {
     this->username = " ";
@@ -299,8 +346,9 @@ void Peternak::tanam() {
     Hewan* hewan;
     cout << "Slot: ";
     cin >> indeksinvent;
-    vector<int> lokasiinvent = parse(indeksinvent); 
-    if (penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe() == "HERBIVORE") {
+    vector<int> lokasiinvent = parse(indeksinvent);
+    string tipe = penyimpanan[lokasiinvent[1]][lokasiinvent[0]]->getTipe();
+    if (tipe == "HERBIVORE" || tipe == "CARNIVORE" || tipe == "OMNIVORE") {
         hewan = dynamic_cast<Hewan*>(penyimpanan[lokasiinvent[1]][lokasiinvent[0]]);
         cout << "Hewan " << hewan->getNama() << " diambil" << endl;
         cetakLahan();
@@ -314,7 +362,7 @@ void Peternak::tanam() {
             cin >> idx;
             vector<int> lokasi = parse(idx);
             peternakan[lokasi[1]][lokasi[0]] = hewan;
-            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = new Tanaman();
+            penyimpanan[lokasiinvent[1]][lokasiinvent[0]] = NULL;
         }
     }
     cetakLahan();
@@ -329,27 +377,92 @@ void Peternak::panen() {
     peternakan.printlahan();
     vector<string> listtanamanmatang;
     vector<int> jumlahtanamanmatang;
+    map<string, int> hewansiappanen = peternakan.listSiapPanen();
+    map<string, int>::iterator it = hewansiappanen.begin();
     // Menghitung tanaman yang siap panen
+    while (it != hewansiappanen.end()) {
+        listtanamanmatang.push_back(it->first);
+        jumlahtanamanmatang.push_back(it->second);
+    }
     for(int i = 0; i < listtanamanmatang.size(); i++) {
         cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
+    }
+    if(listtanamanmatang.size() == 0) {
+        cout << "Tidak ada yang bisa dipanen" << endl;
+    }
+    else {
+        int angka;
+        cout << "Pilih hewan yang akan dipananen: ";
+        cin >> angka;
+        angka--;
+        if(angka >= listtanamanmatang.size() || angka < 0) {
+            cout << "Jenis tumbuhan yang dipanen tidak sebanyak itu" << endl;
+        } 
+        else {
+            cout << "Tanaman " << listtanamanmatang[angka] << " dipilih" << endl;
+            cout << "Masukkan jumlah: ";
+            int jumlah;
+            cin >> jumlah;
+            if (jumlah > jumlahtanamanmatang[angka]) {
+                cout << "Tanaman yang ingin anda panen terlalu banyak" << endl;
+            }
+            else {
+                for(int x = 0; x < jumlah; x++) {
+                    bool get = false;
+                    while (get == false) {
+                        string kode;
+                        cin >> kode;
+                        Produk* a;
+                        vector<int> index = parse(kode);
+                        if(peternakan[index[1]][index[0]]->getKode() == listtanamanmatang[angka]) {
+                            penyimpanan += a;
+                            peternakan[index[1]][index[0]] = NULL;
+                            get = true;
+                        }
+                        else {
+                            cout << "Lokasi yang anda masukkan salah" << endl;
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
 void Peternak::beriMakan() {
     cetakLahan();
+    bool kondisi;
     string slot;
     Hewan* hewan;
     cout << "Hewan yang akan diberi makan: ";
     cin >> slot;
     vector<int> index = parse(slot);
     hewan = peternakan[index[1]][index[0]];
-    printPenyimpanan();
-    Produk* produk;
-    cout << "Ambil makanan: ";
-    cin >> slot;
-    index = parse(slot);
-    produk = dynamic_cast<Produk*>(penyimpanan[index[1]][index[0]]);
-    // hewan->makan(produk);
+    if(hewan == NULL) {
+        cout << "Tidak ada hewan di ladang" << endl;
+    }
+    else {
+        printPenyimpanan();
+        Produk* produk;
+        cout << "Ambil makanan: ";
+        cin >> slot;
+        index = parse(slot);
+        produk = dynamic_cast<Produk*>(penyimpanan[index[1]][index[0]]);
+        if (produk == NULL) {
+            cout << "Tidak ada apa-apa di di sana" << endl;
+        } 
+        else if ((produk->getTipe() == "PRODUCT_ANIMAL") or (produk->getTipe() == "PRODUCT_FRUIT_PLANT")) {
+            kondisi = hewan->makan(produk);
+            if(kondisi == true) {
+                hewan->setBeratSaatIni(produk->getTambahan());
+                penyimpanan[index[1]][index[0]] = NULL;
+            }
+        } 
+        else {
+            cout << "Hei, yakin kamu mau makan itu???" << endl;
+        }
+    }
 }
 
 int Peternak::getLahanKosong() {
@@ -370,6 +483,18 @@ int Peternak::calculateTax() {
     uang += peternakan.getValue();
     uang -= 13;
     return uang;
+}
+
+void Peternak::addumur() {
+
+}
+
+void Peternak::ambilPajak(vector<Peran*> list) {
+    cout << "Hanya bisa dilakukan oleh walikota" << endl;
+}
+
+void Peternak::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
+    cout << "Hanya bisa dilakukan walikota" << endl;
 }
 
 // void Peternak::changelahan() {

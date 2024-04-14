@@ -19,7 +19,7 @@ class Herbivore : public Hewan
         string getTipe();
 
         // Other Method
-        void makan(Produk* produk);
+        bool makan(Produk* produk);
 };
 
 
