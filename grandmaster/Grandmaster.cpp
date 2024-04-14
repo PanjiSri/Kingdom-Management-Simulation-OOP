@@ -17,8 +17,8 @@ void Grandmaster::loadConfigHewanTanaman()
         throw FilePathTidakValid();
     }
 
-    string id, kode_huruf, name, type;
-    int weight, price;
+    string kode_huruf, name, type;
+    int id, weight, price;
     string line;
 
     while (getline(file, line))
@@ -37,8 +37,8 @@ void Grandmaster::loadConfigHewanTanaman()
         throw FilePathTidakValid();
     }
 
-    string id2, kode_huruf2, name2, type2;
-    int duration2, price2;
+    string kode_huruf2, name2, type2;
+    int id2, duration2, price2;
     string line2;
 
     while (getline(file2, line2))
@@ -59,8 +59,8 @@ void Grandmaster::loadConfigProduk()
         throw FilePathTidakValid();
     }
 
-    string id, kode_huruf, name, type, origin;
-    int add_weight, price;
+    string kode_huruf, name, type, origin;
+    int id, add_weight, price;
 
     string line;
     while (getline(file, line))
@@ -163,39 +163,208 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
     banyak_pemain++;
 }
 
-
-
-
 // data_path = data/state.txt
-// void Grandmaster::muatState(string data_path)
-// {
-//     ifstream file(data_path);
+void Grandmaster::muatState(string data_path)
+{
+    ifstream file(data_path);
 
-//     if (!file.is_open())
-//     {
-//         throw FilePathTidakValid();
-//     }
+    if (!file.is_open())
+    {
+        throw FilePathTidakValid();
+    }
 
-//     string line;
-//     getline(file, line);
-//     stringstream ss(line);
+    int row_penyimpanan = besar_penyimpanan[0];
+    int col_penyimpanan = besar_penyimpanan[1];
 
-//     ss >> banyak_pemain;
+    int row_lahan = besar_lahan[0];
+    int col_lahan = besar_lahan[1];
 
-//     for (int i = 0; i < banyak_pemain; i++)
-//     {
-//         getline(file, line);
-//         stringstream ss(line);
+    string line;
+    getline(file, line);
+    stringstream ss(line);
 
-//         string username, jenis_peran;
-//         int berat_badan, uang;
+    ss >> banyak_pemain;
 
-//         ss >> username >> jenis_peran >> berat_badan >> uang;
+    for (int i = 0; i < banyak_pemain; i++)
+    {
+        getline(file, line);
+        stringstream ss(line);
 
-//         // // Asumsinya List Pemain sudah kosong
-//         // if (jenis_peran == "Peternak"){
-//         //     list_pemain.push_back(new Peternak());
-//         // }
+        string username, jenis_peran;
+        int berat_badan, uang;
+
+        ss >> username >> jenis_peran >> berat_badan >> uang;
+
+        int banyak_jenis;
+
+        // // Asumsinya List Pemain sudah kosong
+        if (jenis_peran == "Peternak")
+        {
+            list_pemain.push_back(new Peternak(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
+
+            getline(file, line);
+            stringstream ss(line);
+
+            int banyak_jenis;
+
+            ss >> banyak_jenis;
+        }
+
+        for (int j = 0; j < banyak_jenis; j++)
+            {
+                getline(file, line);
+                stringstream ss(line);
+
+                string nama_jenis;
+
+                ss >> nama_jenis;
+
+                // ini berarti dia tumbuhan
+                if (cariJenis(nama_jenis) == 1)
+                {
+                    int index;
+                    for (int k = 0; k < list_jenis_tanaman.size(); k++)
+                    {
+                        if (list_jenis_tanaman[k].getName() == nama_jenis)
+                        {
+                            index = k;
+                            break;
+                        }
+                    }
+
+                    int id = list_jenis_tanaman[index].getId();
+                    string kode_huruf = list_jenis_tanaman[index].getKodeHuruf();
+                    string name = list_jenis_tanaman[index].getName();
+                    string type = list_jenis_tanaman[index].getType();
+                    int duration = list_jenis_tanaman[index].getDurationToHarvest();
+                    int price = list_jenis_tanaman[index].getPrice();
+
+                    list_item.push_back(new Tanaman(id, kode_huruf, name, type, duration, price));
+                }
+
+                // ini berarti dia hewan
+                else if (cariJenis(nama_jenis) == 2)
+                {
+                    int index;
+                    for (int k = 0; k < list_jenis_hewan.size(); k++)
+                    {
+                        if (list_jenis_hewan[k].getName() == nama_jenis)
+                        {
+                            index = k;
+                            break;
+                        }
+                    }
+
+                    int id = list_jenis_hewan[index].getId();
+                    string kode_huruf = list_jenis_hewan[index].getKodeHuruf();
+                    string name = list_jenis_hewan[index].getName();
+                    string type = list_jenis_hewan[index].getType();
+                    int berat_panen = list_jenis_hewan[index].getDurationToHarvest();
+                    int price = list_jenis_hewan[index].getPrice();
+
+                    if (type == "HERBIVORE")
+                    {
+                        list_item.push_back(new Herbivore(id, kode_huruf, name, berat_panen, price));
+                    }
+                    else if (type == "CARNIVORE")
+                    {
+                        list_item.push_back(new Carnivore(id, kode_huruf, name, berat_panen, price));
+                    }
+                    else if (type == "OMNIVORE")
+                    {
+                        list_item.push_back(new Omnivore(id, kode_huruf, name, berat_panen, price));
+                    }
+                    else
+                    {
+                        throw ConfigTidakValid();
+                    }
+                }
+
+                // ini berarti dia produk
+                else if (cariJenis(nama_jenis) == 3)
+                {
+                    int index;
+                    for (int k = 0; k < list_jenis_produk.size(); k++)
+                    {
+                        if (list_jenis_produk[k].getName() == nama_jenis)
+                        {
+                            index = k;
+                            break;
+                        }
+                    }
+
+                    int id = list_jenis_produk[index].getId();
+                    string kode_huruf = list_jenis_produk[index].getKodeHuruf();
+                    string name = list_jenis_produk[index].getName();
+                    string type = list_jenis_produk[index].getType();
+                    int add_weight = list_jenis_produk[index].getDurationToHarvest();
+                    int price = list_jenis_produk[index].getPrice();
+                    string origin = list_jenis_produk[index].getOrigin();
+
+                    list_item.push_back(new Produk(id, kode_huruf, name, type, origin, add_weight, price));
+                }
+                else{
+                    throw ConfigTidakValid();
+                }
+            }
+
+        
+        
+    }
+}
+
+int Grandmaster::cariJenis(string nama)
+{
+    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    {
+        if (list_jenis_tanaman[i].getName() == nama)
+        {
+            return 1;
+        }
+    }
+
+    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    {
+        if (list_jenis_hewan[i].getName() == nama)
+        {
+            return 2;
+        }
+    }
+
+    for (int i = 0; i < list_jenis_produk.size(); i++)
+    {
+        if (list_jenis_produk[i].getName() == nama)
+        {
+            return 3;
+        }
+    }
+
+    return -1;
+}
+
+// int Grandmaster::cariIndex(string nama){
+//     int jenis = cariJenis(nama);
+
+//     if(jenis == 1){
+//         for (int i = 0; i < list_jenis_tanaman.size(); i++){
+//             if (list_jenis_tanaman[i].getName() == nama){
+//                 return i;
+//             }
+//         }
+//     } else if(jenis == 2){
+//         for (int i = 0; i < list_jenis_hewan.size(); i++){
+//             if (list_jenis_hewan[i].getName() == nama){
+//                 return i;
+//             }
+//         }
+//     }else if(jenis == 3){
+//         for (int i = 0; i < list_jenis_produk.size(); i++){
+//             if (list_jenis_produk[i].getName() == nama){
+//                 return i;
+//             }
+//         }
+//     } else{
+//         return -1;
 //     }
 // }
 

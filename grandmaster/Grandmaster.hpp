@@ -24,8 +24,9 @@ private:
     vector<Line_Handler> list_jenis_tanaman;
     vector<Line_Handler> list_jenis_hewan;
     vector<Line_Handler_Produk> list_jenis_produk;
+    vector<Item *> list_item;
 
-    // path ke file konfigurasi
+        // path ke file konfigurasi
     string config_hewan;
     string config_tanaman;
     string config_produk;
@@ -35,7 +36,7 @@ private:
     vector<Peran *> list_pemain;
     int banyak_pemain;
 
-    //logic permainan
+    // logic permainan
     int idx_giliran_pemain;
 
 public:
@@ -54,12 +55,18 @@ public:
     void mulaiTanpaBerkas();
 
     // manipulasi list
-    void muatPemain(Peran * pemain_baru);
+    void muatPemain(Peran *pemain_baru);
 
-    //muatState
+    // muatState
     void muatState(string data_path);
 
-        //................... ini buat testing aja......................//
+    //cari jenis
+    int cariJenis(string nama);
+
+    // //cari index
+    // int cariIndex(string nama);
+
+    //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
 
     Line_Handler getJenisHewan(int index) const;

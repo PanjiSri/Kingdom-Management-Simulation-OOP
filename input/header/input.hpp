@@ -13,7 +13,7 @@ using namespace std;
 class Line_Handler
 {
 protected:
-    string id;
+    int id;
     string kode_huruf;
     string name;
     string type;
@@ -21,9 +21,9 @@ protected:
     int price;
 
 public:
-    Line_Handler(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price);
+    Line_Handler(int id, const string &kode_huruf, const string &name, const string &type, int duration, int price);
 
-    string getId() const;
+    int getId() const;
 
     string getKodeHuruf() const;
 
@@ -42,7 +42,7 @@ private:
     string origin;
 
 public:
-    Line_Handler_Produk(const string &id, const string &kode_huruf, const string &name, const string &type, int duration, int price, const string &origin);
+    Line_Handler_Produk(int id, const string &kode_huruf, const string &name, const string &type, int duration, int price, const string &origin);
 
     string getOrigin() const;
 };
