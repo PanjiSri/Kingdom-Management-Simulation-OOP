@@ -6,6 +6,7 @@
 #include "../produk/Produk.hpp"
 #include "../Item.hpp"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -30,10 +31,10 @@ class Hewan : public Item
         int getTambahan();
         static int getJumlahHewan();
         virtual string getTipe() = 0;
+        virtual vector<string> getProduk() = 0;
 
-        
         // Setter
-        void setBeratSaatIni(int);
+        void tambahBerat(int);
         void setBerat(int);
         
         // Other Method

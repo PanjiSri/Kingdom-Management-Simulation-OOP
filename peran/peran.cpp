@@ -513,7 +513,7 @@ void Peternak::beriMakan() {
         else if ((produk->getTipe() == "PRODUCT_ANIMAL") or (produk->getTipe() == "PRODUCT_FRUIT_PLANT")) {
             kondisi = hewan->makan(produk);
             if(kondisi == true) {
-                hewan->setBeratSaatIni(produk->getTambahan());
+                hewan->tambahBerat(produk->getTambahan());
                 cout << "Berat " << hewan->getBeratSaatIni() << endl;
                 penyimpanan[index[1]][index[0]] = NULL;
             }

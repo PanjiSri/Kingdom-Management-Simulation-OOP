@@ -16,12 +16,19 @@ string Omnivore::getTipe() {
     return tipe;
 }
 
+vector<string> Omnivore::getProduk() {
+    vector<string> produk;
+    produk.push_back(this->nama + "_MEAT");
+    produk.push_back(this->nama + "_EGG");
+    return produk;
+}
+
 bool Omnivore::makan(Produk* produk) {
     if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        setBeratSaatIni(produk->getTambahan());
+        tambahBerat(produk->getTambahan());
         return true;
     }
 }

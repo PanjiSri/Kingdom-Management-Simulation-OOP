@@ -19,19 +19,9 @@ public:
     Produk(const Produk&);
     ~Produk();
 
-    /*
-        Mengembalikan tipe produk
-    */
+    // Getter
     string getTipe();
-
-    /*
-        Mengembalikan asal produk
-    */
     string getAsal();
-
-    /*
-        Mengembalikan tambahan berat jika produk dikonsumsi
-    */
     int getTambahan();
 };
 
