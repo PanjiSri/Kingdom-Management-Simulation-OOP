@@ -121,44 +121,59 @@ class MatriksPenyimpanan {
             map<string, int> siappanen;
             for(int i = 0; i < baris; i++) {
                 for(int j = 0; j < kolom; j++) {
-                    if(matriks[i][j]->isSiapPanen() == true) {
-                        if(siappanen.size() == 0) {
-                            siappanen.insert({matriks[i][j]->getKode(), 1});
-                        }
-                        else {
-                            if(siappanen.count(matriks[i][j]->getKode())) {
-                                siappanen[matriks[i][j]->getKode()] += 1;
+                    if(matriks[i][j] != NULL) {
+                        if(matriks[i][j]->isSiapPanen() == true) {
+                            if(siappanen.size() == 0) {
+                                siappanen.insert({matriks[i][j]->getNama(), 1});
                             }
                             else {
-                                siappanen.insert({matriks[i][j]->getKode(), 1});
+                                if(siappanen.count(matriks[i][j]->getKode())) {
+                                    siappanen[matriks[i][j]->getNama()] += 1;
+                                }
+                                else {
+                                    siappanen.insert({matriks[i][j]->getNama(), 1});
+                                }
                             }
                         }
                     }
                 }
             }
+            cout << "yuhuu" << endl;
             return siappanen;
         }
 
-        map<string, int> listSiapPanen() {
-            map<string, int> siappanen;
+        bool check_item_building(map<string, int> material) {
+            map<string, int> material_di_invent;
+            material_di_invent.insert({"TAW", 0});
+            material_di_invent.insert({"SAW", 0});
+            material_di_invent.insert({"ALW", 0});
+            material_di_invent.insert({"IRW", 0});
             for(int i = 0; i < baris; i++) {
                 for(int j = 0; j < kolom; j++) {
-                    if(matriks[i][j]->isSiapPanen() == true) {
-                        if(siappanen.size() == 0) {
-                            siappanen.insert({matriks[i][j]->getKode(), 1});
-                        }
-                        else {
-                            if(siappanen.count(matriks[i][j]->getKode())) {
-                                siappanen[matriks[i][j]->getKode()] += 1;
-                            }
-                            else {
-                                siappanen.insert({matriks[i][j]->getKode(), 1});
-                            }
+                    if(matriks[i][j] != NULL) {
+                        if(material_di_invent.count(matriks[i][j]->getKode())) {
+                            material_di_invent[matriks[i][j]->getKode()] += 1;
                         }
                     }
                 }
             }
-            return siappanen;
+            map<string, int>::iterator it = material_di_invent.begin();
+            bool kurang = false;
+            while (it != material_di_invent.end()) {
+                if(it->second < material[it->first]) {
+                    cout << "Material " << it->first << " kurang sebanyak " << material[it->first] - it->second << endl;
+                    kurang = true;
+                }
+            }
+            if (kurang == true) {
+                return false;
+            }
+            else {
+                return true;
+            }
+            
+            
+
         }
 
         void printlahan() {

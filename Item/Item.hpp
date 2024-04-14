@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 using namespace std;
 
 class Item {
@@ -26,6 +27,7 @@ class Item {
         int getHarga();
         virtual string getTipe() = 0;
         virtual int getTambahan() = 0;
+        virtual map<string, int> getMaterial() = 0;
 
         //other method
         bool operator==(string nama) const;

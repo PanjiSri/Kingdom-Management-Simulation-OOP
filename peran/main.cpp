@@ -124,15 +124,14 @@ int main() {
 
     vector<Peran*> listpemain;
     Peran* a = new Peternak("haikal", 8, 8, 8, 8);  
-    a->printPenyimpanan();
-    // a->addPenyimpanan("COM", listitem);
-    // a->addPenyimpanan("COM", listitem);
-    // a->addPenyimpanan("COM", listitem);
-    // a->addPenyimpanan("SNK", listitem);
+    Item* com = new Produk(1, "COM", "COW_MEAT", "PRODUCT_ANIMAL", "COW", 7, 10);
+    a->addPenyimpanan(com);
+    a->addPenyimpanan(com);
+    Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
+    a->addPenyimpanan(snake);
     a->tanam();
     a->beriMakan();
     a->beriMakan();
-    a->beriMakan();
-    a->panen();
+    a->panen(listproduct);
     a->printPenyimpanan();
 };

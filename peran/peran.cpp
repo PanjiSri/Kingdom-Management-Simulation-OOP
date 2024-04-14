@@ -224,6 +224,8 @@ void Walikota::addumur() {
 
 }
 
+void Walikota::tanamFile(string a, string b, int c, vector<Item*> x) {}
+
 void Walikota::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
     if(gulden >= 50) {
         string role, uname;
@@ -247,6 +249,26 @@ void Walikota::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int
     }
     else {
         cout << "Tidak ada uang" << endl;
+    }
+}
+
+void Walikota::bangunBangunan(vector<Bangunan*> listbangunan) {
+    cout << "" << endl; //Ditambah Agil
+    string name;
+    cout << "Bangunan yang ingin dibangun: ";
+    cin >> name;
+    for(int i = 0 ; i < listbangunan.size(); i++) {
+        if(listbangunan[i]->getNama() == name) {
+            if(listbangunan[i]->getHarga() <= gulden) {
+                bool item_complete = penyimpanan.check_item_building(listbangunan[i]->getMaterial());
+                if(item_complete == true) {
+                    penyimpanan += listbangunan[i];
+                }
+            }
+            else {
+                cout << "Uang tidak cukup" << endl;
+            }
+        }
     }
 }
 
@@ -307,6 +329,10 @@ void Petani::tanam() {
     cetakLahan();
 }
 
+void Petani::bangunBangunan(vector<Bangunan*> a) {
+    cout << "Hanya bisa dilakukan walikota" << endl;
+} 
+
 void Petani::cetakLahan() {
     int asciinum = 65;
     lahanPertanian.printlahan();
@@ -319,10 +345,6 @@ void Petani::panen(vector<Produk*> listproduk) {
     map<string, int> hewansiappanen = lahanPertanian.listSiapPanen();
     map<string, int>::iterator it = hewansiappanen.begin();
     // Menghitung tanaman yang siap panen
-    while (it != hewansiappanen.end()) {
-        listtanamanmatang.push_back(it->first);
-        jumlahtanamanmatang.push_back(it->second);
-    }
     for(int i = 0; i < listtanamanmatang.size(); i++) {
         cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
     }
@@ -417,11 +439,11 @@ void Petani::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int r
     cout << "Hanya bisa dilakukan oleh walikota" << endl;
 }
 
-void::tanamFile(string location, string name, int umur, vector<Tanaman*> listtanaman) {
+void Petani::tanamFile(string location, string name, int umur, vector<Item*> listtanaman) {
     Tanaman* plant;
     for(int i = 0; i < listtanaman.size(); i++) {
         if(listtanaman[i]->getNama() == name) {
-            plant = listtanaman[i];
+            plant = dynamic_cast<Tanaman*>(listtanaman[i]);
         }
         plant->setUmur(umur);
     }
@@ -499,12 +521,11 @@ void Peternak::panen(vector<Produk*> listproduk) {
     vector<string> hewankurban;
     vector<int> jumlahhewan;
     map<string, int> hewansiappanen = peternakan.listSiapPanen();
-    map<string, int>::iterator it = hewansiappanen.begin();
     // Menghitung tanaman yang siap panen
-    while (it != hewansiappanen.end()) {
-        hewankurban.push_back(it->first);
-        jumlahhewan.push_back(it->second);
-    }
+    for (auto i = hewansiappanen.begin(); i != hewansiappanen.end(); i++) 
+        hewankurban.push_back(i->first);
+        jumlahhewan.push_back(i->second);
+    cout << "OK" << endl;
     for(int i = 0; i < hewankurban.size(); i++) {
         cout << hewankurban[i] << " (" << jumlahhewan[i] << " buah)" << endl;
     }
@@ -569,6 +590,10 @@ void Peternak::panen(vector<Produk*> listproduk) {
     }
 }
 
+void Peternak::bangunBangunan(vector<Bangunan*> a) {
+    cout << "Hany bisa dilakukan walikota" << endl;
+}
+
 void Peternak::beriMakan() {
     cetakLahan();
     bool kondisi;
@@ -625,11 +650,11 @@ void Peternak::buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int
     cout << "Hanya bisa dilakukan walikota" << endl;
 }
 
-void::tanamFile(string location, string name, int berat, vector<Hewan*> listhewan) {
+void Peternak::tanamFile(string location, string name, int berat, vector<Item*> listhewan) {
     Hewan* animal;
     for(int i = 0; i < listhewan.size(); i++) {
         if(listhewan[i]->getNama() == name) {
-            animal = listhewan[i];
+            animal = dynamic_cast<Hewan*>(listhewan[i]);
         }
         animal->setBerat(berat);
     }
