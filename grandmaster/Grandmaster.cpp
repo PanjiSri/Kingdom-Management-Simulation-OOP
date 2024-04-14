@@ -204,9 +204,18 @@ void Grandmaster::mulaiTanpaBerkas()
     idx_giliran_pemain = 0;
 }
 
-void Grandmaster::mulaiDenganBerkas()
+void Grandmaster::mulaiDenganBerkas(string data_path)
 {
-    
+    loadallconfig();
+    inisiatorHewan();
+    inisiatorTanaman();
+    inisiatorProduk();
+    muatState(data_path);
+
+    banyak_pemain = list_pemain.size();
+
+    //inisiasi giliran pemain
+    idx_giliran_pemain = 0;
 }
 
 void Grandmaster::muatPemain(Peran *pemain_baru)

@@ -70,7 +70,7 @@ public:
     void mulaiTanpaBerkas();
 
     //memulai game dengan berkas
-    void mulaiDenganBerkas();
+    void mulaiDenganBerkas(string data_path);
 
     // manipulasi list
     void muatPemain(Peran *pemain_baru);
