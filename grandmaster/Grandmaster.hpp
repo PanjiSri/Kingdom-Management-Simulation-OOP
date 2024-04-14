@@ -35,6 +35,9 @@ private:
     vector<Peran *> list_pemain;
     int banyak_pemain;
 
+    //logic permainan
+    int idx_giliran_pemain;
+
 public:
     Grandmaster();
     // method load animal.txt, plant.txt, product.txt
@@ -52,6 +55,9 @@ public:
 
     // manipulasi list
     void muatPemain(Peran * pemain_baru);
+
+    //muatState
+    void muatState(string data_path);
 
         //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;

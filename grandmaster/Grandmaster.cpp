@@ -129,22 +129,25 @@ void Grandmaster::mulaiTanpaBerkas()
 
     // inisiasi banyak_pemain
     banyak_pemain = 3;
+
+    // inisiasi giliran pemain
+    idx_giliran_pemain = 0;
 }
 
 void Grandmaster::muatPemain(Peran *pemain_baru)
 {
     // leksikografis
-    string username_baru = pemain_baru->username;
+    string username_baru = pemain_baru->getUname();
     bool cek = false;
 
     for (int i = 0; i < banyak_pemain; ++i)
     {
-        if(username_baru == list_pemain[i]->username){
+        if (username_baru == list_pemain[i]->getUname())
+        {
 
-            throw NamaPemainTidakValidException();      
-                
+            throw NamaPemainTidakValidException();
         }
-        if (username_baru < list_pemain[i]->username)
+        if (username_baru < list_pemain[i]->getUname())
         {
             list_pemain.insert(list_pemain.begin() + i, pemain_baru);
             cek = true;
@@ -159,6 +162,42 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
 
     banyak_pemain++;
 }
+
+
+
+
+// data_path = data/state.txt
+// void Grandmaster::muatState(string data_path)
+// {
+//     ifstream file(data_path);
+
+//     if (!file.is_open())
+//     {
+//         throw FilePathTidakValid();
+//     }
+
+//     string line;
+//     getline(file, line);
+//     stringstream ss(line);
+
+//     ss >> banyak_pemain;
+
+//     for (int i = 0; i < banyak_pemain; i++)
+//     {
+//         getline(file, line);
+//         stringstream ss(line);
+
+//         string username, jenis_peran;
+//         int berat_badan, uang;
+
+//         ss >> username >> jenis_peran >> berat_badan >> uang;
+
+//         // // Asumsinya List Pemain sudah kosong
+//         // if (jenis_peran == "Peternak"){
+//         //     list_pemain.push_back(new Peternak());
+//         // }
+//     }
+// }
 
 // getter
 int Grandmaster::getUangMenang() const

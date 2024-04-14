@@ -7,7 +7,7 @@ class FilePathTidakValid : public exception
 public:
     const char *what() const throw()
     {
-        return "File Path Tidak Valid";
+        return "Path File Tidak Valid";
     }
 };
 
