@@ -1,4 +1,4 @@
-// #include "exception/header/exception.hpp"
+// #include "../exception/header/exception.hpp"
 // #include "../Item/Item.cpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
@@ -21,7 +21,7 @@ private:
 public:
     Toko();
     ~Toko();
-    void jual(int no);
+    Item* jual(int no, int kuantitas);
     void beli(Item* barang);
     void cetakListBarang();
 };

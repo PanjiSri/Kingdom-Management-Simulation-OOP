@@ -1,5 +1,13 @@
 #include "Toko.hpp"
-// #include "Item/Item.hpp"
+// kalo mau coba run yang di bawah uncoment dulu
+// #include "../Item/Item.cpp"
+// #include "../Item/Hewan/Carnivore.cpp"
+// #include "../Item/Hewan/Herbivore.cpp"
+// #include "../Item/Hewan/Omnivore.cpp"
+// #include "../Item/Hewan/Hewan.cpp"
+// #include "../Item/Tanaman/Tanaman.cpp"
+// #include "../Item/Produk/Produk.cpp"
+
 
 Toko::Toko()
 {
@@ -93,18 +101,30 @@ Toko::~Toko()
 {
 }
 
-void Toko::jual(int no){
-    string barang = jenisBarang[no-1]->getKode();
-    if (listBarang[barang] > 0)
+Item* Toko::jual(int no, int kuantitas){
+    if (no > jenisBarang.size())
     {
-        listBarang[barang]--;    
+        throw NoBarangTidakValidException();
     }
+
+    string barang = jenisBarang[no-1]->getKode();
+    if (listBarang[barang] != -1)
+    {
+        if (listBarang[barang]-kuantitas >= 0)
+        {
+            listBarang[barang] = listBarang[barang] - kuantitas;    
+        } else
+        {
+            throw StokTidakTersediaException();
+        }
+    }
+
+    Item* jualan = jenisBarang[no-1];
     if (listBarang[barang] == 0)
     {
         jenisBarang.erase(jenisBarang.begin()+no-1);
     }
-    
-    
+    return jualan;
 }
 
 void Toko::beli(Item* barang){
@@ -119,18 +139,15 @@ void Toko::beli(Item* barang){
 }
 
 void Toko::cetakListBarang(){
-    int no = 1;
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     for (int i = 0; i < jenisBarang.size(); i++)
     {   
         if (listBarang[jenisBarang[i]->getKode()] == -1)
         {
-            cout << no << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
-            no++;
-        } else if (listBarang[jenisBarang[i]->getKode()] != 0)
+            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
+        } else 
         {
-            cout << no << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << listBarang[jenisBarang[i]->getKode()] << ")" <<endl;
-            no++;
+            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << listBarang[jenisBarang[i]->getKode()] << ")" <<endl;
         }
     }  
 }
@@ -144,6 +161,6 @@ void Toko::cetakListBarang(){
 //     a.beli(barang);
 //     a.beli(barang);
 //     a.cetakListBarang();
-//     a.jual(16);
+//     a.jual(1,3);
 //     a.cetakListBarang();
 // }

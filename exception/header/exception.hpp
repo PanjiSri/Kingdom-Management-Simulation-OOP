@@ -54,3 +54,21 @@ public:
         return "Produk tanaman material tidak bisa dimakan";
     }
 };
+
+class StokTidakTersediaException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Stok barang tidak mencukupi";
+    }
+};
+
+class NoBarangTidakValidException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "No barang tidak valid";
+    }
+};

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include "../Item.hpp"
+#include <vector>
+
 using namespace std;
 
 class Tanaman : public Item {
@@ -24,6 +26,7 @@ class Tanaman : public Item {
         int getWaktuPanen();
         int getUmur();
         int getTambahan();
+        vector<string> getProduk();
 
         // Setter
         void tambahUmur();
