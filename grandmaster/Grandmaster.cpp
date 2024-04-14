@@ -298,14 +298,42 @@ void Grandmaster::muatState(string data_path)
 
             ss >> nama_item;
 
-            //pastiin ini jenis item apa, terus tambahin ke peran
-            //cari peran berdasarkan index'
+            // pastiin ini jenis item apa, terus tambahin ke peran
+            // cari peran berdasarkan index'
 
             int index_pemain_untuk_tambah_item = cariPemain(username);
 
-            
+            list_pemain[index_pemain_untuk_tambah_item]->addPenyimpananFile(nama_item, list_item);
+        }
 
-        
+        int banyak_di_lahan;
+        getline(file, line);
+        stringstream ss(line);
+
+        ss >> banyak_di_lahan;
+
+        if(jenis_peran != "Walikota"){
+            for (int k = 0; k < banyak_di_lahan; k++)
+            {
+
+                string lokasi, nama;
+                int umur;
+
+                getline(file, line);
+                stringstream ss(line);
+
+                ss >> lokasi, nama, umur;
+
+                int index_pemain_untuk_tambah_item = cariPemain(username);
+
+                // if(jenis_peran == "Petani"){
+                //     list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_tanaman);
+                // }else if(jenis_peran == "Peternak"){
+                //     list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_tanaman);
+                // }
+
+                
+            }
         }
     }
 }
@@ -339,19 +367,20 @@ int Grandmaster::cariJenis(string nama)
     return -1;
 }
 
+int Grandmaster::cariPemain(string username)
+{
 
-int Grandmaster::cariPemain(string username){
+    for (int i = 0; i < list_pemain.size(); i++)
+    {
 
-    for (int i = 0; i < list_pemain.size(); i++){
-
-        if (list_pemain[i]->getUname() == username){
+        if (list_pemain[i]->getUname() == username)
+        {
             return i;
         }
     }
 
     return -1;
 }
-
 
 // getter
 int Grandmaster::getUangMenang() const
