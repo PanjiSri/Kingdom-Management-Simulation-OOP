@@ -39,3 +39,7 @@ string Item::getNama() {
 int Item::getHarga() {
     return harga;
 }
+
+bool Item::operator==(string nama) const {
+    return this->nama == nama;
+}
