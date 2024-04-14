@@ -55,6 +55,7 @@ class Peran {
         virtual void beriMakan() = 0;
         virtual int getLahanKosong() = 0;
         virtual int calculateTax() = 0;
+        virtual void bangun() = 0;
 
         void menjual(Toko* toko);
         void membeli(Toko* toko);
@@ -84,6 +85,7 @@ class Walikota: public Peran {
         int getLahanKosong();
         // void changelahan();
         int calculateTax();
+        void bangun();
 };
 
 class Petani: public Peran {
@@ -109,6 +111,7 @@ class Petani: public Peran {
         // void changelahan();
         int calculateTax();
         int getLahanKosong();
+        void bangun();
 };
 
 class Peternak: public Peran {
@@ -133,6 +136,7 @@ class Peternak: public Peran {
         void panen();
         int calculateTax();
         int getLahanKosong();
+        void bangun();
 };
 
 #endif
