@@ -116,7 +116,7 @@ class MatriksPenyimpanan {
             }
         }
 
-        void printlahan() {
+        void printLahan() {
             int asciinum = 65;
 
             cout << "       ";
@@ -138,6 +138,7 @@ class MatriksPenyimpanan {
                         cout << "     |";
                     }
                     else {
+                        cout << " ";
                         string kata = matriks[i][j]->getKode();
                         if(matriks[i][j]->isSiapPanen() == true) {
                             for(int k = 0; k < kata.size(); k++) {

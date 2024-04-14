@@ -13,7 +13,7 @@
 using namespace std;
 
 // compile
-// g++ -o test test.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
+// g++ -o test test.cpp ../Pcolorpcolor.c ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
 
 int main() {
     MatriksPenyimpanan<Tanaman*> lahanpertanian;
@@ -40,7 +40,7 @@ int main() {
 
     
     lahanpertanian+=new Tanaman(4,"T05","Tanaman4","HERBIVORE",4,400);
-    lahanpertanian.print();
+    lahanpertanian.printLahan();
     cout << "                              harga: " << lahanpertanian.getValue() << endl;
     
     return 0;
