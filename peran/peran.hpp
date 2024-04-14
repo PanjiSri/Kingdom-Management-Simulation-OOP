@@ -52,7 +52,7 @@ class Peran {
         virtual string getType() = 0;
         virtual void tanam() = 0;
         virtual void tanamFile(string, string, int) = 0;
-        virtual void panen() = 0;
+        virtual void panen(vector<Produk*>) = 0;
         virtual void cetakLahan() = 0;
         virtual void beriMakan() = 0;
         virtual void addumur() = 0;
@@ -84,7 +84,7 @@ class Walikota: public Peran {
         void ambilPajak(vector<Peran*>);
         void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         void tanam();
-        void panen();
+        void panen(vector<Produk*>);
         void beriMakan();
         void cetakLahan();
         void addumur();
@@ -114,7 +114,7 @@ class Petani: public Peran {
         void beriMakan();
         void cetakLahan();
         void addumur();
-        void panen();
+        void panen(vector<Produk*>);
         void ambilPajak(vector<Peran*>);
         void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         void tanamFile(string, string, int);
@@ -142,7 +142,7 @@ class Peternak: public Peran {
         void beriMakan();
         void cetakLahan();
         void addumur();
-        void panen();
+        void panen(vector<Produk*>);
         void ambilPajak(vector<Peran*>);
         void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         void tanamFile(string, string, int);

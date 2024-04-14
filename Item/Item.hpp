@@ -26,6 +26,9 @@ class Item {
         int getHarga();
         virtual string getTipe() = 0;
         virtual int getTambahan() = 0;
+
+        //other method
+        bool operator==(string nama) const;
 };
 
 #endif

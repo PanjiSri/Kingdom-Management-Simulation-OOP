@@ -41,7 +41,7 @@ int main() {
 
     
     lahanpertanian+=new Tanaman(4,"T05","Tanaman4","HERBIVORE",4,400);
-    lahanpertanian.printLahan();
+    lahanpertanian.printlahan();
     cout << "                              harga: " << lahanpertanian.getValue() << endl;
     
     return 0;

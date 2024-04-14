@@ -204,7 +204,7 @@ void Walikota::tanam() {
     cout << "Hanya bisa dilakukan oleh petani." << endl;
 }
 
-void Walikota::panen() {
+void Walikota::panen(vector<Produk*> listproduk) {
     cout << "Hanya bisa dilakukan oleh petani dan peternak." << endl;
 }
 
@@ -311,12 +311,79 @@ void Petani::cetakLahan() {
     int asciinum = 65;
     lahanPertanian.printlahan();
 }
-void Petani::panen() {
+void Petani::panen(vector<Produk*> listproduk) {
+    cout << "=====================LAHAN PETERNAKAN===================" << endl;
+    lahanPertanian.printlahan();
     vector<string> listtanamanmatang;
     vector<int> jumlahtanamanmatang;
+    map<string, int> hewansiappanen = lahanPertanian.listSiapPanen();
+    map<string, int>::iterator it = hewansiappanen.begin();
     // Menghitung tanaman yang siap panen
+    while (it != hewansiappanen.end()) {
+        listtanamanmatang.push_back(it->first);
+        jumlahtanamanmatang.push_back(it->second);
+    }
     for(int i = 0; i < listtanamanmatang.size(); i++) {
         cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
+    }
+    if(listtanamanmatang.size() == 0) {
+        cout << "Tidak ada yang bisa dipanen" << endl;
+    }
+    else {
+        int angka;
+        cout << "Pilih hewan yang akan dipananen: ";
+        cin >> angka;
+        angka--;
+        if(angka >= listtanamanmatang.size() || angka < 0) {
+            cout << "Jenis tumbuhan yang dipanen tidak sebanyak itu" << endl;
+        } 
+        else {
+            cout << "Hewan " << listtanamanmatang[angka] << " dipilih" << endl;
+            cout << "Masukkan jumlah: ";
+            int jumlah;
+            cin >> jumlah;
+            if (jumlah > jumlahtanamanmatang[angka]) {
+                cout << "Hewan yang ingin anda panen terlalu banyak" << endl;
+            }
+            // else if(jumlah > penyimpanan.getLahanKosong()) {
+            //     cout << "Inventory tidak cukup" << endl;
+            // }
+            else {
+                for(int x = 0; x < jumlah; x++) {
+                    bool get = false;
+                    while (get == false) {
+                        string kode;
+                        cin >> kode;
+                        Tanaman* a;
+                        vector<int> index = parse(kode);
+                        if(lahanPertanian[index[1]][index[0]]->getKode() == listtanamanmatang[angka]) {
+                            a = lahanPertanian[index[1]][index[0]];
+                            lahanPertanian[index[1]][index[0]] = NULL;
+                            vector<string> hasilpanen = a->getProduk();
+                            if(hasilpanen.size()*(jumlah-x) > penyimpanan.getLahanKosong()) {
+                                cout << "Inventory anda tidak cukup" << endl;
+                            }
+                            else {
+                                for(int banyak_produk = 0; banyak_produk < hasilpanen.size(); banyak_produk++) {
+                                    Produk* produk;
+                                    for(int q = 0; q < listproduk.size(); q++) {
+                                        if(hasilpanen[banyak_produk] == listproduk[q]->getNama()) {
+                                            produk = listproduk[q];
+                                        }
+                                    }
+                                    penyimpanan += produk;
+                                }
+                                get = true;    
+                            }
+                        }
+                        else {
+                            cout << "Lokasi yang anda masukkan salah" << endl;
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
@@ -426,22 +493,22 @@ string Peternak::getType() {
     return this->peran_pemain;
 }
 
-void Peternak::panen() {
+void Peternak::panen(vector<Produk*> listproduk) {
     cout << "=====================LAHAN PETERNAKAN===================" << endl;
     peternakan.printlahan();
-    vector<string> listtanamanmatang;
-    vector<int> jumlahtanamanmatang;
+    vector<string> hewankurban;
+    vector<int> jumlahhewan;
     map<string, int> hewansiappanen = peternakan.listSiapPanen();
     map<string, int>::iterator it = hewansiappanen.begin();
     // Menghitung tanaman yang siap panen
     while (it != hewansiappanen.end()) {
-        listtanamanmatang.push_back(it->first);
-        jumlahtanamanmatang.push_back(it->second);
+        hewankurban.push_back(it->first);
+        jumlahhewan.push_back(it->second);
     }
-    for(int i = 0; i < listtanamanmatang.size(); i++) {
-        cout << listtanamanmatang[i] << " (" << jumlahtanamanmatang[i] << " buah)" << endl;
+    for(int i = 0; i < hewankurban.size(); i++) {
+        cout << hewankurban[i] << " (" << jumlahhewan[i] << " buah)" << endl;
     }
-    if(listtanamanmatang.size() == 0) {
+    if(hewankurban.size() == 0) {
         cout << "Tidak ada yang bisa dipanen" << endl;
     }
     else {
@@ -449,33 +516,47 @@ void Peternak::panen() {
         cout << "Pilih hewan yang akan dipananen: ";
         cin >> angka;
         angka--;
-        if(angka >= listtanamanmatang.size() || angka < 0) {
+        if(angka >= hewankurban.size() || angka < 0) {
             cout << "Jenis tumbuhan yang dipanen tidak sebanyak itu" << endl;
         } 
         else {
-            cout << "Hewan " << listtanamanmatang[angka] << " dipilih" << endl;
+            cout << "Hewan " << hewankurban[angka] << " dipilih" << endl;
             cout << "Masukkan jumlah: ";
             int jumlah;
             cin >> jumlah;
-            if (jumlah > jumlahtanamanmatang[angka]) {
-                cout << "Tanaman yang ingin anda panen terlalu banyak" << endl;
+            if (jumlah > jumlahhewan[angka]) {
+                cout << "Hewan yang ingin anda panen terlalu banyak" << endl;
             }
-            else if(jumlah > penyimpanan.getLahanKosong()) {
-                cout << "Inventory tidak cukup" << endl;
-            }
+            // else if(jumlah > penyimpanan.getLahanKosong()) {
+            //     cout << "Inventory tidak cukup" << endl;
+            // }
             else {
                 for(int x = 0; x < jumlah; x++) {
                     bool get = false;
                     while (get == false) {
                         string kode;
                         cin >> kode;
-                        Produk* a;
+                        Hewan* a;
                         vector<int> index = parse(kode);
-                        if(peternakan[index[1]][index[0]]->getKode() == listtanamanmatang[angka]) {
-                            penyimpanan += a;
+                        if(peternakan[index[1]][index[0]]->getKode() == hewankurban[angka]) {
+                            a = peternakan[index[1]][index[0]];
                             peternakan[index[1]][index[0]] = NULL;
-                            vector<string> 
-                            get = true;
+                            vector<string> hasilpanen = a->getProduk();
+                            if(hasilpanen.size()*(jumlah-x) > penyimpanan.getLahanKosong()) {
+                                cout << "Inventory anda tidak cukup" << endl;
+                            }
+                            else {
+                                for(int banyak_produk = 0; banyak_produk < hasilpanen.size(); banyak_produk++) {
+                                    Produk* produk;
+                                    for(int q = 0; q < listproduk.size(); q++) {
+                                        if(hasilpanen[banyak_produk] == listproduk[q]->getNama()) {
+                                            produk = listproduk[q];
+                                        }
+                                    }
+                                    penyimpanan += produk;
+                                }
+                                get = true;    
+                            }
                         }
                         else {
                             cout << "Lokasi yang anda masukkan salah" << endl;
