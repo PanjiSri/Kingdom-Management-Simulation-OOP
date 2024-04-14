@@ -17,8 +17,8 @@ void Grandmaster::loadConfigHewanTanaman()
         throw FilePathTidakValid();
     }
 
-    string id, kode_huruf, name, type;
-    int weight, price;
+    string kode_huruf, name, type;
+    int id, weight, price;
     string line;
 
     while (getline(file, line))
@@ -37,8 +37,8 @@ void Grandmaster::loadConfigHewanTanaman()
         throw FilePathTidakValid();
     }
 
-    string id2, kode_huruf2, name2, type2;
-    int duration2, price2;
+    string kode_huruf2, name2, type2;
+    int id2, duration2, price2;
     string line2;
 
     while (getline(file2, line2))
@@ -59,8 +59,8 @@ void Grandmaster::loadConfigProduk()
         throw FilePathTidakValid();
     }
 
-    string id, kode_huruf, name, type, origin;
-    int add_weight, price;
+    string kode_huruf, name, type, origin;
+    int id, add_weight, price;
 
     string line;
     while (getline(file, line))
@@ -117,6 +117,73 @@ void Grandmaster::loadallconfig()
     // cout << "aman" << endl;
 }
 
+void Grandmaster::inisiatorTanaman()
+{
+    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    {
+        int id = list_jenis_tanaman[i].getId();
+        string kode = list_jenis_tanaman[i].getKodeHuruf();
+        string nama = list_jenis_tanaman[i].getName();
+        string tipe = list_jenis_tanaman[i].getType();
+        int durasi = list_jenis_tanaman[i].getDurationToHarvest();
+        int harga = list_jenis_tanaman[i].getPrice();
+
+        list_tanaman.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+    }
+}
+
+void Grandmaster::inisiatorHewan()
+{
+    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    {
+
+        int id = list_jenis_hewan[i].getId();
+        string kode = list_jenis_hewan[i].getKodeHuruf();
+        string nama = list_jenis_hewan[i].getName();
+        string tipe = list_jenis_hewan[i].getType();
+        int berat = list_jenis_hewan[i].getDurationToHarvest();
+        int harga = list_jenis_hewan[i].getPrice();
+
+        if (tipe == "HERBIVORE")
+        {
+            list_hewan.push_back(new Herbivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Herbivore(id, kode, nama, berat, harga));
+        }
+        else if (tipe == "OMNIVORE")
+        {
+            list_hewan.push_back(new Omnivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Omnivore(id, kode, nama, berat, harga));
+        }
+        else if (tipe == "CARNIVORE")
+        {
+            list_hewan.push_back(new Carnivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Carnivore(id, kode, nama, berat, harga));
+        }
+        else
+        {
+            throw ConfigTidakValid();
+        }
+    }
+}
+
+void Grandmaster::inisiatorProduk()
+{
+    for (int i = 0; i < list_jenis_produk.size(); i++)
+    {
+        int id = list_jenis_produk[i].getId();
+        string kode = list_jenis_produk[i].getKodeHuruf();
+        string nama = list_jenis_produk[i].getName();
+        string tipe = list_jenis_produk[i].getType();
+        int berat = list_jenis_produk[i].getDurationToHarvest();
+        int harga = list_jenis_produk[i].getPrice();
+        string origin = list_jenis_produk[i].getOrigin();
+
+        list_produk.push_back(new Produk(id, kode, nama, tipe, origin, berat, harga));
+        list_item.push_back(new Produk(id, kode, nama, tipe, origin, berat, harga));
+    }
+}
+
 void Grandmaster::mulaiTanpaBerkas()
 {
     loadallconfig();
@@ -163,41 +230,128 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
     banyak_pemain++;
 }
 
-
-
-
 // data_path = data/state.txt
-// void Grandmaster::muatState(string data_path)
-// {
-//     ifstream file(data_path);
+void Grandmaster::muatState(string data_path)
+{
+    ifstream file(data_path);
 
-//     if (!file.is_open())
-//     {
-//         throw FilePathTidakValid();
-//     }
+    if (!file.is_open())
+    {
+        throw FilePathTidakValid();
+    }
 
-//     string line;
-//     getline(file, line);
-//     stringstream ss(line);
+    int row_penyimpanan = besar_penyimpanan[0];
+    int col_penyimpanan = besar_penyimpanan[1];
 
-//     ss >> banyak_pemain;
+    int row_lahan = besar_lahan[0];
+    int col_lahan = besar_lahan[1];
 
-//     for (int i = 0; i < banyak_pemain; i++)
-//     {
-//         getline(file, line);
-//         stringstream ss(line);
+    string line;
+    getline(file, line);
+    stringstream ss(line);
 
-//         string username, jenis_peran;
-//         int berat_badan, uang;
+    ss >> banyak_pemain;
 
-//         ss >> username >> jenis_peran >> berat_badan >> uang;
+    for (int i = 0; i < banyak_pemain; i++)
+    {
+        getline(file, line);
+        stringstream ss(line);
 
-//         // // Asumsinya List Pemain sudah kosong
-//         // if (jenis_peran == "Peternak"){
-//         //     list_pemain.push_back(new Peternak());
-//         // }
-//     }
-// }
+        string username, jenis_peran;
+        int berat_badan, uang;
+
+        ss >> username >> jenis_peran >> berat_badan >> uang;
+
+        int banyak_jenis;
+
+        // // Asumsinya List Pemain sudah kosong
+        if (jenis_peran == "Peternak")
+        {
+            muatPemain(new Peternak(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
+        }
+        else if (jenis_peran == "Petani")
+        {
+            muatPemain(new Petani(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
+        }
+        else if (jenis_peran == "Walikota")
+        {
+            muatPemain(new Walikota(username, berat_badan, uang, row_penyimpanan, col_penyimpanan));
+        }
+        else
+        {
+            throw ConfigTidakValid();
+        }
+
+        getline(file, line);
+        stringstream ss(line);
+
+        int banyak_item;
+        ss >> banyak_item;
+
+        for (int j = 0; j < banyak_item; j++)
+        {
+
+            getline(file, line);
+            stringstream ss(line);
+
+            string nama_item;
+
+            ss >> nama_item;
+
+            //pastiin ini jenis item apa, terus tambahin ke peran
+            //cari peran berdasarkan index'
+
+            int index_pemain_untuk_tambah_item = cariPemain(username);
+
+            
+
+        
+        }
+    }
+}
+
+int Grandmaster::cariJenis(string nama)
+{
+    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    {
+        if (list_jenis_tanaman[i].getName() == nama)
+        {
+            return 1;
+        }
+    }
+
+    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    {
+        if (list_jenis_hewan[i].getName() == nama)
+        {
+            return 2;
+        }
+    }
+
+    for (int i = 0; i < list_jenis_produk.size(); i++)
+    {
+        if (list_jenis_produk[i].getName() == nama)
+        {
+            return 3;
+        }
+    }
+
+    return -1;
+}
+
+
+int Grandmaster::cariPemain(string username){
+
+    for (int i = 0; i < list_pemain.size(); i++){
+
+        if (list_pemain[i]->getUname() == username){
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 
 // getter
 int Grandmaster::getUangMenang() const

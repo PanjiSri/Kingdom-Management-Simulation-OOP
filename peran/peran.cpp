@@ -220,6 +220,142 @@ int Walikota::calculateTax() {
     return 0;
 }
 
+void Walikota::bangun() {
+    cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
+    cout << "(sementara kosong)" << endl;
+
+    // memilih bangunan
+    string pilihan_bangunan;
+    cout << "Bangunan yang ingin dibangun: ";
+    cin >> pilihan_bangunan;
+
+    // sementara blm tau dapetin info angka resep dari mana?
+    int gulden_cost;
+    int teak_wood_cost;
+    int sandalwood_wood_cost;
+    int aloe_wood_cost;
+    int ironwood_wood_cost;
+    
+    // menghitung stok beberapa jenis kayu
+    int teak_wood_stock = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "TAW") {
+                ++teak_wood_stock;
+            }
+        }
+    }
+    int sandalwood_wood_stock = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "SAW") {
+                ++sandalwood_wood_stock;
+            }
+        }
+    }
+    int aloe_wood_stock = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "ALW") {
+                ++aloe_wood_stock;
+            }
+        }
+    }
+    int ironwood_wood_stock = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "IRW") {
+                ++ironwood_wood_stock;
+            }
+        }
+    }
+
+    if (gulden < gulden_cost ||
+        teak_wood_stock < teak_wood_cost ||
+        sandalwood_wood_stock < sandalwood_wood_cost ||
+        aloe_wood_stock < aloe_wood_cost ||
+        ironwood_wood_stock < ironwood_wood_cost) {
+        cout << "Kamu tidak punya sumber daya yang cukup!" << endl;
+        return;
+    }
+
+    // mengurangi sumber daya yang dimiliki
+    gulden -= gulden_cost;
+    int count = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "TAW") {
+                delete penyimpanan[i][j];
+                penyimpanan[i][j] = NULL;
+                ++count;
+            }
+
+            if (count >= teak_wood_cost) {
+                break;
+            }
+        }
+    }
+    count = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "SAW") {
+                delete penyimpanan[i][j];
+                penyimpanan[i][j] = NULL;
+                ++count;
+            }
+
+            if (count >= sandalwood_wood_cost) {
+                break;
+            }
+        }
+    }
+    count = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "ALW") {
+                delete penyimpanan[i][j];
+                penyimpanan[i][j] = NULL;
+                ++count;
+            }
+
+            if (count >= aloe_wood_cost) {
+                break;
+            }
+        }
+    }
+    count = 0;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] != NULL && penyimpanan[i][j]->getKode() == "IRW") {
+                delete penyimpanan[i][j];
+                penyimpanan[i][j] = NULL;
+                ++count;
+            }
+
+            if (count >= ironwood_wood_cost) {
+                break;
+            }
+        }
+    }
+
+    // menaruh bangunan pada peti penyimpanan
+    int row, col;
+    for (int i = 0; i < penyimpanan.getBaris(); ++i) {
+        for (int j = 0; j < penyimpanan.getKolom(); ++j) {
+            if (penyimpanan[i][j] == NULL) {
+                row = i;
+                col = j;
+                break;
+            }
+        }
+    }
+    int id; // sementara blm tau dapetin info resep dari mana?
+    string kode; // sementara blm tau dapetin info resep dari mana?
+    int harga; // sementara blm tau dapetin info resep dari mana?
+    penyimpanan[row][col] = new Bangunan(id, kode, pilihan_bangunan, harga);
+    cout << pilihan_bangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
+}
+
 void Walikota::addumur() {
 
 }
@@ -449,6 +585,10 @@ void Petani::tanamFile(string location, string name, int umur, vector<Item*> lis
     }
 }
 
+void Petani::bangun() {
+    cout << "Hanya bisa dilakukan oleh walikota" << endl;
+}
+
 // Child Peternak
 Peternak::Peternak(): Peran() {
     this->username = " ";
@@ -667,3 +807,7 @@ void Peternak::tanamFile(string location, string name, int berat, vector<Item*> 
 //         }
 //     }
 // }
+
+void Peternak::bangun() {
+    cout << "Hanya bisa dilakukan oleh walikota" << endl;
+}

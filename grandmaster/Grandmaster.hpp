@@ -25,7 +25,14 @@ private:
     vector<Line_Handler> list_jenis_hewan;
     vector<Line_Handler_Produk> list_jenis_produk;
 
-    // path ke file konfigurasi
+    // inisiasi configurasi
+    vector<Tanaman *> list_tanaman;
+    vector<Hewan *> list_hewan;
+    vector<Produk *> list_produk;
+    vector<Item *> list_item;
+
+
+        // path ke file konfigurasi
     string config_hewan;
     string config_tanaman;
     string config_produk;
@@ -35,7 +42,7 @@ private:
     vector<Peran *> list_pemain;
     int banyak_pemain;
 
-    //logic permainan
+    // logic permainan
     int idx_giliran_pemain;
 
 public:
@@ -50,16 +57,34 @@ public:
     // load semua config
     void loadallconfig();
 
+    //inisiasi tanaman
+    void inisiatorTanaman();
+
+    //inisiasi hewan
+    void inisiatorHewan();
+
+    //inisiasi produk
+    void inisiatorProduk();
+
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
 
     // manipulasi list
-    void muatPemain(Peran * pemain_baru);
+    void muatPemain(Peran *pemain_baru);
 
-    //muatState
+    // muatState
     void muatState(string data_path);
 
-        //................... ini buat testing aja......................//
+    //cari jenis
+    int cariJenis(string nama);
+
+    // //cari index
+    // int cariIndex(string nama);
+
+    // cari index pemain berdasarkan username
+    int cariPemain(string username);
+
+    //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
 
     Line_Handler getJenisHewan(int index) const;
