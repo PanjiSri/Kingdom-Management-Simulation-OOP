@@ -31,7 +31,7 @@ class Tanaman : public Item {
         // Setter
         void tambahUmur();
         void setUmur(int);
-        map<string, int> getMaterial();
+        // map<string, int> getMaterial();
 
         // Other Method
         bool isSiapPanen();

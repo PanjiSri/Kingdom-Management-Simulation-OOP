@@ -8,16 +8,16 @@
 using namespace std;
 
 class Bangunan : public Item {
-    protected: 
-        map<string, int> material;
     public:
         // Constructor & Destructor
         Bangunan();
-        Bangunan(int, string, string, int, map<string,int>);
+        Bangunan(int, string, string, int);
         Bangunan(const Bangunan&);
         ~Bangunan();
 
-        map<string, int> getMaterial();
+        // map<string, int> getMaterial();
+        string getTipe();
+        int getTambahan();
 };
 
 #endif
