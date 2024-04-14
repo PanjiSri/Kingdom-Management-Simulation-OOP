@@ -81,6 +81,9 @@ public:
     // //cari index
     // int cariIndex(string nama);
 
+    // cari index pemain berdasarkan username
+    int cariPemain(string username);
+
     //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
 

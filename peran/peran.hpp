@@ -44,12 +44,7 @@ public:
     void printPenyimpanan();
     void playerMakan();
     void addPenyimpanan(Item *);
-    void addPenyimpananplant(int id, string kode, string name, strint type)
-    {
-        penyimpanan.push_back(new Tanaman(id, kode, name, type, 0, 0));
-        
-
-    }
+    void addPenyimpananFile(string, vector<Item *>);
     vector<int> parse(string);
 
     virtual string getType() = 0;

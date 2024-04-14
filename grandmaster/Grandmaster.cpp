@@ -269,16 +269,44 @@ void Grandmaster::muatState(string data_path)
         {
             muatPemain(new Peternak(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
         }
-        else if(jenis_peran == "Petani"){
+        else if (jenis_peran == "Petani")
+        {
             muatPemain(new Petani(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
         }
-        else if(jenis_peran == "Walikota"){
-            muatPemain(new Walikota(username, berat_badan, uang, row_penyimpanan, col_penyimpanan));   
-        }else{
+        else if (jenis_peran == "Walikota")
+        {
+            muatPemain(new Walikota(username, berat_badan, uang, row_penyimpanan, col_penyimpanan));
+        }
+        else
+        {
             throw ConfigTidakValid();
         }
 
+        getline(file, line);
+        stringstream ss(line);
+
+        int banyak_item;
+        ss >> banyak_item;
+
+        for (int j = 0; j < banyak_item; j++)
+        {
+
+            getline(file, line);
+            stringstream ss(line);
+
+            string nama_item;
+
+            ss >> nama_item;
+
+            //pastiin ini jenis item apa, terus tambahin ke peran
+            //cari peran berdasarkan index'
+
+            int index_pemain_untuk_tambah_item = cariPemain(username);
+
+            
+
         
+        }
     }
 }
 
@@ -310,6 +338,20 @@ int Grandmaster::cariJenis(string nama)
 
     return -1;
 }
+
+
+int Grandmaster::cariPemain(string username){
+
+    for (int i = 0; i < list_pemain.size(); i++){
+
+        if (list_pemain[i]->getUname() == username){
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 
 // getter
 int Grandmaster::getUangMenang() const
