@@ -1,4 +1,6 @@
 #include "Herbivore.hpp"
+#include <iostream>
+using namespace std;
 
 Herbivore::Herbivore() : Hewan() {}
 
@@ -16,13 +18,13 @@ string Herbivore::getTipe() {
     return tipe;
 }
 
-void Herbivore::makan(Produk* produk) {
+bool Herbivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_ANIMAL") {
-        throw HerbivoraTidakMakanDagingException();
-    } else if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
-        throw MaterialPlantTidakDimakanException();
+        cout << "Herbivora tidak makan tumbuhan" << endl;
+        return false;
     }
     else {
         setBeratSaatIni(produk->getTambahan());
+        return true;
     }
 }

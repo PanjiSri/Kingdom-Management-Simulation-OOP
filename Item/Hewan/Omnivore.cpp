@@ -16,11 +16,12 @@ string Omnivore::getTipe() {
     return tipe;
 }
 
-void Omnivore::makan(Produk* produk) {
+bool Omnivore::makan(Produk* produk) {
     if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
         setBeratSaatIni(produk->getTambahan());
+        return true;
     }
 }

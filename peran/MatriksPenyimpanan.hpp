@@ -13,11 +13,12 @@
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
 #include "../Pcolor/pcolor.h"
+#include <map>
 using namespace std;
 
 template <class T>
 class MatriksPenyimpanan {
-    private:
+    protected:
         vector<vector<T>> matriks;
         int baris;
         int kolom;
@@ -116,6 +117,50 @@ class MatriksPenyimpanan {
             }
         }
 
+        map<string, int> listSiapPanen() {
+            map<string, int> siappanen;
+            for(int i = 0; i < baris; i++) {
+                for(int j = 0; j < kolom; j++) {
+                    if(matriks[i][j]->isSiapPanen() == true) {
+                        if(siappanen.size() == 0) {
+                            siappanen.insert({matriks[i][j]->getKode(), 1});
+                        }
+                        else {
+                            if(siappanen.count(matriks[i][j]->getKode())) {
+                                siappanen[matriks[i][j]->getKode()] += 1;
+                            }
+                            else {
+                                siappanen.insert({matriks[i][j]->getKode(), 1});
+                            }
+                        }
+                    }
+                }
+            }
+            return siappanen;
+        }
+
+        map<string, int> listSiapPanen() {
+            map<string, int> siappanen;
+            for(int i = 0; i < baris; i++) {
+                for(int j = 0; j < kolom; j++) {
+                    if(matriks[i][j]->isSiapPanen() == true) {
+                        if(siappanen.size() == 0) {
+                            siappanen.insert({matriks[i][j]->getKode(), 1});
+                        }
+                        else {
+                            if(siappanen.count(matriks[i][j]->getKode())) {
+                                siappanen[matriks[i][j]->getKode()] += 1;
+                            }
+                            else {
+                                siappanen.insert({matriks[i][j]->getKode(), 1});
+                            }
+                        }
+                    }
+                }
+            }
+            return siappanen;
+        }
+
         void printlahan() {
             int asciinum = 65;
 
@@ -138,10 +183,11 @@ class MatriksPenyimpanan {
                         cout << "     |";
                     }
                     else {
+                        cout << " ";
                         string kata = matriks[i][j]->getKode();
                         if(matriks[i][j]->isSiapPanen() == true) {
                             for(int k = 0; k < kata.size(); k++) {
-                                print_red(kata[k]);
+                                print_green(kata[k]);
                             }
                         }
                         else {
@@ -149,7 +195,7 @@ class MatriksPenyimpanan {
                                 print_red(kata[k]);
                             }
                         }
-                        cout << " |";
+                        cout << "  |";
                     }
                 }
                 cout << endl;
@@ -167,6 +213,18 @@ class MatriksPenyimpanan {
                 }
             }
             return uang;
+        }
+
+        int getLahanKosong() {
+            int empty = 0;
+            for(int i = 0; i < this->getBaris(); i++) {
+                for(int j = 0; j < this->getKolom(); j++) {
+                    if(matriks[i][j] == NULL) {
+                        empty += 1;
+                    }
+                }
+            }
+            return empty;
         }
 
         bool isEmpety() {
