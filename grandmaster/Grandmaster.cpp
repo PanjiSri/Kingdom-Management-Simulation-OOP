@@ -187,6 +187,9 @@ void Grandmaster::inisiatorProduk()
 void Grandmaster::mulaiTanpaBerkas()
 {
     loadallconfig();
+    inisiatorHewan();
+    inisiatorTanaman();
+    inisiatorProduk();
 
     // masih prototype
     // Membuat list pemain sesuai dengan informasi yang diberikan
@@ -306,13 +309,12 @@ void Grandmaster::muatState(string data_path)
             list_pemain[index_pemain_untuk_tambah_item]->addPenyimpananFile(nama_item, list_item);
         }
 
-        int banyak_di_lahan;
-        getline(file, line);
-        stringstream ss(line);
-
-        ss >> banyak_di_lahan;
-
         if(jenis_peran != "Walikota"){
+            int banyak_di_lahan;
+            getline(file, line);
+            stringstream ss(line);
+
+            ss >> banyak_di_lahan;
             for (int k = 0; k < banyak_di_lahan; k++)
             {
 
@@ -326,15 +328,11 @@ void Grandmaster::muatState(string data_path)
 
                 int index_pemain_untuk_tambah_item = cariPemain(username);
 
-                // if(jenis_peran == "Petani"){
-                //     list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_tanaman);
-                // }else if(jenis_peran == "Peternak"){
-                //     list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_tanaman);
-                // }
+                list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_item);
 
-                
             }
         }
+
     }
 }
 
