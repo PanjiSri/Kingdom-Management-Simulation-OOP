@@ -47,7 +47,7 @@ int Hewan::getTambahan() {
     return 0;
 }
 
-void Hewan::setBeratSaatIni(int tambahan_berat) {
+void Hewan::tambahBerat(int tambahan_berat) {
     berat_saat_ini += tambahan_berat;
 }
 

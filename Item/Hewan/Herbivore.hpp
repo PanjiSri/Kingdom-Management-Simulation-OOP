@@ -2,6 +2,7 @@
 #define HERBIVORE_HPP
 
 #include "Hewan.hpp"
+#include <vector>
 
 class Herbivore : public Hewan
 {
@@ -17,6 +18,7 @@ class Herbivore : public Hewan
 
         // Getter
         string getTipe();
+        vector<string> getProduk();
 
         // Other Method
         bool makan(Produk* produk);

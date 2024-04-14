@@ -2,6 +2,7 @@
 #define OMNIVORE_HPP
 
 #include "Hewan.hpp"
+#include <vector>
 
 class Omnivore : public Hewan
 {
@@ -17,6 +18,7 @@ class Omnivore : public Hewan
 
         // Getter
         string getTipe();
+        vector<string> getProduk();
         
         // Other Method
         bool makan(Produk* produk);

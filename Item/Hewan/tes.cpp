@@ -6,6 +6,7 @@
 #include "Omnivore.hpp"
 #include "Hewan.hpp"
 #include "../Item.hpp"
+#include <exception>
 
 using namespace std;
 
@@ -41,6 +42,10 @@ int main() {
     cout << c.getID() << endl;
     cout << h.getID() << endl;
     cout << o.getID() << endl;
+
+    cout << c.getProduk()[0] << endl;
+    cout << h.getProduk()[0] << endl;
+    cout << o.getProduk()[1] << endl;
 
     return 0;
 }

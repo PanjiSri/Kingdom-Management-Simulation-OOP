@@ -17,6 +17,12 @@ string Carnivore::getTipe() {
     return tipe;
 }
 
+vector<string> Carnivore::getProduk() {
+    vector<string> produk;
+    produk.push_back(this->nama + "_MEAT");
+    return produk;
+}
+
 bool Carnivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_FRUIT_PLANT") {
         throw CarnivoraTidakMakanSayurException();

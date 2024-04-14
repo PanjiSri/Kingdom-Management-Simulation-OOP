@@ -18,13 +18,19 @@ string Herbivore::getTipe() {
     return tipe;
 }
 
+vector<string> Herbivore::getProduk() {
+    vector<string> produk;
+    produk.push_back(this->nama + "_MEAT");
+    return produk;
+}
+
 bool Herbivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_ANIMAL") {
         cout << "Herbivora tidak makan tumbuhan" << endl;
         return false;
     }
     else {
-        setBeratSaatIni(produk->getTambahan());
+        tambahBerat(produk->getTambahan());
         return true;
     }
 }
