@@ -17,6 +17,7 @@ using namespace std;
 
 // compile
 // g++ -o main main.cpp peran.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
+// g++ -o a peran/main.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
 
 int main() {
     static int nhewan = 0;
