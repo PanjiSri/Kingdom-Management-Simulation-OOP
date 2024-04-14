@@ -24,6 +24,7 @@ int main() {
     int beratint, hargaint;
     vector<Hewan*> listhewan;
     vector<Item*> listitem;
+    vector<Produk*> listproduct;
     vector<vector<string>> parse;
     string datahewan;
     bool end = false;
@@ -116,7 +117,8 @@ int main() {
             }
         }
         harga = data;
-        Item* x = new Produk(stoi(id),code,name,tipe,origin, stoi(berat), stoi(harga));
+        Produk* x = new Produk(stoi(id),code,name,tipe,origin, stoi(berat), stoi(harga));
+        listproduct.push_back(x);
         listitem.push_back(x);
     }
 

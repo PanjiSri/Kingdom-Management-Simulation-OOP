@@ -61,7 +61,7 @@ class Peran {
         virtual int calculateTax() = 0;
 
         void menjual(Toko* toko);
-        // void membeli(Toko* toko, vector<Produk*>);
+        void membeli(Toko* toko);
 
 };
 
