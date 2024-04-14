@@ -42,6 +42,20 @@ int Tanaman::getTambahan() {
     return 0;
 }
 
+vector<string> Tanaman::getProduk() {
+    string produk = this->nama;
+    produk.erase(produk.length() - 5);
+
+    vector<string> vec_produk;
+    if (this->tipe == "MATERIAL_PLANT") {
+        vec_produk.push_back(produk + "_WOOD");
+    } else {
+        vec_produk.push_back(produk);
+    }
+
+    return vec_produk;
+}
+
 void Tanaman::tambahUmur() {
     umur++;
 }
