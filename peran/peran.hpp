@@ -37,6 +37,7 @@ class Peran {
         // Getter
         int getGulden();
         int getBerat();
+        string getUname();
 
         // Setter
         void tambahBerat(int berat);
