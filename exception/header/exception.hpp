@@ -1,3 +1,6 @@
+#ifndef __EXCEPTION_HPP__
+#define __EXCEPTION_HPP__
+
 #include <iostream>
 #include <exception>
 using namespace std;
@@ -72,3 +75,6 @@ public:
         return "No barang tidak valid";
     }
 };
+
+
+#endif
