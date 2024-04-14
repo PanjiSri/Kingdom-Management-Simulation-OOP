@@ -117,6 +117,21 @@ void Peran::addPenyimpananFile(string name, vector<Item*> listItem) {
     penyimpanan += item;
 }
 
+vector<string> Peran::getSemuaItem(){
+    vector<string> temp;
+
+    for(int i = 0; i < penyimpanan.getBaris(); i++) {
+        for(int j = 0; j < penyimpanan.getKolom(); j++) {
+            if(penyimpanan[j][i] != NULL) {
+                temp.push_back(penyimpanan[j][i]->getNama());
+            }
+        }
+    }
+    return temp;
+}
+
+
+
 vector<int> Peran::parse(string idx) {
     vector<int> indeks;
     indeks.push_back(((int)idx[0])-65);
@@ -620,7 +635,7 @@ void Peternak::beriMakan() {
         if (produk == NULL) {
             cout << "Tidak ada apa-apa di di sana" << endl;
         } 
-        else if ((produk->getTipe() == "PRODUCT_ANIMAL") or (produk->getTipe() == "PRODUCT_FRUIT_PLANT")) {
+        else if ((produk->getTipe() == "PRODUCT_ANIMAL") || (produk->getTipe() == "PRODUCT_FRUIT_PLANT")) {
             kondisi = hewan->makan(produk);
             if(kondisi == true) {
                 hewan->tambahBerat(produk->getTambahan());

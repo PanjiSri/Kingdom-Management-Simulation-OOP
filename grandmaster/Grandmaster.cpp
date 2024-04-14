@@ -204,6 +204,11 @@ void Grandmaster::mulaiTanpaBerkas()
     idx_giliran_pemain = 0;
 }
 
+void Grandmaster::mulaiDenganBerkas()
+{
+    
+}
+
 void Grandmaster::muatPemain(Peran *pemain_baru)
 {
     // leksikografis
@@ -309,7 +314,8 @@ void Grandmaster::muatState(string data_path)
             list_pemain[index_pemain_untuk_tambah_item]->addPenyimpananFile(nama_item, list_item);
         }
 
-        if(jenis_peran != "Walikota"){
+        if (jenis_peran != "Walikota")
+        {
             int banyak_di_lahan;
             getline(file, line);
             stringstream ss(line);
@@ -329,10 +335,8 @@ void Grandmaster::muatState(string data_path)
                 int index_pemain_untuk_tambah_item = cariPemain(username);
 
                 list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_item);
-
             }
         }
-
     }
 }
 

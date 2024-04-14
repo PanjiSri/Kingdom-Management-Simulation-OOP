@@ -69,6 +69,9 @@ public:
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
 
+    //memulai game dengan berkas
+    void mulaiDenganBerkas();
+
     // manipulasi list
     void muatPemain(Peran *pemain_baru);
 
