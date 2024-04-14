@@ -7,7 +7,16 @@ class FilePathTidakValid : public exception
 public:
     const char *what() const throw()
     {
-        return "File Path Tidak Valid";
+        return "Path File Tidak Valid";
+    }
+};
+
+class NamaPemainTidakValidException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Nama tidak valid, sudah ada pemain dengan nama yang sama";
     }
 };
 
@@ -35,5 +44,23 @@ public:
     const char *what() const throw()
     {
         return "Produk tanaman material tidak bisa dimakan";
+    }
+};
+
+class StokTidakTersediaException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Stok barang tidak mencukupi";
+    }
+};
+
+class NoBarangTidakValidException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "No barang tidak valid";
     }
 };
