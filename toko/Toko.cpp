@@ -1,50 +1,48 @@
 #include "Toko.hpp"
+// #include "Item/Item.hpp"
 
 Toko::Toko()
 {
-    // Kode Tanaman
-    jenisBarang.push_back("TEK");
-    jenisBarang.push_back("SDT");
-    jenisBarang.push_back("ALT");
-    jenisBarang.push_back("IRN");
-    jenisBarang.push_back("APL");
-    jenisBarang.push_back("ORG");
-    jenisBarang.push_back("BNT");
-    jenisBarang.push_back("GAV");
+    // DUMMY DULU, GATAU FORMAT NYAMBUNGIN ITEM SAMA BACA CONFIG
+    jenisBarang.push_back(new Tanaman(1, "TEK", "TEAK_TREE", "MATERIAL_PLANT", 15, 5));
+    jenisBarang.push_back(new Tanaman(2, "SDT", "SANDALWOOD_TREE", "MATERIAL_PLANT", 10, 4));
+    jenisBarang.push_back(new Tanaman(3, "ALT", "ALOE_TREE", "MATERIAL_PLANT", 9, 6));
+    jenisBarang.push_back(new Tanaman(4, "IRN", "IRONWOOD_TREE", "MATERIAL_PLANT", 11, 5));
+    jenisBarang.push_back(new Tanaman(5, "APL", "APPLE_TREE", "FRUIT_PLANT", 13, 4));
+    jenisBarang.push_back(new Tanaman(6, "ORG", "ORANGE_TREE", "FRUIT_PLANT", 12, 4));
+    jenisBarang.push_back(new Tanaman(7, "BNT", "BANANA_TREE", "FRUIT_PLANT", 16, 3));
+    jenisBarang.push_back(new Tanaman(8, "GAV", "GUAVA_TREE", "FRUIT_PLANT", 14, 3));
 
-    // Kode Hewan
-    jenisBarang.push_back("COW");
-    jenisBarang.push_back("SHP");
-    jenisBarang.push_back("HRS");
-    jenisBarang.push_back("RBT");
-    jenisBarang.push_back("SNK");
-    jenisBarang.push_back("CHK");
-    jenisBarang.push_back("DCK");
+    jenisBarang.push_back(new Herbivore(1, "COW", "COW", 20, 6));
+    jenisBarang.push_back(new Herbivore(2, "SHP", "SHEEP", 15, 5));
+    jenisBarang.push_back(new Herbivore(3, "HRS", "HORSE", 18, 5));
+    jenisBarang.push_back(new Herbivore(4, "RBT", "RABBIT", 10, 4));
+    jenisBarang.push_back(new Carnivore(5, "SNK", "SNAKE", 13, 4));
+    jenisBarang.push_back(new Omnivore(6, "CHK", "CHICKEN", 12, 3));
+    jenisBarang.push_back(new Omnivore(7, "DCK", "DUCK", 11, 3));
 
-    // Kode Produk
-    jenisBarang.push_back("TAW");
-    jenisBarang.push_back("SAW");
-    jenisBarang.push_back("ALW");
-    jenisBarang.push_back("IRW");
-    jenisBarang.push_back("APP");
-    jenisBarang.push_back("ORP");
-    jenisBarang.push_back("BNP");
-    jenisBarang.push_back("GAP");
-    jenisBarang.push_back("COM");
-    jenisBarang.push_back("SHM");
-    jenisBarang.push_back("HRM");
-    jenisBarang.push_back("RBM");
-    jenisBarang.push_back("SNM");
-    jenisBarang.push_back("CHM");
-    jenisBarang.push_back("DCM");
-    jenisBarang.push_back("CHE");
-    jenisBarang.push_back("DCE");
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
+    // jenisBarang.push_back(new Produk());
 
-    // Kode Bangunan
-    jenisBarang.push_back("SMH");
-    jenisBarang.push_back("MDH");
-    jenisBarang.push_back("LRH");
-    jenisBarang.push_back("HTL");
+    // jenisBarang.push_back(new Bangunan());
+    // jenisBarang.push_back(new Bangunan());
+    // jenisBarang.push_back(new Bangunan());
+    // jenisBarang.push_back(new Bangunan());
 
     // Kode Tanaman
     listBarang["TEK"] = -1;
@@ -95,53 +93,57 @@ Toko::~Toko()
 {
 }
 
-void Toko::jual(string kode){
-    // if (listBarang[kode] == 0)
-    // {
-    //     throw StokHabisException();
-    // }
-    
-    if (listBarang[kode] > 0)
+void Toko::jual(int no){
+    string barang = jenisBarang[no-1]->getKode();
+    if (listBarang[barang] > 0)
     {
-        listBarang[kode] -= 1;    
+        listBarang[barang]--;    
     }
+    if (listBarang[barang] == 0)
+    {
+        jenisBarang.erase(jenisBarang.begin()+no-1);
+    }
+    
     
 }
 
-void Toko::beli(string kode){
-    if (listBarang[kode] != -1)
+void Toko::beli(Item* barang){
+    if (listBarang[barang->getKode()] == 0)
     {
-        listBarang[kode] += 1;
-    }
-    
+        jenisBarang.push_back(barang);
+    }    
+    if (listBarang[barang->getKode()] != -1)
+    {
+        listBarang[barang->getKode()] += 1;
+    }    
 }
 
-// harga masih dummy
 void Toko::cetakListBarang(){
     int no = 1;
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     for (int i = 0; i < jenisBarang.size(); i++)
     {   
-        if (listBarang[jenisBarang[i]] == -1)
+        if (listBarang[jenisBarang[i]->getKode()] == -1)
         {
-            cout << no << ". "<< jenisBarang[i] << " - " << 10 <<endl;
+            cout << no << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
             no++;
-        } else if (listBarang[jenisBarang[i]] != 0)
+        } else if (listBarang[jenisBarang[i]->getKode()] != 0)
         {
-            cout << no << ". "<< jenisBarang[i] << " - " << 10 << " (" << listBarang[jenisBarang[i]] << ")" <<endl;
+            cout << no << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << listBarang[jenisBarang[i]->getKode()] << ")" <<endl;
             no++;
         }
-    }
-    
+    }  
 }
 
 // int main(){
 //     Toko a;
-//     a.beli("COW");
-//     a.beli("COM");
-//     a.beli("COM");
-//     a.beli("COM");
-//     a.beli("COM");
-//     a.jual("COM");
+//     Item* barang = new Produk(1, "TAW", "TEAK_WOOD", "PRODUCT_MATERIAL_PLANT", "TEAK_TREE", 0, 9);
+//     a.beli(barang);
+//     a.beli(barang);
+//     a.beli(barang);
+//     a.beli(barang);
+//     a.beli(barang);
+//     a.cetakListBarang();
+//     a.jual(16);
 //     a.cetakListBarang();
 // }

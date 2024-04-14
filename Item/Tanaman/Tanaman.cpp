@@ -46,6 +46,10 @@ void Tanaman::tambahUmur() {
     umur++;
 }
 
+void Tanaman::setUmur(int num) {
+    umur = num;
+}
+
 bool Tanaman::isSiapPanen() {
     return umur >= waktu_panen;
 }

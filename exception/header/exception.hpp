@@ -11,6 +11,15 @@ public:
     }
 };
 
+class NamaPemainTidakValidException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Nama tidak valid, sudah ada pemain dengan nama yang sama";
+    }
+};
+
 class CarnivoraTidakMakanSayurException : public exception
 {
 public:

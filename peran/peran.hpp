@@ -11,6 +11,7 @@
 #include "../Item/Produk/Produk.hpp"
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
+#include "../toko/Toko.hpp"
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -29,7 +30,7 @@ class Peran {
         // Constructor & Destructor
         Peran();
         Peran(string username, int row, int col);
-        Peran(int gulden, int berat, string username, int row, int col);
+        Peran(string username, int berat, int gulden, int row, int col);
         ~Peran();
         Peran& operator= (const Peran& other);
 
@@ -43,19 +44,23 @@ class Peran {
         // Other Method
         void printPenyimpanan();
         void playerMakan();
-        void addPenyimpanan(string, vector<Item*>);
+        void addPenyimpanan(Item*);
+        void addPenyimpananFile(string, vector<Item*>);
         vector<int> parse(string);
         
         virtual string getType() = 0;
         virtual void tanam() = 0;
+        virtual void tanamFile(string, string, int) = 0;
         virtual void panen() = 0;
         virtual void cetakLahan() = 0;
         virtual void beriMakan() = 0;
         virtual void addumur() = 0;
         virtual void ambilPajak(vector<Peran*>) = 0;
         virtual void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
-        virtual int getLahanKosong() = 0;
         virtual int calculateTax() = 0;
+
+        void menjual(Toko* toko);
+        // void membeli(Toko* toko, vector<Produk*>);
 
 };
 
@@ -65,6 +70,7 @@ class Walikota: public Peran {
 
     public:
         // Constructor & Destructor
+        Walikota(string, int, int, int, int);
         Walikota(string username, int row, int col);
         ~Walikota();
         // Walikota(int gulden, int berat, string);
@@ -82,7 +88,7 @@ class Walikota: public Peran {
         void cetakLahan();
         void addumur();
         void buatuser();
-        int getlahankosong();
+        void tanamFile(string, string, int);
         // void changelahan();
         int calculateTax();
 };
@@ -96,7 +102,7 @@ class Petani: public Peran {
         // Constructor & Destructor
         Petani();
         Petani(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-        Petani(int gulden, int berat, string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        Petani(string username, int, int, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
         ~Petani();
 
         // Getter
@@ -110,9 +116,9 @@ class Petani: public Peran {
         void panen();
         void ambilPajak(vector<Peran*>);
         void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
+        void tanamFile(string, string, int);
         // void changelahan();
         int calculateTax();
-        int getLahanKosong();
 };
 
 class Peternak: public Peran {
@@ -124,7 +130,7 @@ class Peternak: public Peran {
         // Constructor & Destructor
         Peternak();
         Peternak(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-        Peternak(int gulden, int berat, string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
+        Peternak(string username, int, int, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
         ~Peternak();
 
         // Getter
@@ -138,8 +144,8 @@ class Peternak: public Peran {
         void panen();
         void ambilPajak(vector<Peran*>);
         void buatuser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
+        void tanamFile(string, string, int);
         int calculateTax();
-        int getLahanKosong();
 };
 
 #endif

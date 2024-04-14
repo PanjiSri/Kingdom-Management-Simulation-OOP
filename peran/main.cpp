@@ -32,7 +32,7 @@ int main() {
         string data;
         getline(cin,datahewan);
         for(int j = 0; j < datahewan.size(); j++) {
-            if(datahewan[j] == ' ' or datahewan == "\n") {
+            if(datahewan[j] == ' ' || datahewan == "\n") {
                 if(step == 0) {
                     id = data;
                     data = "";
@@ -50,7 +50,7 @@ int main() {
                     data = "";
                 }
                 else if(step == 4) {
-                    harga = data;
+                    berat = data;
                     data = "";
                 }
                 step += 1;   
@@ -59,7 +59,7 @@ int main() {
                 data += datahewan[j];
             }
         }
-        berat = data;
+        harga = data;
         if (tipe == "CARNIVORE") {
             Hewan* x = new Carnivore(stoi(id),code,name,stoi(berat), stoi(harga));
             listhewan.push_back(x);
@@ -84,7 +84,7 @@ int main() {
         string data;
         getline(cin,datahewan);
         for(int j = 0; j < datahewan.size(); j++) {
-            if(datahewan[j] == ' ' or datahewan == "\n") {
+            if(datahewan[j] == ' ' || datahewan == "\n") {
                 if(step == 0) {
                     id = data;
                     data = "";
@@ -123,10 +123,10 @@ int main() {
     vector<Peran*> listpemain;
     Peran* a = new Peternak("haikal", 8, 8, 8, 8);  
     a->printPenyimpanan();
-    a->addPenyimpanan("COM", listitem);
-    a->addPenyimpanan("COM", listitem);
-    a->addPenyimpanan("COM", listitem);
-    a->addPenyimpanan("SNK", listitem);
+    // a->addPenyimpanan("COM", listitem);
+    // a->addPenyimpanan("COM", listitem);
+    // a->addPenyimpanan("COM", listitem);
+    // a->addPenyimpanan("SNK", listitem);
     a->tanam();
     a->beriMakan();
     a->beriMakan();

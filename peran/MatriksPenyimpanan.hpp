@@ -192,6 +192,18 @@ class MatriksPenyimpanan {
             return uang;
         }
 
+        int getLahanKosong() {
+            int empty = 0;
+            for(int i = 0; i < this->getBaris(); i++) {
+                for(int j = 0; j < this->getKolom(); j++) {
+                    if(matriks[i][j] == NULL) {
+                        empty += 1;
+                    }
+                }
+            }
+            return empty;
+        }
+
         bool isEmpety() {
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {

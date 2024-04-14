@@ -27,6 +27,7 @@ class Tanaman : public Item {
 
         // Setter
         void tambahUmur();
+        void setUmur(int);
 
         // Other Method
         bool isSiapPanen();
