@@ -56,6 +56,10 @@ int Peran::getBerat() {
     return this->berat;
 }
 
+string Peran::getUname() {
+    return this->username;
+}
+
 void Peran::printPenyimpanan() {
     cout << "=================== PENYIMPANAN ===================" << endl;
     penyimpanan.print();
