@@ -62,6 +62,7 @@ public:
     virtual void ambilPajak(vector<Peran *>) = 0;
     virtual void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
     virtual int calculateTax() = 0;
+    virtual void bangun() = 0;
 
     void menjual(Toko *toko);
     // void membeli(Toko* toko, vector<Produk*>);
@@ -95,6 +96,7 @@ public:
     void tanamFile(string, string, int);
     // void changelahan();
     int calculateTax();
+    void bangun();
 };
 
 class Petani : public Peran
@@ -124,6 +126,7 @@ public:
     void tanamFile(string, string, int);
     // void changelahan();
     int calculateTax();
+    void bangun();
 };
 
 class Peternak : public Peran
@@ -152,6 +155,7 @@ public:
     void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
     void tanamFile(string, string, int);
     int calculateTax();
+    void bangun();
 };
 
 #endif
