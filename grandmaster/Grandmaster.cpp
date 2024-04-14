@@ -117,6 +117,69 @@ void Grandmaster::loadallconfig()
     // cout << "aman" << endl;
 }
 
+void Grandmaster::inisiatorTanaman()
+{
+    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    {
+        int id = list_jenis_tanaman[i].getId();
+        string kode = list_jenis_tanaman[i].getKodeHuruf();
+        string nama = list_jenis_tanaman[i].getName();
+        string tipe = list_jenis_tanaman[i].getType();
+        int durasi = list_jenis_tanaman[i].getDurationToHarvest();
+        int harga = list_jenis_tanaman[i].getPrice();
+
+        list_tanaman.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+    }
+}
+
+void Grandmaster::inisiatorHewan(){
+    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    {
+
+        int id = list_jenis_hewan[i].getId();
+        string kode = list_jenis_hewan[i].getKodeHuruf();
+        string nama = list_jenis_hewan[i].getName();
+        string tipe = list_jenis_hewan[i].getType();
+        int berat = list_jenis_hewan[i].getDurationToHarvest();
+        int harga = list_jenis_hewan[i].getPrice();
+
+        if(tipe == "HERBIVORE"){
+            list_hewan.push_back(new Herbivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Herbivore(id, kode, nama, berat, harga));
+        }
+        else if(tipe == "OMNIVORE"){
+            list_hewan.push_back(new Omnivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Omnivore(id, kode, nama, berat, harga));
+        }
+        else if(tipe == "CARNIVORE"){
+            list_hewan.push_back(new Carnivore(id, kode, nama, berat, harga));
+            list_item.push_back(new Carnivore(id, kode, nama, berat, harga));
+        }
+        else{
+            throw ConfigTidakValid();
+        }
+    }
+}
+
+
+void Grandmaster::inisiatorProduk(){
+    for (int i = 0; i < list_jenis_produk.size(); i++)
+    {
+        int id = list_jenis_produk[i].getId();
+        string kode = list_jenis_produk[i].getKodeHuruf();
+        string nama = list_jenis_produk[i].getName();
+        string tipe = list_jenis_produk[i].getType();
+        int berat = list_jenis_produk[i].getDurationToHarvest();
+        int harga = list_jenis_produk[i].getPrice();
+        string origin = list_jenis_produk[i].getOrigin();
+
+        list_produk.push_back(new Produk(id, kode, nama, tipe, origin, berat, harga));   
+        list_item.push_back(new Produk(id, kode, nama, tipe, origin, berat, harga));
+    }
+}
+
+
 void Grandmaster::mulaiTanpaBerkas()
 {
     loadallconfig();
@@ -210,106 +273,6 @@ void Grandmaster::muatState(string data_path)
             ss >> banyak_jenis;
         }
 
-        for (int j = 0; j < banyak_jenis; j++)
-            {
-                getline(file, line);
-                stringstream ss(line);
-
-                string nama_jenis;
-
-                ss >> nama_jenis;
-
-                // ini berarti dia tumbuhan
-                if (cariJenis(nama_jenis) == 1)
-                {
-                    int index;
-                    for (int k = 0; k < list_jenis_tanaman.size(); k++)
-                    {
-                        if (list_jenis_tanaman[k].getName() == nama_jenis)
-                        {
-                            index = k;
-                            break;
-                        }
-                    }
-
-                    int id = list_jenis_tanaman[index].getId();
-                    string kode_huruf = list_jenis_tanaman[index].getKodeHuruf();
-                    string name = list_jenis_tanaman[index].getName();
-                    string type = list_jenis_tanaman[index].getType();
-                    int duration = list_jenis_tanaman[index].getDurationToHarvest();
-                    int price = list_jenis_tanaman[index].getPrice();
-
-                    list_item.push_back(new Tanaman(id, kode_huruf, name, type, duration, price));
-                }
-
-                // ini berarti dia hewan
-                else if (cariJenis(nama_jenis) == 2)
-                {
-                    int index;
-                    for (int k = 0; k < list_jenis_hewan.size(); k++)
-                    {
-                        if (list_jenis_hewan[k].getName() == nama_jenis)
-                        {
-                            index = k;
-                            break;
-                        }
-                    }
-
-                    int id = list_jenis_hewan[index].getId();
-                    string kode_huruf = list_jenis_hewan[index].getKodeHuruf();
-                    string name = list_jenis_hewan[index].getName();
-                    string type = list_jenis_hewan[index].getType();
-                    int berat_panen = list_jenis_hewan[index].getDurationToHarvest();
-                    int price = list_jenis_hewan[index].getPrice();
-
-                    if (type == "HERBIVORE")
-                    {
-                        list_item.push_back(new Herbivore(id, kode_huruf, name, berat_panen, price));
-                    }
-                    else if (type == "CARNIVORE")
-                    {
-                        list_item.push_back(new Carnivore(id, kode_huruf, name, berat_panen, price));
-                    }
-                    else if (type == "OMNIVORE")
-                    {
-                        list_item.push_back(new Omnivore(id, kode_huruf, name, berat_panen, price));
-                    }
-                    else
-                    {
-                        throw ConfigTidakValid();
-                    }
-                }
-
-                // ini berarti dia produk
-                else if (cariJenis(nama_jenis) == 3)
-                {
-                    int index;
-                    for (int k = 0; k < list_jenis_produk.size(); k++)
-                    {
-                        if (list_jenis_produk[k].getName() == nama_jenis)
-                        {
-                            index = k;
-                            break;
-                        }
-                    }
-
-                    int id = list_jenis_produk[index].getId();
-                    string kode_huruf = list_jenis_produk[index].getKodeHuruf();
-                    string name = list_jenis_produk[index].getName();
-                    string type = list_jenis_produk[index].getType();
-                    int add_weight = list_jenis_produk[index].getDurationToHarvest();
-                    int price = list_jenis_produk[index].getPrice();
-                    string origin = list_jenis_produk[index].getOrigin();
-
-                    list_item.push_back(new Produk(id, kode_huruf, name, type, origin, add_weight, price));
-                }
-                else{
-                    throw ConfigTidakValid();
-                }
-            }
-
-        
-        
     }
 }
 

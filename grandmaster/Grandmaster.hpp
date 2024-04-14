@@ -24,7 +24,13 @@ private:
     vector<Line_Handler> list_jenis_tanaman;
     vector<Line_Handler> list_jenis_hewan;
     vector<Line_Handler_Produk> list_jenis_produk;
+
+    // inisiasi configurasi
+    vector<Tanaman *> list_tanaman;
+    vector<Hewan *> list_hewan;
+    vector<Produk *> list_produk;
     vector<Item *> list_item;
+
 
         // path ke file konfigurasi
     string config_hewan;
@@ -50,6 +56,15 @@ public:
 
     // load semua config
     void loadallconfig();
+
+    //inisiasi tanaman
+    void inisiatorTanaman();
+
+    //inisiasi hewan
+    void inisiatorHewan();
+
+    //inisiasi produk
+    void inisiatorProduk();
 
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
