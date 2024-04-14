@@ -53,52 +53,77 @@ Toko::Toko()
     // jenisBarang.push_back(new Bangunan());
 
     // Kode Tanaman
-    listBarang["TEK"] = -1;
-    listBarang["SDT"] = -1;
-    listBarang["ALT"] = -1;
-    listBarang["IRN"] = -1;
-    listBarang["APL"] = -1;
-    listBarang["ORG"] = -1;
-    listBarang["BNT"] = -1;
-    listBarang["GAV"] = -1;
+    jumlahTiapJenis["TEK"] = -1;
+    jumlahTiapJenis["SDT"] = -1;
+    jumlahTiapJenis["ALT"] = -1;
+    jumlahTiapJenis["IRN"] = -1;
+    jumlahTiapJenis["APL"] = -1;
+    jumlahTiapJenis["ORG"] = -1;
+    jumlahTiapJenis["BNT"] = -1;
+    jumlahTiapJenis["GAV"] = -1;
 
     // Kode Hewan
-    listBarang["COW"] = -1;
-    listBarang["SHP"] = -1;
-    listBarang["HRS"] = -1;
-    listBarang["RBT"] = -1;
-    listBarang["SNK"] = -1;
-    listBarang["CHK"] = -1;
-    listBarang["DCK"] = -1;
+    jumlahTiapJenis["COW"] = -1;
+    jumlahTiapJenis["SHP"] = -1;
+    jumlahTiapJenis["HRS"] = -1;
+    jumlahTiapJenis["RBT"] = -1;
+    jumlahTiapJenis["SNK"] = -1;
+    jumlahTiapJenis["CHK"] = -1;
+    jumlahTiapJenis["DCK"] = -1;
 
     // Kode Produk
-    listBarang["TAW"] = 0;
-    listBarang["SAW"] = 0;
-    listBarang["ALW"] = 0;
-    listBarang["IRW"] = 0;
-    listBarang["APP"] = 0;
-    listBarang["ORP"] = 0;
-    listBarang["BNP"] = 0;
-    listBarang["GAP"] = 0;
-    listBarang["COM"] = 0;
-    listBarang["SHM"] = 0;
-    listBarang["HRM"] = 0;
-    listBarang["RBM"] = 0;
-    listBarang["SNM"] = 0;
-    listBarang["CHM"] = 0;
-    listBarang["DCM"] = 0;
-    listBarang["CHE"] = 0;
-    listBarang["DCE"] = 0;
+    jumlahTiapJenis["TAW"] = 0;
+    jumlahTiapJenis["SAW"] = 0;
+    jumlahTiapJenis["ALW"] = 0;
+    jumlahTiapJenis["IRW"] = 0;
+    jumlahTiapJenis["APP"] = 0;
+    jumlahTiapJenis["ORP"] = 0;
+    jumlahTiapJenis["BNP"] = 0;
+    jumlahTiapJenis["GAP"] = 0;
+    jumlahTiapJenis["COM"] = 0;
+    jumlahTiapJenis["SHM"] = 0;
+    jumlahTiapJenis["HRM"] = 0;
+    jumlahTiapJenis["RBM"] = 0;
+    jumlahTiapJenis["SNM"] = 0;
+    jumlahTiapJenis["CHM"] = 0;
+    jumlahTiapJenis["DCM"] = 0;
+    jumlahTiapJenis["CHE"] = 0;
+    jumlahTiapJenis["DCE"] = 0;
 
     // Kode Bangunan
-    listBarang["SMH"] = 0;
-    listBarang["MDH"] = 0;
-    listBarang["LRH"] = 0;
-    listBarang["HTL"] = 0;  
+    jumlahTiapJenis["SMH"] = 0;
+    jumlahTiapJenis["MDH"] = 0;
+    jumlahTiapJenis["LRH"] = 0;
+    jumlahTiapJenis["HTL"] = 0;  
+}
+
+Toko::Toko(vector<Tanaman*> list_jenis_tanaman, vector<Hewan*> list_jenis_hewan, vector<Produk*> list_jenis_produk){
+    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    {
+        jenisBarang.push_back(list_jenis_tanaman[i]);
+        jumlahTiapJenis[jenisBarang[i]->getKode()] = -1;
+    }
+    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    {
+        jenisBarang.push_back(list_jenis_hewan[i]);
+        jumlahTiapJenis[list_jenis_hewan[i]->getKode()] = -1;
+    }
+    for (int i = 0; i < list_jenis_produk.size(); i++)
+    {
+        jumlahTiapJenis[list_jenis_produk[i]->getKode()] = 0;
+    }
+    // untuk bangunan
+    // for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    // {
+    //     jumlahTiapJenis[list_jenis_bangunan[i]->getKode()] = 0;
+    // }
+    
 }
 
 Toko::~Toko()
 {
+    jenisBarang.clear();
+    jumlahTiapJenis.clear();
 }
 
 Item* Toko::jual(int no, int kuantitas){
@@ -108,11 +133,11 @@ Item* Toko::jual(int no, int kuantitas){
     }
 
     string barang = jenisBarang[no-1]->getKode();
-    if (listBarang[barang] != -1)
+    if (jumlahTiapJenis[barang] != -1)
     {
-        if (listBarang[barang]-kuantitas >= 0)
+        if (jumlahTiapJenis[barang]-kuantitas >= 0)
         {
-            listBarang[barang] = listBarang[barang] - kuantitas;    
+            jumlahTiapJenis[barang] = jumlahTiapJenis[barang] - kuantitas;    
         } else
         {
             throw StokTidakTersediaException();
@@ -120,7 +145,7 @@ Item* Toko::jual(int no, int kuantitas){
     }
 
     Item* jualan = jenisBarang[no-1];
-    if (listBarang[barang] == 0)
+    if (jumlahTiapJenis[barang] == 0)
     {
         jenisBarang.erase(jenisBarang.begin()+no-1);
     }
@@ -128,13 +153,13 @@ Item* Toko::jual(int no, int kuantitas){
 }
 
 void Toko::beli(Item* barang){
-    if (listBarang[barang->getKode()] == 0)
+    if (jumlahTiapJenis[barang->getKode()] == 0)
     {
         jenisBarang.push_back(barang);
     }    
-    if (listBarang[barang->getKode()] != -1)
+    if (jumlahTiapJenis[barang->getKode()] != -1)
     {
-        listBarang[barang->getKode()] += 1;
+        jumlahTiapJenis[barang->getKode()] += 1;
     }    
 }
 
@@ -142,18 +167,38 @@ void Toko::cetakListBarang(){
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     for (int i = 0; i < jenisBarang.size(); i++)
     {   
-        if (listBarang[jenisBarang[i]->getKode()] == -1)
+        if (jumlahTiapJenis[jenisBarang[i]->getKode()] == -1)
         {
             cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
         } else 
         {
-            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << listBarang[jenisBarang[i]->getKode()] << ")" <<endl;
+            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" <<endl;
         }
     }  
 }
 
 // int main(){
-//     Toko a;
+//     // dummy vector, tapi tipe dan nama tanaman kebalik karena kuikutin konfig bukan file tanaman.cpp
+//     vector<Tanaman*> t;
+//     t.push_back(new Tanaman(1, "TEK", "TEAK_TREE", "MATERIAL_PLANT", 15, 5));
+//     t.push_back(new Tanaman(2, "SDT", "SANDALWOOD_TREE", "MATERIAL_PLANT", 10, 4));
+//     t.push_back(new Tanaman(3, "ALT", "ALOE_TREE", "MATERIAL_PLANT", 9, 6));
+//     t.push_back(new Tanaman(4, "IRN", "IRONWOOD_TREE", "MATERIAL_PLANT", 11, 5));
+//     t.push_back(new Tanaman(5, "APL", "APPLE_TREE", "FRUIT_PLANT", 13, 4));
+//     t.push_back(new Tanaman(6, "ORG", "ORANGE_TREE", "FRUIT_PLANT", 12, 4));
+//     t.push_back(new Tanaman(7, "BNT", "BANANA_TREE", "FRUIT_PLANT", 16, 3));
+//     t.push_back(new Tanaman(8, "GAV", "GUAVA_TREE", "FRUIT_PLANT", 14, 3));
+    
+//     vector<Hewan*> h;
+//     h.push_back(new Herbivore(1, "COW", "COW", 20, 6));
+//     h.push_back(new Herbivore(2, "SHP", "SHEEP", 15, 5));
+//     h.push_back(new Herbivore(3, "HRS", "HORSE", 18, 5));
+//     h.push_back(new Herbivore(4, "RBT", "RABBIT", 10, 4));
+//     h.push_back(new Carnivore(5, "SNK", "SNAKE", 13, 4));
+//     h.push_back(new Omnivore(6, "CHK", "CHICKEN", 12, 3));
+//     h.push_back(new Omnivore(7, "DCK", "DUCK", 11, 3));
+//     vector<Produk*> p;
+//     Toko a(t,h,p);
 //     Item* barang = new Produk(1, "TAW", "TEAK_WOOD", "PRODUCT_MATERIAL_PLANT", "TEAK_TREE", 0, 9);
 //     a.beli(barang);
 //     a.beli(barang);
@@ -161,6 +206,6 @@ void Toko::cetakListBarang(){
 //     a.beli(barang);
 //     a.beli(barang);
 //     a.cetakListBarang();
-//     a.jual(1,3);
+//     a.jual(16,5);
 //     a.cetakListBarang();
 // }
