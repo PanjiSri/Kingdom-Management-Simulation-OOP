@@ -147,6 +147,7 @@ void Grandmaster::loadConfigRecipe(){
             ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
 
             list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial2, 0, 0));
+            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial2, 0, 0));
         }
 
         else if(i == 1){
@@ -163,7 +164,7 @@ void Grandmaster::loadConfigRecipe(){
             ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
 
             list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, 0, 0, crial1, crial2));
-        
+            list_item.push_back(new Bangunan(id, kode_huruf, name, price, 0, 0, crial1, crial2));
         }
 
         else if(i == 2){
@@ -182,6 +183,7 @@ void Grandmaster::loadConfigRecipe(){
             ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3;
 
             list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, 0, crial2, crial3));
+            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, 0, crial2, crial3));
         }
 
         else if(i == 3){
@@ -202,10 +204,10 @@ void Grandmaster::loadConfigRecipe(){
             ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3 >> rial4 >> crial4;
 
             list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial4, crial2, crial3));
+            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial4, crial2, crial3));
         }
     
     }
-
 }
 
 void Grandmaster::loadallconfig()
