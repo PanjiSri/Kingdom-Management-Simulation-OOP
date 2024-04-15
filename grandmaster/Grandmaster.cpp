@@ -116,9 +116,97 @@ void Grandmaster::loadConfigMisc()
     }
 }
 
-// void Grandmaster::loadConfigRecipe(){
+void Grandmaster::loadConfigRecipe(){
 
-// }
+    ifstream file(config_recipe);
+
+    if (!file.is_open())
+    {
+        throw FilePathTidakValid();
+    }
+
+    string line;
+
+    for(int i = 0; i < 4; i++){
+
+        getline(file, line);
+
+        stringstream ss(line);
+
+        if(i == 0){ 
+
+            int id;
+            string kode_huruf;
+            string name;
+            int price;
+            string rial1;
+            int crial1;
+            string rial2;
+            int crial2;
+
+            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
+
+            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial2, 0, 0));
+        }
+
+        else if(i == 1){
+
+            int id;
+            string kode_huruf;
+            string name;
+            int price;
+            string rial1;
+            int crial1;
+            string rial2;
+            int crial2;
+
+            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
+
+            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, 0, 0, crial1, crial2));
+        
+        }
+
+        else if(i == 2){
+
+            int id;
+            string kode_huruf;
+            string name;
+            int price;
+            string rial1;
+            int crial1;
+            string rial2;
+            int crial2;
+            string rial3;
+            int crial3;
+
+            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3;
+
+            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, 0, crial2, crial3));
+        }
+
+        else if(i == 3){
+
+            int id;
+            string kode_huruf;
+            string name;
+            int price;
+            string rial1;
+            int crial1;
+            string rial2;
+            int crial2;
+            string rial3;
+            int crial3;
+            string rial4;
+            int crial4;
+
+            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3 >> rial4 >> crial4;
+
+            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial4, crial2, crial3));
+        }
+    
+    }
+
+}
 
 void Grandmaster::loadallconfig()
 {
