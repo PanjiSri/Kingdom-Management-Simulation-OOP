@@ -117,6 +117,12 @@ public:
     }
 };
 
+class WalikotaTidakBisaBeliBangunanException : public exception {
+public:
+    const char *what() const throw(){
+        return "Anda tidak bisa membeli bangunan";
+    }
+};
 
 
 #endif
