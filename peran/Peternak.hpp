@@ -43,10 +43,10 @@ class Peternak : public Peran {
         void menjual(Toko* toko);
         void membeli(Toko* toko);
 
-        virtual void simpan(vector<Peran *> list_pemain) = 0;
-        virtual int getRowLahan() = 0;
-        virtual int getKolLahan() = 0;
-        virtual int getBanyakItemLahan() = 0;
+        void simpan(vector<Peran *> list_pemain);
+        int getRowLahan();
+        int getKolLahan();
+        int getBanyakItemLahan();
 };
 
 #endif

@@ -46,6 +46,7 @@ public:
     int getGulden();
     int getBerat();
     vector<string> getSemuaItem();
+    MatriksPenyimpanan<Item *> getPenyimpanan();
     virtual int getKekayaan() = 0;
     virtual string getType() = 0;
 
