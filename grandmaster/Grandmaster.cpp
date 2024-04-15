@@ -1,5 +1,8 @@
 #include "Grandmaster.hpp"
-
+/*
+PS D:\A Perkuliahan ITB\Mata Kuliah\Semester 4\OOP\tubes_1\Tubes-1-OOP-SCP> g++ -o testing grandTesting.cpp toko/Toko.cpp peran/peran.cpp peran/Petani.cpp peran/Peternak.cpp peran/Walikota.cpp Pcolor/pcolor.c Item/item.cpp Item/Bangunan/Bangunan.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Herbivore.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Hewan.cpp Item/Produk/Produk.cpp Item/Tanaman/Tanaman.cpp input/input.cpp grandmaster/Grandmaster.cpp
+PS D:\A Perkuliahan ITB\Mata Kuliah\Semester 4\OOP\tubes_1\Tubes-1-OOP-SCP> ./testing   
+*/
 Grandmaster::Grandmaster()
 {
     config_hewan = "folder/animal.txt";
@@ -421,7 +424,6 @@ void Grandmaster::muatState(string data_path)
                 list_pemain[index_pemain_untuk_tambah_item]->beternakBertaniFile(lokasi, nama, umur, list_item);
                 // list_pemain[index_pemain_untuk_tambah_item]->cetakLahan();
             }
-
             if (i == 2)
             {
 
@@ -525,8 +527,8 @@ void Grandmaster::operasi_perintah(string command)
         cout << "Pajak sudah dipungut!" << endl;
         cout << "Berikut adalah detil dari pemungutan pajak:" << endl;
 
-        vector<int> urutan_berdasar_gulden;
-        int n = list_pemain.size();
+        // vector<int> urutan_berdasar_gulden;
+        
         
     }
 }
@@ -580,10 +582,15 @@ int Grandmaster::getIndexGiliran() const
 
 void Grandmaster::getAllPemainInfo()
 {
+    printAllPemain();
+    cout << "=========INFORMASI PEMAIN PETERNAK=========" << endl;
+    list_pemain[1]->cetakLahan();
+    cout << "=========INFORMASI PEMAIN PETANI=========" << endl;
+    list_pemain[2]->cetakLahan();
+    return;
 
     for (int i = 0; i < list_pemain.size(); i++)
     {
-        cout << "=========INFORMASI PEMAIN=========" << endl;
         cout << "Nama: " << list_pemain[i]->getUname() << endl;
         cout << "Berat: " << list_pemain[i]->getBerat() << endl;
         cout << "Gulden: " << list_pemain[i]->getGulden() << endl;
