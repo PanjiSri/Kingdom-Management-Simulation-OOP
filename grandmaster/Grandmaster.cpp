@@ -215,7 +215,7 @@ void Grandmaster::loadallconfig()
     loadConfigHewanTanaman();
     loadConfigProduk();
     loadConfigMisc();
-    toko = new Toko(list_tanaman, list_hewan, list_produk);
+    toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "aman" << endl;
 }
 
@@ -663,6 +663,7 @@ void Grandmaster::operasi_perintah(string command)
 
         list_pemain[idx_giliran_pemain]->membeli(toko);
     }else if(command == "JUAL"){
+
         list_pemain[idx_giliran_pemain]->menjual(toko);
     }
     else
