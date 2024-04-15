@@ -43,6 +43,15 @@ class Walikota : public Peran {
         // void bangun();
         void menjual(Toko* toko);
         void membeli(Toko* toko);
+
+        
+        void simpan(vector<Peran*> list_pemain);
+
+        int getRowLahan();
+
+        int getKolLahan();
+
+        int getBanyakItemLahan();
 };
 
 #endif

@@ -545,12 +545,20 @@ void Grandmaster::operasi_perintah(string command)
     {
         list_pemain[idx_giliran_pemain]->playerMakan();
     }
-    else if (command == "KASIH_MAKAN"){
+    else if (command == "KASIH_MAKAN")
+    {
         list_pemain[idx_giliran_pemain]->beriMakan();
     }
-    else if(command == "PANEN"){
+    else if (command == "PANEN")
+    {
         list_pemain[idx_giliran_pemain]->panen(list_produk);
-    }else{
+    }
+    else if (command == "SIMPAN")
+    {
+        list_pemain[idx_giliran_pemain]->simpan(list_pemain);
+    }
+    else
+    {
         throw CommandTidakValidException();
     }
 }

@@ -1,0 +1,10 @@
+3
+Bondowoso Walikota 70 495
+2
+SANDALWOOD_WOOD
+BANANA
+Budi Peternak 20 61
+3
+COW
+COW_MEAT
+COW

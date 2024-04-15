@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <iostream>
 #include <iomanip> // For std::setw
+#include <fstream>
+#include <sys/stat.h>
+
 
 #include "MatriksPenyimpanan.hpp"
 #include "../Item/Item.hpp"
@@ -22,6 +25,7 @@
 #include "../exception/header/exception.hpp"
 
 using namespace std;
+// namespace fs = std::filesystem;
 
 class Peran
 {
@@ -37,13 +41,14 @@ public:
     Peran(string username, int row_inv, int col_inv);
     Peran(string username, int berat, int gulden, int row_inv, int col_inv);
     ~Peran();
-    Peran &operator= (const Peran &other);
+    Peran &operator=(const Peran &other);
 
     // Getter
     string getUname();
     int getGulden();
     int getBerat();
     vector<string> getSemuaItem();
+    MatriksPenyimpanan<Item *> getPenyimpanan();
     virtual int getKekayaan() = 0;
     virtual string getType() = 0;
 
@@ -53,27 +58,34 @@ public:
 
     // Other Method
     vector<int> parse(string);
-    void centerAlign(const string& text, int width);
+    void centerAlign(const string &text, int width);
     void printPenyimpanan();
-    void addPenyimpananInFirstEmpty(Item*);
-    void addPenyimpananSpesifikLocation(Item*);
-    void addPenyimpananFile(string, vector<Item*>);
+    void addPenyimpananInFirstEmpty(Item *);
+    void addPenyimpananSpesifikLocation(Item *);
+    void addPenyimpananFile(string, vector<Item *>);
     void playerMakan();
 
+    virtual void simpan(vector<Peran *> list_pemain) = 0;
 
     virtual void beternakBertani() = 0;
-    virtual void beternakBertaniFile(string, string, int, vector<Item*>) = 0;
-    virtual void panen(vector<Produk*>) = 0;
+    virtual void beternakBertaniFile(string, string, int, vector<Item *>) = 0;
+    virtual void panen(vector<Produk *>) = 0;
     virtual void cetakLahan() = 0;
     virtual void beriMakan() = 0;
     virtual void addUmurTanaman() = 0;
-    virtual void ambilPajak(vector<Peran*>) = 0;
-    virtual void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
+    virtual void ambilPajak(vector<Peran *>) = 0;
+    virtual void buatUser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
     virtual int calculateTax() = 0;
     // virtual void bangun() = 0;
     virtual vector<vector<string>> getDataLahan() = 0;
-    virtual void menjual(Toko* toko) = 0;
-    virtual void membeli(Toko* toko) = 0;
+    virtual void menjual(Toko *toko) = 0;
+    virtual void membeli(Toko *toko) = 0;
+
+
+    virtual int getRowLahan() = 0;
+    virtual int getKolLahan() = 0;
+    virtual int getBanyakItemLahan() = 0;
+
 };
 
 #endif

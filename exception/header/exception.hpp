@@ -103,26 +103,38 @@ public:
     }
 };
 
-class CommandTidakValidException : public exception{
+class CommandTidakValidException : public exception
+{
 public:
-    const char *what() const throw(){
+    const char *what() const throw()
+    {
         return "Command tidak valid";
     }
 };
 
-class PetaniPeternakTidakBisaJualBangunanException : public exception {
+class PetaniPeternakTidakBisaJualBangunanException : public exception
+{
 public:
-    const char *what() const throw(){
+    const char *what() const throw()
+    {
         return "Anda tidak bisa menjual bangunan";
     }
 };
 
-class WalikotaTidakBisaBeliBangunanException : public exception {
+class WalikotaTidakBisaBeliBangunanException : public exception
+{
 public:
-    const char *what() const throw(){
+    const char *what() const throw()
+    {
         return "Anda tidak bisa membeli bangunan";
     }
 };
 
+class FolderTidakAdaException : public exception {
+    const char *what() const throw()
+    {
+        return "Lokasi berkas tidak valid";
+    }
+};
 
 #endif
