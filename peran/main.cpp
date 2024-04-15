@@ -20,7 +20,7 @@ using namespace std;
 
 // compile
 // g++ -o main main.cpp peran.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
-// g++ -o a peran/main.cpp peran/Peternak.cpp peran/Petani.cpp peran/Walikota.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
+// g++ -o a peran/main.cpp Item/Bangunan/Bangunan.cpp peran/Peternak.cpp peran/Petani.cpp peran/Walikota.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
 
 int main() {
     static int nhewan = 0;
@@ -171,11 +171,19 @@ int main() {
     Peran* a = new Peternak("haikal", 100, 100, 8, 8, 8, 8);
     listpemain.push_back(a);  
     Item* com = new Produk(1, "COM", "COW_MEAT", "PRODUCT_ANIMAL", "COW", 7, 10);
+    Item* SAW = new Produk(2, "SAW", "SANDALWOOD_WOOD", "PRODUCT_MATERIAL_PLANT", "SANDALWOOD_TREE", 0, 8);
+    Item* BNP = new Produk(7, "BNP", "BANANA", "PRODUCT_FRUIT_PLANT", "BANANA_TREE", 3, 7);
+
     a->addPenyimpananSpesifikLocation(com);
     a->addPenyimpananSpesifikLocation(com);
+    a->addPenyimpananSpesifikLocation(SAW);
+    a->addPenyimpananSpesifikLocation(BNP);
     Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
+    
     a->addPenyimpananSpesifikLocation(snake);
     a->beternakBertani();
+    a->beriMakan();
+    a->beriMakan();
     a->beriMakan();
     a->beriMakan();
     a->panen(listproduct);

@@ -19,6 +19,7 @@
 #include "../Item/Bangunan/Bangunan.hpp"
 #include "../toko/Toko.hpp"
 #include "../Pcolor/pcolor.h"
+#include "../exception/header/exception.hpp"
 
 using namespace std;
 

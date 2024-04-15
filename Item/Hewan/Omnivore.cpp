@@ -23,12 +23,11 @@ vector<string> Omnivore::getProduk() {
     return produk;
 }
 
-bool Omnivore::makan(Produk* produk) {
+void Omnivore::makan(Produk* produk) {
     if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        tambahBerat(produk->getTambahan());
-        return true;
+        cout << endl << "Berat "<< this->nama <<" bertambah sebanyak " << produk->getTambahan() << endl;
     }
 }

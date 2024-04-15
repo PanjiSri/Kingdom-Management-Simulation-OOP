@@ -10,7 +10,7 @@ class FilePathTidakValid : public exception
 public:
     const char *what() const throw()
     {
-        return "Path File Tidak Valid";
+        return "Path File Tidak Valid.";
     }
 };
 
@@ -18,7 +18,7 @@ class ConfigTidakValid : public exception{
 public:
     const char *what() const throw()
     {
-        return "Config Tidak Valid";
+        return "Config Tidak Valid.";
     }
 };
 
@@ -27,7 +27,7 @@ class NamaPemainTidakValidException : public exception
 public:
     const char *what() const throw()
     {
-        return "Nama tidak valid, sudah ada pemain dengan nama yang sama";
+        return "Nama tidak valid, sudah ada pemain dengan nama yang sama.";
     }
 };
 
@@ -36,7 +36,7 @@ class CarnivoraTidakMakanSayurException : public exception
 public:
     const char *what() const throw()
     {
-        return "Carnivore hanya memakan produk hewan";
+        return "Carnivore hanya memakan produk hewan.";
     }
 };
 
@@ -45,7 +45,7 @@ class HerbivoraTidakMakanDagingException : public exception
 public:
     const char *what() const throw()
     {
-        return "Herbivore hanya memakan produk tanaman";
+        return "Herbivore hanya memakan produk tanaman.";
     }
 };
 
@@ -54,7 +54,7 @@ class MaterialPlantTidakDimakanException : public exception
 public:
     const char *what() const throw()
     {
-        return "Produk tanaman material tidak bisa dimakan";
+        return "Produk tanaman material tidak bisa dimakan.";
     }
 };
 
@@ -63,7 +63,7 @@ class StokTidakTersediaException : public exception
 public:
     const char *what() const throw()
     {
-        return "Stok barang tidak mencukupi";
+        return "Stok barang tidak mencukupi.";
     }
 };
 
@@ -72,9 +72,17 @@ class NoBarangTidakValidException : public exception
 public:
     const char *what() const throw()
     {
-        return "No barang tidak valid";
+        return "No barang tidak valid.";
     }
 };
 
+class LokasiTidakValidException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Lokasi tidak valid.";
+    }
+};
 
 #endif

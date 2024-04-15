@@ -41,7 +41,14 @@ void Petani::beternakBertani() {
 
         cout << "Slot: ";
         cin >> indeksInvent;
-        vector<int> lokasiInvent = parse(indeksInvent);
+        vector<int> lokasiInvent;
+        try {
+            lokasiInvent = parse(indeksInvent);
+        } catch (LokasiTidakValidException e) {
+            cout << e.what() << endl << endl;
+            return;
+        }
+
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
         
         if (tipe == "MATERIAL_PLANT" || tipe == "FRUIT_PLANT") {
@@ -54,7 +61,13 @@ void Petani::beternakBertani() {
             string idx;
             cout << "Masukkan lokasi yang diinginkan: ";
             cin >> idx;
-            vector<int> lokasi = parse(idx);
+            vector<int> lokasi;
+            try {
+                lokasi = parse(idx);
+            } catch (LokasiTidakValidException e) {
+                cout << e.what() << endl << endl;
+                return;
+            }
 
             lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
             penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
@@ -76,7 +89,14 @@ void Petani::beternakBertaniFile(string location, string name, int umur, vector<
         }
         plant->setUmur(umur);
     }
-    vector<int> lokasi = parse(location);
+
+    vector<int> lokasi;
+    try {
+        lokasi = parse(location);
+    } catch (LokasiTidakValidException e) {
+        cout << e.what() << endl << endl;
+        return;
+    }
     lahanPertanian.setElement(lokasi[1], lokasi[0], plant);
 }
 
@@ -100,7 +120,7 @@ void Petani::panen(vector<Produk*> listProduk) {
         jumlahTanamanMatang.push_back(i->second);
     }
     // Menampilkan tanaman yang siap panen
-    cout << endl << "Daftar tanaman yang siap panen: " << endl;
+    cout << "Daftar tanaman yang siap panen: " << endl;
     for (int i = 0; i < listTanamanMatang.size(); i++) {
         cout << i+1 << ") " << listTanamanMatang[i] << " (" << jumlahTanamanMatang[i] << " buah)" << endl;
     }
@@ -136,7 +156,13 @@ void Petani::panen(vector<Produk*> listProduk) {
                         string kode;
                         cout << "Pilih petak ke-" << x + 1 << " : ";
                         cin >> kode;
-                        vector<int> index = parse(kode);
+                        vector<int> index;
+                        try {
+                            index = parse(kode);
+                        } catch (LokasiTidakValidException e) {
+                            cout << e.what() << endl << endl;
+                            continue;
+                        }
 
                         Tanaman* tanaman;
                         // cek apakah masukan benar

@@ -21,7 +21,7 @@ class Carnivore : public Hewan
         vector<string> getProduk();
 
         // Other Method
-        bool makan(Produk* produk);
+        void makan(Produk* produk);
 };
 
 #endif
