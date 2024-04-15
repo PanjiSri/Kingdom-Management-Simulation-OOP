@@ -116,98 +116,40 @@ void Grandmaster::loadConfigMisc()
     }
 }
 
-void Grandmaster::loadConfigRecipe(){
-
+void Grandmaster::loadConfigRecipe() // belum selesai
+{
     ifstream file(config_recipe);
-
     if (!file.is_open())
     {
         throw FilePathTidakValid();
     }
 
-    string line;
-
-    for(int i = 0; i < 4; i++){
-
-        getline(file, line);
-
-        stringstream ss(line);
-
-        if(i == 0){ 
-
-            int id;
-            string kode_huruf;
-            string name;
-            int price;
-            string rial1;
-            int crial1;
-            string rial2;
-            int crial2;
-
-            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
-
-            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial2, 0, 0));
-            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial2, 0, 0));
-        }
-
-        else if(i == 1){
-
-            int id;
-            string kode_huruf;
-            string name;
-            int price;
-            string rial1;
-            int crial1;
-            string rial2;
-            int crial2;
-
-            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2;
-
-            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, 0, 0, crial1, crial2));
-            list_item.push_back(new Bangunan(id, kode_huruf, name, price, 0, 0, crial1, crial2));
-        }
-
-        else if(i == 2){
-
-            int id;
-            string kode_huruf;
-            string name;
-            int price;
-            string rial1;
-            int crial1;
-            string rial2;
-            int crial2;
-            string rial3;
-            int crial3;
-
-            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3;
-
-            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, 0, crial2, crial3));
-            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, 0, crial2, crial3));
-        }
-
-        else if(i == 3){
-
-            int id;
-            string kode_huruf;
-            string name;
-            int price;
-            string rial1;
-            int crial1;
-            string rial2;
-            int crial2;
-            string rial3;
-            int crial3;
-            string rial4;
-            int crial4;
-
-            ss >> id >> kode_huruf >> name >> price >> rial1 >> crial1 >> rial2 >> crial2 >> rial3 >> crial3 >> rial4 >> crial4;
-
-            list_bangunan.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial4, crial2, crial3));
-            list_item.push_back(new Bangunan(id, kode_huruf, name, price, crial1, crial4, crial2, crial3));
-        }
+    string kode_huruf, nama, nama_material;
+    int id, jumlah_material, harga;
     
+    string line;
+    while (getline(file, line))
+    {
+        map<string, int> material;
+        stringstream ss(line);
+        ss >> id >> kode_huruf >> nama >> harga;
+        while (ss >> nama_material >> jumlah_material)
+        {
+            if (material.size() == 0) {
+                material.insert({nama_material, jumlah_material});
+            }
+            else {
+                if (material.count(nama_material)) {
+                    material[nama_material] = jumlah_material;
+                }
+                else {
+                    material.insert({nama_material, jumlah_material});
+                }
+            }
+        }
+        list_jenis_bangunan.push_back(Konfigurasi_Recipe(id, kode_huruf, nama, harga, material));
     }
+    file.close();
 }
 
 void Grandmaster::loadallconfig()
@@ -215,6 +157,7 @@ void Grandmaster::loadallconfig()
     loadConfigHewanTanaman();
     loadConfigProduk();
     loadConfigMisc();
+    loadConfigRecipe();
     toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "aman" << endl;
 }
@@ -286,12 +229,27 @@ void Grandmaster::inisiatorProduk()
     }
 }
 
+void Grandmaster::inisiatorBangunan() {
+    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    {
+        int id = list_jenis_bangunan[i].getId();
+        string kode = list_jenis_bangunan[i].getKode();
+        string nama = list_jenis_bangunan[i].getName();
+        int harga = list_jenis_bangunan[i].getHarga();
+        map<string, int> bahan_baku = list_jenis_bangunan[i].getBahanBaku();
+
+        list_bangunan.push_back(new Bangunan(id, kode, nama, harga, bahan_baku));
+        list_item.push_back(new Bangunan(id, kode, nama, harga, bahan_baku));
+    }
+}
+
 void Grandmaster::mulaiTanpaBerkas()
 {
     loadallconfig();
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
+    inisiatorBangunan();
 
     // masih prototype
     // Membuat list pemain sesuai dengan informasi yang diberikan
@@ -315,6 +273,7 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
+    inisiatorBangunan();
 
     cout << "banyak_pemain awal " << banyak_pemain << endl;
     muatState(data_path);

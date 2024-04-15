@@ -137,14 +137,14 @@ class FolderTidakAdaException : public exception {
     }
 };
 
-class BangunTidakAdaResepBangunan : public exception {
+class BangunTidakAdaResepBangunanException : public exception {
     const char *what() const throw()
     {
         return "Kamu tidak punya resep bangunan tersebut!";
     }
 };
 
-class BangunSumberDayaTidakCukup : public exception {
+class BangunSumberDayaTidakCukupException : public exception {
     const char *what() const throw()
     {
         return "Kamu tidak punya sumber daya yang cukup!";

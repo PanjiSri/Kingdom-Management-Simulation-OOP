@@ -2,6 +2,8 @@
 #define BANGUNAN_HPP
 
 #include <string>
+#include <map>
+#include <iostream>
 #include "../Item.hpp"
 using namespace std;
 
@@ -15,14 +17,7 @@ class Bangunan : public Item {
     public:
         // Constructor & Destructor
         Bangunan();
-        Bangunan(int id, 
-                 string kode, 
-                 string nama, 
-                 int harga, 
-                 int teak_wood_cost, 
-                 int sandalwood_wood_cost, 
-                 int aloe_wood_cost, 
-                 int ironwood_wood_cost);
+        Bangunan(int id, string kode, string nama, int harga, map<string, int> bahanBaku);
         Bangunan(const Bangunan& other);
         ~Bangunan();
         
@@ -34,6 +29,7 @@ class Bangunan : public Item {
 
         string getTipe();
         int getTambahan();
+        void printDetail();
 };
 
 #endif

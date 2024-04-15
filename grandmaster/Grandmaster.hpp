@@ -82,6 +82,9 @@ public:
     //inisiasi produk
     void inisiatorProduk();
 
+    //inisiasi bangunan
+    void inisiatorBangunan();
+
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
 
