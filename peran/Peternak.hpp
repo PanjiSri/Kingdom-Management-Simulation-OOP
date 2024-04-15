@@ -36,19 +36,16 @@ class Peternak : public Peran {
         void beriMakan();
         void addUmurTanaman();
         void ambilPajak(vector<Peran*>);
-        Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak)
+        Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak);
         vector<vector<string>> getDataLahan();
         int calculateTax();
         void bangun();
         void menjual(Toko* toko);
         void membeli(Toko* toko);
 
-        void simpan(vector<Peran*> list_pemain);
-
+        void simpan(vector<Peran *> list_pemain);
         int getRowLahan();
-
         int getKolLahan();
-
         int getBanyakItemLahan();
 };
 

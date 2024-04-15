@@ -340,7 +340,6 @@ void Petani::menjual(Toko* toko) {
     cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
 }
 
-
 void Petani::simpan(vector<Peran*> list_pemain){
     string file_path;
     cout << "Masukkan lokasi berkas state : ";
