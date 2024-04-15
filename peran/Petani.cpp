@@ -339,3 +339,95 @@ void Petani::menjual(Toko* toko) {
     }
     cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
 }
+
+void Petani::simpan(vector<Peran*> list_pemain){
+    string file_path;
+    cout << "Masukkan lokasi berkas state : ";
+    cin >> file_path;
+    size_t pos = file_path.find_last_of("/");
+    string namaFolder = file_path.substr(0, pos);
+
+    struct stat info;
+    if (stat(namaFolder.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR))
+    {
+        throw FolderTidakAdaException();
+    }
+
+    ofstream outfile(file_path);
+
+    if (!outfile.is_open())
+    {
+        throw FilePathTidakValid();
+    }
+
+    int banyak_pemain = list_pemain.size();
+
+    outfile << banyak_pemain << endl;
+
+    for (int i = 0; i < banyak_pemain; i++)
+    {
+        outfile << list_pemain[i]->getUname() << " " << list_pemain[i]->getType() << " " << to_string(list_pemain[i]->getBerat()) << " " << to_string(list_pemain[i]->getGulden()) << endl;
+
+        int banyak_di_penyimpanan = (list_pemain[i]->getPenyimpanan().getBaris() * list_pemain[i]->getPenyimpanan().getKolom()) - list_pemain[i]->getPenyimpanan().getLahanKosong();
+
+        outfile << banyak_di_penyimpanan << endl;
+
+        for (int j = 0; j < list_pemain[i]->getPenyimpanan().getBaris(); j++)
+        {
+            for (int k = 0; k < list_pemain[i]->getPenyimpanan().getKolom(); k++)
+            {
+                if (list_pemain[i]->getPenyimpanan()[j][k] != NULL)
+                {
+                    outfile << list_pemain[i]->getPenyimpanan()[j][k]->getNama() << endl;
+                }
+            }
+        }
+
+        if (list_pemain[i]->getType() == "Peternak")
+        {
+            int banyak_ternak = list_pemain[i]->getBanyakItemLahan();
+
+            outfile << banyak_ternak << endl;
+
+            vector<vector<string>> temp = list_pemain[i]->getDataLahan();
+            for (int m = 0; m < temp.size(); m++){
+                outfile << temp[m][0] << " " << temp[m][1] << " " << temp[m][2] << endl;
+            }
+        }
+
+        if (list_pemain[i]->getType() == "Petani"){
+            int banyak_tandur = list_pemain[i]->getBanyakItemLahan();
+
+            outfile << banyak_tandur << endl;
+
+            vector<vector<string>> temp = list_pemain[i]->getDataLahan();
+            for (int n = 0; n < temp.size(); n++){
+                outfile << temp[n][0] << " " << temp[n][1] << " " << temp[n][2] << endl;
+            }
+        }
+    }
+    outfile.close();
+}
+
+int Petani::getRowLahan(){
+    return lahanPertanian.getBaris();
+}
+
+int Petani::getKolLahan(){
+    return lahanPertanian.getKolom();
+}
+
+int Petani::getBanyakItemLahan(){
+    int sum = 0;
+    for (int i = 0; i < getRowLahan(); i++)
+    {
+        for (int j = 0; j < getKolLahan(); j++)
+        {
+            if (lahanPertanian[i][j] != NULL)
+            {
+                sum++;
+            }
+        }
+    }
+    return sum;
+}

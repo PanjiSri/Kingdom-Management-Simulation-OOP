@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <iomanip> // For std::setw
+#include <fstream>
+#include <sys/stat.h>
 
 #include "MatriksPenyimpanan.hpp"
 #include "../Item/Item.hpp"
@@ -73,6 +75,11 @@ public:
     virtual vector<vector<string>> getDataLahan() = 0;
     virtual void menjual(Toko* toko) = 0;
     virtual void membeli(Toko* toko) = 0;
+
+    virtual void simpan(vector<Peran *> list_pemain) = 0;
+    virtual int getRowLahan() = 0;
+    virtual int getKolLahan() = 0;
+    virtual int getBanyakItemLahan() = 0;
 };
 
 #endif

@@ -124,5 +124,12 @@ public:
     }
 };
 
+class FolderTidakAdaException : public exception {
+    const char *what() const throw()
+    {
+        return "Lokasi berkas tidak valid";
+    }
+};
+
 
 #endif

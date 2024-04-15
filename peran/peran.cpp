@@ -167,3 +167,8 @@ void Peran::playerMakan() {
         }
     }
 }
+
+MatriksPenyimpanan<Item *> Peran::getPenyimpanan()
+{
+    return this->penyimpanan;
+}
