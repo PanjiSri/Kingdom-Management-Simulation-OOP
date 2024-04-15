@@ -38,8 +38,7 @@ class Petani : public Peran {
         void ambilPajak(vector<Peran*>);
         void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         int calculateTax();
-        // void bangun();
-        // void bangunBangunan(vector<Bangunan*>);
+        void bangun();
         // void menjual(Toko* toko);
         // void membeli(Toko* toko);
 };

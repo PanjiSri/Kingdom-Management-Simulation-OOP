@@ -23,8 +23,6 @@ public:
     string getTipe();
     string getAsal();
     int getTambahan();
-    // map<string, int> getMaterial();
-
 };
 
 #endif

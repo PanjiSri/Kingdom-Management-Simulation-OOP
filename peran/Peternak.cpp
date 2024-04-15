@@ -249,3 +249,7 @@ int Peternak::calculateTax() {
 
     return pajak;
 }
+
+void Peternak::bangun() {
+    cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+}

@@ -214,3 +214,7 @@ int Petani::calculateTax() {
 
     return pajak;
 }
+
+void Petani::bangun() {
+    cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+}
