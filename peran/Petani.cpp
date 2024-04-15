@@ -252,7 +252,7 @@ void Petani::bangun() {
 
 vector<vector<string>> Petani::getDataLahan()
 {
-    int asciinum;
+    int asciinum = 65;
     vector<string> temp_row;
     vector<vector<string>> temp;
     int num;

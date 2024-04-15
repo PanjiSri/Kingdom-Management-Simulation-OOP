@@ -142,7 +142,7 @@ Peran* Walikota::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, i
 }
 
 // sementara belum
-// void Walikota::bangun() {
+void Walikota::bangun() {}
 //     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
 //     cout << "   1. SMALL_HOUSE (50 gulden, teak wood 1, sandal wood 1)" << endl;
 //     cout << "   2. MEDIUM_HOUSE (70 gulden, aloe wood 1, ironwood wood 1)" << endl;

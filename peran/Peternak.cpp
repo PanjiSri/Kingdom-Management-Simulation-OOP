@@ -263,7 +263,7 @@ void Peternak::bangun() {
 }
 
 vector<vector<string>> Peternak::getDataLahan() {
-    int asciinum;
+    int asciinum = 65;
     vector<string> temp_row;
     vector<vector<string>> temp;
     int num;
