@@ -1,4 +1,5 @@
 #include "Peternak.hpp"
+#include <string>
 
 Peternak::Peternak() : Peran() {}
 
