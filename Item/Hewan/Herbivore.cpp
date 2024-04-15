@@ -24,13 +24,13 @@ vector<string> Herbivore::getProduk() {
     return produk;
 }
 
-bool Herbivore::makan(Produk* produk) {
+void Herbivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_ANIMAL") {
-        cout << "Herbivora tidak makan hewan." << endl;
-        return false;
+        throw HerbivoraTidakMakanDagingException();
+    } else if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
+        throw MaterialPlantTidakDimakanException();
     }
     else {
-        tambahBerat(produk->getTambahan());
-        return true;
+        cout << endl << "Berat "<< this->nama <<" bertambah sebanyak " << produk->getTambahan() << endl;
     }
 }

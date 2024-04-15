@@ -65,9 +65,28 @@ void Peran::tambahGulden(int gulden) {
 }
 
 vector<int> Peran::parse(string idx) {
+    if (idx.length() != 3) {
+        throw LokasiTidakValidException();
+    } else {
+        if ((idx[0] < 'A' || idx[0] > 'Z') ||
+            (idx[1] < '0' || idx[1] > '9') ||
+            (idx[2] < '0' || idx[2] > '9')) 
+            {
+            throw LokasiTidakValidException();
+            }
+    }
+
     vector<int> indeks;
-    indeks.push_back(((int)idx[0]) - 65);
-    indeks.push_back((int)(idx[2] - '0') - 1);
+    indeks.push_back(((int)idx[0])-65);         // KOLOM
+    indeks.push_back((int)(idx[1]-'0')*10);     // BARIS
+    indeks[1] += (int)(idx[2]-'0');
+    indeks[1] -= 1;
+
+    if (indeks[0] < 0 || indeks[1] < 0 ||
+        indeks[0] >= penyimpanan.getKolom() || indeks[1] >= penyimpanan.getBaris()) 
+    {
+        throw LokasiTidakValidException();
+    }
     return indeks;
 }
 
@@ -95,7 +114,14 @@ void Peran::addPenyimpananSpesifikLocation(Item* item) {
     cin >> idx;
     cout << endl;
     
-    vector<int> lokasi = parse(idx);
+    vector<int> lokasi;
+    try {
+        lokasi = parse(idx);
+    } catch (LokasiTidakValidException e) {
+        cout << e.what() << endl << endl;
+        return;
+    }
+
     if (lokasi[0] >= penyimpanan.getKolom() || lokasi[1] >= penyimpanan.getBaris()) {
         cout << "Lokasi tidak valid." << endl << endl;
     }
@@ -129,7 +155,14 @@ void Peran::playerMakan() {
         cout << "Ambil makanan dalam inventory mu: ";
         cin >> lokasi;
         cout << endl;
-        vector<int> index = parse(lokasi);
+        vector<int> index;
+        try {
+            index = parse(lokasi);
+        } catch (LokasiTidakValidException e) {
+            cout << e.what() << endl << endl;
+            return;
+        }
+
         x = penyimpanan[index[1]][index[0]];
         
         if (x == NULL) {
