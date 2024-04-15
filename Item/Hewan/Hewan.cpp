@@ -58,5 +58,3 @@ void Hewan::setBerat(int num) {
 bool Hewan::isSiapPanen() {
     return berat_saat_ini >= standar_berat_panen;
 }
-
-// map<string, int> Hewan::getMaterial() {}

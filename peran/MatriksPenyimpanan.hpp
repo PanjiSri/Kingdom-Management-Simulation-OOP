@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <map>
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
@@ -13,7 +14,6 @@
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
 #include "../Pcolor/pcolor.h"
-#include <map>
 using namespace std;
 
 template <class T>
@@ -88,22 +88,26 @@ class MatriksPenyimpanan {
         }
         
         void print() {
-            int asciinum = 65;
+            // print matriks tanpa warna pada kode
+            int ASCII_NUM = 65;
 
+            // print koordinat kolom
             cout << "       ";
             for(int i = 0; i < kolom; i++) {
-                cout << "  " << (char)(asciinum+i) << "   ";
+                cout << "  " << (char)(ASCII_NUM+i) << "   ";
             }
             cout << endl;
             
             printKolomBorder();
             for (int i = 0; i < baris; i++) {
+                // print koordinat baris
                 if (i < 9) {
                     cout << "  0" << i+1 << "  |"; 
                 } else {
                     cout << "  " << i+1 << "  |";
                 }
 
+                // print isi matriks
                 for (int j = 0; j < kolom; j++) {
                     if (matriks[i][j] == NULL) {
                         cout << "     |";
@@ -117,82 +121,27 @@ class MatriksPenyimpanan {
             }
         }
 
-        map<string, int> listSiapPanen() {
-            map<string, int> siappanen;
-            for(int i = 0; i < baris; i++) {
-                for(int j = 0; j < kolom; j++) {
-                    if(matriks[i][j] != NULL) {
-                        if(matriks[i][j]->isSiapPanen() == true) {
-                            if(siappanen.size() == 0) {
-                                siappanen.insert({matriks[i][j]->getNama(), 1});
-                            }
-                            else {
-                                if(siappanen.count(matriks[i][j]->getKode())) {
-                                    siappanen[matriks[i][j]->getNama()] += 1;
-                                }
-                                else {
-                                    siappanen.insert({matriks[i][j]->getNama(), 1});
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            cout << "yuhuu" << endl;
-            return siappanen;
-        }
-
-        bool check_item_building(map<string, int> material) {
-            map<string, int> material_di_invent;
-            material_di_invent.insert({"TAW", 0});
-            material_di_invent.insert({"SAW", 0});
-            material_di_invent.insert({"ALW", 0});
-            material_di_invent.insert({"IRW", 0});
-            for(int i = 0; i < baris; i++) {
-                for(int j = 0; j < kolom; j++) {
-                    if(matriks[i][j] != NULL) {
-                        if(material_di_invent.count(matriks[i][j]->getKode())) {
-                            material_di_invent[matriks[i][j]->getKode()] += 1;
-                        }
-                    }
-                }
-            }
-            map<string, int>::iterator it = material_di_invent.begin();
-            bool kurang = false;
-            while (it != material_di_invent.end()) {
-                if(it->second < material[it->first]) {
-                    cout << "Material " << it->first << " kurang sebanyak " << material[it->first] - it->second << endl;
-                    kurang = true;
-                }
-            }
-            if (kurang == true) {
-                return false;
-            }
-            else {
-                return true;
-            }
-            
-            
-
-        }
-
         void printlahan() {
-            int asciinum = 65;
+            // print matriks dengan warna
+            int ASCII_NUM = 65;
 
+            // print koordinat kolom
             cout << "       ";
             for(int i = 0; i < kolom; i++) {
-                cout << "  " << (char)(asciinum+i) << "   ";
+                cout << "  " << (char)(ASCII_NUM+i) << "   ";
             }
             cout << endl;
             
             printKolomBorder();
             for (int i = 0; i < baris; i++) {
+                // print koordinat baris
                 if (i < 9) {
                     cout << "  0" << i+1 << "  |"; 
                 } else {
                     cout << "  " << i+1 << "  |";
                 }
 
+                // print isi matriks
                 for (int j = 0; j < kolom; j++) {
                     if (matriks[i][j] == NULL) {
                         cout << "     |";
@@ -210,7 +159,7 @@ class MatriksPenyimpanan {
                                 print_red(kata[k]);
                             }
                         }
-                        cout << "  |";
+                        cout << " |";
                     }
                 }
                 cout << endl;
@@ -218,7 +167,67 @@ class MatriksPenyimpanan {
             }
         }
 
+        map<string, int> listSiapPanen() {
+            // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
+            map<string, int> siappanen;
+            for (int i = 0; i < baris; i++) {
+                for (int j = 0; j < kolom; j++) {
+                    if (matriks[i][j] != NULL) {
+                        if (matriks[i][j]->isSiapPanen() == true) {
+                            if (siappanen.size() == 0) {
+                                siappanen.insert({matriks[i][j]->getNama(), 1});
+                            }
+                            else {
+                                if (siappanen.count(matriks[i][j]->getKode())) {
+                                    siappanen[matriks[i][j]->getNama()] += 1;
+                                }
+                                else {
+                                    siappanen.insert({matriks[i][j]->getNama(), 1});
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return siappanen;
+        }
+
+        bool checkItemBuilding(map<string, int> material) {
+        // menentukan apakah jumlah inventory saat ini mencukupi untuk membangun sebuah bangunan
+            map<string, int> material_di_invent;
+            material_di_invent.insert({"TAW", 0});
+            material_di_invent.insert({"SAW", 0});
+            material_di_invent.insert({"ALW", 0});
+            material_di_invent.insert({"IRW", 0});
+
+            for (int i = 0; i < baris; i++) {
+                for (int j = 0; j < kolom; j++) {
+                    if (matriks[i][j] != NULL) {
+                        if (matriks[i][j]->getKode() == ("TAW" || "SAW" || "ALW" || "IRW")){
+                            material_di_invent[matriks[i][j]->getKode()] += 1;
+                        }
+                    }
+                }
+            }
+
+            // cek apakah jumlah inventory mencukupi
+            bool mencukupi = true;
+            bool cetak_kalimat = true;
+            for (auto i = material.begin(); i != material.end(); i++) {
+                if (material_di_invent[i->first] < i->second) {
+                    if (cetak_kalimat) {
+                        cout << "Kamu tidak memiliki cukup material untuk membangun bangunan" << endl;
+                        cetak_kalimat = false;
+                    }
+                    cout << "Material " << i->first << " masih perlu " << i->second - material_di_invent[i->first] << " lagi" << endl;
+                    mencukupi = false;
+                }
+            }
+            return mencukupi;
+        }
+
         int getValue() {
+        // mendapatkan total uang dari seluruh item yang ada di dalam matriks
             int uang = 0;
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {
@@ -231,10 +240,11 @@ class MatriksPenyimpanan {
         }
 
         int getLahanKosong() {
+        // mendapatkan jumlah petak matriks yang kosong
             int empty = 0;
-            for(int i = 0; i < this->getBaris(); i++) {
-                for(int j = 0; j < this->getKolom(); j++) {
-                    if(matriks[i][j] == NULL) {
+            for (int i = 0; i < this->getBaris(); i++) {
+                for (int j = 0; j < this->getKolom(); j++) {
+                    if (matriks[i][j] == NULL) {
                         empty += 1;
                     }
                 }
@@ -243,6 +253,7 @@ class MatriksPenyimpanan {
         }
 
         bool isEmpety() {
+        // cek apakah matriks kosong
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {
                     if (matriks[i][j] != NULL) {
@@ -254,6 +265,7 @@ class MatriksPenyimpanan {
         }
 
         bool isFull() {
+        // cek apakah matriks penuh
             for (int i = 0; i < baris; i++) {
                 for (int j = 0; j < kolom; j++) {
                     if (matriks[i][j] == NULL) {
@@ -262,6 +274,20 @@ class MatriksPenyimpanan {
                 }
             }
             return true;
+        }
+
+        bool isAdaMakanan() {
+        // cek apakah di dalam matriks ada item yang bisa dimakan
+            for (int i = 0; i < baris; i++) {
+                for (int j = 0; j < kolom; j++) {
+                    if (matriks[i][j] != NULL) {
+                        if (matriks[i][j]->getTipe() == "PRODUCT_FRUIT_PLANT" || matriks[i][j]->getTipe() == "PRODUCT_ANIMAL"){
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 };
 

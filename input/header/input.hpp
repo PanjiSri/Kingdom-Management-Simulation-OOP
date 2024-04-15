@@ -7,7 +7,10 @@
 #include <string>
 #include <sstream>
 #include "../../exception/header/exception.hpp"
-#include "../../peran/peran.hpp"
+#include "../../peran/Peran.hpp"
+#include "../../peran/Walikota.hpp"
+#include "../../peran/Peternak.hpp"
+#include "../../peran/Petani.hpp"
 using namespace std;
 
 class Line_Handler

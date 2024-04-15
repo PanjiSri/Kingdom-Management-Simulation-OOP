@@ -33,5 +33,3 @@ string Produk::getAsal() {
 int Produk::getTambahan() {
     return tambahan_berat;
 }
-
-// map<string, int> Produk::getMaterial() {}

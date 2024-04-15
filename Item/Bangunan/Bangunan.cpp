@@ -16,10 +16,6 @@ Bangunan::Bangunan(const Bangunan& other) :
 
 Bangunan::~Bangunan() {}
 
-// map<string, int> Bangunan::getMaterial() {
-//     return this->material;
-// }
-
 string Bangunan::getTipe() {}
 
 int Bangunan::getTambahan() {

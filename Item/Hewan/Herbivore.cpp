@@ -26,7 +26,7 @@ vector<string> Herbivore::getProduk() {
 
 bool Herbivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_ANIMAL") {
-        cout << "Herbivora tidak makan tumbuhan" << endl;
+        cout << "Herbivora tidak makan hewan." << endl;
         return false;
     }
     else {

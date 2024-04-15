@@ -30,7 +30,7 @@ bool Carnivore::makan(Produk* produk) {
         throw MaterialPlantTidakDimakanException();
     }
     else {
-        cout << "Berat hewan bertambah sebanyak " << produk->getTambahan() << endl;
+        cout << endl << "Berat "<< this->nama <<" bertambah sebanyak " << produk->getTambahan() << endl;
         return true;
     }
 }

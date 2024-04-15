@@ -8,14 +8,17 @@
 using namespace std;
 
 class Bangunan : public Item {
+    private:
+        string tipe;
+
     public:
         // Constructor & Destructor
         Bangunan();
         Bangunan(int, string, string, int);
         Bangunan(const Bangunan&);
         ~Bangunan();
-
-        // map<string, int> getMaterial();
+        
+        // Getter
         string getTipe();
         int getTambahan();
 };
