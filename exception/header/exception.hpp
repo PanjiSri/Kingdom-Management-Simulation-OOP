@@ -151,4 +151,11 @@ class BangunSumberDayaTidakCukup : public exception {
     }
 };
 
+class TidakAdaBarangException : public exception{
+    const char *what() const throw()
+    {
+        return "Tidak ada barang di toko";
+    }
+};
+
 #endif

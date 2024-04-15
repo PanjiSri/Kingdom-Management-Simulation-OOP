@@ -169,15 +169,21 @@ void Toko::beli(Item* barang){
 
 void Toko::cetakListBarang(){
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
+    bool adaBarang = false;
     for (int i = 0; i < jenisBarang.size(); i++)
     {   
         cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
         if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
         {
             cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" ;
+            adaBarang = true;
         } 
         cout << endl;
     }  
+
+    if(!adaBarang){
+        throw TidakAdaBarangException();
+    }
 }
 
 // int main(){

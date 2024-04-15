@@ -338,8 +338,8 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
     }
     // leksikografis
     string username_baru = pemain_baru->getUname();
-    bool cek = false;
     cout << "username: " << username_baru << endl;
+    bool cek = false;
     cout << "banyak_pemain " << banyak_pemain << endl;
     for (int i = 0; i < banyak_pemain; ++i)
     {
@@ -665,6 +665,24 @@ void Grandmaster::operasi_perintah(string command)
     }else if(command == "JUAL"){
 
         list_pemain[idx_giliran_pemain]->menjual(toko);
+
+    }else if(command == "TAMBAH_PEMAIN"){
+
+        int row_inv = besar_penyimpanan[0] ;
+        int col_inv = besar_penyimpanan[1];
+
+        int row_lahan = besar_lahan[0];
+        int col_lahan = besar_lahan[1];
+
+        int row_ternak = besar_peternakan[0];
+        int col_ternak = besar_peternakan[1];
+    
+        Peran * anak_baru = list_pemain[idx_giliran_pemain]->buatUser(list_pemain, row_inv, col_inv, row_lahan, col_lahan, row_ternak, col_ternak);
+
+        if (anak_baru != NULL){
+            muatPemain(anak_baru);  
+            printAllPemain();
+        }
     }
     else
     {
