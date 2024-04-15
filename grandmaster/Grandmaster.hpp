@@ -42,6 +42,8 @@ private:
     vector<Item *> list_item;
     vector<Bangunan *> list_bangunan;
 
+    //toko kang
+    Toko* toko;
 
         // path ke file konfigurasi
     string config_hewan;

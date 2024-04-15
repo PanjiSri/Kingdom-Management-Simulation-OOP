@@ -215,6 +215,7 @@ void Grandmaster::loadallconfig()
     loadConfigHewanTanaman();
     loadConfigProduk();
     loadConfigMisc();
+    toko = new Toko(list_tanaman, list_hewan, list_produk);
     // cout << "aman" << endl;
 }
 
@@ -229,8 +230,6 @@ void Grandmaster::inisiatorTanaman()
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
         int harga = list_jenis_tanaman[i].getHarga();
 
-        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
-        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
@@ -623,13 +622,23 @@ void Grandmaster::operasi_perintah(string command)
         list_pemain[idx_giliran_pemain]->cetakLahan();
     }
     else if (command == "TANAM")
-    {
+    {   
+        if (list_pemain[idx_giliran_pemain]->getType() == "Petani"){
 
-        list_pemain[idx_giliran_pemain]->beternakBertani();
+            list_pemain[idx_giliran_pemain]->beternakBertani();
+        }
+        else{
+            cout << "anda bukan petani" << endl;
+        }
     }
     else if (command == "TERNAK")
     {
-        list_pemain[idx_giliran_pemain]->beternakBertani();
+        if(list_pemain[idx_giliran_pemain]->getType() == "Peternak"){
+            list_pemain[idx_giliran_pemain]->beternakBertani();
+        }
+        else{
+            cout << "anda bukan peternak" << endl;
+        }
     }
     else if (command == "MAKAN")
     {
@@ -647,8 +656,14 @@ void Grandmaster::operasi_perintah(string command)
     {
         list_pemain[idx_giliran_pemain]->simpan(list_pemain);
     }else if(command == "BANGUN"){
-        
+
         list_pemain[idx_giliran_pemain]->bangun(list_bangunan);
+    }
+    else if(command == "BELI"){
+
+        list_pemain[idx_giliran_pemain]->membeli(toko);
+    }else if(command == "JUAL"){
+           
     }
     else
     {
