@@ -1,4 +1,4 @@
-#include "peran.hpp"
+#include "Peran.hpp"
 #include <iostream>
 #include <ostream>
 #include "vector"
@@ -11,13 +11,16 @@
 #include "../Item/Produk/Produk.hpp"
 #include "../Item/Tanaman/Tanaman.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
+#include "Peternak.hpp"
+#include "Petani.hpp"
+#include "Walikota.hpp"
 #include <string>
 #include "../Pcolor/pcolor.h"
 using namespace std;
 
 // compile
 // g++ -o main main.cpp peran.cpp ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
-// g++ -o a peran/main.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
+// g++ -o a peran/main.cpp peran/Peternak.cpp peran/Petani.cpp peran/Walikota.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
 
 int main() {
     static int nhewan = 0;
@@ -126,11 +129,11 @@ int main() {
     vector<Peran*> listpemain;
     Peran* a = new Peternak("haikal", 8, 8, 8, 8);  
     Item* com = new Produk(1, "COM", "COW_MEAT", "PRODUCT_ANIMAL", "COW", 7, 10);
-    a->addPenyimpanan(com);
-    a->addPenyimpanan(com);
+    a->addPenyimpananSpesifikLocation(com);
+    a->addPenyimpananSpesifikLocation(com);
     Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
-    a->addPenyimpanan(snake);
-    a->tanam();
+    a->addPenyimpananSpesifikLocation(snake);
+    a->beternakBertani();
     a->beriMakan();
     a->beriMakan();
     a->panen(listproduct);

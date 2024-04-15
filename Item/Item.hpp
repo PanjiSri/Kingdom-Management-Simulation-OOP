@@ -29,7 +29,7 @@ class Item {
         virtual int getTambahan() = 0;
         virtual map<string, int> getMaterial() = 0;
 
-        //other method
+        // Other Method
         bool operator==(string nama) const;
 };
 

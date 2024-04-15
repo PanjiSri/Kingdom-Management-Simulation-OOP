@@ -1,161 +1,76 @@
+#ifndef __PERAN_HPP__
+#define __PERAN_HPP__
 
-#ifndef _PERAN_HPP_
-#define _PERAN_HPP_
-#include "vector"
+#include <vector>
+#include <map>
+#include <string>
+#include <stdio.h>
+#include <iostream>
+#include <iomanip> // For std::setw
+
 #include "MatriksPenyimpanan.hpp"
+#include "../Item/Item.hpp"
+#include "../Item/Hewan/Hewan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"
-#include "../Item/Hewan/Hewan.hpp"
-#include "../Item/Item.hpp"
-#include "../Item/Produk/Produk.hpp"
 #include "../Item/Tanaman/Tanaman.hpp"
+#include "../Item/Produk/Produk.hpp"
 #include "../Item/Bangunan/Bangunan.hpp"
 #include "../toko/Toko.hpp"
-#include <iostream>
-#include <stdio.h>
+#include "../Pcolor/pcolor.h"
+
 using namespace std;
 
 class Peran
 {
 protected:
+    string username;
     int gulden;
     int berat;
-    string username;
     MatriksPenyimpanan<Item *> penyimpanan;
 
 public:
     // Constructor & Destructor
     Peran();
-    Peran(string username, int row, int col);
-    Peran(string username, int berat, int gulden, int row, int col);
+    Peran(string username, int row_inv, int col_inv);
+    Peran(string username, int berat, int gulden, int row_inv, int col_inv);
     ~Peran();
-    Peran &operator=(const Peran &other);
+    Peran &operator= (const Peran &other);
 
     // Getter
+    string getUname();
     int getGulden();
     int getBerat();
-    string getUname();
+    virtual string getType() = 0;
 
     // Setter
     void tambahBerat(int berat);
+    void tambahGulden(int gulden);
 
     // Other Method
-    void printPenyimpanan();
-    void playerMakan();
-    void addPenyimpanan(Item *);
-    void addPenyimpananFile(string, vector<Item *>);
     vector<int> parse(string);
+    void centerAlign(const string& text, int width);
+    void printPenyimpanan();
+    void addPenyimpananInFirstEmpty(Item*);
+    void addPenyimpananSpesifikLocation(Item*);
+    void addPenyimpananFile(string, vector<Item*>);
+    void playerMakan();
 
-    virtual string getType() = 0;
-    virtual void tanam() = 0;
-    virtual void tanamFile(string, string, int, vector<Item*>) = 0;
+    virtual void beternakBertani() = 0;
+    virtual void beternakBertaniFile(string, string, int, vector<Item*>) = 0;
     virtual void panen(vector<Produk*>) = 0;
     virtual void cetakLahan() = 0;
     virtual void beriMakan() = 0;
-    virtual void addumur() = 0;
-    virtual void ambilPajak(vector<Peran *>) = 0;
-        virtual void bangunBangunan(vector<Bangunan*>) = 0;
-    virtual void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
+    virtual void addUmurTanaman() = 0;
+    virtual void ambilPajak(vector<Peran*>) = 0;
+    virtual void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
     virtual int calculateTax() = 0;
+
     // virtual void bangun() = 0;
-
-        void menjual(Toko* toko);
-        void membeli(Toko* toko);
-
-};
-
-class Walikota : public Peran
-{
-private:
-    string peran_pemain;
-
-public:
-    // Constructor & Destructor
-    Walikota(string, int, int, int, int);
-    Walikota(string username, int row, int col);
-    ~Walikota();
-    // Walikota(int gulden, int berat, string);
-
-    // Getter
-    string getType();
-
-    // Setter
-    void addGulden(int);
-    void ambilPajak(vector<Peran *>);
-    void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
-    void tanam();
-    void panen(vector<Produk*>);
-    void beriMakan();
-    void cetakLahan();
-    void addumur();
-        void bangunBangunan(vector<Bangunan*>);
-    void buatuser();
-    void tanamFile(string, string, int, vector<Item*>);
-    // void changelahan();
-    int calculateTax();
-    // void bangun();
-};
-
-class Petani : public Peran
-{
-public:
-    string peran_pemain;
-    MatriksPenyimpanan<Tanaman *> lahanPertanian; // Vector plant tipe data asli
-
-public:
-    // Constructor & Destructor
-    Petani();
-    Petani(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-    Petani(string username, int, int, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-    ~Petani();
-
-    // Getter
-    string getType();
-
-    // Other Method
-    void tanam();
-    void beriMakan();
-    void cetakLahan();
-    void addumur();
-    void panen(vector<Produk*>);
-    void ambilPajak(vector<Peran *>);
-    void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
-    void tanamFile(string, string, int, vector<Item*>);
-        void bangunBangunan(vector<Bangunan*>);
-    // void changelahan();
-    int calculateTax();
-    // void bangun();
-};
-
-class Peternak : public Peran
-{
-public:
-    string peran_pemain;
-    MatriksPenyimpanan<Hewan *> peternakan; // Vector pakai tipe data animal
-
-public:
-    // Constructor & Destructor
-    Peternak();
-    Peternak(string username, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-    Peternak(string username, int, int, int row_inventory, int col_inventory, int row_lahan, int col_lahan);
-    ~Peternak();
-
-    // Getter
-    string getType();
-
-    // Other Method
-    void tanam();
-    void beriMakan();
-    void cetakLahan();
-    void addumur();
-    void panen(vector<Produk*>);
-    void ambilPajak(vector<Peran *>);
-    void buatuser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
-    void tanamFile(string, string, int, vector<Item*>);
-        void bangunBangunan(vector<Bangunan*>);
-    int calculateTax();
-    // void bangun();
+        // virtual void bangunBangunan(vector<Bangunan*>) = 0;
+        // virtual void menjual(Toko* toko) = 0;
+        // virtual void membeli(Toko* toko) = 0;
 };
 
 #endif

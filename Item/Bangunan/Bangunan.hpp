@@ -17,6 +17,7 @@ class Bangunan : public Item {
         Bangunan(const Bangunan&);
         ~Bangunan();
 
+        // Getter
         map<string, int> getMaterial();
 };
 

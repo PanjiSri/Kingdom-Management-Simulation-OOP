@@ -68,5 +68,4 @@ bool Tanaman::isSiapPanen() {
     return umur >= waktu_panen;
 }
 
-
 map<string, int> Tanaman::getMaterial() {}

@@ -1,5 +1,4 @@
 #include <vector>
-
 #include <iostream>
 #include <string>
 #include "../Item/Hewan/Carnivore.hpp"
@@ -14,7 +13,7 @@
 using namespace std;
 
 // compile
-// g++ -o test test.cpp ../Pcolorpcolor.c ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
+// g++ -o test test.cpp ../Pcolor/pcolor.c ../Item/Hewan/Carnivore.cpp ../Item/Hewan/Omnivore.cpp ../Item/Hewan/Herbivore.cpp ../Item/Hewan/Hewan.cpp ../Item/Item.cpp ../Item/Produk/Produk.cpp ../Item/Tanaman/Tanaman.cpp ../Item/Bangunan/Bangunan.cpp
 
 int main() {
     MatriksPenyimpanan<Tanaman*> lahanpertanian;

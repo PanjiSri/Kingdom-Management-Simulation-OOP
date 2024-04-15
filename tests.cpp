@@ -1,14 +1,16 @@
-#include <string>
 #include <iostream>
-using namespace std;
+#include <iomanip> // For std::setw
+
+void centerAlign(const std::string& text, int width) {
+    int padding = (width - text.length()) / 2;
+    std::cout << std::setw(padding + text.length()) << text << std::endl;
+}
 
 int main() {
-    string a = "teak_wood";
-    cout << a << endl;
-    a.erase(a.length()-5);
-    cout << a << endl;
-    a += "_plank";
-    cout << a << endl;
-
+    int terminalWidth = 40; // Set the width of your terminal/console window
+    std::string text = "Center Aligned Text";
+    
+    centerAlign(text, terminalWidth);
+    
     return 0;
 }
