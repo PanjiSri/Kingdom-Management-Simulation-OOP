@@ -78,7 +78,8 @@ void Petani::beternakBertaniFile(string location, string name, int umur, vector<
 }
 
 void Petani::cetakLahan() {
-    int lebar = this->lahanPertanian.getKolom()*5 + this->lahanPertanian.getKolom() + 6;
+    int lebar = this->lahanPertanian.getKolom()*5 + this->lahanPertanian.getKolom() + 1;
+    cout << "      ";
     centerAlign("[ LADANG ]", lebar);
     lahanPertanian.printlahan();
 }

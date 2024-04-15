@@ -76,7 +76,8 @@ void Peran::centerAlign(const string& text, int width) {
 }
 
 void Peran::printPenyimpanan() {
-    int lebar = this->penyimpanan.getKolom()*5 + this->penyimpanan.getKolom() + 6;
+    int lebar = this->penyimpanan.getKolom()*5 + this->penyimpanan.getKolom() + 1;
+    cout << "      ";
     centerAlign("[ PENYIMPANAN ]", lebar);
     this->penyimpanan.print();
 }

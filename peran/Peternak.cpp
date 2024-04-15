@@ -77,7 +77,8 @@ void Peternak::beternakBertaniFile(string location, string name, int berat, vect
 }
 
 void Peternak::cetakLahan() {
-    int lebar = this->peternakan.getKolom()*5 + this->peternakan.getKolom() + 6;
+    int lebar = this->peternakan.getKolom()*5 + this->peternakan.getKolom() + 1;
+    cout << "      ";
     centerAlign("[ PETERNAKAN ]", lebar);
     peternakan.printlahan();
 }
