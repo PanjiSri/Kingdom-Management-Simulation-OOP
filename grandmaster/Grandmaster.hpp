@@ -16,6 +16,7 @@
 #include "../peran/Petani.hpp"
 #include "../peran/Peternak.hpp"
 #include "../exception/header/exception.hpp"
+#include "../Item/Bangunan/Bangunan.hpp"
 using namespace std;
 
 class Grandmaster
@@ -39,9 +40,10 @@ private:
     vector<Hewan *> list_hewan;
     vector<Produk *> list_produk;
     vector<Item *> list_item;
-    public : 
-        vector<Bangunan *> list_bangunan;
-    private :
+    vector<Bangunan *> list_bangunan;
+
+    //toko kang
+    Toko* toko;
 
         // path ke file konfigurasi
     string config_hewan;

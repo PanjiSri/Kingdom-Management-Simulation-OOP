@@ -158,6 +158,7 @@ void Grandmaster::loadallconfig()
     loadConfigProduk();
     loadConfigMisc();
     loadConfigRecipe();
+    toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "aman" << endl;
 }
 
@@ -580,13 +581,23 @@ void Grandmaster::operasi_perintah(string command)
         list_pemain[idx_giliran_pemain]->cetakLahan();
     }
     else if (command == "TANAM")
-    {
+    {   
+        if (list_pemain[idx_giliran_pemain]->getType() == "Petani"){
 
-        list_pemain[idx_giliran_pemain]->beternakBertani();
+            list_pemain[idx_giliran_pemain]->beternakBertani();
+        }
+        else{
+            cout << "anda bukan petani" << endl;
+        }
     }
     else if (command == "TERNAK")
     {
-        list_pemain[idx_giliran_pemain]->beternakBertani();
+        if(list_pemain[idx_giliran_pemain]->getType() == "Peternak"){
+            list_pemain[idx_giliran_pemain]->beternakBertani();
+        }
+        else{
+            cout << "anda bukan peternak" << endl;
+        }
     }
     else if (command == "MAKAN")
     {
@@ -603,6 +614,16 @@ void Grandmaster::operasi_perintah(string command)
     else if (command == "SIMPAN")
     {
         list_pemain[idx_giliran_pemain]->simpan(list_pemain);
+    }else if(command == "BANGUN"){
+
+        list_pemain[idx_giliran_pemain]->bangun(list_bangunan);
+    }
+    else if(command == "BELI"){
+
+        list_pemain[idx_giliran_pemain]->membeli(toko);
+    }else if(command == "JUAL"){
+
+        list_pemain[idx_giliran_pemain]->menjual(toko);
     }
     else
     {
