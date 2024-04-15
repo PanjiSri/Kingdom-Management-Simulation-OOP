@@ -86,4 +86,11 @@ public:
     }
 };
 
+class CommandTidakValidException : public exception{
+public:
+    const char *what() const throw(){
+        return "Command tidak valid";
+    }
+};
+
 #endif

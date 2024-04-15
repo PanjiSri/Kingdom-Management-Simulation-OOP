@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "algorithm"
+#include <algorithm>
 #include "../input/header/input.hpp"
 #include "../peran/Peran.hpp"
 #include "../peran/Walikota.hpp"
