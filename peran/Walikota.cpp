@@ -45,7 +45,6 @@ int Walikota::calculateTax() {
     return 0;
 }
 
-// SEMENTARA
 void Walikota::ambilPajak(vector<Peran*> listPeran) {
     cout << "Cring cring cring..." << endl;
     cout << "Pajak sudah di pungut" << endl << endl;

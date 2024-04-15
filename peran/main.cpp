@@ -26,11 +26,14 @@ int main() {
     static int nhewan = 0;
     string name, code, tipe, harga, berat, id, origin;
     int beratint, hargaint;
+    vector<Tanaman*> listtanaman;
     vector<Hewan*> listhewan;
     vector<Item*> listitem;
     vector<Produk*> listproduct;
     vector<vector<string>> parse;
     string datahewan;
+    string datatanaman;
+
     bool end = false;
     for(int i = 0; i < 7; i++) {
         int step = 0;
@@ -84,6 +87,44 @@ int main() {
         }
     }
 
+    for(int i = 0; i < 8; i++) {
+        int step = 0;
+        string data;
+        getline(cin,datatanaman);
+        for(int j = 0; j < datatanaman.size(); j++) {
+            if(datatanaman[j] == ' ' || datatanaman == "\n") {
+                if(step == 0) {
+                    id = data;
+                    data = "";
+                }
+                else if(step == 1) {
+                    code = data;
+                    data = "";
+                }
+                else if(step == 2) {
+                    name = data;
+                    data = "";
+                }
+                else if(step == 3) {
+                    tipe = data;
+                    data = "";
+                }
+                else if(step == 4) {
+                    berat = data;
+                    data = "";
+                }
+                step += 1;   
+            }
+            else {
+                data += datatanaman[j];
+            }
+        }
+        harga = data;
+        Tanaman* y = new Tanaman(stoi(id),code,name, tipe, stoi(berat), stoi(harga));
+        listtanaman.push_back(y);
+        listitem.push_back(y);
+    }
+
     for(int i = 0; i < 17; i++) {
         int step = 0;
         string data;
@@ -121,9 +162,9 @@ int main() {
             }
         }
         harga = data;
-        Produk* x = new Produk(stoi(id),code,name,tipe,origin, stoi(berat), stoi(harga));
-        listproduct.push_back(x);
-        listitem.push_back(x);
+        Produk* z = new Produk(stoi(id),code,name,tipe,origin, stoi(berat), stoi(harga));
+        listproduct.push_back(z);
+        listitem.push_back(z);
     }
 
     vector<Peran*> listpemain;
@@ -138,4 +179,29 @@ int main() {
     a->beriMakan();
     a->panen(listproduct);
     a->printPenyimpanan();
+
+    Peran* b = new Petani("budi", 8, 8, 8, 8);
+    Item* apel = new Tanaman(5, "APL", "APPLE_TREE", "FRUIT_PLANT", 13, 4);
+    Item *aloe = new Tanaman(3, "ALT", "ALOE_TREE", "MATERIAL_PLANT", 9, 6);
+    b->addPenyimpananSpesifikLocation(apel);
+    b->addPenyimpananSpesifikLocation(aloe);
+    b->beternakBertani();
+    b->beternakBertani();
+    b->panen(listproduct);
+
+    for (int i = 0; i < 10; i++) {
+        b->addUmurTanaman();
+    }
+    b->panen(listproduct);
+    for (int i = 0; i < 5; i++) {
+        b->addUmurTanaman();
+    }
+    b->panen(listproduct);
+
+    a->cetakLahan();
+    b->cetakLahan();
+
+    a->printPenyimpanan();
+    b->printPenyimpanan();
+    return 0;
 };

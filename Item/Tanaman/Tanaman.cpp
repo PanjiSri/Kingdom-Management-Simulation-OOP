@@ -8,7 +8,7 @@ Tanaman::Tanaman() :
     this->umur = 0;
 }
 
-Tanaman::Tanaman(int _ID, string _kode, string _tipe, string _nama, int _waktu_panen, int _harga) : 
+Tanaman::Tanaman(int _ID, string _kode, string _nama, string _tipe, int _waktu_panen, int _harga) : 
     Item(_ID, _kode, _nama, _harga), 
     tipe(_tipe), 
     waktu_panen(_waktu_panen) 

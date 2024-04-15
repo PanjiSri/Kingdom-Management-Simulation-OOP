@@ -38,26 +38,25 @@ void Petani::beternakBertani() {
         cout << "Slot: ";
         cin >> indeksInvent;
         vector<int> lokasiInvent = parse(indeksInvent);
+        string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
         
-        if (penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe() == "MATERIAL_PLANT" ||
-            penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe() == "FRUIT_PLANT") {
-                
-                tanaman = dynamic_cast<Tanaman*> (penyimpanan[lokasiInvent[1]][lokasiInvent[0]]);
-                cout << "Tumbuhan " << tanaman->getNama() << " diambil." << endl << endl;
-                
-                cout << "Pilih petak lahan yang ingin ditanami" << endl;
-                cetakLahan();
-                
-                string idx;
-                cout << "Masukkan lokasi yang diinginkan: ";
-                cin >> idx;
-                vector<int> lokasi = parse(idx);
+        if (tipe == "MATERIAL_PLANT" || tipe == "FRUIT_PLANT") {
+            tanaman = dynamic_cast<Tanaman*> (penyimpanan[lokasiInvent[1]][lokasiInvent[0]]);
+            cout << "Tumbuhan " << tanaman->getNama() << " diambil." << endl << endl;
+            
+            cout << "Pilih petak lahan yang ingin ditanami" << endl;
+            cetakLahan();
+            
+            string idx;
+            cout << "Masukkan lokasi yang diinginkan: ";
+            cin >> idx;
+            vector<int> lokasi = parse(idx);
 
-                lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
-                penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
+            lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
+            penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
 
-                cout << endl << "Cangkul, cangkul, cangkul yang dalam~!" << endl;
-                cout << tanaman->getNama() << " berhasil ditanam!" << endl << endl;
+            cout << endl << "Cangkul, cangkul, cangkul yang dalam~!" << endl;
+            cout << tanaman->getNama() << " berhasil ditanam!" << endl << endl;
         } else {
             cout << "Hei, itu bukan tanaman!!!" << endl << endl;
         }
@@ -173,7 +172,7 @@ void Petani::beriMakan() {
 void Petani::addUmurTanaman() {
     for (int i = 0 ; i < lahanPertanian.getBaris(); i++) {
         for (int j = 0; j < lahanPertanian.getKolom(); j++) {
-            if(lahanPertanian[i][j] != NULL) {
+            if (lahanPertanian[i][j] != NULL) {
                 lahanPertanian[i][j]->tambahUmur();
             }
         }
