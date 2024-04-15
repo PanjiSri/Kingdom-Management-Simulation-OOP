@@ -131,6 +131,30 @@ void Walikota::buatUser(vector<Peran*> listPlayer, int row_inv, int col_inv, int
     }
 }
 
+void Walikota::menjual(Toko* toko){
+    cout << "Berikut merupakan penyimpanan Anda\n";
+    printPenyimpanan();
+    int ulang;
+    int total = 0;
+    cout << "Berapa benda yang ingin anda jual: ";
+    cin >> ulang;
+    for(int i = 0; i < ulang; i++) {
+        cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
+        string indeksinvent;
+        cin >> indeksinvent;
+        vector<int> idx = parse(indeksinvent);
+        Item* barang;
+        barang = penyimpanan[idx[1]][idx[0]];
+        // ketika peran menjual berarti toko membeli kan,
+        // make sense ga penamaannya atau malah bikin bingung
+        toko->beli(barang);
+        gulden = gulden + barang->getHarga();
+        total += barang->getHarga();
+        penyimpanan[idx[1]][idx[0]] = NULL;
+    }
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
+}
+
 // sementara belum
 // void Walikota::bangun() {
 //     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
