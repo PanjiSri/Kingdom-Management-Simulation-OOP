@@ -14,7 +14,8 @@ public:
     }
 };
 
-class ConfigTidakValid : public exception{
+class ConfigTidakValid : public exception
+{
 public:
     const char *what() const throw()
     {
@@ -76,5 +77,13 @@ public:
     }
 };
 
+class HanyaWalikotaException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Sayang sekali operasi ini hanya bisa dilakukan oleh walikota";
+    }
+};
 
 #endif

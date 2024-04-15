@@ -4,7 +4,7 @@ Peran::Peran() {
     this->username = " ";
     this->gulden = 50;
     this->berat = 40;
-} 
+}
 
 Peran::Peran(string username, int row_inv, int col_inv) {
     this->username = username;
@@ -38,7 +38,8 @@ int Peran::getGulden() {
     return this->gulden;
 }
 
-int Peran::getBerat() {
+int Peran::getBerat()
+{
     return this->berat;
 }
 
@@ -65,8 +66,8 @@ void Peran::tambahGulden(int gulden) {
 
 vector<int> Peran::parse(string idx) {
     vector<int> indeks;
-    indeks.push_back(((int)idx[0])-65);
-    indeks.push_back((int)(idx[2]-'0')-1);
+    indeks.push_back(((int)idx[0]) - 65);
+    indeks.push_back((int)(idx[2] - '0') - 1);
     return indeks;
 }
 

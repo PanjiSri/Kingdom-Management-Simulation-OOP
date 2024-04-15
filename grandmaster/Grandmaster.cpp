@@ -505,6 +505,30 @@ void Grandmaster::operasi_perintah(string command)
     {
         list_pemain[idx_giliran_pemain]->printPenyimpanan();
     }
+    else if (command == "PUNGUT_PAJAK")
+    {
+        list_pemain[idx_giliran_pemain]->ambilPajak(list_pemain);
+        /*Cring cring cring...
+            Pajak sudah dipungut!
+
+            Berikut adalah detil dari pemungutan pajak:
+            Prima - Peternak: 60 gulden
+            Hilya - Petani: 50 gulden
+            Adit - Petani: 10 gulden
+            HK - Petani: 10 gulden
+            SP - Petani: 0 gulden
+
+            Negara mendapatkan pemasukan sebesar 130 gulden.
+            Gunakan dengan baik dan jangan dikorupsi ya!
+        */
+        cout << "Cring cring cring..." << endl;
+        cout << "Pajak sudah dipungut!" << endl;
+        cout << "Berikut adalah detil dari pemungutan pajak:" << endl;
+
+        vector<int> urutan_berdasar_gulden;
+        int n = list_pemain.size();
+        
+    }
 }
 
 // getter
@@ -617,4 +641,15 @@ void Grandmaster::printAllPemain()
         }
     }
     cout << "]" << endl;
+}
+
+void Grandmaster::printWalikota()
+{
+    for (int i = 0; i < list_pemain.size(); i++)
+    {
+        if (list_pemain[i]->getType() == "walikota")
+        {
+            cout << list_pemain[i]->getUname() << endl;
+        }
+    }
 }
