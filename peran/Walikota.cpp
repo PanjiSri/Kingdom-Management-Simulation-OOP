@@ -102,7 +102,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     cout << "Jangan dikorupsi ya!!!"<< endl << endl;
 }
 
-void Walikota::buatUser(vector<Peran*> listPlayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
+Peran* Walikota::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) {
     if (gulden >= 50) {
         string role, uname;
         cout << "Pilih role yang ingin dibuat: ";
@@ -110,49 +110,35 @@ void Walikota::buatUser(vector<Peran*> listPlayer, int row_inv, int col_inv, int
 
         if (role == "Petani" || role == "Peternak") {
             cout << endl << "Masukkan username: ";
-            gulden -= 50;
+            cin >> uname;
+            // cek apakah username telah digunakan
+            for (int i = 0; i < listplayer.size(); i++) {
+                if (listplayer[i]->getUname() == uname) {
+                    cout << "Username telah digunakan!" << endl << endl;
+                    return NULL;
+                }
+            }
 
+            gulden -= 50;
             if (role == "Petani") {
-                Peran* a = new Petani(uname, row_inv, col_inv, row_farm, col_farm);
-                listPlayer.push_back(a);
+                Peran* a = new Petani(uname, row_inv, col_inv, row_lahan, col_lahan);
+                return a;
             }
             else {
-                Peran* a = new Peternak(uname, row_inv, col_inv, row_pet, col_pet);
-                listPlayer.push_back(a);
+                Peran* a = new Peternak(uname, row_inv, col_inv, row_ternak, col_ternak);
+                return a;
             }
             cout << endl;
         }
         else {
             cout << "Role ini tidak bisa dibuat." << endl << endl;
+            return NULL;
         }
     }
     else {
         cout << "Uang anda tidak cukup Pak Walikota." << endl << endl;
+        return NULL;
     }
-}
-
-void Walikota::menjual(Toko* toko){
-    cout << "Berikut merupakan penyimpanan Anda\n";
-    printPenyimpanan();
-    int ulang;
-    int total = 0;
-    cout << "Berapa benda yang ingin anda jual: ";
-    cin >> ulang;
-    for(int i = 0; i < ulang; i++) {
-        cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
-        string indeksinvent;
-        cin >> indeksinvent;
-        vector<int> idx = parse(indeksinvent);
-        Item* barang;
-        barang = penyimpanan[idx[1]][idx[0]];
-        // ketika peran menjual berarti toko membeli kan,
-        // make sense ga penamaannya atau malah bikin bingung
-        toko->beli(barang);
-        gulden = gulden + barang->getHarga();
-        total += barang->getHarga();
-        penyimpanan[idx[1]][idx[0]] = NULL;
-    }
-    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
 }
 
 // sementara belum
@@ -286,11 +272,9 @@ void Walikota::menjual(Toko* toko){
 // }
 
 
-vector<vector<string>> Walikota::getDataLahan() {
-}
+vector<vector<string>> Walikota::getDataLahan() {}
 
-// belum selesai
-void Walikota::membeli(Toko* toko){
+void Walikota::membeli(Toko* toko) {
     toko->cetakListBarang();
     int noBarang;
     int kuantitas;
@@ -302,8 +286,7 @@ void Walikota::membeli(Toko* toko){
     cin >> kuantitas;
     
     // handle error beli bangunan
-    if (toko->getListBarang()[noBarang-1]->getTipe() == "BANGUNAN")
-    {
+    if (toko->getListBarang()[noBarang-1]->getTipe() == "BANGUNAN") {
         throw WalikotaTidakBisaBeliBangunanException();
     }
     

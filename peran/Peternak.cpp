@@ -296,18 +296,26 @@ int Peternak::calculateTax()
     }
     else if (KKP > 6 && KKP <= 25)
     {
+    } 
+    else if (KKP > 6 && KKP <= 25) {
         pajak = KKP * 0.15;
     }
     else if (KKP > 25 && KKP <= 50)
     {
+    } 
+    else if (KKP > 25 && KKP <= 50) {
         pajak = KKP * 0.25;
     }
     else if (KKP > 50 && KKP <= 500)
     {
+    } 
+    else if (KKP > 50 && KKP <= 500) {
         pajak = KKP * 0.30;
     }
     else
     {
+    } 
+    else {
         pajak = KKP * 0.35;
     }
 
@@ -320,9 +328,9 @@ int Peternak::calculateTax()
     return pajak;
 }
 
-// void Peternak::bangun() {
-//     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
-// }
+void Peternak::bangun() {
+    cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+}
 
 vector<vector<string>> Peternak::getDataLahan()
 {
@@ -360,6 +368,7 @@ vector<vector<string>> Peternak::getDataLahan()
 // belum selesai
 void Peternak::membeli(Toko *toko)
 {
+void Peternak::membeli(Toko* toko) {
     toko->cetakListBarang();
     int noBarang;
     int kuantitas;
@@ -396,10 +405,26 @@ void Peternak::membeli(Toko *toko)
     }
     // addpenyimpanan(item);
     // harusnya gini sih
+    
+    Item* item = toko->jual(noBarang, kuantitas);
+    if(this->getGulden() < item->getHarga()*kuantitas) {
+        cout << "Uang yang anda miliki tidak cukup" << endl;
+    }
+    else {
+        penyimpanan.print();
+        for(int i = 0; i < kuantitas; i++) {
+            string location;
+            cout << "Masukkan lokasi untuk item ke-" << i+1 << ": ";
+            cin >> location;
+            vector<int> index = parse(location);
+            penyimpanan.setElement(index[1], index[0], item);
+        }
+    }
 }
 
 void Peternak::menjual(Toko *toko)
 {
+void Peternak::menjual(Toko* toko) {
     cout << "Berikut merupakan penyimpanan Anda\n";
     printPenyimpanan();
     int ulang;
@@ -408,6 +433,8 @@ void Peternak::menjual(Toko *toko)
     cin >> ulang;
     for (int i = 0; i < ulang; i++)
     {
+
+    for(int i = 0; i < ulang; i++) {
         cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
         string indeksinvent;
         cin >> indeksinvent;
@@ -416,8 +443,7 @@ void Peternak::menjual(Toko *toko)
         barang = penyimpanan[idx[1]][idx[0]];
 
         // handle error kalo bangunan
-        if (barang->getTipe() == "BANGUNAN")
-        {
+        if (barang->getTipe() == "BANGUNAN") {
             throw PetaniPeternakTidakBisaJualBangunanException();
         }
 

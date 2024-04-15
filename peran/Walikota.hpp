@@ -37,10 +37,10 @@ class Walikota : public Peran {
         void beriMakan();
         void addUmurTanaman();
         int calculateTax();
-        void ambilPajak(vector<Peran*>);    //nanti dulu
-        void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
+        void ambilPajak(vector<Peran*>);
+        Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak);
         vector<vector<string>> getDataLahan();
-        // void bangun();
+        void bangun();
         void menjual(Toko* toko);
         void membeli(Toko* toko);
 

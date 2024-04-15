@@ -44,8 +44,7 @@ int Peran::getGulden()
     return this->gulden;
 }
 
-int Peran::getBerat()
-{
+int Peran::getBerat() {
     return this->berat;
 }
 
