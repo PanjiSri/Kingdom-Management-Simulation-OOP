@@ -178,17 +178,18 @@ int main() {
     a->addPenyimpananSpesifikLocation(com);
     a->addPenyimpananSpesifikLocation(com);
     a->addPenyimpananSpesifikLocation(SAW);
-    a->addPenyimpananSpesifikLocation(BNP);
-    Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
+    a->menjual(store);
+    // a->addPenyimpananSpesifikLocation(BNP);
+    // Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
     
-    a->addPenyimpananSpesifikLocation(snake);
-    a->beternakBertani();
-    a->beriMakan();
-    a->beriMakan();
-    a->beriMakan();
-    a->beriMakan();
-    a->panen(listproduct);
-    a->printPenyimpanan();
+    // a->addPenyimpananSpesifikLocation(snake);
+    // a->beternakBertani();
+    // a->beriMakan();
+    // a->beriMakan();
+    // a->beriMakan();
+    // a->beriMakan();
+    // a->panen(listproduct);
+    // a->printPenyimpanan();
     // a->addPenyimpananSpesifikLocation(com);
     // a->addPenyimpananSpesifikLocation(com);
     // Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);

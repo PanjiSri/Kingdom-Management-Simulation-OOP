@@ -178,22 +178,22 @@ void Peran::playerMakan() {
 }
 
 // // belum handle error
-// void Peran::menjual(Toko* toko){
-//     cout << "Berikut merupakan penyimpanan Anda\n";
-//     printPenyimpanan();
-//     cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
-//     string indeksinvent;
-//     cin >> indeksinvent;
-//     vector<int> idx = parse(indeksinvent);
-//     Item* barang;
-//     barang = penyimpanan[idx[1]][idx[0]];
-//     // ketika peran menjual berarti toko membeli kan,
-//     // make sense ga penamaannya atau malah bikin bingung
-//     toko->beli(barang);
-//     gulden = gulden + barang->getHarga();
-//     cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< barang->getHarga() << " gulden!\n";
-//     penyimpanan[idx[1]][idx[0]] = NULL;
-// }
+void Peran::menjual(Toko* toko){
+    cout << "Berikut merupakan penyimpanan Anda\n";
+    printPenyimpanan();
+    cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
+    string indeksinvent;
+    cin >> indeksinvent;
+    vector<int> idx = parse(indeksinvent);
+    Item* barang;
+    barang = penyimpanan[idx[1]][idx[0]];
+    // ketika peran menjual berarti toko membeli kan,
+    // make sense ga penamaannya atau malah bikin bingung
+    toko->beli(barang);
+    gulden = gulden + barang->getHarga();
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< barang->getHarga() << " gulden!\n";
+    penyimpanan[idx[1]][idx[0]] = NULL;
+}
 
 
 
