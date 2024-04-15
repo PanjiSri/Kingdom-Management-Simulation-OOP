@@ -373,8 +373,13 @@ void Peternak::menjual(Toko* toko){
         vector<int> idx = parse(indeksinvent);
         Item* barang;
         barang = penyimpanan[idx[1]][idx[0]];
-        // ketika peran menjual berarti toko membeli kan,
-        // make sense ga penamaannya atau malah bikin bingung
+        
+        // handle error kalo bangunan
+        if (barang->getTipe() == "BANGUNAN")
+        {
+            throw PetaniPeternakTidakBisaJualBangunanException();
+        }
+        
         toko->beli(barang);
         gulden = gulden + barang->getHarga();
         total += barang->getHarga();
