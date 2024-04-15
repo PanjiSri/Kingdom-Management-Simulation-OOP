@@ -171,15 +171,15 @@ int main() {
     // Toko* store = new Toko();
     Peran* a = new Peternak("haikal", 100, 100, 8, 8, 8, 8);
     listpemain.push_back(a);  
-    Item* com = new Produk(1, "COM", "COW_MEAT", "PRODUCT_ANIMAL", "COW", 7, 10);
+    Item* COM = new Produk(1, "COM", "COW_MEAT", "PRODUCT_ANIMAL", "COW", 7, 10);
     Item* SAW = new Produk(2, "SAW", "SANDALWOOD_WOOD", "PRODUCT_MATERIAL_PLANT", "SANDALWOOD_TREE", 0, 8);
     Item* BNP = new Produk(7, "BNP", "BANANA", "PRODUCT_FRUIT_PLANT", "BANANA_TREE", 3, 7);
 
-    a->addPenyimpananSpesifikLocation(com);
-    a->addPenyimpananSpesifikLocation(com);
+    a->addPenyimpananSpesifikLocation(COM);
+    a->addPenyimpananSpesifikLocation(COM);
     a->addPenyimpananSpesifikLocation(SAW);
     // a->menjual(store);
-    a->addPenyimpananSpesifikLocation(BNP);
+    // a->addPenyimpananSpesifikLocation(BNP);
     Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
     
     a->addPenyimpananSpesifikLocation(snake);
@@ -187,27 +187,19 @@ int main() {
     a->beriMakan();
     a->beriMakan();
     
-    try {
-        cout << "MASUK SINI GAK";
-        a->beriMakan();
-        cout << "MASUK SINI GAK";
-    } catch (CarnivoraTidakMakanSayurException e) {
-        cout << e.what() << endl;        
-    }
+    // try {
+    //     cout << "MASUK SINI GAK";
+    //     a->beriMakan();
+    //     cout << "MASUK SINI GAK";
+    // } catch (CarnivoraTidakMakanSayurException e) {
+    //     cout << e.what() << endl;        
+    // }
 
-    try {
-        a->beriMakan();
-    } catch (MaterialPlantTidakDimakanException e) {
-        cout << e.what() << endl;        
-    }
-
-    a->panen(listproduct);
-    a->printPenyimpanan();
-    a->addPenyimpananSpesifikLocation(com);
-    a->addPenyimpananSpesifikLocation(com);
-    // Item* snake = new Carnivore(1, "SNK", "SNAKE", 13, 4);
-    a->addPenyimpananSpesifikLocation(snake);
-    a->beternakBertani();
+    // try {
+    //     a->beriMakan();
+    // } catch (MaterialPlantTidakDimakanException e) {
+    //     cout << e.what() << endl;        
+    // }
 
     a->panen(listproduct);
     a->printPenyimpanan();

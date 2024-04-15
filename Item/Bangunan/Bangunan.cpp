@@ -10,19 +10,12 @@ Bangunan::Bangunan()
       ironwood_wood_cost(0) 
     {}
 
-Bangunan::Bangunan(int id, 
-                   string kode, 
-                   string nama, 
-                   int harga, 
-                   int teak_wood_cost, 
-                   int sandalwood_wood_cost, 
-                   int aloe_wood_cost, 
-                   int ironwood_wood_cost)
-    : Item(id, kode, nama, harga), 
-      teak_wood_cost(teak_wood_cost), 
-      sandalwood_wood_cost(sandalwood_wood_cost), 
-      aloe_wood_cost(aloe_wood_cost), 
-      ironwood_wood_cost(ironwood_wood_cost) 
+Bangunan::Bangunan(int id, string kode, string nama, int harga, map<string, int> bahanBaku) 
+    : Item(id, kode, nama, harga),
+      teak_wood_cost(bahanBaku["TEAK_WOOD"]),
+      sandalwood_wood_cost(bahanBaku["SANDALWOOD_WOOD"]),
+      aloe_wood_cost(bahanBaku["ALOE_WOOD"]),
+      ironwood_wood_cost(bahanBaku["IRONWOOD_WOOD"])
     {}
 
 Bangunan::Bangunan(const Bangunan& other)
@@ -59,4 +52,14 @@ string Bangunan::getTipe() {
 
 int Bangunan::getTambahan() {
     return 0;
+}
+
+void Bangunan::printDetail() {
+    cout << "Nama\t: " << nama << endl;
+    cout << "Harga\t: " << harga << endl;
+    cout << "Bahan Baku:\n";
+    cout << "1. Teak Wood\t\t: " << teak_wood_cost << endl;
+    cout << "2. Sandalwood Wood\t: " << sandalwood_wood_cost << endl;
+    cout << "3. Aloe Wood\t\t: " << aloe_wood_cost << endl;
+    cout << "4. Ironwood Wood\t: " << ironwood_wood_cost << endl;
 }

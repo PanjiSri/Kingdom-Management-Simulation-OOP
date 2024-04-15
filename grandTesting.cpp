@@ -24,7 +24,11 @@ int main()
 
     // g.getAllPemainInfo();
 
-    g.printAllPemain();
+    // g.printAllPemain();
+    g.list_bangunan[0]->printDetail();
+    g.list_bangunan[1]->printDetail();
+    g.list_bangunan[2]->printDetail();
+    g.list_bangunan[3]->printDetail();
 
 
 
@@ -35,20 +39,20 @@ int main()
     // g.next();
 
 
-    g.operasi_perintah("PUNGUT_PAJAK");
-    g.printAllPemain();
+    // g.operasi_perintah("PUNGUT_PAJAK");
+    // g.printAllPemain();
 
-    cout << "sekarang giliran pemain indeks ke ";
-    g.next();
+        // cout << "sekarang giliran pemain indeks ke ";
+        // g.next();
 
-    while(true){
-        string command;
-        cin >> command;
-        if(command == "BREAK"){
-            break;
-        }
-        g.operasi_perintah(command);
-    }
+        // while(true){
+        //     string command;
+        //     cin >> command;
+        //     if(command == "BREAK"){
+        //         break;
+        //     }
+        //     g.operasi_perintah(command);
+        // }
     // cout << "sekarang giliran pemain indeks ke ";
     // g.operasi_perintah("NEXT");
     // g.printAllPemain();

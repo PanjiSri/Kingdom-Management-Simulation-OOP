@@ -39,8 +39,9 @@ private:
     vector<Hewan *> list_hewan;
     vector<Produk *> list_produk;
     vector<Item *> list_item;
-    // vector<Bangunan *> list_bangunan;
-
+    public : 
+        vector<Bangunan *> list_bangunan;
+    private :
 
         // path ke file konfigurasi
     string config_hewan;
@@ -78,6 +79,9 @@ public:
 
     //inisiasi produk
     void inisiatorProduk();
+
+    //inisiasi bangunan
+    void inisiatorBangunan();
 
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();

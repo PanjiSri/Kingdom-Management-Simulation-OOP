@@ -116,15 +116,48 @@ void Grandmaster::loadConfigMisc()
     }
 }
 
-// void Grandmaster::loadConfigRecipe(){
+void Grandmaster::loadConfigRecipe() // belum selesai
+{
+    ifstream file(config_recipe);
+    if (!file.is_open())
+    {
+        throw FilePathTidakValid();
+    }
 
-// }
+    string kode_huruf, nama, nama_material;
+    int id, jumlah_material, harga;
+    
+    string line;
+    while (getline(file, line))
+    {
+        map<string, int> material;
+        stringstream ss(line);
+        ss >> id >> kode_huruf >> nama >> harga;
+        while (ss >> nama_material >> jumlah_material)
+        {
+            if (material.size() == 0) {
+                material.insert({nama_material, jumlah_material});
+            }
+            else {
+                if (material.count(nama_material)) {
+                    material[nama_material] = jumlah_material;
+                }
+                else {
+                    material.insert({nama_material, jumlah_material});
+                }
+            }
+        }
+        list_jenis_bangunan.push_back(Konfigurasi_Recipe(id, kode_huruf, nama, harga, material));
+    }
+    file.close();
+}
 
 void Grandmaster::loadallconfig()
 {
     loadConfigHewanTanaman();
     loadConfigProduk();
     loadConfigMisc();
+    loadConfigRecipe();
     // cout << "aman" << endl;
 }
 
@@ -139,8 +172,6 @@ void Grandmaster::inisiatorTanaman()
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
         int harga = list_jenis_tanaman[i].getHarga();
 
-        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
-        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
@@ -197,12 +228,27 @@ void Grandmaster::inisiatorProduk()
     }
 }
 
+void Grandmaster::inisiatorBangunan() {
+    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    {
+        int id = list_jenis_bangunan[i].getId();
+        string kode = list_jenis_bangunan[i].getKode();
+        string nama = list_jenis_bangunan[i].getName();
+        int harga = list_jenis_bangunan[i].getHarga();
+        map<string, int> bahan_baku = list_jenis_bangunan[i].getBahanBaku();
+
+        list_bangunan.push_back(new Bangunan(id, kode, nama, harga, bahan_baku));
+        list_item.push_back(new Bangunan(id, kode, nama, harga, bahan_baku));
+    }
+}
+
 void Grandmaster::mulaiTanpaBerkas()
 {
     loadallconfig();
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
+    inisiatorBangunan();
 
     // masih prototype
     // Membuat list pemain sesuai dengan informasi yang diberikan
@@ -226,6 +272,7 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
+    inisiatorBangunan();
 
     cout << "banyak_pemain awal " << banyak_pemain << endl;
     muatState(data_path);
