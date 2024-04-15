@@ -17,8 +17,7 @@
 using namespace std;
 
 template <class T>
-class MatriksPenyimpanan
-{
+class MatriksPenyimpanan {
 protected:
     vector<vector<T>> matriks;
     int baris;
@@ -152,7 +151,6 @@ public:
                 else {
                     cout << " ";
                     string kata = matriks[i][j]->getKode();
-                    cout << kata << endl;
                     if (matriks[i][j]->isSiapPanen() == true)
                     {
                         for (int k = 0; k < kata.size(); k++)
@@ -174,7 +172,7 @@ public:
     }
 
     map<string, string> listProdukInMatriks() {
-        // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
+    // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
         map<string, string> listProduk;
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
@@ -196,7 +194,6 @@ public:
         return listProduk;
     }
     
-
     map<string, int> listSiapPanen() {
         // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
         map<string, int> siappanen;
@@ -222,50 +219,8 @@ public:
         return siappanen;
     }
 
-    // bool checkItemBuilding(map<string, int> material)
-    // {
-    //     // menentukan apakah jumlah inventory saat ini mencukupi untuk membangun sebuah bangunan
-    //     map<string, int> material_di_invent;
-    //     material_di_invent.insert({"TAW", 0});
-    //     material_di_invent.insert({"SAW", 0});
-    //     material_di_invent.insert({"ALW", 0});
-    //     material_di_invent.insert({"IRW", 0});
-
-    //     for (int i = 0; i < baris; i++)
-    //     {
-    //         for (int j = 0; j < kolom; j++)
-    //         {
-    //             if (matriks[i][j] != NULL)
-    //             {
-    //                 if (matriks[i][j]->getKode() == ("TAW" || "SAW" || "ALW" || "IRW"))
-    //                 {
-    //                     material_di_invent[matriks[i][j]->getKode()] += 1;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     // cek apakah jumlah inventory mencukupi
-    //     bool mencukupi = true;
-    //     bool cetak_kalimat = true;
-    //     for (auto i = material.begin(); i != material.end(); i++)
-    //     {
-    //         if (material_di_invent[i->first] < i->second)
-    //         {
-    //             if (cetak_kalimat)
-    //             {
-    //                 cout << "Kamu tidak memiliki cukup material untuk membangun bangunan" << endl;
-    //                 cetak_kalimat = false;
-    //             }
-    //             cout << "Material " << i->first << " masih perlu " << i->second - material_di_invent[i->first] << " lagi" << endl;
-    //             mencukupi = false;
-    //         }
-    //     }
-    //     return mencukupi;
-    // }
-
     int getValue() {
-        // mendapatkan total uang dari seluruh item yang ada di dalam matriks
+    // mendapatkan total uang dari seluruh item yang ada di dalam matriks
         int uang = 0;
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
@@ -278,7 +233,7 @@ public:
     }
 
     int getLahanKosong() {
-        // mendapatkan jumlah petak matriks yang kosong
+    // mendapatkan jumlah petak matriks yang kosong
         int empty = 0;
         for (int i = 0; i < this->getBaris(); i++) {
             for (int j = 0; j < this->getKolom(); j++) {
@@ -291,7 +246,7 @@ public:
     }
 
     bool isEmpety() {
-        // cek apakah matriks kosong
+    // cek apakah matriks kosong
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 if (matriks[i][j] != NULL) {
@@ -303,7 +258,7 @@ public:
     }
 
     bool isFull() {
-        // cek apakah matriks penuh
+    // cek apakah matriks penuh
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 if (matriks[i][j] == NULL) {
@@ -315,7 +270,7 @@ public:
     }
 
     bool isAdaMakanan() {
-        // cek apakah di dalam matriks ada item yang bisa dimakan
+    // cek apakah di dalam matriks ada item yang bisa dimakan
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 if (matriks[i][j] != NULL) {

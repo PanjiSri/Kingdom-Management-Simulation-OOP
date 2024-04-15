@@ -102,7 +102,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     cout << "Jangan dikorupsi ya!!!"<< endl << endl;
 }
 
-void Walikota::buatUser(vector<Peran*> listPlayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) {
+Peran* Walikota::buatUser(vector<Peran*> listplayer) {
     if (gulden >= 50) {
         string role, uname;
         cout << "Pilih role yang ingin dibuat: ";
@@ -110,15 +110,23 @@ void Walikota::buatUser(vector<Peran*> listPlayer, int row_inv, int col_inv, int
 
         if (role == "Petani" || role == "Peternak") {
             cout << endl << "Masukkan username: ";
-            gulden -= 50;
+            cin >> uname;
+            // cek apakah username telah digunakan
+            for (int i = 0; i < listplayer.size(); i++) {
+                if (listplayer[i]->getUname() == uname) {
+                    cout << "Username telah digunakan!" << endl << endl;
+                    return NULL;
+                }
+            }
 
+            gulden -= 50;
             if (role == "Petani") {
-                Peran* a = new Petani(uname, row_inv, col_inv, row_farm, col_farm);
-                listPlayer.push_back(a);
+                Peran* a = new Petani(uname, penyimpanan.getBaris(), penyimpanan.getKolom(), penyimpanan.getBaris(), penyimpanan.getKolom());
+                return a;
             }
             else {
-                Peran* a = new Peternak(uname, row_inv, col_inv, row_pet, col_pet);
-                listPlayer.push_back(a);
+                Peran* a = new Peternak(uname, penyimpanan.getBaris(), penyimpanan.getKolom(), penyimpanan.getBaris(), penyimpanan.getKolom());
+                return a;
             }
             cout << endl;
         }
