@@ -25,6 +25,7 @@ class Walikota : public Peran {
 
         // Getter
         string getType();
+        int getKekayaan();
 
         // Setter
         

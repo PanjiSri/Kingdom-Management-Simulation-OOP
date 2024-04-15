@@ -26,6 +26,10 @@ string Peternak::getType() {
     return type;
 }
 
+int Peternak::getKekayaan() {
+    return this->gulden + this->penyimpanan.getValue() + this->peternakan.getValue();
+}
+
 void Peternak::beternakBertani() {
     if (peternakan.getLahanKosong() == 0) {
         cout << "Peternakan Anda penuh." << endl << endl;
@@ -224,7 +228,7 @@ void Peternak::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int
 
 int Peternak::calculateTax() {
     int KKP, pajak;
-    KKP = this->penyimpanan.getValue() + this->peternakan.getValue() - 11;
+    KKP = this->getKekayaan() - 11;
     
     if (KKP <= 6) {
         pajak = KKP * 0.05;

@@ -26,6 +26,10 @@ string Petani::getType() {
     return type;
 }
 
+int Petani::getKekayaan() {
+    return this->gulden + this->penyimpanan.getValue() + this->lahanPertanian.getValue();
+}
+
 void Petani::beternakBertani() {
     if (lahanPertanian.getLahanKosong() == 0) {
         cout << "Lahan Anda penuh." << endl << endl;
@@ -189,7 +193,7 @@ void Petani::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int r
 
 int Petani::calculateTax() {
     int KKP, pajak;
-    KKP = this->penyimpanan.getValue() + this->lahanPertanian.getValue() - 13;
+    KKP = this->getKekayaan() - 13;
     
     if (KKP <= 6) {
         pajak = KKP * 0.05;

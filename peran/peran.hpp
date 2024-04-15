@@ -42,7 +42,8 @@ public:
     string getUname();
     int getGulden();
     int getBerat();
-    vector<string>  getSemuaItem();
+    vector<string> getSemuaItem();
+    virtual int getKekayaan() = 0;
     virtual string getType() = 0;
 
     // Setter

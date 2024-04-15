@@ -21,6 +21,10 @@ string Walikota::getType() {
     return type;
 }
 
+int Walikota::getKekayaan() {
+    return this->gulden + this->penyimpanan.getValue();
+}
+
 void Walikota::beternakBertani() {
     cout << "Kamu walikota, pekerjaanmu bukan ini!!!" << endl << endl;
 }
@@ -46,7 +50,7 @@ int Walikota::calculateTax() {
 }
 
 void Walikota::ambilPajak(vector<Peran*> listPeran) {
-    cout << "Cring cring cring..." << endl;
+    cout << endl << "Cring cring cring..." << endl;
     cout << "Pajak sudah di pungut" << endl << endl;
     
     int gulden_pajak = 0;
@@ -61,10 +65,12 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     vector<detailPajak> detailPajak;
     // mendapatkan semua detail pajak dari pemain
     for (int i = 0; i < listPeran.size(); i++) {
-        pajak_pemain = listPeran[i]->calculateTax();
-        gulden_pajak += pajak_pemain;
-        listPeran[i]->tambahGulden(-pajak_pemain);
-        detailPajak.push_back({pajak_pemain, listPeran[i]->getUname(), listPeran[i]->getType()});
+        if (listPeran[i]->getType() != "Walikota") {
+            pajak_pemain = listPeran[i]->calculateTax();
+            gulden_pajak += pajak_pemain;
+            listPeran[i]->tambahGulden(-pajak_pemain);
+            detailPajak.push_back({pajak_pemain, listPeran[i]->getUname(), listPeran[i]->getType()});
+        }
     }
 
     // urutkan pajak dari yang terbesar
@@ -92,7 +98,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     }
     // tambahkan pajak ke walikota
     this->tambahGulden(gulden_pajak);
-    cout << "Negara mendapatkan pemasukan sebesar " << gulden_pajak << "gulde" << endl;
+    cout << "Negara mendapatkan pemasukan sebesar " << gulden_pajak << " gulden" << endl;
     cout << "Jangan dikorupsi ya!!!"<< endl << endl;
 }
 

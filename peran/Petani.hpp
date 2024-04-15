@@ -24,6 +24,7 @@ class Petani : public Peran {
 
         // Getter
         string getType();
+        int getKekayaan();
 
         // Setter
         
