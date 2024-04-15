@@ -47,6 +47,7 @@ private:
     string config_tanaman;
     string config_produk;
     string config_misc;
+    string config_recipe;
 
     // list pemain
     vector<Peran *> list_pemain;
@@ -63,6 +64,8 @@ public:
 
     // method load misc.txt
     void loadConfigMisc();
+
+    void loadConfigRecipe();
 
     // load semua config
     void loadallconfig();

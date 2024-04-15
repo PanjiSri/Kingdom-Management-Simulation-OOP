@@ -9,6 +9,8 @@ Grandmaster::Grandmaster()
     config_produk = "folder/product.txt";
     config_tanaman = "folder/plant.txt";
     config_misc = "folder/misc.txt";
+    config_recipe = "folder/recipe.txt";
+
     idx_giliran_pemain = 0;
     banyak_pemain = 0;
 }
@@ -113,6 +115,10 @@ void Grandmaster::loadConfigMisc()
         }
     }
 }
+
+// void Grandmaster::loadConfigRecipe(){
+
+// }
 
 void Grandmaster::loadallconfig()
 {

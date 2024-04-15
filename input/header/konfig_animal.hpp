@@ -16,7 +16,7 @@ public:
     ~Konfigurasi_Animal();
 
     string getTipe();
-    int getWeightToHarvest();
+    int getWeightToHarvest();    
 
 };
 
