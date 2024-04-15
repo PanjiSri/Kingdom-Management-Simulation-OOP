@@ -32,6 +32,15 @@ public:
     }
 };
 
+class BukanMakananException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Itu bukan makanan.";
+    }
+};
+
 class CarnivoraTidakMakanSayurException : public exception
 {
 public:
@@ -100,5 +109,20 @@ public:
         return "Command tidak valid";
     }
 };
+
+class PetaniPeternakTidakBisaJualBangunanException : public exception {
+public:
+    const char *what() const throw(){
+        return "Anda tidak bisa menjual bangunan";
+    }
+};
+
+class WalikotaTidakBisaBeliBangunanException : public exception {
+public:
+    const char *what() const throw(){
+        return "Anda tidak bisa membeli bangunan";
+    }
+};
+
 
 #endif

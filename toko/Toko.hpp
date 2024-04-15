@@ -26,4 +26,5 @@ public:
     Item* jual(int no, int kuantitas);
     void beli(Item* barang);
     void cetakListBarang();
+    vector<Item*> getListBarang();
 };

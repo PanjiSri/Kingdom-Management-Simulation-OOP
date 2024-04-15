@@ -300,7 +300,13 @@ void Walikota::membeli(Toko* toko){
     cin >> noBarang;
     cout << "\nKuantitas : ";
     cin >> kuantitas;
-    // belum divalidasi
+    
+    // handle error beli bangunan
+    if (toko->getListBarang()[noBarang-1]->getTipe() == "BANGUNAN")
+    {
+        throw WalikotaTidakBisaBeliBangunanException();
+    }
+    
     try {
         Item* item = toko->jual(noBarang, kuantitas);
         if(this->getGulden() < item->getHarga()*kuantitas) {

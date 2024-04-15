@@ -21,7 +21,7 @@ class Herbivore : public Hewan
         vector<string> getProduk();
 
         // Other Method
-        void makan(Produk* produk);
+        void makan(Item* item);
 };
 
 
