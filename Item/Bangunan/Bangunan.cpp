@@ -52,3 +52,11 @@ int Bangunan::getAloeWoodCost() {
 int Bangunan::getIronwoodWoodCost() {
     return ironwood_wood_cost;
 }
+
+string Bangunan::getTipe() {
+    return "bangunan";
+}
+
+int Bangunan::getTambahan() {
+    return 0;
+}

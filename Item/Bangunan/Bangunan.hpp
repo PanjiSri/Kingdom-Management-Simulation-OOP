@@ -31,6 +31,9 @@ class Bangunan : public Item {
         int getSandalwoodWoodCost();
         int getAloeWoodCost();
         int getIronwoodWoodCost();
+
+        string getTipe();
+        int getTambahan();
 };
 
 #endif
