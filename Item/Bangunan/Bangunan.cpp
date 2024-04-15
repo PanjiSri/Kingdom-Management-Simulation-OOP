@@ -40,12 +40,23 @@ Bangunan::~Bangunan() {}
 int Bangunan::getTeakWoodCost() {
     return teak_wood_cost;
 }
+
 int Bangunan::getSandalwoodWoodCost() {
     return sandalwood_wood_cost;
 }
+
 int Bangunan::getAloeWoodCost() {
     return aloe_wood_cost;
 }
+
 int Bangunan::getIronwoodWoodCost() {
     return ironwood_wood_cost;
+}
+
+string Bangunan::getTipe() {
+    return "bangunan";
+}
+
+int Bangunan::getTambahan() {
+    return 0;
 }
