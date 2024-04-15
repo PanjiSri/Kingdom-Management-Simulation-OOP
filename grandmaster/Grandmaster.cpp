@@ -135,6 +135,8 @@ void Grandmaster::inisiatorTanaman()
 
         list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
+        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
 }
 

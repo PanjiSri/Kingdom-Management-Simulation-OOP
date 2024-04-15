@@ -23,7 +23,7 @@ vector<string> Carnivore::getProduk() {
     return produk;
 }
 
-bool Carnivore::makan(Produk* produk) {
+void Carnivore::makan(Produk* produk) {
     if (produk->getTipe() == "PRODUCT_FRUIT_PLANT") {
         throw CarnivoraTidakMakanSayurException();
     } else if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
@@ -31,6 +31,5 @@ bool Carnivore::makan(Produk* produk) {
     }
     else {
         cout << endl << "Berat "<< this->nama <<" bertambah sebanyak " << produk->getTambahan() << endl;
-        return true;
     }
 }

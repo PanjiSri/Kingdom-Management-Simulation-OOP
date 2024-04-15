@@ -183,6 +183,7 @@ public:
                 {
                     cout << " ";
                     string kata = matriks[i][j]->getKode();
+                    cout << kata << endl;
                     if (matriks[i][j]->isSiapPanen() == true)
                     {
                         for (int k = 0; k < kata.size(); k++)

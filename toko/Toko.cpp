@@ -172,7 +172,8 @@ void Toko::cetakListBarang(){
             cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
         } else 
         {
-            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" <<endl;
+            cout << (i+1) << ". "<<
+            jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" <<endl;
         }
     }  
 }
