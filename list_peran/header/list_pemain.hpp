@@ -2,7 +2,10 @@
 #define LIST_PERAN_HPP
 
 // #include "dummy.hpp"
-#include "../../peran/peran.hpp"
+#include "../../peran/Peran.hpp"
+#include "../../peran/Walikota.hpp"
+#include "../../peran/Petani.hpp"
+#include "../../peran/Peternak.hpp"
 #include <vector>
 using namespace std;
 
