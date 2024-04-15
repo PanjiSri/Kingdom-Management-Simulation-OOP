@@ -69,6 +69,9 @@ public:
     // memulai game //ragu apakah perlu loadallconfig() disini?
     void mulaiTanpaBerkas();
 
+    //memulai game dengan berkas
+    void mulaiDenganBerkas(string data_path);
+
     // manipulasi list
     void muatPemain(Peran *pemain_baru);
 
@@ -83,6 +86,14 @@ public:
 
     // cari index pemain berdasarkan username
     int cariPemain(string username);
+
+
+    //command program
+    void next();
+
+
+    //alur program
+    void operasi_perintah(string command);
 
     //................... ini buat testing aja......................//
     Line_Handler getJenisTanaman(int index) const;
@@ -103,7 +114,13 @@ public:
 
     int getBesarPeternakan(int index) const;
 
-    // ~Grandmaster();
+    int getIndexGiliran() const;
+
+    void getAllPemainInfo();
+
+    void printAllPemain();
+
+    ~Grandmaster();
 };
 
 #endif

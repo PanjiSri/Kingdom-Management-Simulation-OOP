@@ -8,6 +8,7 @@
 #include "../Item/Produk/Produk.hpp"
 // bangungan belum terelealisasi
 // #include "../Item/Bangunan/Bangunan.cpp"
+// #include "../grandmaster/Grandmaster.hpp"
 
 #include <iostream>
 #include <map>
@@ -17,9 +18,10 @@ class Toko
 {
 private:
     vector<Item*> jenisBarang;
-    map<string,int> listBarang;
+    map<string,int> jumlahTiapJenis;
 public:
     Toko();
+    Toko(vector<Tanaman*>, vector<Hewan*>, vector<Produk*>); // kurang bangunan
     ~Toko();
     Item* jual(int no, int kuantitas);
     void beli(Item* barang);

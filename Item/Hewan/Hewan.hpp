@@ -36,7 +36,7 @@ class Hewan : public Item
         // Setter
         void tambahBerat(int);
         void setBerat(int);
-        map<string, int> getMaterial();
+        // map<string, int> getMaterial();
         
         // Other Method
         virtual bool makan(Produk* produk) = 0;

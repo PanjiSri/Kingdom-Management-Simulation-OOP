@@ -1,3 +1,6 @@
+#ifndef __PCOLOR_HPP__
+#define __PCOLOR_HPP__
+
 /**
 Filename: pcolor.h
 Description: Print character with some color in terminal
@@ -21,3 +24,5 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 void print_red(char c);
 void print_green(char c);
 void print_blue(char c);
+
+#endif

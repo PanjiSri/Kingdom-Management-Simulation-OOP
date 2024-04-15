@@ -27,7 +27,7 @@ class Item {
         int getHarga();
         virtual string getTipe() = 0;
         virtual int getTambahan() = 0;
-        virtual map<string, int> getMaterial() = 0;
+        // virtual map<string, int> getMaterial() = 0;
 
         // Other Method
         bool operator==(string nama) const;

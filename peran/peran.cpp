@@ -50,6 +50,21 @@ void Peran::tambahGulden(int gulden) {
     this->gulden += gulden;
 }
 
+vector<string> Peran::getSemuaItem(){
+    vector<string> temp;
+
+    for(int i = 0; i < penyimpanan.getBaris(); i++) {
+        for(int j = 0; j < penyimpanan.getKolom(); j++) {
+            if(penyimpanan[j][i] != NULL) {
+                temp.push_back(penyimpanan[j][i]->getNama());
+            }
+        }
+    }
+    return temp;
+}
+
+
+
 vector<int> Peran::parse(string idx) {
     vector<int> indeks;
     indeks.push_back(((int)idx[0])-65);
