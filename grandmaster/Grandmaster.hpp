@@ -6,7 +6,11 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include "../input/header/input.hpp"
+#include "../input/header/konfig_file.hpp"
+#include "../input/header/konfig_animal.hpp"
+#include "../input/header/konfig_tanaman.hpp"
+#include "../input/header/konfig_produk.hpp"
+#include "../input/header/konfig_recipe.hpp"
 #include "../peran/Peran.hpp"
 #include "../peran/Walikota.hpp"
 #include "../peran/Petani.hpp"
@@ -25,15 +29,17 @@ private:
     int besar_peternakan[2];
 
     // list jenis tanaman, hewan, produk
-    vector<Line_Handler> list_jenis_tanaman;
-    vector<Line_Handler> list_jenis_hewan;
-    vector<Line_Handler_Produk> list_jenis_produk;
+    vector<Konfigurasi_Tanaman> list_jenis_tanaman;
+    vector<Konfigurasi_Animal> list_jenis_hewan;
+    vector<Konfigurasi_Produk> list_jenis_produk;
+    vector<Konfigurasi_Recipe> list_jenis_bangunan;
 
     // inisiasi configurasi
     vector<Tanaman *> list_tanaman;
     vector<Hewan *> list_hewan;
     vector<Produk *> list_produk;
     vector<Item *> list_item;
+    // vector<Bangunan *> list_bangunan;
 
 
         // path ke file konfigurasi
@@ -41,6 +47,7 @@ private:
     string config_tanaman;
     string config_produk;
     string config_misc;
+    string config_recipe;
 
     // list pemain
     vector<Peran *> list_pemain;
@@ -57,6 +64,8 @@ public:
 
     // method load misc.txt
     void loadConfigMisc();
+
+    void loadConfigRecipe();
 
     // load semua config
     void loadallconfig();
@@ -100,11 +109,11 @@ public:
     void operasi_perintah(string command);
 
     //................... ini buat testing aja......................//
-    Line_Handler getJenisTanaman(int index) const;
+    // Line_Handler getJenisTanaman(int index) const;
 
-    Line_Handler getJenisHewan(int index) const;
+    // Line_Handler getJenisHewan(int index) const;
 
-    Line_Handler_Produk getJenisProduk(int index) const;
+    // Line_Handler_Produk getJenisProduk(int index) const;
 
     //..............................................................//
 

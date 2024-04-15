@@ -9,6 +9,8 @@ Grandmaster::Grandmaster()
     config_produk = "folder/product.txt";
     config_tanaman = "folder/plant.txt";
     config_misc = "folder/misc.txt";
+    config_recipe = "folder/recipe.txt";
+
     idx_giliran_pemain = 0;
     banyak_pemain = 0;
 }
@@ -30,7 +32,7 @@ void Grandmaster::loadConfigHewanTanaman()
     {
         stringstream ss(line);
         ss >> id >> kode_huruf >> name >> type >> weight >> price;
-        list_jenis_hewan.push_back(Line_Handler(id, kode_huruf, name, type, weight, price));
+        list_jenis_hewan.push_back(Konfigurasi_Animal(id, kode_huruf, name, type, weight, price));
     }
 
     file.close();
@@ -50,7 +52,7 @@ void Grandmaster::loadConfigHewanTanaman()
     {
         stringstream ss(line2);
         ss >> id2 >> kode_huruf2 >> name2 >> type2 >> duration2 >> price2;
-        list_jenis_tanaman.push_back(Line_Handler(id2, kode_huruf2, name2, type2, duration2, price2));
+        list_jenis_tanaman.push_back(Konfigurasi_Tanaman(id2, kode_huruf2, name2, type2, duration2, price2));
     }
 
     file2.close();
@@ -72,7 +74,7 @@ void Grandmaster::loadConfigProduk()
     {
         stringstream ss(line);
         ss >> id >> kode_huruf >> name >> type >> origin >> add_weight >> price;
-        list_jenis_produk.push_back(Line_Handler_Produk(id, kode_huruf, name, type, add_weight, price, origin));
+        list_jenis_produk.push_back(Konfigurasi_Produk(id, kode_huruf, name, type, origin, add_weight, price));
     }
     file.close();
 }
@@ -114,6 +116,10 @@ void Grandmaster::loadConfigMisc()
     }
 }
 
+// void Grandmaster::loadConfigRecipe(){
+
+// }
+
 void Grandmaster::loadallconfig()
 {
     loadConfigHewanTanaman();
@@ -127,11 +133,11 @@ void Grandmaster::inisiatorTanaman()
     for (int i = 0; i < list_jenis_tanaman.size(); i++)
     {
         int id = list_jenis_tanaman[i].getId();
-        string kode = list_jenis_tanaman[i].getKodeHuruf();
+        string kode = list_jenis_tanaman[i].getKode();
         string nama = list_jenis_tanaman[i].getName();
-        string tipe = list_jenis_tanaman[i].getType();
+        string tipe = list_jenis_tanaman[i].getTipe();
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
-        int harga = list_jenis_tanaman[i].getPrice();
+        int harga = list_jenis_tanaman[i].getHarga();
 
         list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
@@ -146,11 +152,11 @@ void Grandmaster::inisiatorHewan()
     {
 
         int id = list_jenis_hewan[i].getId();
-        string kode = list_jenis_hewan[i].getKodeHuruf();
+        string kode = list_jenis_hewan[i].getKode();
         string nama = list_jenis_hewan[i].getName();
-        string tipe = list_jenis_hewan[i].getType();
-        int berat = list_jenis_hewan[i].getDurationToHarvest();
-        int harga = list_jenis_hewan[i].getPrice();
+        string tipe = list_jenis_hewan[i].getTipe();
+        int berat = list_jenis_hewan[i].getWeightToHarvest();
+        int harga = list_jenis_hewan[i].getHarga();
 
         if (tipe == "HERBIVORE")
         {
@@ -179,11 +185,11 @@ void Grandmaster::inisiatorProduk()
     for (int i = 0; i < list_jenis_produk.size(); i++)
     {
         int id = list_jenis_produk[i].getId();
-        string kode = list_jenis_produk[i].getKodeHuruf();
+        string kode = list_jenis_produk[i].getKode();
         string nama = list_jenis_produk[i].getName();
-        string tipe = list_jenis_produk[i].getType();
-        int berat = list_jenis_produk[i].getDurationToHarvest();
-        int harga = list_jenis_produk[i].getPrice();
+        string tipe = list_jenis_produk[i].getTipe();
+        int berat = list_jenis_produk[i].getBeratTambahan();
+        int harga = list_jenis_produk[i].getHarga();
         string origin = list_jenis_produk[i].getOrigin();
 
         list_produk.push_back(new Produk(id, kode, nama, tipe, origin, berat, harga));
@@ -575,21 +581,21 @@ int Grandmaster::getBesarPeternakan(int index) const
     return besar_peternakan[index];
 }
 
-// testing
-Line_Handler Grandmaster::getJenisHewan(int index) const
-{
-    return list_jenis_hewan[index];
-}
+// // testing
+// Line_Handler Grandmaster::getJenisHewan(int index) const
+// {
+//     return list_jenis_hewan[index];
+// }
 
-Line_Handler Grandmaster::getJenisTanaman(int index) const
-{
-    return list_jenis_tanaman[index];
-}
+// Line_Handler Grandmaster::getJenisTanaman(int index) const
+// {
+//     return list_jenis_tanaman[index];
+// }
 
-Line_Handler_Produk Grandmaster::getJenisProduk(int index) const
-{
-    return list_jenis_produk[index];
-}
+// Line_Handler_Produk Grandmaster::getJenisProduk(int index) const
+// {
+//     return list_jenis_produk[index];
+// }
 
 int Grandmaster::getIndexGiliran() const
 {
