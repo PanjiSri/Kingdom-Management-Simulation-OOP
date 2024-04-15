@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include "algorithm"
 #include "../input/header/input.hpp"
 #include "../peran/peran.hpp"
 #include "../exception/header/exception.hpp"
@@ -119,6 +120,8 @@ public:
     void getAllPemainInfo();
 
     void printAllPemain();
+
+    void printWalikota();
 
     ~Grandmaster();
 };
