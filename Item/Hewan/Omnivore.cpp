@@ -26,10 +26,12 @@ vector<string> Omnivore::getProduk() {
 void Omnivore::makan(Item* item) {
     if (item->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
-    } else if (item->getTipe() == "PRODUCT_FRUIT_PLANT" ||
-                item->getTipe() == "PRODUCT_ANIMAL") {
+    } 
+    else if (item->getTipe() == "PRODUCT_FRUIT_PLANT" ||
+             item->getTipe() == "PRODUCT_ANIMAL") {
         this->berat_saat_ini += item->getTambahan();
-    } else {
+    } 
+    else {
         throw BukanMakananException();
     }
 }

@@ -3,44 +3,40 @@
 
 Petani::Petani() : Peran() {}
 
-Petani::Petani(string username, int row_inv, int col_inv, int row_lahan, int col_lahan) : Peran(username, row_inv, col_inv)
+Petani::Petani(string username, int row_inv, int col_inv, int row_lahan, int col_lahan) : 
+    Peran(username, row_inv, col_inv)
 {
     lahanPertanian.setUkuran(row_lahan, col_lahan);
 }
 
-Petani::Petani(string username, int berat, int gulden, int row_inv, int col_inv, int row_lahan, int col_lahan) : Peran(username, berat, gulden, row_inv, col_inv)
+Petani::Petani(string username, int berat, int gulden, int row_inv, int col_inv, int row_lahan, int col_lahan) : 
+    Peran(username, berat, gulden, row_inv, col_inv)
 {
     lahanPertanian.setUkuran(row_lahan, col_lahan);
 }
 
 Petani::~Petani() {}
 
-Petani &Petani::operator=(const Petani &other)
-{
+Petani &Petani::operator=(const Petani &other) {
     Peran::operator=(other);
     lahanPertanian = other.lahanPertanian;
     return *this;
 }
 
-string Petani::getType()
-{
+string Petani::getType() {
     return type;
 }
 
-int Petani::getKekayaan()
-{
+int Petani::getKekayaan() {
     return this->gulden + this->penyimpanan.getValue() + this->lahanPertanian.getValue();
 }
 
-void Petani::beternakBertani()
-{
-    if (lahanPertanian.getLahanKosong() == 0)
-    {
+void Petani::beternakBertani() {
+    if (lahanPertanian.getLahanKosong() == 0) {
         cout << "Lahan Anda penuh." << endl
              << endl;
     }
-    else
-    {
+    else {
         cout << "Pilih tanaman dari penyimpanan" << endl;
         printPenyimpanan();
         string indeksInvent;
@@ -80,14 +76,11 @@ void Petani::beternakBertani()
     // cetakLahan();
 }
 
-void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem)
-{
+void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem) {
     Tanaman* plant;
-    for (int i = 0; i < listItem.size(); i++)
-    {
+    for (int i = 0; i < listItem.size(); i++) {
         cout << listItem[i]->getNama() << endl;
-        if (listItem[i]->getNama() == name)
-        {
+        if (listItem[i]->getNama() == name) {
             plant = dynamic_cast<Tanaman*>(listItem[i]);
             cout << plant->getKode() << endl;
             plant->setUmur(umur);
@@ -98,8 +91,7 @@ void Petani::beternakBertaniFile(string location, string name, int umur, vector<
     lahanPertanian.setElement(lokasi[1], lokasi[0], plant);
 }
 
-void Petani::cetakLahan()
-{
+void Petani::cetakLahan() {
     int lebar = this->lahanPertanian.getKolom() * 5 + this->lahanPertanian.getKolom() + 1;
     cout << "      ";
     centerAlign("[ LADANG ]", lebar);
@@ -113,8 +105,7 @@ void Petani::cetakLahan()
     cout << endl;
 }
 
-void Petani::panen(vector<Produk *> listProduk)
-{
+void Petani::panen(vector<Produk *> listProduk) {
     cetakLahan();
 
     vector<string> listTanamanMatang;
@@ -122,24 +113,22 @@ void Petani::panen(vector<Produk *> listProduk)
     map<string, int> tanamanSiapPanen = lahanPertanian.listSiapPanen();
 
     // Menghitung tanaman yang siap panen
-    for (auto i = tanamanSiapPanen.begin(); i != tanamanSiapPanen.end(); i++)
-    {
+    for (auto i = tanamanSiapPanen.begin(); i != tanamanSiapPanen.end(); i++) {
         listTanamanMatang.push_back(i->first);
         jumlahTanamanMatang.push_back(i->second);
     }
+
     // Menampilkan tanaman yang siap panen
     cout << "Daftar tanaman yang siap panen: " << endl;
     for (int i = 0; i < listTanamanMatang.size(); i++) {
         cout << i+1 << ") " << listTanamanMatang[i] << " (" << jumlahTanamanMatang[i] << " buah)" << endl;
     }
 
-    if (listTanamanMatang.size() == 0)
-    { // jika tidak ada yang bisa dipanen
+    if (listTanamanMatang.size() == 0) { // jika tidak ada yang bisa dipanen
         cout << "Tidak ada tanaman yang bisa dipanen." << endl
              << endl;
     }
-    else
-    {
+    else {
         // memilih jenis tanaman yang ingin dipanen
         int angka;
         cout << endl
@@ -147,13 +136,11 @@ void Petani::panen(vector<Produk *> listProduk)
         cin >> angka;
         angka--;
 
-        if (angka >= listTanamanMatang.size() || angka < 0)
-        { // jika masukan tidak valid
+        if (angka >= listTanamanMatang.size() || angka < 0) { // jika masukan tidak valid
             cout << "Hei, apakah kamu tidak bisa membaca!!!." << endl
                  << endl;
         }
-        else
-        {
+        else {
             // memilih berapa banyak tanaman dari jenis tsb yang ingin dipanen
             cout << "Tanaman " << listTanamanMatang[angka] << " dipilih" << endl
                  << endl;
@@ -161,19 +148,15 @@ void Petani::panen(vector<Produk *> listProduk)
             int jumlah;
             cin >> jumlah;
 
-            if (jumlah > jumlahTanamanMatang[angka])
-            { // jika input lebih dari yang ada
+            if (jumlah > jumlahTanamanMatang[angka]) { // jika input lebih dari yang ada
                 cout << "Tanaman yang bisa dipanen tidak sebanyak itu tahu." << endl
                      << endl;
             }
-            else
-            {
-                for (int x = 0; x < jumlah; x++)
-                {
+            else {
+                for (int x = 0; x < jumlah; x++) {
                     bool get = false;
 
-                    while (get == false)
-                    {
+                    while (get == false) {
                         // memilih petak yang ingin dipanen
                         string kode;
                         cout << "Pilih petak ke-" << x + 1 << " : ";
@@ -187,21 +170,17 @@ void Petani::panen(vector<Produk *> listProduk)
                             this->lahanPertanian[index[1]][index[0]] = NULL;
                             vector<string> hasilPanen = tanaman->getProduk();
 
-                            for (int banyak_produk = 0; banyak_produk < hasilPanen.size(); banyak_produk++)
-                            {
+                            for (int banyak_produk = 0; banyak_produk < hasilPanen.size(); banyak_produk++) {
                                 Produk *produk;
-                                for (int q = 0; q < listProduk.size(); q++)
-                                {
+                                for (int q = 0; q < listProduk.size(); q++) {
                                     // membuat objek produk dari string nama pada hasilPanen
-                                    if (hasilPanen[banyak_produk] == listProduk[q]->getNama())
-                                    {
+                                    if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
                                         produk = listProduk[q];
                                     }
                                 }
                                 penyimpanan += produk;
                             }
                             get = true;
-                            // }
                         }
                         else { // jika masukan salah
                             cout << "Lokasi yang anda masukkan salah." << endl
@@ -214,28 +193,22 @@ void Petani::panen(vector<Produk *> listProduk)
     }
 }
 
-void Petani::beriMakan()
-{
+void Petani::beriMakan() {
     cout << "Emangnya kamu punya hewan???" << endl
          << endl;
 }
 
-void Petani::addUmurTanaman()
-{
-    for (int i = 0; i < lahanPertanian.getBaris(); i++)
-    {
-        for (int j = 0; j < lahanPertanian.getKolom(); j++)
-        {
-            if (lahanPertanian[i][j] != NULL)
-            {
+void Petani::addUmurTanaman() {
+    for (int i = 0; i < lahanPertanian.getBaris(); i++) {
+        for (int j = 0; j < lahanPertanian.getKolom(); j++) {
+            if (lahanPertanian[i][j] != NULL) {
                 lahanPertanian[i][j]->tambahUmur();
             }
         }
     }
 }
 
-void Petani::ambilPajak(vector<Peran *> list)
-{
+void Petani::ambilPajak(vector<Peran *> list) {
     cout << "Hei, ini bukan wewenangmu!!!" << endl
          << endl;
 }
@@ -245,35 +218,28 @@ Peran* Petani::buatUser(vector<Peran*> listplayer) {
     return NULL;
 }
 
-int Petani::calculateTax()
-{
+int Petani::calculateTax() {
     int KKP, pajak;
     KKP = this->getKekayaan() - 13;
 
-    if (KKP <= 6)
-    {
+    if (KKP <= 6) {
         pajak = KKP * 0.05;
     }
-    else if (KKP > 6 && KKP <= 25)
-    {
+    else if (KKP > 6 && KKP <= 25) {
         pajak = KKP * 0.15;
     }
-    else if (KKP > 25 && KKP <= 50)
-    {
+    else if (KKP > 25 && KKP <= 50) {
         pajak = KKP * 0.25;
     }
-    else if (KKP > 50 && KKP <= 500)
-    {
+    else if (KKP > 50 && KKP <= 500) {
         pajak = KKP * 0.30;
     }
-    else
-    {
+    else {
         pajak = KKP * 0.35;
     }
 
     // jika gulden yang dimiliki lebih kecil dari pajak yang dikeluarkan
-    if (gulden < pajak)
-    {
+    if (gulden < pajak) {
         pajak = gulden;
     }
 

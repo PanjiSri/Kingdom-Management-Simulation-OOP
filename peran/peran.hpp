@@ -60,7 +60,6 @@ public:
     void addPenyimpananFile(string, vector<Item*>);
     void playerMakan();
 
-
     virtual void beternakBertani() = 0;
     virtual void beternakBertaniFile(string, string, int, vector<Item*>) = 0;
     virtual void panen(vector<Produk*>) = 0;
