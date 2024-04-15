@@ -663,7 +663,7 @@ void Grandmaster::operasi_perintah(string command)
 
         list_pemain[idx_giliran_pemain]->membeli(toko);
     }else if(command == "JUAL"){
-           
+        list_pemain[idx_giliran_pemain]->menjual(toko);
     }
     else
     {
