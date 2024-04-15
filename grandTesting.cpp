@@ -23,24 +23,24 @@ int main()
 
     g.getAllPemainInfo();
 
-    g.next();
+    // g.next();
 
-    g.next();
+    // g.next();
 
-    g.next();
+    // g.next();
 
-    cout << "sekarang giliran pemain indeks ke ";
-    g.next();
+    // cout << "sekarang giliran pemain indeks ke ";
+    // g.next();
 
-    cout << "sekarang giliran pemain indeks ke ";
-    g.operasi_perintah("NEXT");
-    g.printAllPemain();
-    g.operasi_perintah("CETAK_PENYIMPANAN");
-    g.operasi_perintah("PUNGUT_PAJAK");
-    cout << "sekarang giliran pemain indeks ke ";
-    g.operasi_perintah("NEXT");
-    g.printAllPemain();
-    cout << "walikota sekarang adalah ";
-    g.printWalikota();
-    g.operasi_perintah("PUNGUT_PAJAK");
+    // cout << "sekarang giliran pemain indeks ke ";
+    // g.operasi_perintah("NEXT");
+    // g.printAllPemain();
+    // g.operasi_perintah("CETAK_PENYIMPANAN");
+    // g.operasi_perintah("PUNGUT_PAJAK");
+    // cout << "sekarang giliran pemain indeks ke ";
+    // g.operasi_perintah("NEXT");
+    // g.printAllPemain();
+    // cout << "walikota sekarang adalah ";
+    // g.printWalikota();
+    // g.operasi_perintah("PUNGUT_PAJAK");
 }

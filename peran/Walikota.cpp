@@ -260,3 +260,7 @@ void Walikota::bangun() {
     addPenyimpananInFirstEmpty(new Bangunan(id, kode, pilihan_bangunan, harga));
     cout << pilihan_bangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
 }
+
+
+vector<vector<string>> Walikota::getDataLahan() {
+}
