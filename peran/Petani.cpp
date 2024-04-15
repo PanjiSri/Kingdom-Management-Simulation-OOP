@@ -246,11 +246,9 @@ int Petani::calculateTax() {
     return pajak;
 }
 
-// void Petani::bangun()
-// {
-//     cout << "Kamu tidak punya wewenang untuk membangun." << endl
-//          << endl;
-// }
+void Petani::bangun() {
+    cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+}
 
 vector<vector<string>> Petani::getDataLahan()
 {
@@ -286,58 +284,51 @@ vector<vector<string>> Petani::getDataLahan()
 }
 
 // belum selesai
-void Petani::membeli(Toko* toko){
+void Petani::membeli(Toko* toko) {
     toko->cetakListBarang();
     int noBarang;
     int kuantitas;
-    cout << "\nUang Anda : " << gulden << endl;
+    cout << endl << "Uang Anda : " << gulden << endl;
     cout << "Slot Penyimpanan tersedia : " << penyimpanan.getLahanKosong() << endl;
     cout << "Barang ingin dibeli : "; 
     cin >> noBarang;
     cout << "\nKuantitas : ";
     cin >> kuantitas;
-    // belum divalidasi
-    try {
-        Item* item = toko->jual(noBarang, kuantitas);
-        if(this->getGulden() < item->getHarga()*kuantitas) {
-            cout << "Uang yang anda miliki tidak cukup" << endl;
-        }
-        else {
-            penyimpanan.print();
-            for(int i = 0; i < kuantitas; i++) {
-                string location;
-                cout << "Masukkan lokasi untuk item ke-" << i << endl;
-                cin >> location;
-                vector<int> index = parse(location);
-                penyimpanan.setElement(index[1], index[0], item);
-            }
+
+    Item* item = toko->jual(noBarang, kuantitas);
+    if (this->getGulden() < item->getHarga()*kuantitas) {
+        cout << "Uang yang anda miliki tidak cukup" << endl;
+    }
+    else {
+        penyimpanan.print();
+        for(int i = 0; i < kuantitas; i++) {
+            string location;
+            cout << "Masukkan lokasi untuk item ke-" << i << endl;
+            cin >> location;
+            vector<int> index = parse(location);
+            penyimpanan.setElement(index[1], index[0], item);
         }
     }
-    catch (StokTidakTersediaException e) {
-        cout << e.what() << endl;
-    }
-    // addpenyimpanan(item);
-    // harusnya gini sih
 }
 
-void Petani::menjual(Toko* toko){
+void Petani::menjual(Toko* toko) {
     cout << "Berikut merupakan penyimpanan Anda\n";
     printPenyimpanan();
     int ulang;
     int total = 0;
     cout << "Berapa benda yang ingin anda jual: ";
     cin >> ulang;
+
     for(int i = 0; i < ulang; i++) {
         cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
-        string indeksinvent;
-        cin >> indeksinvent;
-        vector<int> idx = parse(indeksinvent);
+        string indeksInvent;
+        cin >> indeksInvent;
+        vector<int> idx = parse(indeksInvent);
         Item* barang;
         barang = penyimpanan[idx[1]][idx[0]];
 
         // handle error kalo bangunan
-        if (barang->getTipe() == "BANGUNAN")
-        {
+        if (barang->getTipe() == "BANGUNAN") {
             throw PetaniPeternakTidakBisaJualBangunanException();
         }
         

@@ -69,7 +69,7 @@ public:
     virtual void ambilPajak(vector<Peran*>) = 0;
     virtual Peran* buatUser(vector<Peran*> listplayer) = 0;
     virtual int calculateTax() = 0;
-    // virtual void bangun() = 0;
+    virtual void bangun() = 0;
     virtual vector<vector<string>> getDataLahan() = 0;
     virtual void menjual(Toko* toko) = 0;
     virtual void membeli(Toko* toko) = 0;

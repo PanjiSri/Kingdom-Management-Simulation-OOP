@@ -39,7 +39,7 @@ class Petani : public Peran {
         Peran* buatUser(vector<Peran*> listplayer);
         vector<vector<string>> getDataLahan();
         int calculateTax();
-        // void bangun();
+        void bangun();
         void menjual(Toko* toko);
         void membeli(Toko* toko);
 };
