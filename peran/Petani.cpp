@@ -84,14 +84,16 @@ void Petani::beternakBertani()
 
 void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem)
 {
-    Tanaman *plant;
+    Tanaman* plant;
     for (int i = 0; i < listItem.size(); i++)
     {
+        cout << listItem[i]->getNama() << endl;
         if (listItem[i]->getNama() == name)
         {
-            plant = dynamic_cast<Tanaman *>(listItem[i]);
+            plant = dynamic_cast<Tanaman*>(listItem[i]);
+            cout << plant->getKode() << endl;
+            plant->setUmur(umur);
         }
-        plant->setUmur(umur);
     }
     vector<int> lokasi = parse(location);
     lahanPertanian.setElement(lokasi[1], lokasi[0], plant);
@@ -277,11 +279,11 @@ int Petani::calculateTax()
     return pajak;
 }
 
-void Petani::bangun()
-{
-    cout << "Kamu tidak punya wewenang untuk membangun." << endl
-         << endl;
-}
+// void Petani::bangun()
+// {
+//     cout << "Kamu tidak punya wewenang untuk membangun." << endl
+//          << endl;
+// }
 
 vector<vector<string>> Petani::getDataLahan()
 {
@@ -314,4 +316,39 @@ vector<vector<string>> Petani::getDataLahan()
         }
     }
     return temp;
+}
+
+// belum selesai
+void Petani::membeli(Toko* toko){
+    toko->cetakListBarang();
+    int noBarang;
+    int kuantitas;
+    cout << "\nUang Anda : " << gulden << endl;
+    cout << "Slot Penyimpanan tersedia : " << penyimpanan.getLahanKosong() << endl;
+    cout << "Barang ingin dibeli : "; 
+    cin >> noBarang;
+    cout << "\nKuantitas : ";
+    cin >> kuantitas;
+    // belum divalidasi
+    try {
+        Item* item = toko->jual(noBarang, kuantitas);
+        if(this->getGulden() < item->getHarga()*kuantitas) {
+            cout << "Uang yang anda miliki tidak cukup" << endl;
+        }
+        else {
+            penyimpanan.print();
+            for(int i = 0; i < kuantitas; i++) {
+                string location;
+                cout << "Masukkan lokasi untuk item ke-" << i << endl;
+                cin >> location;
+                vector<int> index = parse(location);
+                penyimpanan.setElement(index[1], index[0], item);
+            }
+        }
+    }
+    catch (StokTidakTersediaException e) {
+        cout << e.what() << endl;
+    }
+    // addpenyimpanan(item);
+    // harusnya gini sih
 }

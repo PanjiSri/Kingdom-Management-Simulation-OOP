@@ -133,8 +133,8 @@ void Grandmaster::inisiatorTanaman()
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
         int harga = list_jenis_tanaman[i].getPrice();
 
-        list_tanaman.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
-        list_item.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
 }
 
@@ -586,6 +586,7 @@ void Grandmaster::getAllPemainInfo()
     cout << "=========INFORMASI PEMAIN PETERNAK=========" << endl;
     list_pemain[1]->cetakLahan();
     cout << "=========INFORMASI PEMAIN PETANI=========" << endl;
+    cout << list_pemain[2]->getType() << endl;
     list_pemain[2]->cetakLahan();
     return;
 
