@@ -133,8 +133,8 @@ void Grandmaster::inisiatorTanaman()
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
         int harga = list_jenis_tanaman[i].getPrice();
 
-        list_tanaman.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
-        list_item.push_back(new Tanaman(id, kode, tipe, nama, durasi, harga));
+        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
 }
 

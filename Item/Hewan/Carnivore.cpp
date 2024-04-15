@@ -23,13 +23,13 @@ vector<string> Carnivore::getProduk() {
     return produk;
 }
 
-void Carnivore::makan(Produk* produk) {
-    if (produk->getTipe() == "PRODUCT_FRUIT_PLANT") {
+void Carnivore::makan(Item* item) {
+    if (item->getTipe() == "PRODUCT_FRUIT_PLANT") {
         throw CarnivoraTidakMakanSayurException();
-    } else if(produk->getTipe() == "PRODUCT_MATERIAL_PLANT") {
+    } else if(item->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
+    } else {
+        throw BukanMakananException();
     }
-    else {
-        cout << endl << "Berat "<< this->nama <<" bertambah sebanyak " << produk->getTambahan() << endl;
-    }
+    this->berat_saat_ini += item->getTambahan();
 }

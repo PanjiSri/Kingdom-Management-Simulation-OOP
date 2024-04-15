@@ -100,6 +100,13 @@ void Peran::printPenyimpanan() {
     cout << "      ";
     centerAlign("[ PENYIMPANAN ]", lebar);
     this->penyimpanan.print();
+
+    map<string, string> listItemDiPenyimpanan = penyimpanan.listProdukInMatriks();
+    for (auto i = listItemDiPenyimpanan.begin(); i != listItemDiPenyimpanan.end(); i++) {
+        cout << "      - ";
+        cout << i->first << " : " << i->second << endl;
+    }
+    cout << endl;
 }
 
 void Peran::addPenyimpananInFirstEmpty(Item* item) {
@@ -114,18 +121,9 @@ void Peran::addPenyimpananSpesifikLocation(Item* item) {
     cin >> idx;
     cout << endl;
     
-    vector<int> lokasi;
-    try {
-        lokasi = parse(idx);
-    } catch (LokasiTidakValidException e) {
-        cout << e.what() << endl << endl;
-        return;
-    }
+    vector<int> lokasi = parse(idx);
 
-    if (lokasi[0] >= penyimpanan.getKolom() || lokasi[1] >= penyimpanan.getBaris()) {
-        cout << "Lokasi tidak valid." << endl << endl;
-    }
-    else if (penyimpanan[lokasi[1]][lokasi[0]] != NULL) {
+    if (penyimpanan[lokasi[1]][lokasi[0]] != NULL) {
         cout << "Cari tempat yang kosong." << endl << endl;
     }
     else {
@@ -155,14 +153,7 @@ void Peran::playerMakan() {
         cout << "Ambil makanan dalam inventory mu: ";
         cin >> lokasi;
         cout << endl;
-        vector<int> index;
-        try {
-            index = parse(lokasi);
-        } catch (LokasiTidakValidException e) {
-            cout << e.what() << endl << endl;
-            return;
-        }
-
+        vector<int> index = parse(lokasi);
         x = penyimpanan[index[1]][index[0]];
         
         if (x == NULL) {

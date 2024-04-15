@@ -32,6 +32,15 @@ public:
     }
 };
 
+class BukanMakananException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Itu bukan makanan.";
+    }
+};
+
 class CarnivoraTidakMakanSayurException : public exception
 {
 public:

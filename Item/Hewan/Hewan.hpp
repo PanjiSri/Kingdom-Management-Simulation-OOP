@@ -38,7 +38,7 @@ class Hewan : public Item
         void setBerat(int);
         
         // Other Method
-        virtual void makan(Produk* produk) = 0;
+        virtual void makan(Item* item) = 0;
         bool isSiapPanen();
 };
 

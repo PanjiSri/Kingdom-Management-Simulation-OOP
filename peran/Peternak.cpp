@@ -42,14 +42,7 @@ void Peternak::beternakBertani() {
 
         cout << "Slot: ";
         cin >> indeksInvent;
-        vector<int> lokasiInvent;
-        try {
-            lokasiInvent = parse(indeksInvent);
-        } catch (LokasiTidakValidException e) {
-            cout << e.what() << endl << endl;
-            return;
-        }
-
+        vector<int> lokasiInvent = parse(indeksInvent);
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
         if (tipe == "HERBIVORE" || tipe == "CARNIVORE" || tipe == "OMNIVORE") {
@@ -62,13 +55,7 @@ void Peternak::beternakBertani() {
                 string idx;
                 cout << "Masukkan lokasi yang diinginkan: ";
                 cin >> idx;
-                vector<int> lokasi;
-                try {
-                    lokasi = parse(idx);
-                } catch (LokasiTidakValidException e) {
-                    cout << e.what() << endl << endl;
-                    return;
-                }
+                vector<int> lokasi = parse(idx);
 
                 peternakan.setElement(lokasi[1], lokasi[0], hewan);
                 penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
@@ -91,13 +78,7 @@ void Peternak::beternakBertaniFile(string location, string name, int berat, vect
         hewan->setBerat(berat);
     }
 
-    vector<int> lokasi;
-    try {
-        lokasi = parse(location);
-    } catch (LokasiTidakValidException e) {
-        cout << e.what() << endl << endl;
-        return;
-    }
+    vector<int> lokasi = parse(location);
     peternakan.setElement(lokasi[1], lokasi[0], hewan);
 }
 
@@ -106,6 +87,13 @@ void Peternak::cetakLahan() {
     cout << "      ";
     centerAlign("[ PETERNAKAN ]", lebar);
     peternakan.printlahan();
+
+    map<string, string> listHewanDiPeternakan = peternakan.listProdukInMatriks();
+    for (auto i = listHewanDiPeternakan.begin(); i != listHewanDiPeternakan.end(); i++) {
+        cout << "      - ";
+        cout << i->first << " : " << i->second << endl;
+    }
+    cout << endl;
 }
 
 void Peternak::panen(vector<Produk*> listProduk) {
@@ -157,13 +145,7 @@ void Peternak::panen(vector<Produk*> listProduk) {
                         string kode;
                         cout << "Pilih petak ke-" << x + 1 << " : ";
                         cin >> kode;
-                        vector<int> index;
-                        try {
-                            index = parse(kode);;
-                        } catch (LokasiTidakValidException e) {
-                            cout << e.what() << endl << endl;
-                            continue;
-                        }
+                        vector<int> index = parse(kode);;
 
                         Hewan* hewan;
                         // cek apakah masukan benar
@@ -211,50 +193,28 @@ void Peternak::beriMakan() {
     cout << "Pilih hewan yang akan diberi makan: ";
     cin >> slot;
     cout << endl;
-    vector<int> index;
-    try {
-        index = parse(slot);
-    } catch (LokasiTidakValidException e) {
-        cout << e.what() << endl << endl;
-        return;
-    }
+    vector<int> index = parse(slot);
 
     hewan = peternakan[index[1]][index[0]];
-
     if (hewan == NULL) {
         cout << "Tidak ada hewan di sana." << endl << endl;
     }
     else {
         printPenyimpanan();
-        Produk* produk;
+        Item* item;
         cout << "Ambil makanan: ";
         cin >> slot;
-        index;
-        try {
-            index = parse(slot);
-        } catch (LokasiTidakValidException e) {
-            cout << e.what() << endl << endl;
-            return;
-        }
-        produk = dynamic_cast<Produk*> (penyimpanan[index[1]][index[0]]);
+        index = parse(slot);
+        item = dynamic_cast<Item*> (penyimpanan[index[1]][index[0]]);
 
-        if (produk == NULL) {
+        if (item == NULL) {
             cout << "Tidak ada apa-apa di di sana." << endl << endl;
         } 
         else {
-            try {
-                hewan->makan(produk);
-                hewan->tambahBerat(produk->getTambahan());
+                hewan->makan(item);
                 cout << "Makanan berhasil diberikan" << endl;
                 cout << "Berat "<< hewan->getNama() <<" menjadi " << hewan->getBeratSaatIni() << endl << endl;
                 penyimpanan.setElement(index[1], index[0], NULL);
-            } catch (CarnivoraTidakMakanSayurException e) {
-                cout << e.what() << endl << endl;
-            } catch (MaterialPlantTidakDimakanException e) {
-                cout << e.what() << endl << endl;
-            } catch (HerbivoraTidakMakanDagingException e) {
-                cout << e.what() << endl << endl;
-            }
         }
     }
 }

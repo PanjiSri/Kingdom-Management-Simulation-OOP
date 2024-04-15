@@ -48,18 +48,10 @@ void Petani::beternakBertani()
 
         cout << "Slot: ";
         cin >> indeksInvent;
-        vector<int> lokasiInvent;
-        try {
-            lokasiInvent = parse(indeksInvent);
-        } catch (LokasiTidakValidException e) {
-            cout << e.what() << endl << endl;
-            return;
-        }
-
+        vector<int> lokasiInvent = parse(indeksInvent);
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
-        if (tipe == "MATERIAL_PLANT" || tipe == "FRUIT_PLANT")
-        {
+        if (tipe == "MATERIAL_PLANT" || tipe == "FRUIT_PLANT") {
             tanaman = dynamic_cast<Tanaman *>(penyimpanan[lokasiInvent[1]][lokasiInvent[0]]);
             cout << "Tumbuhan " << tanaman->getNama() << " diambil." << endl
                  << endl;
@@ -70,13 +62,7 @@ void Petani::beternakBertani()
             string idx;
             cout << "Masukkan lokasi yang diinginkan: ";
             cin >> idx;
-            vector<int> lokasi;
-            try {
-                lokasi = parse(idx);
-            } catch (LokasiTidakValidException e) {
-                cout << e.what() << endl << endl;
-                return;
-            }
+            vector<int> lokasi = parse(idx);
 
             lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
             penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
@@ -86,8 +72,7 @@ void Petani::beternakBertani()
             cout << tanaman->getNama() << " berhasil ditanam!" << endl
                  << endl;
         }
-        else
-        {
+        else {
             cout << "Hei, itu bukan tanaman!!!" << endl
                  << endl;
         }
@@ -107,13 +92,7 @@ void Petani::beternakBertaniFile(string location, string name, int umur, vector<
         plant->setUmur(umur);
     }
 
-    vector<int> lokasi;
-    try {
-        lokasi = parse(location);
-    } catch (LokasiTidakValidException e) {
-        cout << e.what() << endl << endl;
-        return;
-    }
+    vector<int> lokasi = parse(location);
     lahanPertanian.setElement(lokasi[1], lokasi[0], plant);
 }
 
@@ -123,6 +102,13 @@ void Petani::cetakLahan()
     cout << "      ";
     centerAlign("[ LADANG ]", lebar);
     lahanPertanian.printlahan();
+    
+    map<string, string> listTanamanDiLadang = lahanPertanian.listProdukInMatriks();
+    for (auto i = listTanamanDiLadang.begin(); i != listTanamanDiLadang.end(); i++) {
+        cout << "      - ";
+        cout << i->first << " : " << i->second << endl;
+    }
+    cout << endl;
 }
 
 void Petani::panen(vector<Produk *> listProduk)
@@ -190,18 +176,11 @@ void Petani::panen(vector<Produk *> listProduk)
                         string kode;
                         cout << "Pilih petak ke-" << x + 1 << " : ";
                         cin >> kode;
-                        vector<int> index;
-                        try {
-                            index = parse(kode);
-                        } catch (LokasiTidakValidException e) {
-                            cout << e.what() << endl << endl;
-                            continue;
-                        }
+                        vector<int> index = parse(kode);
 
                         Tanaman *tanaman;
                         // cek apakah masukan benar
-                        if (this->lahanPertanian[index[1]][index[0]]->getNama() == listTanamanMatang[angka])
-                        {
+                        if (this->lahanPertanian[index[1]][index[0]]->getNama() == listTanamanMatang[angka]) {
                             tanaman = this->lahanPertanian[index[1]][index[0]];
                             this->lahanPertanian[index[1]][index[0]] = NULL;
                             vector<string> hasilPanen = tanaman->getProduk();
@@ -222,8 +201,7 @@ void Petani::panen(vector<Produk *> listProduk)
                             get = true;
                             // }
                         }
-                        else
-                        { // jika masukan salah
+                        else { // jika masukan salah
                             cout << "Lokasi yang anda masukkan salah." << endl
                                  << endl;
                         }
