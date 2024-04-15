@@ -54,7 +54,7 @@ int Bangunan::getIronwoodWoodCost() {
 }
 
 string Bangunan::getTipe() {
-    return "bangunan";
+    return "BANGUNAN";
 }
 
 int Bangunan::getTambahan() {
