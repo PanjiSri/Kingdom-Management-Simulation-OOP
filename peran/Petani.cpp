@@ -1,4 +1,5 @@
 #include "Petani.hpp"
+#include <string>
 
 Petani::Petani() : Peran() {}
 
@@ -243,4 +244,31 @@ int Petani::calculateTax() {
 
 void Petani::bangun() {
     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+}
+
+vector<vector<string>> Petani::getDataLahan() {
+    int asciinum;
+    vector<string> temp_row;
+    vector<vector<string>> temp;
+    int num;
+    for(int i = 0; i < lahanPertanian.getBaris(); i++) {
+        for(int j = 0; j < lahanPertanian.getKolom(); j++) {
+            string location;
+            vector<string> temp_row;
+            if(lahanPertanian[i][j] != NULL) {
+                num = i + 1;
+                if(num < 10) {
+                    location = (char)(asciinum+j) + to_string(0) + to_string(num);
+                }
+                else {
+                    location = (char)(asciinum+j) + to_string(num);
+                }
+                temp_row.push_back(location);
+                temp_row.push_back(lahanPertanian[i][j]->getNama());
+                temp_row.push_back(to_string(lahanPertanian[i][j]->getUmur()));
+                temp.push_back(temp_row);
+            }
+        }
+    }
+    return temp;
 }

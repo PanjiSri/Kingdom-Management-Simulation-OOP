@@ -4,7 +4,7 @@ Peran::Peran() {
     this->username = " ";
     this->gulden = 50;
     this->berat = 40;
-} 
+}
 
 Peran::Peran(string username, int row_inv, int col_inv) {
     this->username = username;
@@ -38,7 +38,8 @@ int Peran::getGulden() {
     return this->gulden;
 }
 
-int Peran::getBerat() {
+int Peran::getBerat()
+{
     return this->berat;
 }
 
