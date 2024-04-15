@@ -36,7 +36,7 @@ class Peternak : public Peran {
         void beriMakan();
         void addUmurTanaman();
         void ambilPajak(vector<Peran*>);
-        Peran* buatUser(vector<Peran*> listplayer);
+        Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak)
         vector<vector<string>> getDataLahan();
         int calculateTax();
         void bangun();

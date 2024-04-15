@@ -225,7 +225,7 @@ void Peternak::ambilPajak(vector<Peran*> list) {
     cout << "Hei, ini bukan wewenangmu!!!" << endl << endl;
 }
 
-Peran* Peternak::buatUser(vector<Peran*> listplayer) {
+Peran* Peternak::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) {
     cout << "Hanya walikota yang bisa melakukannya." << endl << endl;
     return NULL;
 }

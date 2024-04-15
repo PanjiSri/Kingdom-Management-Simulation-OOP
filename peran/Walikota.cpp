@@ -102,7 +102,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     cout << "Jangan dikorupsi ya!!!"<< endl << endl;
 }
 
-Peran* Walikota::buatUser(vector<Peran*> listplayer) {
+Peran* Walikota::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) {
     if (gulden >= 50) {
         string role, uname;
         cout << "Pilih role yang ingin dibuat: ";
@@ -121,11 +121,11 @@ Peran* Walikota::buatUser(vector<Peran*> listplayer) {
 
             gulden -= 50;
             if (role == "Petani") {
-                Peran* a = new Petani(uname, penyimpanan.getBaris(), penyimpanan.getKolom(), penyimpanan.getBaris(), penyimpanan.getKolom());
+                Peran* a = new Petani(uname, row_inv, col_inv, row_lahan, col_lahan);
                 return a;
             }
             else {
-                Peran* a = new Peternak(uname, penyimpanan.getBaris(), penyimpanan.getKolom(), penyimpanan.getBaris(), penyimpanan.getKolom());
+                Peran* a = new Peternak(uname, row_inv, col_inv, row_ternak, col_ternak);
                 return a;
             }
             cout << endl;

@@ -213,7 +213,7 @@ void Petani::ambilPajak(vector<Peran *> list) {
          << endl;
 }
 
-Peran* Petani::buatUser(vector<Peran*> listplayer) {
+Peran* Petani::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) {
     cout << "Hanya walikota yang bisa melakukannya." << endl << endl;
     return NULL;
 }
