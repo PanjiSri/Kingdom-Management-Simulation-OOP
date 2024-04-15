@@ -8,6 +8,9 @@
 using namespace std;
 
 class Bangunan : public Item {
+    private:
+        string tipe;
+
     public:
         // Constructor & Destructor
         Bangunan();

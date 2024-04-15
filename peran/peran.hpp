@@ -42,6 +42,7 @@ public:
     string getUname();
     int getGulden();
     int getBerat();
+    vector<string>  getSemuaItem();
     virtual string getType() = 0;
 
     // Setter
@@ -57,6 +58,7 @@ public:
     void addPenyimpananFile(string, vector<Item*>);
     void playerMakan();
 
+
     virtual void beternakBertani() = 0;
     virtual void beternakBertaniFile(string, string, int, vector<Item*>) = 0;
     virtual void panen(vector<Produk*>) = 0;
@@ -68,9 +70,9 @@ public:
     virtual int calculateTax() = 0;
 
     // virtual void bangun() = 0;
-        // virtual void bangunBangunan(vector<Bangunan*>) = 0;
-        // virtual void menjual(Toko* toko) = 0;
-        // virtual void membeli(Toko* toko) = 0;
+    // virtual void bangunBangunan(vector<Bangunan*>) = 0;
+    // virtual void menjual(Toko* toko) = 0;
+    // virtual void membeli(Toko* toko) = 0;
 };
 
 #endif

@@ -6,7 +6,10 @@
 #include <string>
 #include <sstream>
 #include "../input/header/input.hpp"
-#include "../peran/peran.hpp"
+#include "../peran/Peran.hpp"
+#include "../peran/Walikota.hpp"
+#include "../peran/Petani.hpp"
+#include "../peran/Peternak.hpp"
 #include "../exception/header/exception.hpp"
 using namespace std;
 

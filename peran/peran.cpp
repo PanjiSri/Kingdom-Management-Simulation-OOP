@@ -42,20 +42,12 @@ int Peran::getBerat() {
     return this->berat;
 }
 
-void Peran::tambahBerat(int berat) {
-    this->berat += berat;
-}
-
-void Peran::tambahGulden(int gulden) {
-    this->gulden += gulden;
-}
-
-vector<string> Peran::getSemuaItem(){
+vector<string> Peran::getSemuaItem() {
     vector<string> temp;
 
-    for(int i = 0; i < penyimpanan.getBaris(); i++) {
-        for(int j = 0; j < penyimpanan.getKolom(); j++) {
-            if(penyimpanan[j][i] != NULL) {
+    for (int i = 0; i < penyimpanan.getBaris(); i++) {
+        for (int j = 0; j < penyimpanan.getKolom(); j++) {
+            if (penyimpanan[j][i] != NULL) {
                 temp.push_back(penyimpanan[j][i]->getNama());
             }
         }
@@ -63,7 +55,13 @@ vector<string> Peran::getSemuaItem(){
     return temp;
 }
 
+void Peran::tambahBerat(int berat) {
+    this->berat += berat;
+}
 
+void Peran::tambahGulden(int gulden) {
+    this->gulden += gulden;
+}
 
 vector<int> Peran::parse(string idx) {
     vector<int> indeks;
@@ -143,16 +141,6 @@ void Peran::playerMakan() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 // // belum handle error
 // void Peran::menjual(Toko* toko){

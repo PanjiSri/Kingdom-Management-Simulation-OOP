@@ -418,7 +418,7 @@ void Grandmaster::muatState(string data_path)
                 cout << "nama: " << nama << endl;
                 cout << "umur: " << umur << endl;
 
-                list_pemain[index_pemain_untuk_tambah_item]->tanamFile(lokasi, nama, umur, list_item);
+                list_pemain[index_pemain_untuk_tambah_item]->beternakBertaniFile(lokasi, nama, umur, list_item);
                 // list_pemain[index_pemain_untuk_tambah_item]->cetakLahan();
             }
 
