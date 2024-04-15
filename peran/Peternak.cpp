@@ -253,3 +253,30 @@ int Peternak::calculateTax() {
 void Peternak::bangun() {
     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
 }
+
+vector<vector<string>> Peternak::getDataLahan() {
+    int asciinum;
+    vector<string> temp_row;
+    vector<vector<string>> temp;
+    int num;
+    for(int i = 0; i < peternakan.getBaris(); i++) {
+        for(int j = 0; j < peternakan.getKolom(); j++) {
+            string location;
+            vector<string> temp_row;
+            if(peternakan[i][j] != NULL) {
+                num = i + 1;
+                if(num < 10) {
+                    location = (char)(asciinum+j) + to_string(0) + to_string(num);
+                }
+                else {
+                    location = (char)(asciinum+j) + to_string(num);
+                }
+                temp_row.push_back(location);
+                temp_row.push_back(peternakan[i][j]->getNama());
+                temp_row.push_back(to_string(peternakan[i][j]->getBeratSaatIni()));
+                temp.push_back(temp_row);
+            }
+        }
+    }
+    return temp;
+}
