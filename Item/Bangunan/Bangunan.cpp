@@ -16,7 +16,9 @@ Bangunan::Bangunan(const Bangunan& other) :
 
 Bangunan::~Bangunan() {}
 
-string Bangunan::getTipe() {}
+string Bangunan::getTipe() {
+    return "Bangunan";
+}
 
 int Bangunan::getTambahan() {
     return 0;

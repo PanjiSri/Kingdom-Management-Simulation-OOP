@@ -240,10 +240,9 @@ void Petani::ambilPajak(vector<Peran *> list)
          << endl;
 }
 
-void Petani::buatUser(vector<Peran *> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet)
-{
-    cout << "Hanya walikota yang bisa melakukannya." << endl
-         << endl;
+Peran* Petani::buatUser(vector<Peran*> listplayer) {
+    cout << "Hanya walikota yang bisa melakukannya." << endl << endl;
+    return NULL;
 }
 
 int Petani::calculateTax()

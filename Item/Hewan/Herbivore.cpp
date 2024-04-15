@@ -29,8 +29,9 @@ void Herbivore::makan(Item* item) {
         throw HerbivoraTidakMakanDagingException();
     } else if(item->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
+    } else if (item->getTipe() == "PRODUCT_FRUIT_PLANT") {
+        this->berat_saat_ini += item->getTambahan();
     } else {
         throw BukanMakananException();
     }
-    this->berat_saat_ini += item->getTambahan();
 }

@@ -28,8 +28,10 @@ void Carnivore::makan(Item* item) {
         throw CarnivoraTidakMakanSayurException();
     } else if(item->getTipe() == "PRODUCT_MATERIAL_PLANT") {
         throw MaterialPlantTidakDimakanException();
-    } else {
+    } else if (item->getTipe() == "PRODUCT_ANIMAL") {
+            this->berat_saat_ini += item->getTambahan();
+    } else { 
         throw BukanMakananException();
     }
-    this->berat_saat_ini += item->getTambahan();
+
 }

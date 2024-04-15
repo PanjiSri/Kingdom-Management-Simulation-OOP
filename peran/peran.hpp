@@ -68,7 +68,7 @@ public:
     virtual void beriMakan() = 0;
     virtual void addUmurTanaman() = 0;
     virtual void ambilPajak(vector<Peran*>) = 0;
-    virtual void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet) = 0;
+    virtual Peran* buatUser(vector<Peran*> listplayer) = 0;
     virtual int calculateTax() = 0;
     // virtual void bangun() = 0;
     virtual vector<vector<string>> getDataLahan() = 0;
