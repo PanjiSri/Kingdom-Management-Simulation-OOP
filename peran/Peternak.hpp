@@ -39,9 +39,9 @@ class Peternak : public Peran {
         void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         vector<vector<string>> getDataLahan();
         int calculateTax();
-        void bangun();
-        // void menjual(Toko* toko);
-        // void membeli(Toko* toko);
+        // void bangun();
+        void menjual(Toko* toko);
+        void membeli(Toko* toko);
 };
 
 #endif

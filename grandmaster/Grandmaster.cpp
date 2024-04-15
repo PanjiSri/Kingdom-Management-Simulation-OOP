@@ -1,7 +1,7 @@
 #include "Grandmaster.hpp"
 /*
 PS D:\A Perkuliahan ITB\Mata Kuliah\Semester 4\OOP\tubes_1\Tubes-1-OOP-SCP> g++ -o testing grandTesting.cpp toko/Toko.cpp peran/peran.cpp peran/Petani.cpp peran/Peternak.cpp peran/Walikota.cpp Pcolor/pcolor.c Item/item.cpp Item/Bangunan/Bangunan.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Herbivore.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Hewan.cpp Item/Produk/Produk.cpp Item/Tanaman/Tanaman.cpp input/input.cpp grandmaster/Grandmaster.cpp
-PS D:\A Perkuliahan ITB\Mata Kuliah\Semester 4\OOP\tubes_1\Tubes-1-OOP-SCP> ./testing   
+PS D:\A Perkuliahan ITB\Mata Kuliah\Semester 4\OOP\tubes_1\Tubes-1-OOP-SCP> ./testing
 */
 Grandmaster::Grandmaster()
 {
@@ -133,6 +133,8 @@ void Grandmaster::inisiatorTanaman()
         int durasi = list_jenis_tanaman[i].getDurationToHarvest();
         int harga = list_jenis_tanaman[i].getPrice();
 
+        list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
+        list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_tanaman.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
         list_item.push_back(new Tanaman(id, kode, nama, tipe, durasi, harga));
     }
@@ -502,6 +504,13 @@ void Grandmaster::operasi_perintah(string command)
     if (command == "NEXT")
     {
         next();
+        for (int i = 0; i < list_pemain.size(); i++)
+        {
+            if (list_pemain[i]->getType() == "Petani")
+            {
+                list_pemain[i]->addUmurTanaman();
+            }
+        }
     }
     else if (command == "CETAK_PENYIMPANAN")
     {
@@ -510,26 +519,33 @@ void Grandmaster::operasi_perintah(string command)
     else if (command == "PUNGUT_PAJAK")
     {
         list_pemain[idx_giliran_pemain]->ambilPajak(list_pemain);
-        /*Cring cring cring...
-            Pajak sudah dipungut!
+        // cout << list_pemain[cariPemain("Budi")]->getType() << endl;
+        // cout << "Peternak" << endl;
+    }
+    else if (command == "CETAK_LADANG")
+    {
+        list_pemain[idx_giliran_pemain]->cetakLahan();
+    }
+    else if (command == "TANAM")
+    {
 
-            Berikut adalah detil dari pemungutan pajak:
-            Prima - Peternak: 60 gulden
-            Hilya - Petani: 50 gulden
-            Adit - Petani: 10 gulden
-            HK - Petani: 10 gulden
-            SP - Petani: 0 gulden
-
-            Negara mendapatkan pemasukan sebesar 130 gulden.
-            Gunakan dengan baik dan jangan dikorupsi ya!
-        */
-        cout << "Cring cring cring..." << endl;
-        cout << "Pajak sudah dipungut!" << endl;
-        cout << "Berikut adalah detil dari pemungutan pajak:" << endl;
-
-        // vector<int> urutan_berdasar_gulden;
-        
-        
+        list_pemain[idx_giliran_pemain]->beternakBertani();
+    }
+    else if (command == "TERNAK")
+    {
+        list_pemain[idx_giliran_pemain]->beternakBertani();
+    }
+    else if (command == "MAKAN")
+    {
+        list_pemain[idx_giliran_pemain]->playerMakan();
+    }
+    else if (command == "KASIH_MAKAN"){
+        list_pemain[idx_giliran_pemain]->beriMakan();
+    }
+    else if(command == "PANEN"){
+        list_pemain[idx_giliran_pemain]->panen(list_produk);
+    }else{
+        throw CommandTidakValidException();
     }
 }
 
@@ -586,7 +602,11 @@ void Grandmaster::getAllPemainInfo()
     cout << "=========INFORMASI PEMAIN PETERNAK=========" << endl;
     list_pemain[1]->cetakLahan();
     cout << "=========INFORMASI PEMAIN PETANI=========" << endl;
+    cout << list_pemain[2]->getGulden() << endl;
+    cout << list_pemain[2]->getBerat() << endl;
+    list_pemain[2]->printPenyimpanan();
     list_pemain[2]->cetakLahan();
+
     return;
 
     for (int i = 0; i < list_pemain.size(); i++)

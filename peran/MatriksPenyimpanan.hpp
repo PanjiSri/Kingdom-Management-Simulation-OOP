@@ -152,8 +152,11 @@ public:
                 else {
                     cout << " ";
                     string kata = matriks[i][j]->getKode();
-                    if (matriks[i][j]->isSiapPanen() == true) {
-                        for (int k = 0; k < kata.size(); k++) {
+                    cout << kata << endl;
+                    if (matriks[i][j]->isSiapPanen() == true)
+                    {
+                        for (int k = 0; k < kata.size(); k++)
+                        {
                             print_green(kata[k]);
                         }
                     }

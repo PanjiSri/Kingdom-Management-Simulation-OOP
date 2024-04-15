@@ -40,9 +40,9 @@ class Walikota : public Peran {
         void ambilPajak(vector<Peran*>);    //nanti dulu
         void buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_farm, int col_farm, int row_pet, int col_pet);
         vector<vector<string>> getDataLahan();
-        void bangun();
-        // void menjual(Toko* toko);
-        // void membeli(Toko* toko);
+        // void bangun();
+        void menjual(Toko* toko);
+        void membeli(Toko* toko);
 };
 
 #endif

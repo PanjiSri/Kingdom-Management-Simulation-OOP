@@ -126,6 +126,10 @@ Toko::~Toko()
     jumlahTiapJenis.clear();
 }
 
+vector<Item*> Toko::getListBarang(){
+    return jenisBarang;
+}
+
 Item* Toko::jual(int no, int kuantitas){
     if (no > jenisBarang.size())
     {
@@ -167,13 +171,12 @@ void Toko::cetakListBarang(){
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     for (int i = 0; i < jenisBarang.size(); i++)
     {   
-        if (jumlahTiapJenis[jenisBarang[i]->getKode()] == -1)
+        cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
+        if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
         {
-            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() <<endl;
-        } else 
-        {
-            cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga() << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" <<endl;
-        }
+            cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" ;
+        } 
+        cout << endl;
     }  
 }
 

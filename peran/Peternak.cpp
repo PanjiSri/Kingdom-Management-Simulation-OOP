@@ -74,8 +74,8 @@ void Peternak::beternakBertaniFile(string location, string name, int berat, vect
     for (int i = 0; i < listItem.size(); i++) {
         if (listItem[i]->getNama() == name) {
             hewan = dynamic_cast<Hewan*>(listItem[i]);
+            hewan->setBerat(berat);
         }
-        hewan->setBerat(berat);
     }
 
     vector<int> lokasi = parse(location);
@@ -253,9 +253,9 @@ int Peternak::calculateTax() {
     return pajak;
 }
 
-void Peternak::bangun() {
-    cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
-}
+// void Peternak::bangun() {
+//     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
+// }
 
 vector<vector<string>> Peternak::getDataLahan() {
     int asciinum;
@@ -282,4 +282,68 @@ vector<vector<string>> Peternak::getDataLahan() {
         }
     }
     return temp;
+}
+
+// belum selesai
+void Peternak::membeli(Toko* toko){
+    toko->cetakListBarang();
+    int noBarang;
+    int kuantitas;
+    cout << "\nUang Anda : " << gulden << endl;
+    cout << "Slot Penyimpanan tersedia : " << penyimpanan.getLahanKosong() << endl;
+    cout << "Barang ingin dibeli : "; 
+    cin >> noBarang;
+    cout << "\nKuantitas : ";
+    cin >> kuantitas;
+    // belum divalidasi
+    try {
+        Item* item = toko->jual(noBarang, kuantitas);
+        if(this->getGulden() < item->getHarga()*kuantitas) {
+            cout << "Uang yang anda miliki tidak cukup" << endl;
+        }
+        else {
+            penyimpanan.print();
+            for(int i = 0; i < kuantitas; i++) {
+                string location;
+                cout << "Masukkan lokasi untuk item ke-" << i+1 << ": ";
+                cin >> location;
+                vector<int> index = parse(location);
+                penyimpanan.setElement(index[1], index[0], item);
+            }
+        }
+    }
+    catch (StokTidakTersediaException e) {
+        cout << e.what() << endl;
+    }
+    // addpenyimpanan(item);
+    // harusnya gini sih
+}
+
+void Peternak::menjual(Toko* toko){
+    cout << "Berikut merupakan penyimpanan Anda\n";
+    printPenyimpanan();
+    int ulang;
+    int total = 0;
+    cout << "Berapa benda yang ingin anda jual: ";
+    cin >> ulang;
+    for(int i = 0; i < ulang; i++) {
+        cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
+        string indeksinvent;
+        cin >> indeksinvent;
+        vector<int> idx = parse(indeksinvent);
+        Item* barang;
+        barang = penyimpanan[idx[1]][idx[0]];
+        
+        // handle error kalo bangunan
+        if (barang->getTipe() == "BANGUNAN")
+        {
+            throw PetaniPeternakTidakBisaJualBangunanException();
+        }
+        
+        toko->beli(barang);
+        gulden = gulden + barang->getHarga();
+        total += barang->getHarga();
+        penyimpanan[idx[1]][idx[0]] = NULL;
+    }
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
 }

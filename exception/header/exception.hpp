@@ -103,4 +103,20 @@ public:
     }
 };
 
+class CommandTidakValidException : public exception{
+public:
+    const char *what() const throw(){
+        return "Command tidak valid";
+    }
+};
+
+class PetaniPeternakTidakBisaJualBangunanException : public exception {
+public:
+    const char *what() const throw(){
+        return "Anda tidak bisa menjual bangunan";
+    }
+};
+
+
+
 #endif
