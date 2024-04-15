@@ -646,6 +646,9 @@ void Grandmaster::operasi_perintah(string command)
     else if (command == "SIMPAN")
     {
         list_pemain[idx_giliran_pemain]->simpan(list_pemain);
+    }else if(command == "BANGUN"){
+        
+        list_pemain[idx_giliran_pemain]->bangun(list_bangunan);
     }
     else
     {

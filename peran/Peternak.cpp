@@ -258,7 +258,7 @@ int Peternak::calculateTax() {
     return pajak;
 }
 
-void Peternak::bangun() {
+void Peternak::bangun(vector<Bangunan *> listbangunan) {
     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
 }
 

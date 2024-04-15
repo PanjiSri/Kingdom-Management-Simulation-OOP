@@ -72,7 +72,7 @@ public:
     virtual void ambilPajak(vector<Peran*>) = 0;
     virtual Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) = 0;
     virtual int calculateTax() = 0;
-    virtual void bangun() = 0;
+    virtual void bangun(vector<Bangunan *> listbangunan) = 0;
     virtual vector<vector<string>> getDataLahan() = 0;
     virtual void menjual(Toko* toko) = 0;
     virtual void membeli(Toko* toko) = 0;

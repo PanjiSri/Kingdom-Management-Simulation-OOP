@@ -16,7 +16,7 @@
 #include "../peran/Petani.hpp"
 #include "../peran/Peternak.hpp"
 #include "../exception/header/exception.hpp"
-#include "../Bangunan/Bangunan.hpp"
+#include "../Item/Bangunan/Bangunan.hpp"
 using namespace std;
 
 class Grandmaster

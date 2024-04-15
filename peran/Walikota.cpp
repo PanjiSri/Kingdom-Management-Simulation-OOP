@@ -142,7 +142,9 @@ Peran* Walikota::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, i
 }
 
 // sementara belum
-void Walikota::bangun() {}
+void Walikota::bangun(vector<Bangunan *> listbangunan) {
+    cout << "uhuy";
+}
 //     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
 //     cout << "   1. SMALL_HOUSE (50 gulden, teak wood 1, sandal wood 1)" << endl;
 //     cout << "   2. MEDIUM_HOUSE (70 gulden, aloe wood 1, ironwood wood 1)" << endl;
@@ -270,7 +272,6 @@ void Walikota::bangun() {}
 //     addPenyimpananInFirstEmpty(new Bangunan(id, kode, pilihan_bangunan, harga));
 //     cout << pilihan_bangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
 // }
-
 
 vector<vector<string>> Walikota::getDataLahan() {}
 

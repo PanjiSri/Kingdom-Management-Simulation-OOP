@@ -39,7 +39,7 @@ class Petani : public Peran {
         Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak);
         vector<vector<string>> getDataLahan();
         int calculateTax();
-        void bangun();
+        void bangun(vector<Bangunan *> listbangunan);
         void menjual(Toko* toko);
         void membeli(Toko* toko);
 
