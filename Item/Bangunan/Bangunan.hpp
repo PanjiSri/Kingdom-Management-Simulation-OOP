@@ -28,9 +28,6 @@ class Bangunan : public Item {
         int getIronwoodWoodCost();
         string getTipe();
         int getTambahan();
-
-        // Method
-        void printDetail();
 };
 
 #endif

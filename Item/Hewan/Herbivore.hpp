@@ -7,7 +7,7 @@
 class Herbivore : public Hewan
 {
     private:
-        string tipe = "HERBIVORE";
+        const string tipe = "HERBIVORE";
 
     public:
         // Constructor & Destructor

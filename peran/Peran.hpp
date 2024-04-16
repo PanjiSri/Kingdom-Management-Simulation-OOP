@@ -25,8 +25,7 @@
 
 using namespace std;
 
-class Peran
-{
+class Peran {
 protected:
     string username;
     int gulden;

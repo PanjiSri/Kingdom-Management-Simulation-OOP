@@ -23,7 +23,6 @@ using namespace std;
 // g++ -o a peran/main.cpp Item/Bangunan/Bangunan.cpp peran/Peternak.cpp peran/Petani.cpp peran/Walikota.cpp peran/peran.cpp Item/Hewan/Omnivore.cpp Item/Hewan/Carnivore.cpp Item/Hewan/Hewan.cpp Item/Hewan/Herbivore.cpp Item/Tanaman/Tanaman.cpp Item/Item.cpp Item/Produk/Produk.cpp Pcolor/pcolor.c Toko/toko.cpp
 
 int main() {
-    static int nhewan = 0;
     string name, code, tipe, harga, berat, id, origin;
     int beratint, hargaint;
     vector<Tanaman*> listtanaman;

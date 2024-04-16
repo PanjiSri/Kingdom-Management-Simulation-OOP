@@ -5,8 +5,7 @@
 #include "../Item.hpp"
 using std::string;
 
-class Produk : public Item
-{
+class Produk : public Item{
 private:
     const string tipe;
     const string asal;
