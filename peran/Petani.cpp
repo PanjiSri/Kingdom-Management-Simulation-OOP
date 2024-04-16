@@ -88,6 +88,11 @@ void Petani::beternakBertani() {
         cout << "Slot: ";
         cin >> indeksInvent;
         vector<int> lokasiInvent = parse(indeksInvent);
+
+        if (penyimpanan[lokasiInvent[1]][lokasiInvent[0]] == NULL) {
+            cout << "Slot kosong." << endl << endl;
+            return;
+        }
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
         if (tipe == "MATERIAL_PLANT" || tipe == "FRUIT_PLANT") {
@@ -103,11 +108,19 @@ void Petani::beternakBertani() {
             cin >> idx;
             vector<int> lokasi = parse(idx);
 
-            lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
-            penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
+            if (lokasi[0] >= lahanPertanian.getKolom() || lokasi[1] >= lahanPertanian.getBaris()) {
+                cout << "Lokasi tidak valid." << endl << endl;
+            } 
+            else if (lahanPertanian[lokasi[1]][lokasi[0]] != NULL) {
+                cout << "Petak sudah terisi." << endl << endl;
+            } 
+            else {
+                lahanPertanian.setElement(lokasi[1], lokasi[0], tanaman);
+                penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
 
-            cout << endl << "Cangkul, cangkul, cangkul yang dalam~!" << endl;
-            cout << tanaman->getNama() << " berhasil ditanam!" << endl << endl;
+                cout << endl << "Cangkul, cangkul, cangkul yang dalam~!" << endl;
+                cout << tanaman->getNama() << " berhasil ditanam!" << endl << endl;
+            }
         }
         else {
             cout << "Hei, itu bukan tanaman!!!" << endl << endl;
@@ -154,7 +167,6 @@ void Petani::panen(vector<Produk *> listProduk) {
         listTanamanMatang.push_back(i->first);
         jumlahTanamanMatang.push_back(i->second);
     }
-
     // Menampilkan tanaman yang siap panen
     cout << "Daftar tanaman yang siap panen: " << endl;
     for (int i = 0; i < int(listTanamanMatang.size()); i++) {
@@ -162,8 +174,7 @@ void Petani::panen(vector<Produk *> listProduk) {
     }
 
     if (listTanamanMatang.size() == 0) { // jika tidak ada yang bisa dipanen
-        cout << "Tidak ada tanaman yang bisa dipanen." << endl
-             << endl;
+        cout << "Tidak ada tanaman yang bisa dipanen." << endl << endl;
     }
     else {
         // memilih jenis tanaman yang ingin dipanen
@@ -200,35 +211,42 @@ void Petani::panen(vector<Produk *> listProduk) {
                         cin >> kode;
                         vector<int> index = parse(kode);
 
-                        Tanaman *tanaman;
-                        // cek apakah masukan benar
-                        if (this->lahanPertanian[index[1]][index[0]]->getNama() == listTanamanMatang[angka]) {
-                            tanaman = this->lahanPertanian[index[1]][index[0]];
-                            this->lahanPertanian[index[1]][index[0]] = NULL;
-                            vector<string> hasilPanen = tanaman->getProduk();
-
-                            if (penyimpanan.getPetakKosong() == 0) {
-                                cout << "Inventory Anda sudah penuh." << endl << endl;
-                                this->lahanPertanian[index[1]][index[0]] = tanaman;
-                                return;
-                            }
-                            else {
-                                for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
-                                    Produk *produk;
-                                    for (int q = 0; q < int(listProduk.size()); q++) {
-                                        // membuat objek produk dari string nama pada hasilPanen
-                                        if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
-                                            produk = listProduk[q];
-                                        }
-                                    }
-                                    penyimpanan += produk;
-                                }
-                                get = true;
-                            }
+                        if (index[0] >= lahanPertanian.getKolom() || index[1] >= lahanPertanian.getBaris()) {
+                            cout << "Lokasi yang anda masukkan salah." << endl << endl;
                         }
-                        else { // jika masukan salah
-                            cout << "Lokasi yang anda masukkan salah." << endl
-                                 << endl;
+                        else if (lahanPertanian[index[1]][index[0]] == NULL) {
+                            cout << "Tidak ada tanaman di sana." << endl << endl;
+                        }
+                        else {
+                            Tanaman *tanaman;
+                            // cek apakah masukan benar
+                            if (this->lahanPertanian[index[1]][index[0]]->getNama() == listTanamanMatang[angka]) {
+                                tanaman = this->lahanPertanian[index[1]][index[0]];
+                                this->lahanPertanian[index[1]][index[0]] = NULL;
+                                vector<string> hasilPanen = tanaman->getProduk();
+
+                                if (penyimpanan.getPetakKosong() == 0) {
+                                    cout << "Inventory Anda sudah penuh." << endl << endl;
+                                    this->lahanPertanian[index[1]][index[0]] = tanaman;
+                                    return;
+                                }
+                                else {
+                                    for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
+                                        Produk *produk;
+                                        for (int q = 0; q < int(listProduk.size()); q++) {
+                                            // membuat objek produk dari string nama pada hasilPanen
+                                            if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
+                                                produk = listProduk[q];
+                                            }
+                                        }
+                                        penyimpanan += produk;
+                                    }
+                                    get = true;
+                                }
+                            }
+                            else { // jika masukan salah
+                                cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                            }
                         }
                     }
                 }

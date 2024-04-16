@@ -86,6 +86,11 @@ void Peternak::beternakBertani() {
         cout << "Slot: ";
         cin >> indeksInvent;
         vector<int> lokasiInvent = parse(indeksInvent);
+
+        if (penyimpanan[lokasiInvent[1]][lokasiInvent[0]] == NULL) {
+            cout << "Slot kosong." << endl << endl;
+            return;
+        }
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
         if (tipe == "HERBIVORE" || tipe == "CARNIVORE" || tipe == "OMNIVORE") {
@@ -100,16 +105,24 @@ void Peternak::beternakBertani() {
                 cin >> idx;
                 vector<int> lokasi = parse(idx);
 
-                peternakan.setElement(lokasi[1], lokasi[0], hewan);
-                penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
+                if (lokasi[0] >= peternakan.getKolom() || lokasi[1] >= peternakan.getBaris()) {
+                    cout << "Lokasi tidak valid." << endl << endl;
+                } 
+                else if (peternakan[lokasi[1]][lokasi[0]] != NULL) {
+                    cout << "Petak sudah terisi." << endl << endl;
+                } 
+                else {
+                    peternakan.setElement(lokasi[1], lokasi[0], hewan);
+                    penyimpanan.setElement(lokasiInvent[1], lokasiInvent[0], NULL);
 
-                cout << endl << "Dengan hati-hati, kamu meletakkan seekor " << hewan->getNama() <<  " di kandang" << endl;
-                cout << hewan->getNama() << " telah menjadi peliharaanmu sekarang!!" << endl << endl;
-        } else {
+                    cout << endl << "Dengan hati-hati, kamu meletakkan seekor " << hewan->getNama() <<  " di kandang" << endl;
+                    cout << hewan->getNama() << " telah menjadi peliharaanmu sekarang!!" << endl << endl;
+                }
+        } 
+        else {
             cout << "Hei, itu bukan hewan!!!" << endl << endl;
         }
     }
-// cetakLahan();
 }
 
 void Peternak::beternakBertaniFile(string location, string name, int berat, vector<Item*> listItem) {
@@ -159,7 +172,8 @@ void Peternak::panen(vector<Produk*> listProduk) {
 
     if (listHewanPanen.size() == 0) { // jika tidak ada yang bisa dipanen
         cout << "Tidak ada hewan yang bisa dipanen." << endl << endl;
-    } else {
+    } 
+    else {
         // memilih jenis hewan yang ingin dipanen
         int angka;
         cout << endl << "Pilih hewan yang ingin dipananen: ";
@@ -188,44 +202,51 @@ void Peternak::panen(vector<Produk*> listProduk) {
                         string kode;
                         cout << "Pilih petak ke-" << x + 1 << " : ";
                         cin >> kode;
-                        vector<int> index = parse(kode);;
+                        vector<int> index = parse(kode);
 
-                        Hewan* hewan;
-                        // cek apakah masukan benar
-                        if (this->peternakan[index[1]][index[0]]->getNama() == listHewanPanen[angka]) {
-                            hewan = this->peternakan[index[1]][index[0]];
-                            this->peternakan[index[1]][index[0]] = NULL;
-                            vector<string> hasilPanen = hewan->getProduk();
-
-                            if (int(hasilPanen.size()) > penyimpanan.getPetakKosong()) {
-                                // ada hewan yang menghasilkan 2 produk
-                                cout << "Inventory Anda tidak cukup untuk produk hewan tersebut." << endl << endl;
-                                this->peternakan[index[1]][index[0]] = hewan;
-                                get = true;
-                            } else if (penyimpanan.getPetakKosong() == 0) {
-                                cout << "Inventory Anda sudah penuh." << endl << endl;
-                                this->peternakan[index[1]][index[0]] = hewan;
-                                return;
-                            }
-                            else {
-                                for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
-                                    Produk* produk;
-                                    for (int q = 0; q < int(listProduk.size()); q++) {
-                                        // membuat objek produk dari string nama pada hasilPanen
-                                        if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
-                                            produk = listProduk[q];
-                                        }
-                                    }
-                                    penyimpanan += produk;
-                                }
-                                get = true;
-                            }
-                        }
-                        else { // jika masukan salah
+                        if (index[0] >= peternakan.getKolom() || index[1] >= peternakan.getBaris()) {
                             cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                        } 
+                        else if (peternakan[index[1]][index[0]] == NULL) {
+                            cout << "Tidak ada hewan di sana." << endl << endl;
+                        }
+                        else {
+                            Hewan* hewan;
+                            // cek apakah masukan benar
+                            if (this->peternakan[index[1]][index[0]]->getNama() == listHewanPanen[angka]) {
+                                hewan = this->peternakan[index[1]][index[0]];
+                                this->peternakan[index[1]][index[0]] = NULL;
+                                vector<string> hasilPanen = hewan->getProduk();
+
+                                if (int(hasilPanen.size()) > penyimpanan.getPetakKosong()) {
+                                    // ada hewan yang menghasilkan 2 produk
+                                    cout << "Inventory Anda tidak cukup untuk produk hewan tersebut." << endl << endl;
+                                    this->peternakan[index[1]][index[0]] = hewan;
+                                    get = true;
+                                } else if (penyimpanan.getPetakKosong() == 0) {
+                                    cout << "Inventory Anda sudah penuh." << endl << endl;
+                                    this->peternakan[index[1]][index[0]] = hewan;
+                                    return;
+                                }
+                                else {
+                                    for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
+                                        Produk* produk;
+                                        for (int q = 0; q < int(listProduk.size()); q++) {
+                                            // membuat objek produk dari string nama pada hasilPanen
+                                            if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
+                                                produk = listProduk[q];
+                                            }
+                                        }
+                                        penyimpanan += produk;
+                                    }
+                                    get = true;
+                                }
+                            }
+                            else { // jika masukan salah
+                                cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                            }
                         }
                     }
-                    
                 }
             }
         }
