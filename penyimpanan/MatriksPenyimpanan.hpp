@@ -189,10 +189,14 @@ public:
                 }
                 
                 if (matriks[i][j] != NULL && matriks[i][j]->getKode() == kode) {
-                    delete matriks[i][j];
+                    // delete matriks[i][j];
                     matriks[i][j] = NULL;
                     count++;
                 }
+            }
+            
+            if (count >= jumlah) {
+                break;
             }
         }
     }
