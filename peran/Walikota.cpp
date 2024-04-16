@@ -279,7 +279,11 @@ void Walikota::membeli(Toko* toko) {
             cout << "Masukkan lokasi untuk item ke-" << i << " : ";
             cin >> location;
             vector<int> index = parse(location);
-            if (penyimpanan[index[1]][index[0]] != NULL) {
+            if (index[0] >= penyimpanan.getKolom() || index[1] >= penyimpanan.getBaris()) {
+                cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                i--;
+            }
+            else if (penyimpanan[index[1]][index[0]] != NULL) {
                 cout << "Slot sudah terisi." << endl;
                 i--;
             } else {
@@ -311,13 +315,16 @@ void Walikota::menjual(Toko* toko){
                 string indeksInvent;
                 cin >> indeksInvent;
                 vector<int> idx = parse(indeksInvent);
-                Item* barang;
-                barang = penyimpanan[idx[1]][idx[0]];
-
-                if (barang == NULL) {
+                if (idx[0] >= penyimpanan.getKolom() || idx[1] >= penyimpanan.getBaris()) {
+                    cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                    i--;
+                }
+                else if (penyimpanan[idx[1]][idx[0]] == NULL) {
                     cout << "Petak kosong." << endl;
                     i--;
                 } else {
+                    Item* barang;
+                    barang = penyimpanan[idx[1]][idx[0]];
                     toko->beli(barang);
                     gulden = gulden + barang->getHarga();
                     total_uang += barang->getHarga();
