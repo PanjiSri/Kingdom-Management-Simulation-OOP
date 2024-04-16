@@ -113,7 +113,6 @@ void Petani::beternakBertani() {
             cout << "Hei, itu bukan tanaman!!!" << endl << endl;
         }
     }
-    // cetakLahan();
 }
 
 void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem) {
@@ -455,4 +454,3 @@ void Petani::simpan(vector<Peran*> list_pemain, Toko *toko) {
     outfile.close();
     cout << "Data pemain berhasil disimpan!" << endl << endl;
 }
-

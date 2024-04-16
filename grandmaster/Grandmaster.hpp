@@ -62,32 +62,31 @@ private:
     int idx_giliran_pemain;
 
 public:
+    // Constructor & Destructor
     Grandmaster();
     ~Grandmaster();
+
+    // Getter
+    int getBesarPenyimpanan(int index) const;
+    int getBesarLahan(int index) const;
+    int getBesarPeternakan(int index) const;
+    int getIndexGiliran() const;
+    string cariKodeBarang(string nama);
+
     // method load animal.txt, plant.txt, product.txt, recipe.txt
     void loadConfigHewanTanaman();
     void loadConfigProduk();
     void loadConfigRecipe();
-    
-    // method load misc.txt
     void loadConfigMisc();
-
-    // load semua config
     void loadallconfig();
 
-    //inisiasi tanaman
+    //inisiasi
     void inisiatorTanaman();
-
-    //inisiasi hewan
     void inisiatorHewan();
-
-    //inisiasi produk
     void inisiatorProduk();
-
-    //inisiasi bangunan
     void inisiatorBangunan();
 
-    // memulai game //ragu apakah perlu loadallconfig() disini?
+    // memulai game
     void mulaiTanpaBerkas();
 
     //memulai game dengan berkas
@@ -102,47 +101,14 @@ public:
     // cari jenis
     int cariJenis(string nama);
 
-    // //cari index
-    // int cariIndex(string nama);
-
     // cari index pemain berdasarkan username
     int cariPemain(string username);
 
-
-    //command program
+    // command program
     void next();
 
     //alur program
     void operasi_perintah(string command);
-
-    //................... ini buat testing aja......................//
-    // Line_Handler getJenisTanaman(int index) const;
-
-    // Line_Handler getJenisHewan(int index) const;
-
-    // Line_Handler_Produk getJenisProduk(int index) const;
-
-    //..............................................................//
-
-    int getUangMenang() const;
-
-    int getBeratMenang() const;
-
-    int getBesarPenyimpanan(int index) const;
-
-    int getBesarLahan(int index) const;
-
-    int getBesarPeternakan(int index) const;
-
-    int getIndexGiliran() const;
-
-    void getAllPemainInfo();
-
-    void printAllPemain();
-
-    void printWalikota();
-
-    string cariKodeBarang(string nama);
 
     void runner();
 };

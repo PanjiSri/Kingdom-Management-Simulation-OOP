@@ -22,13 +22,15 @@ public:
     Toko(vector<Tanaman*>, vector<Hewan*>, vector<Produk*>, vector<Bangunan*>); 
     ~Toko();
 
+    // Getter
+    vector<vector<string>> getBarangJumlah();
+    vector<Item*> getListBarang();
+
+    // Setter
+    void setJenisBarang(string, int);
+    
     // Other Method
     Item* jual(int no, int kuantitas);
     void beli(Item* barang);
     void cetakListBarang();
-    vector<Item*> getListBarang();
-
-    void setJenisBarang(string, int);
-
-    vector<vector<string>> getBarangJumlah();
 };
