@@ -219,3 +219,7 @@ void Toko::cetakListBarang(){
 //     a.jual(16,5);
 //     a.cetakListBarang();
 // }
+
+void Toko::setJenisBarang(string kode, int value){
+    this->jumlahTiapJenis[kode] = value;
+}

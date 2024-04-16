@@ -296,14 +296,14 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
 {
     loadallconfig();
 
-    cout << "flag 1" << endl; 
+    // cout << "flag 1" << endl; 
 
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
     inisiatorBangunan();
 
-    cout << "banyak_pemain awal " << banyak_pemain << endl;
+    // cout << "banyak_pemain awal " << banyak_pemain << endl;
     muatState(data_path);
 
     banyak_pemain = list_pemain.size();
@@ -314,20 +314,20 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
 
 void Grandmaster::muatPemain(Peran *pemain_baru)
 {
-    cout << "flag 0" << endl;
+    // cout << "flag 0" << endl;
     if (list_pemain.empty())
     {
         list_pemain.push_back(pemain_baru);
-        cout << "username " << pemain_baru->getUname() << endl;
-        cout << "banyak_pemain " << banyak_pemain << endl;
+        // cout << "username " << pemain_baru->getUname() << endl;
+        // cout << "banyak_pemain " << banyak_pemain << endl;
         banyak_pemain++;
         return;
     }
     // leksikografis
     string username_baru = pemain_baru->getUname();
-    cout << "username: " << username_baru << endl;
+    // cout << "username: " << username_baru << endl;
     bool cek = false;
-    cout << "banyak_pemain " << banyak_pemain << endl;
+    // cout << "banyak_pemain " << banyak_pemain << endl;
     for (int i = 0; i < banyak_pemain; ++i)
     {
         if (username_baru == list_pemain[i]->getUname())
@@ -348,7 +348,7 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
         list_pemain.push_back(pemain_baru);
     }
 
-    cout << "flag 2" << endl;
+    // cout << "flag 2" << endl;
 
     banyak_pemain++;
 }
@@ -520,6 +520,26 @@ void Grandmaster::muatState(string data_path)
         //         return;
         // }
     }
+
+    int banyak_barang_toko;
+
+    getline(file, line);
+    stringstream ss_barang_toko(line); 
+
+    ss_barang_toko >> banyak_barang_toko;
+
+    for (int i = 0; i < banyak_barang_toko; i++)
+    {
+        string namaBarang;
+        int banyakBarang;
+        getline(file, line);
+        stringstream ss_toko(line);
+
+        ss_toko >> namaBarang >> banyakBarang;
+
+        toko->setJenisBarang(namaBarang, banyakBarang);
+    }
+
 }
 
 int Grandmaster::cariJenis(string nama)
