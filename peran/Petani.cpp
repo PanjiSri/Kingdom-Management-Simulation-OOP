@@ -119,10 +119,8 @@ void Petani::beternakBertani() {
 void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem) {
     Tanaman* plant;
     for (int i = 0; i < listItem.size(); i++) {
-        cout << listItem[i]->getNama() << endl;
         if (listItem[i]->getNama() == name) {
             plant = dynamic_cast<Tanaman*>(listItem[i]);
-            cout << plant->getKode() << endl;
             plant->setUmur(umur);
         }
     }

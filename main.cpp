@@ -6,7 +6,7 @@ int main() {
 
     Grandmaster gm;
     
-    gm.runner(); 
+    gm.runner();
 
     return 0;
 }
