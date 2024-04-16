@@ -265,6 +265,10 @@ void Peternak::beriMakan() {
         cin >> slot;
         cout << endl;
         vector<int> index = parse(slot);
+        if (index[0] >= peternakan.getKolom() || index[1] >= peternakan.getBaris()) {
+            cout << "Lokasi yang anda masukkan salah." << endl << endl;
+            return;
+        }
 
         hewan = peternakan[index[1]][index[0]];
         if (hewan == NULL) {
@@ -277,16 +281,21 @@ void Peternak::beriMakan() {
                 cout << "Ambil makanan: ";
                 cin >> slot;
                 index = parse(slot);
-                item = dynamic_cast<Item*> (penyimpanan[index[1]][index[0]]);
-
-                if (item == NULL) {
-                    cout << "Tidak ada apa-apa di di sana." << endl << endl;
-                } 
+                if (index[0] >= penyimpanan.getKolom() || index[1] >= penyimpanan.getBaris()) {
+                    cout << "Lokasi yang anda masukkan salah." << endl << endl;
+                }
                 else {
-                        hewan->makan(item);
-                        cout << "Makanan berhasil diberikan" << endl;
-                        cout << "Berat "<< hewan->getNama() <<" menjadi " << hewan->getBeratSaatIni() << endl << endl;
-                        penyimpanan.setElement(index[1], index[0], NULL);
+                    item = dynamic_cast<Item*> (penyimpanan[index[1]][index[0]]);
+
+                    if (item == NULL) {
+                        cout << "Tidak ada apa-apa di di sana." << endl << endl;
+                    } 
+                    else {
+                            hewan->makan(item);
+                            cout << "Makanan berhasil diberikan" << endl;
+                            cout << "Berat "<< hewan->getNama() <<" menjadi " << hewan->getBeratSaatIni() << endl << endl;
+                            penyimpanan.setElement(index[1], index[0], NULL);
+                    }
                 }
             }
             else {

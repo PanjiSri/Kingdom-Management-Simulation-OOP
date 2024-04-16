@@ -315,13 +315,18 @@ public:
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 if (matriks[i][j] != NULL) {
-                    if (tipe == "HERBIVORE" || tipe == "OMNIVORE") {
+                    if (tipe == "HERBIVORE") {
                         if (matriks[i][j]->getTipe() == "PRODUCT_FRUIT_PLANT") {
                             return true;
                         }
                     }
-                    else if (tipe == "CARNIVORE" || tipe == "OMNIVORE") {
+                    else if (tipe == "CARNIVORE") {
                         if (matriks[i][j]->getTipe() == "PRODUCT_ANIMAL") {
+                            return true;
+                        }
+                    }
+                    else {
+                        if (matriks[i][j]->getTipe() == "PRODUCT_FRUIT_PLANT" || matriks[i][j]->getTipe() == "PRODUCT_ANIMAL") {
                             return true;
                         }
                     }
