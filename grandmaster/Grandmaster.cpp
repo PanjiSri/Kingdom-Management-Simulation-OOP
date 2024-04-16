@@ -42,6 +42,8 @@ Grandmaster::~Grandmaster()
     {
         delete list_produk[i];
     }
+
+    delete toko;
 }
 
 void Grandmaster::loadConfigHewanTanaman()
@@ -304,9 +306,17 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
     inisiatorProduk();
     inisiatorBangunan();
 
+
+
     toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "banyak_pemain awal " << banyak_pemain << endl;
+
     muatState(data_path);
+
+
+
+
+
 
     banyak_pemain = list_pemain.size();
 
@@ -416,6 +426,7 @@ void Grandmaster::muatState(string data_path)
             throw ConfigTidakValid();
         }
 
+
         // // Debugging
         // if (i == 0)
         // {
@@ -464,6 +475,7 @@ void Grandmaster::muatState(string data_path)
             int index_pemain_untuk_tambah_item = cariPemain(username);
 
             list_pemain[index_pemain_untuk_tambah_item]->addPenyimpananFile(nama_item, list_item);
+            
         }
 
         // cout << "debug walikota i: " << i << endl;
@@ -535,6 +547,7 @@ void Grandmaster::muatState(string data_path)
         stringstream ss_toko(line);
 
         ss_toko >> namaBarang >> banyakBarang;
+
 
         string kode = cariKodeBarang(namaBarang);
 
@@ -631,8 +644,22 @@ void Grandmaster::operasi_perintah(string command)
         list_pemain[idx_giliran_pemain]->ambilPajak(list_pemain);
     }
     else if (command == "CETAK_LADANG")
-    {
-        list_pemain[idx_giliran_pemain]->cetakLahan();
+    {   
+        if(list_pemain[idx_giliran_pemain]->getType() == "Petani"){
+            list_pemain[idx_giliran_pemain]->cetakLahan();
+        }else{
+            throw AndaBukanPetaniException();        
+        }
+    
+    }
+    else if(command == "CETAK_PETERNAKAN"){
+
+        if(list_pemain[idx_giliran_pemain]->getType() == "Peternak"){
+            list_pemain[idx_giliran_pemain]->cetakLahan();
+        }else{
+            throw AndaBukanPeternakException();
+        }
+
     }
     else if (command == "TANAM")
     {   
@@ -641,7 +668,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "Anda bukan petani." << endl << endl;
+            throw AndaBukanPetaniException();  
         }
     }
     else if (command == "TERNAK")
@@ -650,7 +677,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "Anda bukan peternak." << endl;
+            throw AndaBukanPeternakException();
         }
     }
     else if (command == "MAKAN")
@@ -697,7 +724,6 @@ void Grandmaster::operasi_perintah(string command)
 
         if (anak_baru != NULL) {
             muatPemain(anak_baru);  
-            printAllPemain();
         }
     }
     else
@@ -818,4 +844,114 @@ string Grandmaster::cariKodeBarang(string nama){
         }
     }
     return "";
+}
+
+void Grandmaster::runner(){
+    cout << "**********************************************" << endl;
+    cout << "*                                            *" << endl;
+    cout << "*          Selamat Datang Di Kelola          *" << endl;
+    cout << "*                 Kerajaan                   *" << endl;
+    cout << "*                SCP-040-JP                  *" << endl;
+    cout << "*                                            *" << endl;
+    cout << "**********************************************" << endl;
+
+    string pilihan_mulai;
+
+    cout << "Apakah anda ingin memulai menggunakan berkas? (y/n)" << endl;
+
+    cin >> pilihan_mulai;
+
+    bool isMuat = true;
+
+
+    if(pilihan_mulai == "y" || pilihan_mulai == "Y"){
+
+            string path_file;
+
+            while(isMuat){
+                try {
+                    cout << "Masukkan path menuju berkas beserta ekstensinya terhadap path TUBES-1-OOP-SCP> : ";   
+
+                    cin >> path_file;
+
+                    mulaiDenganBerkas(path_file);
+
+                    isMuat = false;
+                } catch (exception &e) {
+                    cout << "Error: " <<  e.what() << endl; } 
+            }
+
+            string command;
+            bool isRunning = true;
+
+            while(isRunning){
+            
+                try {
+                    cout << "Sekarang giliran " << list_pemain[idx_giliran_pemain]->getUname() << endl;
+
+                    cout << "Tulis operasi atau perintah yang anda ingingkan: ";
+
+                    cin >> command;
+
+                    operasi_perintah(command);
+
+                    for(int i = 0; i < list_pemain.size(); i++){
+
+                        if(list_pemain[i]->getBerat() == berat_menang && list_pemain[i]->getGulden() == uang_menang){
+                            isRunning = false;
+
+                            cout << "**************************************" << endl;
+                            cout << "*                                    *" << endl;
+                            cout << "*       PERMAINAN DIMENANGKAN        *" << endl;
+                            cout << "*     " << list_pemain[i]->getUname()   << "    *" << endl;
+                            cout << "*                                    *" << endl;
+                            cout << "**************************************" << endl;
+
+                            break;   
+                        }                    
+                    }
+
+                } catch (exception &e) {
+
+                    cout << "Error: " <<  e.what() << endl; }
+
+            }
+    }else if (pilihan_mulai == "n" || pilihan_mulai == "N"){
+        mulaiTanpaBerkas();
+
+        string command;
+        bool isRunning = true;
+
+        while(isRunning){
+            
+                try {
+                    cout << "Sekarang giliran " << list_pemain[idx_giliran_pemain]->getUname() << endl;
+
+                    cout << "Tulis operasi atau perintah yang anda ingingkan: ";
+
+                    cin >> command;
+
+                    operasi_perintah(command);
+
+                    for(int i = 0; i < list_pemain.size(); i++){
+
+                        if(list_pemain[i]->getBerat() == berat_menang && list_pemain[i]->getGulden() == uang_menang){
+                            isRunning = false;
+
+                            cout << "**************************************" << endl;
+                            cout << "*                                    *" << endl;
+                            cout << "*       PERMAINAN DIMENANGKAN        *" << endl;
+                            cout << "*     " << list_pemain[i]->getUname()   << "    *" << endl;
+                            cout << "*                                    *" << endl;
+                            cout << "**************************************" << endl;
+
+                            break;   
+                        }                    
+                    }
+
+                } catch (exception &e) {
+
+                    cout << "Error: " <<  e.what() << endl; }
+        }
+    }
 }
