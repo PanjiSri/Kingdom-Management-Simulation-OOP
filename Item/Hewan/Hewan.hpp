@@ -10,10 +10,8 @@
 
 using namespace std;
 
-class Hewan : public Item
-{
+class Hewan : public Item {
     protected:
-        static int nhewan;
         const int standar_berat_panen;
         int berat_saat_ini;
 
@@ -27,9 +25,7 @@ class Hewan : public Item
         // Getter
         int getBeratPanen();
         int getBeratSaatIni();
-        string getKode();
         int getTambahan();
-        static int getJumlahHewan();
         virtual string getTipe() = 0;
         virtual vector<string> getProduk() = 0;
 

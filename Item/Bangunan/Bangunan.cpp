@@ -53,14 +53,3 @@ string Bangunan::getTipe() {
 int Bangunan::getTambahan() {
     return 0;
 }
-
-void Bangunan::printDetail() {
-// hanya keperluan testing
-    cout << "Nama\t\t: " << nama << endl;
-    cout << "Harga\t\t: " << harga << endl;
-    cout << "Bahan Baku:\n";
-    cout << "1. Teak Wood\t\t: " << teak_wood_cost << endl;
-    cout << "2. Sandalwood Wood\t: " << sandalwood_wood_cost << endl;
-    cout << "3. Aloe Wood\t\t: " << aloe_wood_cost << endl;
-    cout << "4. Ironwood Wood\t: " << ironwood_wood_cost << endl;
-}

@@ -38,10 +38,10 @@ private:
     vector<Konfigurasi_Recipe> list_jenis_bangunan;
 
     // inisiasi configurasi
+    vector<Item *> list_item;
     vector<Tanaman *> list_tanaman;
     vector<Hewan *> list_hewan;
     vector<Produk *> list_produk;
-    vector<Item *> list_item;
     vector<Bangunan *> list_bangunan;
 
     //toko kang

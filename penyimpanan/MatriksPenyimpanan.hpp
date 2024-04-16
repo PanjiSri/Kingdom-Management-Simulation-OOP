@@ -23,6 +23,14 @@ protected:
     int baris;
     int kolom;
 
+    void printKolomBorder() {
+        cout << "      +";
+        for (int i = 0; i < kolom; i++) {
+            cout << "-----+";
+        }
+        cout << endl;
+    }
+
 public:
     // Constructor
     MatriksPenyimpanan() {
@@ -190,14 +198,6 @@ public:
     }
 
     // Other method
-    void printKolomBorder() {
-        cout << "      +";
-        for (int i = 0; i < kolom; i++) {
-            cout << "-----+";
-        }
-        cout << endl;
-    }
-
     void print() {
         // print matriks tanpa warna pada kode
         int ASCII_NUM = 65;
@@ -233,7 +233,7 @@ public:
         }
     }
 
-    void printlahan() {
+    void printWithColour() {
         // print matriks dengan warna
         int ASCII_NUM = 65;
 

@@ -7,7 +7,7 @@
 class Omnivore : public Hewan
 {
     private:
-        string tipe = "OMNIVORE";
+        const string tipe = "OMNIVORE";
 
     public:
         // Constructor & Destructor
