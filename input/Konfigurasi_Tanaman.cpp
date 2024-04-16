@@ -1,10 +1,12 @@
-#include "header/konfig_tanaman.hpp"
+#include "header/Konfigurasi_Tanaman.hpp"
 
 
 Konfigurasi_Tanaman::Konfigurasi_Tanaman() {}
 
 
-Konfigurasi_Tanaman::Konfigurasi_Tanaman(int _id, string _kode, string _nama, string _tipe, int _duration_to_harvest, int harga) : Konfigurasi_Item(_id, _kode, _nama, harga){
+Konfigurasi_Tanaman::Konfigurasi_Tanaman(int _id, string _kode, string _nama, string _tipe, int _duration_to_harvest, int harga) : 
+    Konfigurasi_Item(_id, _kode, _nama, harga)
+{
     this->duration_to_harvest = _duration_to_harvest;
     this->tipe = _tipe;
 }

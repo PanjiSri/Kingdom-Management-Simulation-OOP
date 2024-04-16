@@ -55,8 +55,9 @@ int Bangunan::getTambahan() {
 }
 
 void Bangunan::printDetail() {
-    cout << "Nama\t: " << nama << endl;
-    cout << "Harga\t: " << harga << endl;
+// hanya keperluan testing
+    cout << "Nama\t\t: " << nama << endl;
+    cout << "Harga\t\t: " << harga << endl;
     cout << "Bahan Baku:\n";
     cout << "1. Teak Wood\t\t: " << teak_wood_cost << endl;
     cout << "2. Sandalwood Wood\t: " << sandalwood_wood_cost << endl;

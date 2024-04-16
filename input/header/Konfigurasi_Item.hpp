@@ -12,9 +12,12 @@ protected:
     int harga;
 
 public:
+    // Konstruktor dan destruktor
     Konfigurasi_Item();
     Konfigurasi_Item(int _id, string _kode, string _nama, int _harga);
     ~Konfigurasi_Item();
+
+    // Getter
     int getId();
     string getKode();
     string getName();

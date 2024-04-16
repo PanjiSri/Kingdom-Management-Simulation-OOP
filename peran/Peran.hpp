@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sys/stat.h>
 
-#include "MatriksPenyimpanan.hpp"
+#include "../penyimpanan/MatriksPenyimpanan.hpp"
 #include "../Item/Item.hpp"
 #include "../Item/Hewan/Hewan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
@@ -49,6 +49,10 @@ public:
     MatriksPenyimpanan<Item *> getPenyimpanan();
     virtual int getKekayaan() = 0;
     virtual string getType() = 0;
+    virtual int getRowLahan() = 0;
+    virtual int getKolLahan() = 0;
+    virtual int getBanyakItemLahan() = 0;
+    virtual vector<vector<string>> getDataLahan() = 0;
 
     // Setter
     void tambahBerat(int berat);
@@ -73,14 +77,9 @@ public:
     virtual Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak) = 0;
     virtual int calculateTax() = 0;
     virtual void bangun(vector<Bangunan *> listbangunan) = 0;
-    virtual vector<vector<string>> getDataLahan() = 0;
     virtual void menjual(Toko* toko) = 0;
     virtual void membeli(Toko* toko) = 0;
-
     virtual void simpan(vector<Peran *> list_pemain) = 0;
-    virtual int getRowLahan() = 0;
-    virtual int getKolLahan() = 0;
-    virtual int getBanyakItemLahan() = 0;
 };
 
 #endif

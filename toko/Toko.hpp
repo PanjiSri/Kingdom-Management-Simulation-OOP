@@ -11,15 +11,18 @@
 #include <map>
 #include <vector>
 using namespace std;
-class Toko
-{
+
+class Toko {
 private:
     vector<Item*> jenisBarang;
     map<string,int> jumlahTiapJenis;
 public:
+    // Konstruktor dan destruktor
     Toko();
     Toko(vector<Tanaman*>, vector<Hewan*>, vector<Produk*>, vector<Bangunan*>); 
     ~Toko();
+
+    // Other Method
     Item* jual(int no, int kuantitas);
     void beli(Item* barang);
     void cetakListBarang();

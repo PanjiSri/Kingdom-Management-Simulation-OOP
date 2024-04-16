@@ -62,6 +62,95 @@ public:
         return matriks[idx];
     }
 
+    int getValue() {
+    // mendapatkan total uang dari seluruh item yang ada di dalam matriks
+        int uang = 0;
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    uang += matriks[i][j]->getHarga();
+                }
+            }
+        }
+        return uang;
+    }
+
+    int getPetakKosong() {
+    // mendapatkan jumlah petak matriks yang kosong
+        int empty = 0;
+        for (int i = 0; i < this->getBaris(); i++) {
+            for (int j = 0; j < this->getKolom(); j++) {
+                if (matriks[i][j] == NULL) {
+                    empty += 1;
+                }
+            }
+        }
+        return empty;
+    }
+
+    int getCountItem(string kode) {
+    // mendapatkan jumlah item berdasarkan kode
+        int count = 0;
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    if (matriks[i][j]->getKode() == kode) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    map<string, string> listProdukInMatriks() {
+    // mendapatkan jenis-jenis produk yang ada di dalam matriks
+        map<string, string> listProduk;
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    if (listProduk.size() == 0) {
+                        listProduk.insert({matriks[i][j]->getKode(), matriks[i][j]->getNama()});
+                    }
+                    else {
+                        if (listProduk.count(matriks[i][j]->getNama())) {
+                            listProduk[matriks[i][j]->getKode()] += " " + matriks[i][j]->getNama();
+                        }
+                        else {
+                            listProduk.insert({matriks[i][j]->getKode(), matriks[i][j]->getNama()});
+                        }
+                    }
+                }
+            }
+        }
+        return listProduk;
+    }
+    
+    map<string, int> listSiapPanen() {
+    // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
+        map<string, int> siappanen;
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    if (matriks[i][j]->isSiapPanen() == true) {
+                        if (siappanen.size() == 0) {
+                            siappanen.insert({matriks[i][j]->getNama(), 1});
+                        }
+                        else {
+                            if (siappanen.count(matriks[i][j]->getKode())) {
+                                siappanen[matriks[i][j]->getNama()] += 1;
+                            }
+                            else {
+                                siappanen.insert({matriks[i][j]->getNama(), 1});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return siappanen;
+    }
+
     // Setter
     void setElement(int i, int j, T elem) {
         matriks[i][j] = elem;
@@ -73,6 +162,24 @@ public:
                 if (matriks[i][j] == NULL) {
                     matriks[i][j] = elem;
                     return;
+                }
+            }
+        }
+    }
+
+    void deleteElement(string kode, int jumlah) {
+    // menghapus elemen dari matriks berdasarkan kode dan jumlah
+        int count = 0;
+        for (int i = 0; i < this->baris; i++) {
+            for (int j = 0; j < this->kolom; j++) {
+                if (count >= jumlah) {
+                    break;
+                }
+                
+                if (matriks[i][j] != NULL && matriks[i][j]->getKode() == kode) {
+                    delete matriks[i][j];
+                    matriks[i][j] = NULL;
+                    count++;
                 }
             }
         }
@@ -171,80 +278,6 @@ public:
         }
     }
 
-    map<string, string> listProdukInMatriks() {
-    // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
-        map<string, string> listProduk;
-        for (int i = 0; i < baris; i++) {
-            for (int j = 0; j < kolom; j++) {
-                if (matriks[i][j] != NULL) {
-                    if (listProduk.size() == 0) {
-                        listProduk.insert({matriks[i][j]->getKode(), matriks[i][j]->getNama()});
-                    }
-                    else {
-                        if (listProduk.count(matriks[i][j]->getNama())) {
-                            listProduk[matriks[i][j]->getKode()] += " " + matriks[i][j]->getNama();
-                        }
-                        else {
-                            listProduk.insert({matriks[i][j]->getKode(), matriks[i][j]->getNama()});
-                        }
-                    }
-                }
-            }
-        }
-        return listProduk;
-    }
-    
-    map<string, int> listSiapPanen() {
-        // mendapatkan hewan/tanaman yang siap panen beserta jumlahnya
-        map<string, int> siappanen;
-        for (int i = 0; i < baris; i++) {
-            for (int j = 0; j < kolom; j++) {
-                if (matriks[i][j] != NULL) {
-                    if (matriks[i][j]->isSiapPanen() == true) {
-                        if (siappanen.size() == 0) {
-                            siappanen.insert({matriks[i][j]->getNama(), 1});
-                        }
-                        else {
-                            if (siappanen.count(matriks[i][j]->getKode())) {
-                                siappanen[matriks[i][j]->getNama()] += 1;
-                            }
-                            else {
-                                siappanen.insert({matriks[i][j]->getNama(), 1});
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return siappanen;
-    }
-
-    int getValue() {
-    // mendapatkan total uang dari seluruh item yang ada di dalam matriks
-        int uang = 0;
-        for (int i = 0; i < baris; i++) {
-            for (int j = 0; j < kolom; j++) {
-                if (matriks[i][j] != NULL) {
-                    uang += matriks[i][j]->getHarga();
-                }
-            }
-        }
-        return uang;
-    }
-
-    int getLahanKosong() {
-    // mendapatkan jumlah petak matriks yang kosong
-        int empty = 0;
-        for (int i = 0; i < this->getBaris(); i++) {
-            for (int j = 0; j < this->getKolom(); j++) {
-                if (matriks[i][j] == NULL) {
-                    empty += 1;
-                }
-            }
-        }
-        return empty;
-    }
-
     bool isEmpety() {
     // cek apakah matriks kosong
         for (int i = 0; i < baris; i++) {
@@ -269,13 +302,20 @@ public:
         return true;
     }
 
-    bool isAdaMakanan() {
+    bool isAdaMakanan(string tipe) {
     // cek apakah di dalam matriks ada item yang bisa dimakan
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < kolom; j++) {
                 if (matriks[i][j] != NULL) {
-                    if (matriks[i][j]->getTipe() == "PRODUCT_FRUIT_PLANT" || matriks[i][j]->getTipe() == "PRODUCT_ANIMAL") {
-                        return true;
+                    if (tipe == "HERBIVORE" || tipe == "OMNIVORE") {
+                        if (matriks[i][j]->getTipe() == "PRODUCT_FRUIT_PLANT") {
+                            return true;
+                        }
+                    }
+                    else if (tipe == "CARNIVORE" || tipe == "OMNIVORE") {
+                        if (matriks[i][j]->getTipe() == "PRODUCT_ANIMAL") {
+                            return true;
+                        }
                     }
                 }
             }

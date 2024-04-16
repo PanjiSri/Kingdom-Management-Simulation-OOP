@@ -97,7 +97,7 @@ Toko::Toko()
     jumlahTiapJenis["HTL"] = 0;  
 }
 
-Toko::Toko(vector<Tanaman*> list_jenis_tanaman, vector<Hewan*> list_jenis_hewan, vector<Produk*> list_jenis_produk){
+Toko::Toko(vector<Tanaman*> list_jenis_tanaman, vector<Hewan*> list_jenis_hewan, vector<Produk*> list_jenis_produk, vector<Bangunan*> list_jenis_bangunan){
     for (int i = 0; i < list_jenis_tanaman.size(); i++)
     {
         jenisBarang.push_back(list_jenis_tanaman[i]);
@@ -112,11 +112,10 @@ Toko::Toko(vector<Tanaman*> list_jenis_tanaman, vector<Hewan*> list_jenis_hewan,
     {
         jumlahTiapJenis[list_jenis_produk[i]->getKode()] = 0;
     }
-    // untuk bangunan
-    // for (int i = 0; i < list_jenis_bangunan.size(); i++)
-    // {
-    //     jumlahTiapJenis[list_jenis_bangunan[i]->getKode()] = 0;
-    // }
+    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    {
+        jumlahTiapJenis[list_jenis_bangunan[i]->getKode()] = 0;
+    }
     
 }
 
@@ -160,6 +159,7 @@ void Toko::beli(Item* barang){
     if (jumlahTiapJenis[barang->getKode()] == 0)
     {
         jenisBarang.push_back(barang);
+        jumlahTiapJenis[barang->getKode()] = 0;
     }    
     if (jumlahTiapJenis[barang->getKode()] != -1)
     {
@@ -207,7 +207,8 @@ void Toko::cetakListBarang(){
 //     h.push_back(new Omnivore(6, "CHK", "CHICKEN", 12, 3));
 //     h.push_back(new Omnivore(7, "DCK", "DUCK", 11, 3));
 //     vector<Produk*> p;
-//     Toko a(t,h,p);
+//     vector<Bangunan*> b;
+//     Toko a(t,h,p,b);
 //     Item* barang = new Produk(1, "TAW", "TEAK_WOOD", "PRODUCT_MATERIAL_PLANT", "TEAK_TREE", 0, 9);
 //     a.beli(barang);
 //     a.beli(barang);
