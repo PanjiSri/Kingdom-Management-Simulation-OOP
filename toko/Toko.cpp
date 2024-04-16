@@ -104,24 +104,15 @@ void Toko::cetakListBarang()
 {
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     bool adaBarang = false;
-    int number = 1;
     for (int i = 0; i < int(jenisBarang.size()); i++)
     {
-        if (jumlahTiapJenis[jenisBarang[i]->getKode()] == -1)
+        cout << (i + 1) << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
+        if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
         {
-            cout << number << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
+            cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")";
             adaBarang = true;
-            ++number;
-            cout << endl;
-        } else {
-            if (jumlahTiapJenis[jenisBarang[i]->getKode()] != 0) {
-                cout << number << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
-                cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")";
-                adaBarang = true;
-                ++number;
-                cout << endl;
-            }
         }
+        cout << endl;
     }
 
     if (!adaBarang)
