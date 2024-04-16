@@ -264,13 +264,13 @@ public:
                     string kata = matriks[i][j]->getKode();
                     if (matriks[i][j]->isSiapPanen() == true)
                     {
-                        for (int k = 0; k < kata.size(); k++)
+                        for (int k = 0; k < int(kata.size()); k++)
                         {
                             print_green(kata[k]);
                         }
                     }
                     else {
-                        for (int k = 0; k < kata.size(); k++) {
+                        for (int k = 0; k < int(kata.size()); k++) {
                             print_red(kata[k]);
                         }
                     }

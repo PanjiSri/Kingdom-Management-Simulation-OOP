@@ -18,27 +18,27 @@ Grandmaster::Grandmaster()
 Grandmaster::~Grandmaster()
 {
 
-    for (int i = 0; i < list_pemain.size(); i++)
+    for (int i = 0; i < int(list_pemain.size()); i++)
     {
         delete list_pemain[i];
     }
 
-    for (int i = 0; i < list_tanaman.size(); i++)
+    for (int i = 0; i < int(list_tanaman.size()); i++)
     {
         delete list_tanaman[i];
     }
 
-    for (int i = 0; i < list_hewan.size(); i++)
+    for (int i = 0; i < int(list_hewan.size()); i++)
     {
         delete list_hewan[i];
     }
 
-    for (int i = 0; i < list_item.size(); i++)
+    for (int i = 0; i < int(list_item.size()); i++)
     {
         delete list_item[i];
     }
 
-    for (int i = 0; i < list_produk.size(); i++)
+    for (int i = 0; i < int(list_produk.size()); i++)
     {
         delete list_produk[i];
     }
@@ -194,7 +194,7 @@ void Grandmaster::loadallconfig()
 
 void Grandmaster::inisiatorTanaman()
 {
-    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    for (int i = 0; i < int(list_jenis_tanaman.size()); i++)
     {
         int id = list_jenis_tanaman[i].getId();
         string kode = list_jenis_tanaman[i].getKode();
@@ -210,7 +210,7 @@ void Grandmaster::inisiatorTanaman()
 
 void Grandmaster::inisiatorHewan()
 {
-    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    for (int i = 0; i < int(list_jenis_hewan.size()); i++)
     {
 
         int id = list_jenis_hewan[i].getId();
@@ -244,7 +244,7 @@ void Grandmaster::inisiatorHewan()
 
 void Grandmaster::inisiatorProduk()
 {
-    for (int i = 0; i < list_jenis_produk.size(); i++)
+    for (int i = 0; i < int(list_jenis_produk.size()); i++)
     {
         int id = list_jenis_produk[i].getId();
         string kode = list_jenis_produk[i].getKode();
@@ -260,7 +260,7 @@ void Grandmaster::inisiatorProduk()
 }
 
 void Grandmaster::inisiatorBangunan() {
-    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    for (int i = 0; i < int(list_jenis_bangunan.size()); i++)
     {
         int id = list_jenis_bangunan[i].getId();
         string kode = list_jenis_bangunan[i].getKode();
@@ -557,7 +557,7 @@ void Grandmaster::muatState(string data_path)
 
 int Grandmaster::cariJenis(string nama)
 {
-    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    for (int i = 0; i < int(list_jenis_tanaman.size()); i++)
     {
         if (list_jenis_tanaman[i].getName() == nama)
         {
@@ -565,7 +565,7 @@ int Grandmaster::cariJenis(string nama)
         }
     }
 
-    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    for (int i = 0; i < int(list_jenis_hewan.size()); i++)
     {
         if (list_jenis_hewan[i].getName() == nama)
         {
@@ -573,7 +573,7 @@ int Grandmaster::cariJenis(string nama)
         }
     }
 
-    for (int i = 0; i < list_jenis_produk.size(); i++)
+    for (int i = 0; i < int(list_jenis_produk.size()); i++)
     {
         if (list_jenis_produk[i].getName() == nama)
         {
@@ -581,7 +581,7 @@ int Grandmaster::cariJenis(string nama)
         }
     }
 
-    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    for (int i = 0; i < int(list_jenis_bangunan.size()); i++)
     {
         if (list_jenis_bangunan[i].getName() == nama)
         {
@@ -595,7 +595,7 @@ int Grandmaster::cariJenis(string nama)
 int Grandmaster::cariPemain(string username)
 {
 
-    for (int i = 0; i < list_pemain.size(); i++)
+    for (int i = 0; i < int(list_pemain.size()); i++)
     {
 
         if (list_pemain[i]->getUname() == username)
@@ -610,7 +610,7 @@ int Grandmaster::cariPemain(string username)
 void Grandmaster::next()
 {
 
-    if (idx_giliran_pemain + 1 >= list_pemain.size())
+    if (idx_giliran_pemain + 1 >= int(list_pemain.size()))
     {
         idx_giliran_pemain = 0;
     }
@@ -627,7 +627,7 @@ void Grandmaster::operasi_perintah(string command)
     if (command == "NEXT")
     {
         next();
-        for (int i = 0; i < list_pemain.size(); i++)
+        for (int i = 0; i < int(list_pemain.size()); i++)
         {
             if (list_pemain[i]->getType() == "Petani")
             {
@@ -792,7 +792,7 @@ void Grandmaster::getAllPemainInfo()
 
     return;
 
-    for (int i = 0; i < list_pemain.size(); i++)
+    for (int i = 0; i < int(list_pemain.size()); i++)
     {
         cout << "Nama: " << list_pemain[i]->getUname() << endl;
         cout << "Berat: " << list_pemain[i]->getBerat() << endl;
@@ -809,14 +809,14 @@ void Grandmaster::printAllPemain()
 {
 
     cout << "[";
-    for (int i = 0; i < list_pemain.size(); i++)
+    for (int i = 0; i < int(list_pemain.size()); i++)
     {
         cout << "(";
         cout << list_pemain[i]->getUname() << ", ";
         cout << list_pemain[i]->getBerat() << ", ";
         cout << list_pemain[i]->getGulden();
         cout << ")";
-        if (i != list_pemain.size() - 1)
+        if (i != int(list_pemain.size()) - 1)
         {
             cout << ",";
         }
@@ -826,7 +826,7 @@ void Grandmaster::printAllPemain()
 
 void Grandmaster::printWalikota()
 {
-    for (int i = 0; i < list_pemain.size(); i++)
+    for (int i = 0; i < int(list_pemain.size()); i++)
     {
         if (list_pemain[i]->getType() == "walikota")
         {
@@ -838,7 +838,7 @@ void Grandmaster::printWalikota()
 
 string Grandmaster::cariKodeBarang(string nama){
 
-    for(int i = 0; i < list_item.size(); i++){
+    for(int i = 0; i < int(list_item.size()); i++){
         if(list_item[i]->getNama() == nama){
             return list_item[i]->getKode();
         }
@@ -895,7 +895,7 @@ void Grandmaster::runner(){
 
                     operasi_perintah(command);
 
-                    for(int i = 0; i < list_pemain.size(); i++){
+                    for(int i = 0; i < int(list_pemain.size()); i++){
 
                         if(list_pemain[i]->getBerat() == berat_menang && list_pemain[i]->getGulden() == uang_menang){
                             isRunning = false;
@@ -933,7 +933,7 @@ void Grandmaster::runner(){
 
                     operasi_perintah(command);
 
-                    for(int i = 0; i < list_pemain.size(); i++){
+                    for(int i = 0; i < int(list_pemain.size()); i++){
 
                         if(list_pemain[i]->getBerat() == berat_menang && list_pemain[i]->getGulden() == uang_menang){
                             isRunning = false;

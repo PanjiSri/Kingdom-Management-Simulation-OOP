@@ -78,7 +78,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
 
     vector<detailPajak> detailPajak;
     // mendapatkan semua detail pajak dari pemain
-    for (int i = 0; i < listPeran.size(); i++) {
+    for (int i = 0; i < int(listPeran.size()); i++) {
         if (listPeran[i]->getType() != "Walikota") {
             pajak_pemain = listPeran[i]->calculateTax();
             gulden_pajak += pajak_pemain;
@@ -88,9 +88,9 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
     }
 
     // urutkan pajak dari yang terbesar
-    for (int i = 0; i < detailPajak.size(); i++) {
+    for (int i = 0; i < int(detailPajak.size()); i++) {
         int max = i;
-        for (int j = i+1; j < detailPajak.size(); j++) {
+        for (int j = i+1; j < int(detailPajak.size()); j++) {
             if (detailPajak[j].pajak > detailPajak[max].pajak) {
                 max = j;
             } else if (detailPajak[j].pajak == detailPajak[max].pajak) {
@@ -106,7 +106,7 @@ void Walikota::ambilPajak(vector<Peran*> listPeran) {
 
     // cetak pajak
     cout << "Berikut adalah detail dari pemungutan pajak:" << endl;
-    for (int i = 0; i < detailPajak.size(); i++) {
+    for (int i = 0; i < int(detailPajak.size()); i++) {
         cout << "   " << i+1 << ". ";
         cout << detailPajak[i].uname << " - " << detailPajak[i].peran << " : " << detailPajak[i].pajak << endl;
     }
@@ -126,7 +126,7 @@ Peran* Walikota::buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, i
             cout << endl << "Masukkan username: ";
             cin >> uname;
             // cek apakah username telah digunakan
-            for (int i = 0; i < listplayer.size(); i++) {
+            for (int i = 0; i < int(listplayer.size()); i++) {
                 if (listplayer[i]->getUname() == uname) {
                     cout << "Username telah digunakan!" << endl << endl;
                     return NULL;
@@ -197,7 +197,7 @@ void Walikota::bangun(vector<Bangunan *> listbangunan) {
     // cek keberadaan resep bangunan
     bool resep_exist = false;
     int index_listbangunan = 0;
-    while (index_listbangunan < listbangunan.size() && !resep_exist) {
+    while (index_listbangunan < int(listbangunan.size()) && !resep_exist) {
         if (listbangunan[index_listbangunan]->getNama() == pilihan_bangunan) {
             resep_exist = true;
         } else {
@@ -229,7 +229,6 @@ void Walikota::bangun(vector<Bangunan *> listbangunan) {
     }
 
     // mengurangi sumber daya yang dimiliki
-    int count = 0;
     this->penyimpanan.deleteElement("TAW", teak_wood_cost);
     this->penyimpanan.deleteElement("SAW", sandalwood_wood_cost);
     this->penyimpanan.deleteElement("ALW", aloe_wood_cost);
@@ -374,7 +373,7 @@ void Walikota::simpan(vector<Peran*> list_pemain, Toko * toko){
             outfile << banyak_ternak << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++) {
+            for (int j = 0; j < int(temp.size()); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
@@ -385,7 +384,7 @@ void Walikota::simpan(vector<Peran*> list_pemain, Toko * toko){
             outfile << banyak_tandur << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++) {
+            for (int j = 0; j < int(temp.size()); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
@@ -394,7 +393,7 @@ void Walikota::simpan(vector<Peran*> list_pemain, Toko * toko){
     
     vector<vector<string>> data_toko = toko->getBarangJumlah();
     int sum = 0;
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             sum += 1;
         }
@@ -402,7 +401,7 @@ void Walikota::simpan(vector<Peran*> list_pemain, Toko * toko){
 
     outfile << sum << endl;
 
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             outfile << data_toko[i][0] << " " << data_toko[i][1] << endl;
         }

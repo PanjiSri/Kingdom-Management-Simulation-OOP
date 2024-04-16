@@ -114,7 +114,7 @@ void Peternak::beternakBertani() {
 
 void Peternak::beternakBertaniFile(string location, string name, int berat, vector<Item*> listItem) {
     Hewan* hewan;
-    for (int i = 0; i < listItem.size(); i++) {
+    for (int i = 0; i < int(listItem.size()); i++) {
         if (listItem[i]->getNama() == name) {
             hewan = dynamic_cast<Hewan*>(listItem[i]);
             hewan->setBerat(berat);
@@ -153,7 +153,7 @@ void Peternak::panen(vector<Produk*> listProduk) {
     }
     // Menampilkan hewan yang siap panen
     cout << "Daftar hewan yang siap panen: " << endl;
-    for (int i = 0; i < listHewanPanen.size(); i++) {
+    for (int i = 0; i < int(listHewanPanen.size()); i++) {
         cout << i+1 << ") " << listHewanPanen[i] << " (" << jumlahHewanPanen[i] << " ekor)" << endl;
     }
 
@@ -166,7 +166,7 @@ void Peternak::panen(vector<Produk*> listProduk) {
         cin >> angka;
         angka--;
 
-        if (angka >= listHewanPanen.size() || angka < 0) { // jika masukan tidak valid
+        if (angka >= int(listHewanPanen.size()) || angka < 0) { // jika masukan tidak valid
             cout << "Hei, apakah kamu tidak bisa membaca!!!." << endl << endl;
         } 
         else {
@@ -197,7 +197,7 @@ void Peternak::panen(vector<Produk*> listProduk) {
                             this->peternakan[index[1]][index[0]] = NULL;
                             vector<string> hasilPanen = hewan->getProduk();
 
-                            if (hasilPanen.size() > penyimpanan.getPetakKosong()) {
+                            if (int(hasilPanen.size()) > penyimpanan.getPetakKosong()) {
                                 // ada hewan yang menghasilkan 2 produk
                                 cout << "Inventory Anda tidak cukup untuk produk hewan tersebut." << endl << endl;
                                 this->peternakan[index[1]][index[0]] = hewan;
@@ -208,9 +208,9 @@ void Peternak::panen(vector<Produk*> listProduk) {
                                 return;
                             }
                             else {
-                                for (int banyak_produk = 0; banyak_produk < hasilPanen.size(); banyak_produk++) {
+                                for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
                                     Produk* produk;
-                                    for (int q = 0; q < listProduk.size(); q++) {
+                                    for (int q = 0; q < int(listProduk.size()); q++) {
                                         // membuat objek produk dari string nama pada hasilPanen
                                         if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
                                             produk = listProduk[q];
@@ -238,7 +238,6 @@ void Peternak::beriMakan() {
         cout << "Anda belum memiliki hewan." << endl << endl;
     }
     else {
-        bool kondisi;
         string slot;
         Hewan* hewan;
 
@@ -446,7 +445,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
             outfile << banyak_ternak << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++) {
+            for (int j = 0; j < int(temp.size()); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
@@ -457,7 +456,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
             outfile << banyak_tandur << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++) {
+            for (int j = 0; j < int(temp.size()); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
@@ -465,7 +464,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
     
     vector<vector<string>> data_toko = toko->getBarangJumlah();
     int sum = 0;
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             sum += 1;
         }
@@ -473,7 +472,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
 
     outfile << sum << endl;
 
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             outfile << data_toko[i][0] << " " << data_toko[i][1] << endl;
         }

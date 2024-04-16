@@ -98,22 +98,22 @@ Toko::Toko()
 
 Toko::Toko(vector<Tanaman *> list_jenis_tanaman, vector<Hewan *> list_jenis_hewan, vector<Produk *> list_jenis_produk, vector<Bangunan *> list_jenis_bangunan)
 {
-    for (int i = 0; i < list_jenis_tanaman.size(); i++)
+    for (int i = 0; i < int(list_jenis_tanaman.size()); i++)
     {
         jenisBarang.push_back(list_jenis_tanaman[i]);
         jumlahTiapJenis.insert({list_jenis_tanaman[i]->getKode(), -1});
     }
-    for (int i = 0; i < list_jenis_hewan.size(); i++)
+    for (int i = 0; i < int(list_jenis_hewan.size()); i++)
     {
         jenisBarang.push_back(list_jenis_hewan[i]);
         jumlahTiapJenis.insert({list_jenis_hewan[i]->getKode(), -1});
     }
-    for (int i = 0; i < list_jenis_produk.size(); i++)
+    for (int i = 0; i < int(list_jenis_produk.size()); i++)
     {
         jenisBarang.push_back(list_jenis_produk[i]);
         jumlahTiapJenis.insert({list_jenis_produk[i]->getKode(), 0});
     }
-    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    for (int i = 0; i < int(list_jenis_bangunan.size()); i++)
     {
         jenisBarang.push_back(list_jenis_bangunan[i]);
         jumlahTiapJenis.insert({list_jenis_bangunan[i]->getKode(), 0});
@@ -131,7 +131,7 @@ vector<Item *> Toko::getListBarang()
 
 Item *Toko::jual(int no, int kuantitas)
 {
-    if (no > jenisBarang.size())
+    if (no > int(jenisBarang.size()))
     {
         throw NoBarangTidakValidException();
     }
@@ -174,7 +174,7 @@ void Toko::cetakListBarang()
 {
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     bool adaBarang = false;
-    for (int i = 0; i < jenisBarang.size(); i++)
+    for (int i = 0; i < int(jenisBarang.size()); i++)
     {
         cout << (i + 1) << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
         if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
@@ -234,7 +234,7 @@ void Toko::setJenisBarang(string kode, int value)
 vector<vector<string>> Toko::getBarangJumlah()
 {
     vector<vector<string>> list;
-    for (int i = 0; i < jenisBarang.size(); i++)
+    for (int i = 0; i < int(jenisBarang.size()); i++)
     {
         vector<string> temp;
         temp.push_back(jenisBarang[i]->getNama());

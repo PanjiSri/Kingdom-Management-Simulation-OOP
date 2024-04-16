@@ -22,7 +22,7 @@ class Hewan : public Item
         Hewan();
         Hewan(int, string, string, int, int);
         Hewan(const Hewan&);
-        ~Hewan();
+        virtual ~Hewan();
         
         // Getter
         int getBeratPanen();

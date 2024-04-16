@@ -38,7 +38,7 @@ public:
     Peran();
     Peran(string username, int row_inv, int col_inv);
     Peran(string username, int berat, int gulden, int row_inv, int col_inv);
-    ~Peran();
+    virtual ~Peran();
     Peran &operator= (const Peran &other);
 
     // Getter

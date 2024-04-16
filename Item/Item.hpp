@@ -18,7 +18,7 @@ class Item {
         Item();
         Item(int, string, string, int);
         Item(const Item&);
-        ~Item();
+        virtual ~Item();
         
         // Getter
         int getID();

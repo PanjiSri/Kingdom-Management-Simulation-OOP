@@ -118,7 +118,7 @@ void Petani::beternakBertani() {
 
 void Petani::beternakBertaniFile(string location, string name, int umur, vector<Item *> listItem) {
     Tanaman* plant;
-    for (int i = 0; i < listItem.size(); i++) {
+    for (int i = 0; i < int(listItem.size()); i++) {
         if (listItem[i]->getNama() == name) {
             plant = dynamic_cast<Tanaman*>(listItem[i]);
             plant->setUmur(umur);
@@ -158,7 +158,7 @@ void Petani::panen(vector<Produk *> listProduk) {
 
     // Menampilkan tanaman yang siap panen
     cout << "Daftar tanaman yang siap panen: " << endl;
-    for (int i = 0; i < listTanamanMatang.size(); i++) {
+    for (int i = 0; i < int(listTanamanMatang.size()); i++) {
         cout << i+1 << ") " << listTanamanMatang[i] << " (" << jumlahTanamanMatang[i] << " buah)" << endl;
     }
 
@@ -174,7 +174,7 @@ void Petani::panen(vector<Produk *> listProduk) {
         cin >> angka;
         angka--;
 
-        if (angka >= listTanamanMatang.size() || angka < 0) { // jika masukan tidak valid
+        if (angka >= int(listTanamanMatang.size()) || angka < 0) { // jika masukan tidak valid
             cout << "Hei, apakah kamu tidak bisa membaca!!!." << endl
                  << endl;
         }
@@ -214,9 +214,9 @@ void Petani::panen(vector<Produk *> listProduk) {
                                 return;
                             }
                             else {
-                                for (int banyak_produk = 0; banyak_produk < hasilPanen.size(); banyak_produk++) {
+                                for (int banyak_produk = 0; banyak_produk < int(hasilPanen.size()); banyak_produk++) {
                                     Produk *produk;
-                                    for (int q = 0; q < listProduk.size(); q++) {
+                                    for (int q = 0; q < int(listProduk.size()); q++) {
                                         // membuat objek produk dari string nama pada hasilPanen
                                         if (hasilPanen[banyak_produk] == listProduk[q]->getNama()) {
                                             produk = listProduk[q];
@@ -419,7 +419,7 @@ void Petani::simpan(vector<Peran*> list_pemain, Toko *toko) {
             outfile << banyak_ternak << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int m = 0; m < temp.size(); m++) {
+            for (int m = 0; m < int(temp.size()); m++) {
                 outfile << temp[m][0] << " " << temp[m][1] << " " << temp[m][2] << endl;
             }
         }
@@ -430,7 +430,7 @@ void Petani::simpan(vector<Peran*> list_pemain, Toko *toko) {
             outfile << banyak_tandur << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int n = 0; n < temp.size(); n++) {
+            for (int n = 0; n < int(temp.size()); n++) {
                 outfile << temp[n][0] << " " << temp[n][1] << " " << temp[n][2] << endl;
             }
         }
@@ -438,7 +438,7 @@ void Petani::simpan(vector<Peran*> list_pemain, Toko *toko) {
 
     vector<vector<string>> data_toko = toko->getBarangJumlah();
     int sum = 0;
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             sum += 1;
         }
@@ -446,7 +446,7 @@ void Petani::simpan(vector<Peran*> list_pemain, Toko *toko) {
 
     outfile << sum << endl;
 
-    for(int i = 0; i < data_toko.size(); i++) {
+    for(int i = 0; i < int(data_toko.size()); i++) {
         if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             outfile << data_toko[i][0] << " " << data_toko[i][1] << endl;
         }

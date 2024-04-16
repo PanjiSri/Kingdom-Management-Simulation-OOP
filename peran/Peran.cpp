@@ -138,7 +138,7 @@ void Peran::addPenyimpananSpesifikLocation(Item* item) {
 void Peran::addPenyimpananFile(string name, vector<Item*> listItem) {
 // memasukkan item yang ada dalam file txt ke dalam penyimpanan
     Item* item;
-    for (int i = 0; i < listItem.size(); i++) {
+    for (int i = 0; i < int(listItem.size()); i++) {
         if (listItem[i]->getNama() == name) {
             item = listItem[i];
         }
