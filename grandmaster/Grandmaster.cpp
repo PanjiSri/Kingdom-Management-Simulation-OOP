@@ -689,9 +689,19 @@ void Grandmaster::runner(){
                     mulaiDenganBerkas(path_file);
 
                     isMuat = false;
-                } 
+                }
                 catch (exception &e) {
-                    cout << "Error: " <<  e.what() << endl; 
+                    cout << e.what() << endl;
+                    list_pemain.clear();
+                    list_hewan.clear();
+                    list_bangunan.clear();
+                    list_item.clear();
+                    list_jenis_bangunan.clear();
+                    list_jenis_hewan.clear();
+                    list_jenis_produk.clear();
+                    list_jenis_tanaman.clear();
+                    list_produk.clear();
+                    list_tanaman.clear();
                 } 
             }
 

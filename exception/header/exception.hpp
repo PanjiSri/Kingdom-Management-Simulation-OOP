@@ -20,7 +20,7 @@ class ConfigTidakValid : public exception
 public:
     const char *what() const throw()
     {
-        return "Config Tidak Valid.";
+        return "Isi File Tidak Valid.";
     }
 };
 

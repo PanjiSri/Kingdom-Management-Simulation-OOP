@@ -89,6 +89,7 @@ void Peternak::beternakBertani() {
         if (penyimpanan[lokasiInvent[1]][lokasiInvent[0]] == NULL) {
             throw SlotKosongException();
         }
+        
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
         if (tipe == "HERBIVORE" || tipe == "CARNIVORE" || tipe == "OMNIVORE") {
