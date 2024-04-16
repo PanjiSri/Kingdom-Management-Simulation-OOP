@@ -10,7 +10,7 @@ CFLAGS = -o $(TARGET) -Wall
 
 # Define the all rule
 run: all
-	@./tes
+	@./$(TARGET)
 
 all: $(TARGET)
 
