@@ -79,7 +79,7 @@ public:
     virtual void bangun(vector<Bangunan *> listbangunan) = 0;
     virtual void menjual(Toko* toko) = 0;
     virtual void membeli(Toko* toko) = 0;
-    virtual void simpan(vector<Peran *> list_pemain) = 0;
+    virtual void simpan(vector<Peran *> list_pemain, Toko *toko) = 0;
 };
 
 #endif

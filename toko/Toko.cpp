@@ -219,3 +219,19 @@ void Toko::cetakListBarang(){
 //     a.jual(16,5);
 //     a.cetakListBarang();
 // }
+
+void Toko::setJenisBarang(string kode, int value){
+    this->jumlahTiapJenis[kode] = value;
+}
+
+vector<vector<string>> Toko::getBarangJumlah(){
+    vector<vector<string>> list;
+    for (int i = 0; i <jenisBarang.size(); i++)
+    {
+        vector<string> temp;
+        temp.push_back(jenisBarang[i]->getNama());
+        temp.push_back(to_string(jumlahTiapJenis[jenisBarang[i]->getKode()]));
+        list.push_back(temp);
+    }
+    return list;
+}

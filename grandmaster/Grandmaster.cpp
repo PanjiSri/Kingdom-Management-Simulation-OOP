@@ -296,14 +296,14 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
 {
     loadallconfig();
 
-    cout << "flag 1" << endl; 
+    // cout << "flag 1" << endl; 
 
     inisiatorHewan();
     inisiatorTanaman();
     inisiatorProduk();
     inisiatorBangunan();
 
-    cout << "banyak_pemain awal " << banyak_pemain << endl;
+    // cout << "banyak_pemain awal " << banyak_pemain << endl;
     muatState(data_path);
 
     banyak_pemain = list_pemain.size();
@@ -314,20 +314,20 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
 
 void Grandmaster::muatPemain(Peran *pemain_baru)
 {
-    cout << "flag 0" << endl;
+    // cout << "flag 0" << endl;
     if (list_pemain.empty())
     {
         list_pemain.push_back(pemain_baru);
-        cout << "username " << pemain_baru->getUname() << endl;
-        cout << "banyak_pemain " << banyak_pemain << endl;
+        // cout << "username " << pemain_baru->getUname() << endl;
+        // cout << "banyak_pemain " << banyak_pemain << endl;
         banyak_pemain++;
         return;
     }
     // leksikografis
     string username_baru = pemain_baru->getUname();
-    cout << "username: " << username_baru << endl;
+    // cout << "username: " << username_baru << endl;
     bool cek = false;
-    cout << "banyak_pemain " << banyak_pemain << endl;
+    // cout << "banyak_pemain " << banyak_pemain << endl;
     for (int i = 0; i < banyak_pemain; ++i)
     {
         if (username_baru == list_pemain[i]->getUname())
@@ -348,7 +348,7 @@ void Grandmaster::muatPemain(Peran *pemain_baru)
         list_pemain.push_back(pemain_baru);
     }
 
-    cout << "flag 2" << endl;
+    // cout << "flag 2" << endl;
 
     banyak_pemain++;
 }
@@ -377,7 +377,7 @@ void Grandmaster::muatState(string data_path)
 
     ss >> banyak_pemain_file;
 
-    cout << "banyak pemain file: " << banyak_pemain_file << endl;
+    // cout << "banyak pemain file: " << banyak_pemain_file << endl;
 
     for (int i = 0; i < banyak_pemain_file; i++)
     {
@@ -389,10 +389,10 @@ void Grandmaster::muatState(string data_path)
 
         ss_pemain >> username >> jenis_peran >> berat_badan >> uang; // Gunakan ss_pemain di sini
 
-        cout << "username: " << username << endl;
-        cout << "jenis peran: " << jenis_peran << endl;
-        cout << "berat badan: " << berat_badan << endl;
-        cout << "uang: " << uang << endl;
+        // cout << "username: " << username << endl;
+        // cout << "jenis peran: " << jenis_peran << endl;
+        // cout << "berat badan: " << berat_badan << endl;
+        // cout << "uang: " << uang << endl;
 
         // int banyak_jenis;
 
@@ -417,26 +417,26 @@ void Grandmaster::muatState(string data_path)
             throw ConfigTidakValid();
         }
 
-        // Debugging
-        if (i == 0)
-        {
-            cout << "debug 1" << endl;
-            cout << list_pemain[0]->getUname() << endl;
-        }
-        else if (i == 1)
-        {
-            cout << "debug 2" << endl;
-            cout << list_pemain[0]->getUname() << endl;
-            cout << list_pemain[1]->getUname() << endl;
-        }
-        else
-        {
-            cout << "debug 3" << endl;
-            // cout << list_pemain[0]->getUname() << endl;
-            // cout << list_pemain[1]->getUname() << endl;
-            // cout << list_pemain[2]->getUname() << endl;
-            printAllPemain();
-        }
+        // // Debugging
+        // if (i == 0)
+        // {
+        //     cout << "debug 1" << endl;
+        //     cout << list_pemain[0]->getUname() << endl;
+        // }
+        // else if (i == 1)
+        // {
+        //     cout << "debug 2" << endl;
+        //     cout << list_pemain[0]->getUname() << endl;
+        //     cout << list_pemain[1]->getUname() << endl;
+        // }
+        // else
+        // {
+        //     cout << "debug 3" << endl;
+        //     // cout << list_pemain[0]->getUname() << endl;
+        //     // cout << list_pemain[1]->getUname() << endl;
+        //     // cout << list_pemain[2]->getUname() << endl;
+        //     printAllPemain();
+        // }
 
         // Debugging
 
@@ -446,7 +446,7 @@ void Grandmaster::muatState(string data_path)
         int banyak_item;
         ss_item >> banyak_item; // Gunakan ss_item di sini
 
-        cout << "banyak item: " << banyak_item << endl;
+        // cout << "banyak item: " << banyak_item << endl;
 
         for (int j = 0; j < banyak_item; j++)
         {
@@ -460,19 +460,19 @@ void Grandmaster::muatState(string data_path)
 
             // pastiin ini jenis item apa, terus tambahin ke peran
             // cari peran berdasarkan index'
-            cout << "nama item: " << nama_item << endl;
+            // cout << "nama item: " << nama_item << endl;
 
             int index_pemain_untuk_tambah_item = cariPemain(username);
 
             list_pemain[index_pemain_untuk_tambah_item]->addPenyimpananFile(nama_item, list_item);
         }
 
-        cout << "debug walikota i: " << i << endl;
-        if (i == 2)
-        {
-            cout << "debug 4" << endl;
-            list_pemain[0]->printPenyimpanan();
-        }
+        // cout << "debug walikota i: " << i << endl;
+        // if (i == 2)
+        // {
+        //     cout << "debug 4" << endl;
+        //     list_pemain[0]->printPenyimpanan();
+        // }
 
         if (jenis_peran != "Walikota")
         {
@@ -482,13 +482,13 @@ void Grandmaster::muatState(string data_path)
 
             ss_di_lahan >> banyak_di_lahan; // Gunakan ss_di_lahan di sini
 
-            cout << "banyak di lahan: " << banyak_di_lahan << endl;
+            // cout << "banyak di lahan: " << banyak_di_lahan << endl;
 
             int index_pemain_untuk_tambah_item = cariPemain(username);
 
-            printAllPemain();
+            // printAllPemain();
 
-            cout << "index pemain: " << index_pemain_untuk_tambah_item << endl;
+            // cout << "index pemain: " << index_pemain_untuk_tambah_item << endl;
 
             for (int k = 0; k < banyak_di_lahan; k++)
             {
@@ -501,24 +501,44 @@ void Grandmaster::muatState(string data_path)
 
                 ss_lahan >> lokasi >> nama >> umur; // Gunakan ss_lahan di sini
 
-                cout << "lokasi: " << lokasi << endl;
-                cout << "nama: " << nama << endl;
-                cout << "umur: " << umur << endl;
+                // cout << "lokasi: " << lokasi << endl;
+                // cout << "nama: " << nama << endl;
+                // cout << "umur: " << umur << endl;
 
                 list_pemain[index_pemain_untuk_tambah_item]->beternakBertaniFile(lokasi, nama, umur, list_item);
                 // list_pemain[index_pemain_untuk_tambah_item]->cetakLahan();
             }
-            if (i == 2)
-            {
+            // if (i == 2)
+            // {
 
-                cout << "debug 5" << endl;
-                // list_pemain[1]->cetakLahan();
-                printAllPemain();
-            }
+            //     cout << "debug 5" << endl;
+            //     // list_pemain[1]->cetakLahan();
+            //     printAllPemain();
+            // }
         }
         // if(i == 2){
         //         return;
         // }
+    }
+
+    int banyak_barang_toko;
+
+    getline(file, line);
+    stringstream ss_barang_toko(line); 
+
+    ss_barang_toko >> banyak_barang_toko;
+
+    for (int i = 0; i < banyak_barang_toko; i++)
+    {
+        string namaBarang;
+        int banyakBarang;
+        getline(file, line);
+        stringstream ss_toko(line);
+
+        ss_toko >> namaBarang >> banyakBarang;
+
+        string kode = cariKodeBarang(namaBarang);
+        toko->setJenisBarang(kode, banyakBarang);
     }
 }
 
@@ -787,4 +807,15 @@ void Grandmaster::printWalikota()
             cout << list_pemain[i]->getUname() << endl;
         }
     }
+}
+
+
+string Grandmaster::cariKodeBarang(string nama){
+
+    for(int i = 0; i < list_item.size(); i++){
+        if(list_item[i]->getNama() == nama){
+            return list_item[i]->getKode();
+        }
+    }
+    return "";
 }

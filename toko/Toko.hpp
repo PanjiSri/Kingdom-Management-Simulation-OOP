@@ -27,4 +27,8 @@ public:
     void beli(Item* barang);
     void cetakListBarang();
     vector<Item*> getListBarang();
+
+    void setJenisBarang(string, int);
+
+    vector<vector<string>> getBarangJumlah();
 };

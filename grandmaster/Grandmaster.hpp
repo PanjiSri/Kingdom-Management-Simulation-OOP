@@ -141,6 +141,8 @@ public:
     void printAllPemain();
 
     void printWalikota();
+
+    string cariKodeBarang(string nama);
 };
 
 #endif

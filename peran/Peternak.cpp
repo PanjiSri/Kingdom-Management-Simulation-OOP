@@ -400,7 +400,7 @@ void Peternak::menjual(Toko* toko) {
     }
 }
 
-void Peternak::simpan(vector<Peran *> list_pemain) {
+void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
     string file_path;
     cout << "Masukkan lokasi berkas state : ";
     cin >> file_path;
@@ -462,6 +462,23 @@ void Peternak::simpan(vector<Peran *> list_pemain) {
             }
         }
     }
+    
+    vector<vector<string>> data_toko = toko->getBarangJumlah();
+    int sum = 0;
+    for(int i = 0; i < data_toko.size(); i++) {
+        if (data_toko[i][1] != "0" || data_toko[i][1] != "-1") {
+            sum += 1;
+        }
+    }
+
+    outfile << sum << endl;
+
+    for(int i = 0; i < data_toko.size(); i++) {
+        if (data_toko[i][1] != "0" || data_toko[i][1] != "-1") {
+            outfile << data_toko[i][0] << " " << data_toko[i][1] << endl;
+        }
+    }
+
     outfile.close();
     cout << "Data pemain berhasil disimpan!" << endl << endl;
 }
