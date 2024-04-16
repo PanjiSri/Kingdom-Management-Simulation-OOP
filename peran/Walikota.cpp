@@ -201,7 +201,7 @@ void Walikota::bangun(vector<Bangunan *> listbangunan) {
         if (listbangunan[index_listbangunan]->getNama() == pilihan_bangunan) {
             resep_exist = true;
         } else {
-            ++index_listbangunan;
+            index_listbangunan++;
         }
     }
     if (!resep_exist) {
@@ -271,16 +271,22 @@ void Walikota::membeli(Toko* toko) {
     Item* item = toko->jual(noBarang, kuantitas);
     if (this->getGulden() < item->getHarga()*kuantitas) {
         cout << "Uang yang Anda miliki tidak cukup." << endl << endl;
-    }
-    else {
+    } else if (kuantitas > penyimpanan.getPetakKosong()) {
+        cout << "Slot penyimpanan tidak cukup." << endl << endl;
+    } else {
         penyimpanan.print();
         for (int i = 0; i < kuantitas; i++) {
             string location;
             cout << "Masukkan lokasi untuk item ke-" << i << " : ";
             cin >> location;
             vector<int> index = parse(location);
-            penyimpanan.setElement(index[1], index[0], item);
-            this->gulden -= item->getHarga();
+            if (penyimpanan[index[1]][index[0]] != NULL) {
+                cout << "Slot sudah terisi." << endl;
+                i--;
+            } else {
+                penyimpanan.setElement(index[1], index[0], item);
+                this->gulden -= item->getHarga();
+            }
         }
     }
 }
@@ -288,27 +294,41 @@ void Walikota::membeli(Toko* toko) {
 void Walikota::menjual(Toko* toko){
     cout << "Berikut merupakan penyimpanan Anda" << endl;
     printPenyimpanan();
-    int total_barang;
-    int total_uang = 0;
-    cout << "Berapa benda yang ingin anda jual: ";
-    cin >> total_barang;
+    
+    if (penyimpanan.isEmpety()) {
+        cout << "Penyimpanan Anda kosong!" << endl << endl;
+    } else {
+        int total_barang;
+        int total_uang = 0;
+        cout << "Berapa benda yang ingin Anda jual: ";
+        cin >> total_barang;
 
-    cout << "Silahkan pilih petak yang ingin Anda jual!" << endl;
-    for (int i = 0; i < total_barang; i++) {
-        cout << "Petak ke-" << i+1 << " : ";
-        string indeksInvent;
-        cin >> indeksInvent;
-        vector<int> idx = parse(indeksInvent);
-        Item* barang;
-        barang = penyimpanan[idx[1]][idx[0]];
+        if (total_barang > penyimpanan.getPetakTerisi()) {
+            cout << "Barang yang ingin Anda jual lebih dari yang Anda punya!" << endl << endl;
+        } else {
+            cout << "Silahkan pilih petak yang ingin Anda jual!" << endl;
+            for (int i = 0; i < total_barang; i++) {
+                cout << "Petak ke-" << i+1 << " : ";
+                string indeksInvent;
+                cin >> indeksInvent;
+                vector<int> idx = parse(indeksInvent);
+                Item* barang;
+                barang = penyimpanan[idx[1]][idx[0]];
 
-        toko->beli(barang);
-        gulden = gulden + barang->getHarga();
-        total_uang += barang->getHarga();
-        penyimpanan[idx[1]][idx[0]] = NULL;
+                if (barang == NULL) {
+                    cout << "Petak kosong." << endl;
+                    i--;
+                } else {
+                    toko->beli(barang);
+                    gulden = gulden + barang->getHarga();
+                    total_uang += barang->getHarga();
+                    penyimpanan.setElement(idx[1], idx[0], NULL);
+                }
+            }
+            cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total_uang << " gulden!" << endl << endl;
+            this->gulden += total_uang;
+        }
     }
-    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total_uang << " gulden!" << endl << endl;
-    this->gulden += total_uang;
 }
 
 void Walikota::simpan(vector<Peran*> list_pemain, Toko * toko){

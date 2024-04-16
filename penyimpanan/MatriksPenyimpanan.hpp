@@ -88,6 +88,10 @@ public:
         return empty;
     }
 
+    int getPetakTerisi() {
+        return baris * kolom - getPetakKosong();
+    }
+
     int getCountItem(string kode) {
     // mendapatkan jumlah item berdasarkan kode
         int count = 0;
@@ -316,6 +320,34 @@ public:
                         if (matriks[i][j]->getTipe() == "PRODUCT_ANIMAL") {
                             return true;
                         }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    bool isAdaTanaman() {
+    // cek apakah ada tanaman di di dalam matriks
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    if (matriks[i][j]->getTipe() == "MATERIAL_PLANT" || matriks[i][j]->getTipe() == "FRUIT_PLANT") {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    bool isAdaHewan() {
+    // cek apakah ada hewan di dalam matriks
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                if (matriks[i][j] != NULL) {
+                    if (matriks[i][j]->getTipe() == "CARNIVORE" || matriks[i][j]->getTipe() == "OMNIVORE" || matriks[i][j]->getTipe() == "HERBIVORE") {
+                        return true;
                     }
                 }
             }
