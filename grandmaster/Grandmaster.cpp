@@ -40,6 +40,11 @@ Grandmaster::~Grandmaster()
         delete list_produk[i];
     }
 
+    for (int i = 0; i < int(list_bangunan.size()); i++)
+    {
+        delete list_bangunan[i];
+    }
+
     delete toko;
 }
 
