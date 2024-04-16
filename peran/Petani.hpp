@@ -25,6 +25,10 @@ class Petani : public Peran {
         // Getter
         string getType();
         int getKekayaan();
+        int getRowLahan();
+        int getKolLahan();
+        int getBanyakItemLahan();
+        vector<vector<string>> getDataLahan();
 
         // Setter
         
@@ -37,16 +41,11 @@ class Petani : public Peran {
         void addUmurTanaman();
         void ambilPajak(vector<Peran*>);
         Peran* buatUser(vector<Peran*> listplayer, int row_inv, int col_inv, int row_lahan, int col_lahan, int row_ternak, int col_ternak);
-        vector<vector<string>> getDataLahan();
         int calculateTax();
         void bangun(vector<Bangunan *> listbangunan);
         void menjual(Toko* toko);
         void membeli(Toko* toko);
-
         void simpan(vector<Peran *> list_pemain);
-        int getRowLahan();
-        int getKolLahan();
-        int getBanyakItemLahan();
 };
 
 #endif

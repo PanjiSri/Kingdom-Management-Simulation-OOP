@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ostream>
 #include "vector"
-#include "MatriksPenyimpanan.hpp"
+#include "../penyimpanan/MatriksPenyimpanan.hpp"
 #include "../Item/Hewan/Carnivore.hpp"
 #include "../Item/Hewan/Omnivore.hpp"
 #include "../Item/Hewan/Herbivore.hpp"

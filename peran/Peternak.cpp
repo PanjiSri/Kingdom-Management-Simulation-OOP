@@ -31,8 +31,49 @@ int Peternak::getKekayaan() {
     return this->gulden + this->penyimpanan.getValue() + this->peternakan.getValue();
 }
 
+int Peternak::getRowLahan() {
+    return peternakan.getBaris();
+}
+
+int Peternak::getKolLahan() {
+    return peternakan.getKolom();
+}
+
+int Peternak::getBanyakItemLahan() {
+    int luas = peternakan.getBaris() * peternakan.getKolom();
+    return luas - peternakan.getPetakKosong();
+}
+
+vector<vector<string>> Peternak::getDataLahan() {
+// mendapatkan semua item yang ada di lahan
+    int asciinum = 65;
+    vector<string> temp_row;
+    vector<vector<string>> temp;
+    int num;
+    for(int i = 0; i < peternakan.getBaris(); i++) {
+        for(int j = 0; j < peternakan.getKolom(); j++) {
+            string location;
+            vector<string> temp_row;
+            if(peternakan[i][j] != NULL) {
+                num = i + 1;
+                if(num < 10) {
+                    location = (char)(asciinum+j) + to_string(0) + to_string(num);
+                }
+                else {
+                    location = (char)(asciinum+j) + to_string(num);
+                }
+                temp_row.push_back(location);
+                temp_row.push_back(peternakan[i][j]->getNama());
+                temp_row.push_back(to_string(peternakan[i][j]->getBeratSaatIni()));
+                temp.push_back(temp_row);
+            }
+        }
+    }
+    return temp;
+}
+
 void Peternak::beternakBertani() {
-    if (peternakan.getLahanKosong() == 0) {
+    if (peternakan.getPetakKosong() == 0) {
         cout << "Peternakan Anda penuh." << endl << endl;
     } else {
         cout << "Pilih hewan dari penyimpanan" << endl;
@@ -154,7 +195,7 @@ void Peternak::panen(vector<Produk*> listProduk) {
                             this->peternakan[index[1]][index[0]] = NULL;
                             vector<string> hasilPanen = hewan->getProduk();
 
-                            if (hasilPanen.size() > penyimpanan.getLahanKosong()) {
+                            if (hasilPanen.size() > penyimpanan.getPetakKosong()) {
                                 // ada hewan yang menghasilkan 2 produk
                                 cout << "Inventory Anda tidak cukup untuk produk hewan tersebut." << endl << endl;
                             }
@@ -185,36 +226,45 @@ void Peternak::panen(vector<Produk*> listProduk) {
 
 void Peternak::beriMakan() {
     cetakLahan();
-
-    bool kondisi;
-    string slot;
-    Hewan* hewan;
-
-    cout << "Pilih hewan yang akan diberi makan: ";
-    cin >> slot;
-    cout << endl;
-    vector<int> index = parse(slot);
-
-    hewan = peternakan[index[1]][index[0]];
-    if (hewan == NULL) {
-        cout << "Tidak ada hewan di sana." << endl << endl;
+    if (peternakan.isEmpety()) {
+        cout << "Anda belum memiliki hewan." << endl << endl;
     }
     else {
-        printPenyimpanan();
-        Item* item;
-        cout << "Ambil makanan: ";
-        cin >> slot;
-        index = parse(slot);
-        item = dynamic_cast<Item*> (penyimpanan[index[1]][index[0]]);
+        bool kondisi;
+        string slot;
+        Hewan* hewan;
 
-        if (item == NULL) {
-            cout << "Tidak ada apa-apa di di sana." << endl << endl;
-        } 
+        cout << "Pilih hewan yang akan diberi makan: ";
+        cin >> slot;
+        cout << endl;
+        vector<int> index = parse(slot);
+
+        hewan = peternakan[index[1]][index[0]];
+        if (hewan == NULL) {
+            cout << "Tidak ada hewan di sana." << endl << endl;
+        }
         else {
-                hewan->makan(item);
-                cout << "Makanan berhasil diberikan" << endl;
-                cout << "Berat "<< hewan->getNama() <<" menjadi " << hewan->getBeratSaatIni() << endl << endl;
-                penyimpanan.setElement(index[1], index[0], NULL);
+            if (penyimpanan.isAdaMakanan(hewan->getTipe())) {
+                printPenyimpanan();
+                Item* item;
+                cout << "Ambil makanan: ";
+                cin >> slot;
+                index = parse(slot);
+                item = dynamic_cast<Item*> (penyimpanan[index[1]][index[0]]);
+
+                if (item == NULL) {
+                    cout << "Tidak ada apa-apa di di sana." << endl << endl;
+                } 
+                else {
+                        hewan->makan(item);
+                        cout << "Makanan berhasil diberikan" << endl;
+                        cout << "Berat "<< hewan->getNama() <<" menjadi " << hewan->getBeratSaatIni() << endl << endl;
+                        penyimpanan.setElement(index[1], index[0], NULL);
+                }
+            }
+            else {
+                cout << "Tidak ada makanan yang cocok untuk hewan ini." << endl << endl;
+            }
         }
     }
 }
@@ -262,48 +312,21 @@ void Peternak::bangun(vector<Bangunan *> listbangunan) {
     cout << "Kamu tidak punya wewenang untuk membangun." << endl << endl;
 }
 
-vector<vector<string>> Peternak::getDataLahan() {
-    int asciinum = 65;
-    vector<string> temp_row;
-    vector<vector<string>> temp;
-    int num;
-    for(int i = 0; i < peternakan.getBaris(); i++) {
-        for(int j = 0; j < peternakan.getKolom(); j++) {
-            string location;
-            vector<string> temp_row;
-            if(peternakan[i][j] != NULL) {
-                num = i + 1;
-                if(num < 10) {
-                    location = (char)(asciinum+j) + to_string(0) + to_string(num);
-                }
-                else {
-                    location = (char)(asciinum+j) + to_string(num);
-                }
-                temp_row.push_back(location);
-                temp_row.push_back(peternakan[i][j]->getNama());
-                temp_row.push_back(to_string(peternakan[i][j]->getBeratSaatIni()));
-                temp.push_back(temp_row);
-            }
-        }
-    }
-    return temp;
-}
-
-// belum selesai
 void Peternak::membeli(Toko* toko) {
     toko->cetakListBarang();
     int noBarang;
     int kuantitas;
-    cout << "\nUang Anda : " << gulden << endl;
-    cout << "Slot Penyimpanan tersedia : " << penyimpanan.getLahanKosong() << endl;
+
+    cout << endl << "Uang Anda : " << gulden << endl;
+    cout << "Slot Penyimpanan tersedia : " << penyimpanan.getPetakKosong() << endl << endl;
     cout << "Barang ingin dibeli : "; 
     cin >> noBarang;
-    cout << "\nKuantitas : ";
+    cout << endl << "Kuantitas : ";
     cin >> kuantitas;
     
     Item* item = toko->jual(noBarang, kuantitas);
-    if(this->getGulden() < item->getHarga()*kuantitas) {
-        cout << "Uang yang anda miliki tidak cukup" << endl;
+    if (this->getGulden() < item->getHarga()*kuantitas) {
+        cout << "Uang yang Anda miliki tidak cukup." << endl;
     }
     else {
         penyimpanan.print();
@@ -313,20 +336,22 @@ void Peternak::membeli(Toko* toko) {
             cin >> location;
             vector<int> index = parse(location);
             penyimpanan.setElement(index[1], index[0], item);
+            this->gulden -= item->getHarga();
         }
     }
 }
 
 void Peternak::menjual(Toko* toko) {
-    cout << "Berikut merupakan penyimpanan Anda\n";
+    cout << "Berikut merupakan penyimpanan Anda" << endl;
     printPenyimpanan();
-    int ulang;
-    int total = 0;
+    int total_barang;
+    int total_uang = 0;
     cout << "Berapa benda yang ingin anda jual: ";
-    cin >> ulang;
+    cin >> total_barang;
 
-    for(int i = 0; i < ulang; i++) {
-        cout << "Silahkan pilih petak yang ingin Anda jual!\nPetak : ";
+    cout << "Silahkan pilih petak yang ingin Anda jual!" << endl;
+    for(int i = 0; i < total_barang; i++) {
+        cout << "Petak ke-" << i+1 << " : ";
         string indeksinvent;
         cin >> indeksinvent;
         vector<int> idx = parse(indeksinvent);
@@ -340,14 +365,14 @@ void Peternak::menjual(Toko* toko) {
         
         toko->beli(barang);
         gulden = gulden + barang->getHarga();
-        total += barang->getHarga();
+        total_uang += barang->getHarga();
         penyimpanan[idx[1]][idx[0]] = NULL;
     }
-    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total << " gulden!\n";
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah "<< total_uang << " gulden!" << endl << endl;
+    cout << "Uang Anda sekarang : " << gulden << endl;
 }
 
-void Peternak::simpan(vector<Peran *> list_pemain)
-{
+void Peternak::simpan(vector<Peran *> list_pemain) {
     string file_path;
     cout << "Masukkan lokasi berkas state : ";
     cin >> file_path;
@@ -355,15 +380,13 @@ void Peternak::simpan(vector<Peran *> list_pemain)
     string namaFolder = file_path.substr(0, pos);
 
     struct stat info;
-    if (stat(namaFolder.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR))
-    {
+    if (stat(namaFolder.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR)) {
         throw FolderTidakAdaException();
     }
 
     ofstream outfile(file_path);
 
-    if (!outfile.is_open())
-    {
+    if (!outfile.is_open()) {
         throw FilePathTidakValid();
     }
 
@@ -371,27 +394,22 @@ void Peternak::simpan(vector<Peran *> list_pemain)
 
     outfile << banyak_pemain << endl;
 
-    for (int i = 0; i < banyak_pemain; i++)
-    {
+    for (int i = 0; i < banyak_pemain; i++) {
         outfile << list_pemain[i]->getUname() << " " << list_pemain[i]->getType() << " " << to_string(list_pemain[i]->getBerat()) << " " << to_string(list_pemain[i]->getGulden()) << endl;
 
-        int banyak_di_penyimpanan = (list_pemain[i]->getPenyimpanan().getBaris() * list_pemain[i]->getPenyimpanan().getKolom()) - list_pemain[i]->getPenyimpanan().getLahanKosong();
+        int banyak_di_penyimpanan = (list_pemain[i]->getPenyimpanan().getBaris() * list_pemain[i]->getPenyimpanan().getKolom()) - list_pemain[i]->getPenyimpanan().getPetakKosong();
 
         outfile << to_string(banyak_di_penyimpanan) << endl;
 
-        for (int j = 0; j < list_pemain[i]->getPenyimpanan().getBaris(); j++)
-        {
-            for (int k = 0; k < list_pemain[i]->getPenyimpanan().getKolom(); k++)
-            {
-                if (list_pemain[i]->getPenyimpanan()[j][k] != NULL)
-                {
+        for (int j = 0; j < list_pemain[i]->getPenyimpanan().getBaris(); j++) {
+            for (int k = 0; k < list_pemain[i]->getPenyimpanan().getKolom(); k++) {
+                if (list_pemain[i]->getPenyimpanan()[j][k] != NULL) {
                     outfile << list_pemain[i]->getPenyimpanan()[j][k]->getNama() << endl;
                 }
             }
         }
 
-        if (list_pemain[i]->getType() == "Peternak")
-        {
+        if (list_pemain[i]->getType() == "Peternak") {
             cout << "tes tes" << endl;
             int banyak_ternak = list_pemain[i]->getBanyakItemLahan();
 
@@ -400,7 +418,7 @@ void Peternak::simpan(vector<Peran *> list_pemain)
             outfile << banyak_ternak << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++){
+            for (int j = 0; j < temp.size(); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
@@ -411,37 +429,12 @@ void Peternak::simpan(vector<Peran *> list_pemain)
             outfile << banyak_tandur << endl;
 
             vector<vector<string>> temp = list_pemain[i]->getDataLahan();
-            for (int j = 0; j < temp.size(); j++){
+            for (int j = 0; j < temp.size(); j++) {
                 outfile << temp[j][0] << " " << temp[j][1] << " " << temp[j][2] << endl;
             }
         }
     }
-    
     outfile.close();
+    cout << "Data pemain berhasil disimpan!" << endl << endl;
 }
 
-int Peternak::getRowLahan()
-{
-    return peternakan.getBaris();
-}
-
-int Peternak::getKolLahan()
-{
-    return peternakan.getKolom();
-}
-
-int Peternak::getBanyakItemLahan()
-{
-    int sum = 0;
-    for (int i = 0; i < getRowLahan(); i++)
-    {
-        for (int j = 0; j < getKolLahan(); j++)
-        {
-            if (peternakan[i][j] != NULL)
-            {
-                sum++;
-            }
-        }
-    }
-    return sum;
-}

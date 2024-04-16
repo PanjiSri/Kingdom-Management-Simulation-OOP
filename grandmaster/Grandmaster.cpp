@@ -15,6 +15,35 @@ Grandmaster::Grandmaster()
     banyak_pemain = 0;
 }
 
+Grandmaster::~Grandmaster()
+{
+
+    for (int i = 0; i < list_pemain.size(); i++)
+    {
+        delete list_pemain[i];
+    }
+
+    for (int i = 0; i < list_tanaman.size(); i++)
+    {
+        delete list_tanaman[i];
+    }
+
+    for (int i = 0; i < list_hewan.size(); i++)
+    {
+        delete list_hewan[i];
+    }
+
+    for (int i = 0; i < list_item.size(); i++)
+    {
+        delete list_item[i];
+    }
+
+    for (int i = 0; i < list_produk.size(); i++)
+    {
+        delete list_produk[i];
+    }
+}
+
 void Grandmaster::loadConfigHewanTanaman()
 {
     ifstream file(config_hewan);
@@ -79,6 +108,42 @@ void Grandmaster::loadConfigProduk()
     file.close();
 }
 
+void Grandmaster::loadConfigRecipe()
+{
+    ifstream file(config_recipe);
+    if (!file.is_open())
+    {
+        throw FilePathTidakValid();
+    }
+
+    string kode_huruf, nama, nama_material;
+    int id, jumlah_material, harga;
+    
+    string line;
+    while (getline(file, line))
+    {
+        map<string, int> material;
+        stringstream ss(line);
+        ss >> id >> kode_huruf >> nama >> harga;
+        while (ss >> nama_material >> jumlah_material)
+        {
+            if (material.size() == 0) {
+                material.insert({nama_material, jumlah_material});
+            }
+            else {
+                if (material.count(nama_material)) {
+                    material[nama_material] = jumlah_material;
+                }
+                else {
+                    material.insert({nama_material, jumlah_material});
+                }
+            }
+        }
+        list_jenis_bangunan.push_back(Konfigurasi_Recipe(id, kode_huruf, nama, harga, material));
+    }
+    file.close();
+}
+
 void Grandmaster::loadConfigMisc()
 {
     ifstream file(config_misc);
@@ -114,42 +179,6 @@ void Grandmaster::loadConfigMisc()
             ss >> besar_peternakan[0] >> besar_peternakan[1];
         }
     }
-}
-
-void Grandmaster::loadConfigRecipe() // belum selesai
-{
-    ifstream file(config_recipe);
-    if (!file.is_open())
-    {
-        throw FilePathTidakValid();
-    }
-
-    string kode_huruf, nama, nama_material;
-    int id, jumlah_material, harga;
-    
-    string line;
-    while (getline(file, line))
-    {
-        map<string, int> material;
-        stringstream ss(line);
-        ss >> id >> kode_huruf >> nama >> harga;
-        while (ss >> nama_material >> jumlah_material)
-        {
-            if (material.size() == 0) {
-                material.insert({nama_material, jumlah_material});
-            }
-            else {
-                if (material.count(nama_material)) {
-                    material[nama_material] = jumlah_material;
-                }
-                else {
-                    material.insert({nama_material, jumlah_material});
-                }
-            }
-        }
-        list_jenis_bangunan.push_back(Konfigurasi_Recipe(id, kode_huruf, nama, harga, material));
-    }
-    file.close();
 }
 
 void Grandmaster::loadallconfig()
@@ -251,7 +280,6 @@ void Grandmaster::mulaiTanpaBerkas()
     inisiatorProduk();
     inisiatorBangunan();
 
-    // masih prototype
     // Membuat list pemain sesuai dengan informasi yang diberikan
     list_pemain.push_back(new Petani("Petani1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
     list_pemain.push_back(new Peternak("Peternak1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
@@ -268,7 +296,7 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
 {
     loadallconfig();
 
-    cout << "flag 1" << endl;
+    cout << "flag 1" << endl; 
 
     inisiatorHewan();
     inisiatorTanaman();
@@ -520,6 +548,14 @@ int Grandmaster::cariJenis(string nama)
         }
     }
 
+    for (int i = 0; i < list_jenis_bangunan.size(); i++)
+    {
+        if (list_jenis_bangunan[i].getName() == nama)
+        {
+            return 4;
+        }
+    }
+
     return -1;
 }
 
@@ -573,8 +609,6 @@ void Grandmaster::operasi_perintah(string command)
     else if (command == "PUNGUT_PAJAK")
     {
         list_pemain[idx_giliran_pemain]->ambilPajak(list_pemain);
-        // cout << list_pemain[cariPemain("Budi")]->getType() << endl;
-        // cout << "Peternak" << endl;
     }
     else if (command == "CETAK_LADANG")
     {
@@ -587,7 +621,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "anda bukan petani" << endl;
+            cout << "Anda bukan petani." << endl << endl;
         }
     }
     else if (command == "TERNAK")
@@ -596,7 +630,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "anda bukan peternak" << endl;
+            cout << "Anda bukan peternak." << endl;
         }
     }
     else if (command == "MAKAN")
@@ -614,18 +648,21 @@ void Grandmaster::operasi_perintah(string command)
     else if (command == "SIMPAN")
     {
         list_pemain[idx_giliran_pemain]->simpan(list_pemain);
-    }else if(command == "BANGUN"){
-
+    }
+    else if (command == "BANGUN")
+    {
         list_pemain[idx_giliran_pemain]->bangun(list_bangunan);
     }
-    else if(command == "BELI"){
-
+    else if (command == "BELI")
+    {
         list_pemain[idx_giliran_pemain]->membeli(toko);
-    }else if(command == "JUAL"){
-
+    }
+    else if (command == "JUAL")
+    {
         list_pemain[idx_giliran_pemain]->menjual(toko);
-
-    }else if(command == "TAMBAH_PEMAIN"){
+    }
+    else if (command == "TAMBAH_PEMAIN")
+    {
 
         int row_inv = besar_penyimpanan[0] ;
         int col_inv = besar_penyimpanan[1];
@@ -638,7 +675,7 @@ void Grandmaster::operasi_perintah(string command)
     
         Peran * anak_baru = list_pemain[idx_giliran_pemain]->buatUser(list_pemain, row_inv, col_inv, row_lahan, col_lahan, row_ternak, col_ternak);
 
-        if (anak_baru != NULL){
+        if (anak_baru != NULL) {
             muatPemain(anak_baru);  
             printAllPemain();
         }
@@ -719,35 +756,6 @@ void Grandmaster::getAllPemainInfo()
         {
             list_pemain[i]->cetakLahan();
         }
-    }
-}
-
-Grandmaster::~Grandmaster()
-{
-
-    for (int i = 0; i < list_pemain.size(); i++)
-    {
-        delete list_pemain[i];
-    }
-
-    for (int i = 0; i < list_tanaman.size(); i++)
-    {
-        delete list_tanaman[i];
-    }
-
-    for (int i = 0; i < list_hewan.size(); i++)
-    {
-        delete list_hewan[i];
-    }
-
-    for (int i = 0; i < list_item.size(); i++)
-    {
-        delete list_item[i];
-    }
-
-    for (int i = 0; i < list_produk.size(); i++)
-    {
-        delete list_produk[i];
     }
 }
 

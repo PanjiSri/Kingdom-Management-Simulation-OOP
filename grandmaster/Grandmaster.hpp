@@ -1,16 +1,18 @@
 #ifndef GRANDMASTER_HPP
 #define GRANDMASTER_HPP
+
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include "../input/header/konfig_file.hpp"
-#include "../input/header/konfig_animal.hpp"
-#include "../input/header/konfig_tanaman.hpp"
-#include "../input/header/konfig_produk.hpp"
-#include "../input/header/konfig_recipe.hpp"
+
+#include "../input/header/Konfigurasi_Item.hpp"
+#include "../input/header/Konfigurasi_Animal.hpp"
+#include "../input/header/Konfigurasi_Tanaman.hpp"
+#include "../input/header/Konfigurasi_Produk.hpp"
+#include "../input/header/Konfigurasi_Recipe.hpp"
 #include "../peran/Peran.hpp"
 #include "../peran/Walikota.hpp"
 #include "../peran/Petani.hpp"
@@ -45,7 +47,7 @@ private:
     //toko kang
     Toko* toko;
 
-        // path ke file konfigurasi
+    // path ke file konfigurasi
     string config_hewan;
     string config_tanaman;
     string config_produk;
@@ -61,14 +63,14 @@ private:
 
 public:
     Grandmaster();
-    // method load animal.txt, plant.txt, product.txt
+    ~Grandmaster();
+    // method load animal.txt, plant.txt, product.txt, recipe.txt
     void loadConfigHewanTanaman();
     void loadConfigProduk();
-
+    void loadConfigRecipe();
+    
     // method load misc.txt
     void loadConfigMisc();
-
-    void loadConfigRecipe();
 
     // load semua config
     void loadallconfig();
@@ -97,7 +99,7 @@ public:
     // muatState
     void muatState(string data_path);
 
-    //cari jenis
+    // cari jenis
     int cariJenis(string nama);
 
     // //cari index
@@ -109,7 +111,6 @@ public:
 
     //command program
     void next();
-
 
     //alur program
     void operasi_perintah(string command);
@@ -140,8 +141,6 @@ public:
     void printAllPemain();
 
     void printWalikota();
-
-    ~Grandmaster();
 };
 
 #endif

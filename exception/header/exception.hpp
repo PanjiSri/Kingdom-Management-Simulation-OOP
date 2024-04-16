@@ -5,6 +5,7 @@
 #include <exception>
 using namespace std;
 
+// Berhubungan dengan file eksternal
 class FilePathTidakValid : public exception
 {
 public:
@@ -23,6 +24,15 @@ public:
     }
 };
 
+class FolderTidakAdaException : public exception 
+{
+    const char *what() const throw()
+    {
+        return "Lokasi berkas tidak valid";
+    }
+};
+
+// Berhubungan dengan peran
 class NamaPemainTidakValidException : public exception
 {
 public:
@@ -32,6 +42,34 @@ public:
     }
 };
 
+class HanyaWalikotaException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Sayang sekali operasi ini hanya bisa dilakukan oleh walikota";
+    }
+};
+
+class PetaniPeternakTidakBisaJualBangunanException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Anda tidak bisa menjual bangunan";
+    }
+};
+
+class WalikotaTidakBisaBeliBangunanException : public exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "Anda tidak bisa membeli bangunan";
+    }
+};
+
+// Berhubungan dengan item
 class BukanMakananException : public exception
 {
 public:
@@ -68,6 +106,23 @@ public:
     }
 };
 
+class BangunTidakAdaResepBangunanException : public exception 
+{
+    const char *what() const throw()
+    {
+        return "Kamu tidak punya resep bangunan tersebut!";
+    }
+};
+
+class BangunSumberDayaTidakCukupException : public exception 
+{
+    const char *what() const throw()
+    {
+        return "Kamu tidak punya sumber daya yang cukup!";
+    }
+};
+
+// Berhubungan dengan toko
 class StokTidakTersediaException : public exception
 {
 public:
@@ -86,20 +141,21 @@ public:
     }
 };
 
+class TidakAdaBarangException : public exception
+{
+    const char *what() const throw()
+    {
+        return "Tidak ada barang di toko";
+    }
+};
+
+// DLL
 class LokasiTidakValidException : public exception
 {
 public:
     const char *what() const throw()
     {
         return "Lokasi tidak valid.";
-    }
-};
-class HanyaWalikotaException : public exception
-{
-public:
-    const char *what() const throw()
-    {
-        return "Sayang sekali operasi ini hanya bisa dilakukan oleh walikota";
     }
 };
 
@@ -109,52 +165,6 @@ public:
     const char *what() const throw()
     {
         return "Command tidak valid";
-    }
-};
-
-class PetaniPeternakTidakBisaJualBangunanException : public exception
-{
-public:
-    const char *what() const throw()
-    {
-        return "Anda tidak bisa menjual bangunan";
-    }
-};
-
-class WalikotaTidakBisaBeliBangunanException : public exception
-{
-public:
-    const char *what() const throw()
-    {
-        return "Anda tidak bisa membeli bangunan";
-    }
-};
-
-class FolderTidakAdaException : public exception {
-    const char *what() const throw()
-    {
-        return "Lokasi berkas tidak valid";
-    }
-};
-
-class BangunTidakAdaResepBangunanException : public exception {
-    const char *what() const throw()
-    {
-        return "Kamu tidak punya resep bangunan tersebut!";
-    }
-};
-
-class BangunSumberDayaTidakCukupException : public exception {
-    const char *what() const throw()
-    {
-        return "Kamu tidak punya sumber daya yang cukup!";
-    }
-};
-
-class TidakAdaBarangException : public exception{
-    const char *what() const throw()
-    {
-        return "Tidak ada barang di toko";
     }
 };
 

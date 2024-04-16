@@ -55,6 +55,10 @@ vector<string> Peran::getSemuaItem() {
     return temp;
 }
 
+MatriksPenyimpanan<Item *> Peran::getPenyimpanan() {
+    return this->penyimpanan;
+}
+
 void Peran::tambahBerat(int berat) {
     this->berat += berat;
 }
@@ -144,8 +148,8 @@ void Peran::addPenyimpananFile(string name, vector<Item*> listItem) {
 
 void Peran::playerMakan() {
     printPenyimpanan();
-    if (penyimpanan.isEmpety() || !penyimpanan.isAdaMakanan()) {
-        cout << "Tidak ada yang bisa kamu makan disini" << endl << endl;
+    if (penyimpanan.isEmpety() || !penyimpanan.isAdaMakanan("OMNIVORE")) {
+        cout << "Tidak ada yang bisa kamu makan disini." << endl << endl;
     } else {
         Item* x;
         string lokasi;
@@ -166,9 +170,4 @@ void Peran::playerMakan() {
             cout << "Hei, yakin kamu mau makan itu???" << endl << endl;
         }
     }
-}
-
-MatriksPenyimpanan<Item *> Peran::getPenyimpanan()
-{
-    return this->penyimpanan;
 }
