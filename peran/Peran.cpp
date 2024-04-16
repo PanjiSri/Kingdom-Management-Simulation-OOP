@@ -86,8 +86,7 @@ vector<int> Peran::parse(string idx) {
     indeks[1] += (int)(idx[2]-'0');
     indeks[1] -= 1;
 
-    if (indeks[0] < 0 || indeks[1] < 0 ||
-        indeks[0] >= penyimpanan.getKolom() || indeks[1] >= penyimpanan.getBaris()) 
+    if (indeks[0] < 0 || indeks[1] < 0) 
     {
         throw LokasiTidakValidException();
     }
