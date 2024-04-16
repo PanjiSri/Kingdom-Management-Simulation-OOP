@@ -66,7 +66,26 @@ Item *Toko::jual(int no, int kuantitas)
         throw NoBarangTidakValidException();
     }
 
-    string barang = jenisBarang[no - 1]->getKode();
+    int target;
+    int number = 0;
+    for (int i = 0; i < int(jenisBarang.size()); i++)
+    {
+        if (number == no) {
+            target = i-1;
+            break;
+        }
+        
+        if (jumlahTiapJenis[jenisBarang[i]->getKode()] == -1) {
+            ++number;
+        } else {
+            if (jumlahTiapJenis[jenisBarang[i]->getKode()] != 0) {
+                ++number;
+            }
+        }
+
+
+    }
+    string barang = jenisBarang[target]->getKode();
     if (jumlahTiapJenis[barang] != -1)
     {
         if (jumlahTiapJenis[barang] - kuantitas >= 0)
@@ -79,7 +98,7 @@ Item *Toko::jual(int no, int kuantitas)
         }
     }
 
-    Item *jualan = jenisBarang[no - 1];
+    Item *jualan = jenisBarang[target];
     if (jumlahTiapJenis[barang] == 0)
     {
         jenisBarang.erase(jenisBarang.begin() + no - 1);
@@ -104,15 +123,25 @@ void Toko::cetakListBarang()
 {
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     bool adaBarang = false;
+    int number = 1;
     for (int i = 0; i < int(jenisBarang.size()); i++)
     {
-        cout << (i + 1) << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
-        if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
+        // cout << i << " " << jenisBarang[i]->getNama() << endl;
+        if (jumlahTiapJenis[jenisBarang[i]->getKode()] == -1)
         {
-            cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")";
+            cout << number << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
             adaBarang = true;
+            ++number;
+            cout << endl;
+        } else {
+            if (jumlahTiapJenis[jenisBarang[i]->getKode()] != 0) {
+                cout << number << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
+                cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")";
+                adaBarang = true;
+                ++number;
+                cout << endl;
+            }
         }
-        cout << endl;
     }
 
     if (!adaBarang)
