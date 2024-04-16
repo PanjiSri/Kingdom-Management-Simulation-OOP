@@ -438,7 +438,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
     vector<vector<string>> data_toko = toko->getBarangJumlah();
     int sum = 0;
     for(int i = 0; i < data_toko.size(); i++) {
-        if (data_toko[i][1] != "0" || data_toko[i][1] != "-1") {
+        if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             sum += 1;
         }
     }
@@ -446,7 +446,7 @@ void Peternak::simpan(vector<Peran *> list_pemain, Toko *toko) {
     outfile << sum << endl;
 
     for(int i = 0; i < data_toko.size(); i++) {
-        if (data_toko[i][1] != "0" || data_toko[i][1] != "-1") {
+        if (!(data_toko[i][1] == "0" || data_toko[i][1] == "-1")) {
             outfile << data_toko[i][0] << " " << data_toko[i][1] << endl;
         }
     }

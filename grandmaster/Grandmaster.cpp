@@ -187,7 +187,6 @@ void Grandmaster::loadallconfig()
     loadConfigProduk();
     loadConfigMisc();
     loadConfigRecipe();
-    toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "aman" << endl;
 }
 
@@ -280,6 +279,8 @@ void Grandmaster::mulaiTanpaBerkas()
     inisiatorProduk();
     inisiatorBangunan();
 
+    toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
+
     // Membuat list pemain sesuai dengan informasi yang diberikan
     list_pemain.push_back(new Petani("Petani1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
     list_pemain.push_back(new Peternak("Peternak1", besar_penyimpanan[0], besar_penyimpanan[1], besar_lahan[0], besar_lahan[1]));
@@ -303,6 +304,7 @@ void Grandmaster::mulaiDenganBerkas(string data_path)
     inisiatorProduk();
     inisiatorBangunan();
 
+    toko = new Toko(list_tanaman, list_hewan, list_produk, list_bangunan);
     // cout << "banyak_pemain awal " << banyak_pemain << endl;
     muatState(data_path);
 
@@ -400,17 +402,14 @@ void Grandmaster::muatState(string data_path)
         if (jenis_peran == "Peternak")
         {
             muatPemain(new Peternak(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
-            cout << "muat pemain peternak" << endl;
         }
         else if (jenis_peran == "Petani")
         {
             muatPemain(new Petani(username, berat_badan, uang, row_penyimpanan, col_penyimpanan, row_lahan, col_lahan));
-            cout << "muat pemain petani" << endl;
         }
         else if (jenis_peran == "Walikota")
         {
             muatPemain(new Walikota(username, berat_badan, uang, row_penyimpanan, col_penyimpanan));
-            cout << "muat pemain walikota" << endl;
         }
         else
         {
@@ -538,6 +537,7 @@ void Grandmaster::muatState(string data_path)
         ss_toko >> namaBarang >> banyakBarang;
 
         string kode = cariKodeBarang(namaBarang);
+
         toko->setJenisBarang(kode, banyakBarang);
     }
 }
@@ -667,7 +667,7 @@ void Grandmaster::operasi_perintah(string command)
     }
     else if (command == "SIMPAN")
     {
-        list_pemain[idx_giliran_pemain]->simpan(list_pemain);
+        list_pemain[idx_giliran_pemain]->simpan(list_pemain, toko);
     }
     else if (command == "BANGUN")
     {

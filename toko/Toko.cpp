@@ -8,7 +8,6 @@
 // #include "../Item/Tanaman/Tanaman.cpp"
 // #include "../Item/Produk/Produk.cpp"
 
-
 Toko::Toko()
 {
     // DUMMY DULU, GATAU FORMAT NYAMBUNGIN ITEM SAMA BACA CONFIG
@@ -94,95 +93,102 @@ Toko::Toko()
     jumlahTiapJenis["SMH"] = 0;
     jumlahTiapJenis["MDH"] = 0;
     jumlahTiapJenis["LRH"] = 0;
-    jumlahTiapJenis["HTL"] = 0;  
+    jumlahTiapJenis["HTL"] = 0;
 }
 
-Toko::Toko(vector<Tanaman*> list_jenis_tanaman, vector<Hewan*> list_jenis_hewan, vector<Produk*> list_jenis_produk, vector<Bangunan*> list_jenis_bangunan){
+Toko::Toko(vector<Tanaman *> list_jenis_tanaman, vector<Hewan *> list_jenis_hewan, vector<Produk *> list_jenis_produk, vector<Bangunan *> list_jenis_bangunan)
+{
     for (int i = 0; i < list_jenis_tanaman.size(); i++)
     {
         jenisBarang.push_back(list_jenis_tanaman[i]);
-        jumlahTiapJenis[jenisBarang[i]->getKode()] = -1;
+        jumlahTiapJenis.insert({list_jenis_tanaman[i]->getKode(), -1});
     }
     for (int i = 0; i < list_jenis_hewan.size(); i++)
     {
         jenisBarang.push_back(list_jenis_hewan[i]);
-        jumlahTiapJenis[list_jenis_hewan[i]->getKode()] = -1;
+        jumlahTiapJenis.insert({list_jenis_hewan[i]->getKode(), -1});
     }
     for (int i = 0; i < list_jenis_produk.size(); i++)
     {
-        jumlahTiapJenis[list_jenis_produk[i]->getKode()] = 0;
+        jenisBarang.push_back(list_jenis_produk[i]);
+        jumlahTiapJenis.insert({list_jenis_produk[i]->getKode(), 0});
     }
     for (int i = 0; i < list_jenis_bangunan.size(); i++)
     {
-        jumlahTiapJenis[list_jenis_bangunan[i]->getKode()] = 0;
+        jenisBarang.push_back(list_jenis_bangunan[i]);
+        jumlahTiapJenis.insert({list_jenis_bangunan[i]->getKode(), 0});
     }
-    
 }
 
 Toko::~Toko()
 {
-    jenisBarang.clear();
-    jumlahTiapJenis.clear();
 }
 
-vector<Item*> Toko::getListBarang(){
+vector<Item *> Toko::getListBarang()
+{
     return jenisBarang;
 }
 
-Item* Toko::jual(int no, int kuantitas){
+Item *Toko::jual(int no, int kuantitas)
+{
     if (no > jenisBarang.size())
     {
         throw NoBarangTidakValidException();
     }
 
-    string barang = jenisBarang[no-1]->getKode();
+    string barang = jenisBarang[no - 1]->getKode();
     if (jumlahTiapJenis[barang] != -1)
     {
-        if (jumlahTiapJenis[barang]-kuantitas >= 0)
+        if (jumlahTiapJenis[barang] - kuantitas >= 0)
         {
-            jumlahTiapJenis[barang] = jumlahTiapJenis[barang] - kuantitas;    
-        } else
+            jumlahTiapJenis[barang] = jumlahTiapJenis[barang] - kuantitas;
+        }
+        else
         {
             throw StokTidakTersediaException();
         }
     }
 
-    Item* jualan = jenisBarang[no-1];
+    Item *jualan = jenisBarang[no - 1];
     if (jumlahTiapJenis[barang] == 0)
     {
-        jenisBarang.erase(jenisBarang.begin()+no-1);
+        jenisBarang.erase(jenisBarang.begin() + no - 1);
     }
     return jualan;
 }
 
-void Toko::beli(Item* barang){
+void Toko::beli(Item *barang)
+{
     if (jumlahTiapJenis[barang->getKode()] == 0)
     {
         jenisBarang.push_back(barang);
         jumlahTiapJenis[barang->getKode()] = 0;
-    }    
+    }
     if (jumlahTiapJenis[barang->getKode()] != -1)
     {
         jumlahTiapJenis[barang->getKode()] += 1;
-    }    
+    }
 }
 
-void Toko::cetakListBarang(){
+void Toko::cetakListBarang()
+{
     cout << "Selamat datang di toko!!\nBerikut merupakan hal yang dapat Anda Beli\n";
     bool adaBarang = false;
     for (int i = 0; i < jenisBarang.size(); i++)
-    {   
-        cout << (i+1) << ". "<< jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
+    {
+        cout << (i + 1) << ". " << jenisBarang[i]->getNama() << " - " << jenisBarang[i]->getHarga();
         if (jumlahTiapJenis[jenisBarang[i]->getKode()] != -1)
         {
-            cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")" ;
+            cout << " (" << jumlahTiapJenis[jenisBarang[i]->getKode()] << ")";
             adaBarang = true;
-        } 
+        }
         cout << endl;
-    }  
+    }
 
-    if(!adaBarang){
+    if (!adaBarang)
+    {
         throw TidakAdaBarangException();
+        // cout << "gak ada barang" << endl;
     }
 }
 
@@ -197,7 +203,7 @@ void Toko::cetakListBarang(){
 //     t.push_back(new Tanaman(6, "ORG", "ORANGE_TREE", "FRUIT_PLANT", 12, 4));
 //     t.push_back(new Tanaman(7, "BNT", "BANANA_TREE", "FRUIT_PLANT", 16, 3));
 //     t.push_back(new Tanaman(8, "GAV", "GUAVA_TREE", "FRUIT_PLANT", 14, 3));
-    
+
 //     vector<Hewan*> h;
 //     h.push_back(new Herbivore(1, "COW", "COW", 20, 6));
 //     h.push_back(new Herbivore(2, "SHP", "SHEEP", 15, 5));
@@ -220,13 +226,15 @@ void Toko::cetakListBarang(){
 //     a.cetakListBarang();
 // }
 
-void Toko::setJenisBarang(string kode, int value){
+void Toko::setJenisBarang(string kode, int value)
+{
     this->jumlahTiapJenis[kode] = value;
 }
 
-vector<vector<string>> Toko::getBarangJumlah(){
+vector<vector<string>> Toko::getBarangJumlah()
+{
     vector<vector<string>> list;
-    for (int i = 0; i <jenisBarang.size(); i++)
+    for (int i = 0; i < jenisBarang.size(); i++)
     {
         vector<string> temp;
         temp.push_back(jenisBarang[i]->getNama());
