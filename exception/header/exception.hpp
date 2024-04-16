@@ -168,4 +168,20 @@ public:
     }
 };
 
+class AndaBukanPetaniException : public exception{
+public:
+    const char *what() const throw()
+    {
+        return "Anda bukan petani";
+    }
+};
+
+class AndaBukanPeternakException : public exception{
+public:
+    const char *what() const throw()
+    {
+        return "Anda bukan peternak";
+    }
+};
+
 #endif

@@ -631,8 +631,22 @@ void Grandmaster::operasi_perintah(string command)
         list_pemain[idx_giliran_pemain]->ambilPajak(list_pemain);
     }
     else if (command == "CETAK_LADANG")
-    {
-        list_pemain[idx_giliran_pemain]->cetakLahan();
+    {   
+        if(list_pemain[idx_giliran_pemain]->getType() == "Petani"){
+            list_pemain[idx_giliran_pemain]->cetakLahan();
+        }else{
+            throw AndaBukanPetaniException();        
+        }
+    
+    }
+    else if(command == "CETAK_PETERNAKAN"){
+
+        if(list_pemain[idx_giliran_pemain]->getType() == "Peternak"){
+            list_pemain[idx_giliran_pemain]->cetakLahan();
+        }else{
+            throw AndaBukanPeternakException();
+        }
+
     }
     else if (command == "TANAM")
     {   
@@ -641,7 +655,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "Anda bukan petani." << endl << endl;
+            throw AndaBukanPetaniException();  
         }
     }
     else if (command == "TERNAK")
@@ -650,7 +664,7 @@ void Grandmaster::operasi_perintah(string command)
             list_pemain[idx_giliran_pemain]->beternakBertani();
         }
         else{
-            cout << "Anda bukan peternak." << endl;
+            throw AndaBukanPeternakException();
         }
     }
     else if (command == "MAKAN")
