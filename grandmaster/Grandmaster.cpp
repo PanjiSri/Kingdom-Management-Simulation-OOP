@@ -542,8 +542,6 @@ void Grandmaster::next()
     {
         idx_giliran_pemain++;
     }
-
-    cout << idx_giliran_pemain << endl;
 }
 
 void Grandmaster::operasi_perintah(string command)
@@ -702,10 +700,11 @@ void Grandmaster::runner(){
 
             while (isRunning) {
             
+                cout << "===========================================================" << endl;
                 try {
                     cout << "Sekarang giliran " << list_pemain[idx_giliran_pemain]->getUname() << endl;
 
-                    cout << "Tulis operasi atau perintah yang anda ingingkan: ";
+                    cout << "Tulis operasi atau perintah yang anda inginkan: ";
 
                     cin >> command;
 
@@ -741,10 +740,11 @@ void Grandmaster::runner(){
 
         while(isRunning){
             
+                cout << "===========================================================" << endl;
                 try {
                     cout << "Sekarang giliran " << list_pemain[idx_giliran_pemain]->getUname() << endl;
 
-                    cout << "Tulis operasi atau perintah yang anda ingingkan: ";
+                    cout << "Tulis operasi atau perintah yang anda inginkan: ";
 
                     cin >> command;
 

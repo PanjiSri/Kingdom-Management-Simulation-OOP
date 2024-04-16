@@ -86,6 +86,9 @@ void Peternak::beternakBertani() {
         cout << "Slot: ";
         cin >> indeksInvent;
         vector<int> lokasiInvent = parse(indeksInvent);
+        if (penyimpanan[lokasiInvent[1]][lokasiInvent[0]] == NULL) {
+            throw SlotKosongException();
+        }
         string tipe = penyimpanan[lokasiInvent[1]][lokasiInvent[0]]->getTipe();
 
         if (tipe == "HERBIVORE" || tipe == "CARNIVORE" || tipe == "OMNIVORE") {

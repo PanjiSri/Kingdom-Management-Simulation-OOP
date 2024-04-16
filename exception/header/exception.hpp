@@ -184,4 +184,12 @@ public:
     }
 };
 
+class SlotKosongException : public exception{
+public:
+    const char *what() const throw()
+    {
+        return "Slot pada penyimpanan tersebut kosong";
+    }
+};
+
 #endif
