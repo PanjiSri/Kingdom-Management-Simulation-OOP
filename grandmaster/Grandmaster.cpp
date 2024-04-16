@@ -726,10 +726,9 @@ void Grandmaster::runner(){
                             isRunning = false;
 
                             cout << "**************************************" << endl;
-                            cout << "*                                    *" << endl;
-                            cout << "*       PERMAINAN DIMENANGKAN        *" << endl;
-                            cout << "*     " << list_pemain[i]->getUname()   << "    *" << endl;
-                            cout << "*                                    *" << endl;
+                            cout << "********PERMAINAN SELESAI*************" << endl;
+                            cout << "#PERMAINAN DIMENANGKAN: " << list_pemain[i]->getUname() << "#" << endl;
+                            cout << "**************************************" << endl;
                             cout << "**************************************" << endl;
 
                             break;   
@@ -766,10 +765,9 @@ void Grandmaster::runner(){
                             isRunning = false;
 
                             cout << "**************************************" << endl;
-                            cout << "*                                    *" << endl;
-                            cout << "*       PERMAINAN DIMENANGKAN        *" << endl;
-                            cout << "*     " << list_pemain[i]->getUname()   << "    *" << endl;
-                            cout << "*                                    *" << endl;
+                            cout << "********PERMAINAN SELESAI*************" << endl;
+                            cout << "#PERMAINAN DIMENANGKAN: " << list_pemain[i]->getUname() << "#" << endl;
+                            cout << "**************************************" << endl;
                             cout << "**************************************" << endl;
 
                             break;   

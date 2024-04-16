@@ -157,16 +157,21 @@ void Peran::playerMakan() {
         cin >> lokasi;
         cout << endl;
         vector<int> index = parse(lokasi);
-        x = penyimpanan[index[1]][index[0]];
         
-        if (x == NULL) {
-            cout << "Tidak ada apa-apa di di sana" << endl << endl;
-        } else if ((x->getTipe() == "PRODUCT_ANIMAL") || (x->getTipe() == "PRODUCT_FRUIT_PLANT")) {
-            tambahBerat(x->getTambahan());
-            penyimpanan[index[1]][index[0]] = NULL;
-            cout << "Berat badanmu naik jadi " << this->berat << endl << endl;
+        if (index[0] >= penyimpanan.getKolom() || index[1] >= penyimpanan.getBaris()) {
+            cout << "Lokasi yang anda masukkan salah." << endl << endl;
         } else {
-            cout << "Hei, yakin kamu mau makan itu???" << endl << endl;
+            x = penyimpanan[index[1]][index[0]];
+            
+            if (x == NULL) {
+                cout << "Tidak ada apa-apa di di sana" << endl << endl;
+            } else if ((x->getTipe() == "PRODUCT_ANIMAL") || (x->getTipe() == "PRODUCT_FRUIT_PLANT")) {
+                tambahBerat(x->getTambahan());
+                penyimpanan[index[1]][index[0]] = NULL;
+                cout << "Berat badanmu naik jadi " << this->berat << endl << endl;
+            } else {
+                cout << "Hei, yakin kamu mau makan itu???" << endl << endl;
+            }
         }
     }
 }
