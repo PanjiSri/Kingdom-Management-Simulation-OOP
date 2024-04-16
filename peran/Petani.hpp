@@ -45,7 +45,7 @@ class Petani : public Peran {
         void bangun(vector<Bangunan *> listbangunan);
         void menjual(Toko* toko);
         void membeli(Toko* toko);
-        void simpan(vector<Peran *> list_pemain);
+        void simpan(vector<Peran *> list_pemain, Toko *toko);
 };
 
 #endif

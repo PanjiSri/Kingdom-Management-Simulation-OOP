@@ -537,9 +537,9 @@ void Grandmaster::muatState(string data_path)
 
         ss_toko >> namaBarang >> banyakBarang;
 
-        toko->setJenisBarang(namaBarang, banyakBarang);
+        string kode = cariKodeBarang(namaBarang);
+        toko->setJenisBarang(kode, banyakBarang);
     }
-
 }
 
 int Grandmaster::cariJenis(string nama)
@@ -807,4 +807,15 @@ void Grandmaster::printWalikota()
             cout << list_pemain[i]->getUname() << endl;
         }
     }
+}
+
+
+string Grandmaster::cariKodeBarang(string nama){
+
+    for(int i = 0; i < list_item.size(); i++){
+        if(list_item[i]->getNama() == nama){
+            return list_item[i]->getKode();
+        }
+    }
+    return "";
 }
