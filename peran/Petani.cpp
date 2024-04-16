@@ -133,7 +133,7 @@ void Petani::cetakLahan() {
     int lebar = this->lahanPertanian.getKolom() * 5 + this->lahanPertanian.getKolom() + 1;
     cout << "      ";
     centerAlign("[ LADANG ]", lebar);
-    lahanPertanian.printlahan();
+    lahanPertanian.printWithColour();
     
     map<string, string> listTanamanDiLadang = lahanPertanian.listProdukInMatriks();
     for (auto i = listTanamanDiLadang.begin(); i != listTanamanDiLadang.end(); i++) {

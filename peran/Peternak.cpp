@@ -129,7 +129,7 @@ void Peternak::cetakLahan() {
     int lebar = this->peternakan.getKolom()*5 + this->peternakan.getKolom() + 1;
     cout << "      ";
     centerAlign("[ PETERNAKAN ]", lebar);
-    peternakan.printlahan();
+    peternakan.printWithColour();
 
     map<string, string> listHewanDiPeternakan = peternakan.listProdukInMatriks();
     for (auto i = listHewanDiPeternakan.begin(); i != listHewanDiPeternakan.end(); i++) {
