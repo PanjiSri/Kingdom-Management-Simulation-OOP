@@ -326,7 +326,6 @@ void Walikota::menjual(Toko* toko){
                     Item* barang;
                     barang = penyimpanan[idx[1]][idx[0]];
                     toko->beli(barang);
-                    gulden = gulden + barang->getHarga();
                     total_uang += barang->getHarga();
                     penyimpanan.setElement(idx[1], idx[0], NULL);
                 }

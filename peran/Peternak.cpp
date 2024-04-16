@@ -425,7 +425,6 @@ void Peternak::menjual(Toko* toko) {
                     }
 
                     toko->beli(barang);
-                    gulden = gulden + barang->getHarga();
                     total_uang += barang->getHarga();
                     penyimpanan.setElement(idx[1], idx[0], NULL);
                 }
